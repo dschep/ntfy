@@ -1,0 +1,10 @@
+{
+    "backend": "notifier.backends.pushover",
+    "notifier.backends.pushover": {
+        "user_key": "AAAAAAAAAAA",
+        "api_token": "AAAAAAAAAAA"
+    },
+    "notifier.backends.pushbullet": {
+        "access_token": "AAAAAAAAAAA"
+    }
+}
