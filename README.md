@@ -40,7 +40,6 @@ ntfy-done sleep 10
 # Backends
  - [x] [Pushover](https://pushover.net)
  - [x] [Pushbullet](https://pushbullet.com)
-
  - [ ] [Prowl](http://www.prowlapp.com)
  - [ ] [Airgram](http://www.airgramapp.com)
  - [ ] [Pushjet](https://pushjet.io)
