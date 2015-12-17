@@ -38,20 +38,18 @@ ntfy-done sleep 10
 
 
 # Backends
-### Supported
- * [Pushover](https://pushover.net)
- * [Pushbullet](https://pushbullet.com)
+ - [x] [Pushover](https://pushover.net)
+ - [x] [Pushbullet](https://pushbullet.com)
 
-### Planned/Possible
- * [Prowl](http://www.prowlapp.com)
- * [Airgram](http://www.airgramapp.com)
- * [Pushjet](https://pushjet.io)
- * [Pushalot](https://pushalot.com)
- * [Boxcar](https://boxcar.io)
- * [Instapush](https://instapush.im)
- * Mac OS X Notification Center
- * Linux Desktop Notifications (notify-send/PyNotify)
- * Windows Desktop Notifications?
+ - [ ] [Prowl](http://www.prowlapp.com)
+ - [ ] [Airgram](http://www.airgramapp.com)
+ - [ ] [Pushjet](https://pushjet.io)
+ - [ ] [Pushalot](https://pushalot.com)
+ - [ ] [Boxcar](https://boxcar.io)
+ - [ ] [Instapush](https://instapush.im)
+ - [ ] Mac OS X Notification Center
+ - [ ] Linux Desktop Notifications (notify-send/PyNotify)
+ - [ ] Windows Desktop Notifications?
 
 ## Config
 `ntfy` is configured via a json config file stored at `~/.ntfy.json`. It
