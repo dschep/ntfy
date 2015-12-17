@@ -31,10 +31,6 @@ setup(
 
         'Intended Audience :: End Users/Desktop',
 
-        'Topic :: Software Development :: Build Tools',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-        'Topic :: Multimedia :: Graphics :: Presentation',
-
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
 
         'Programming Language :: Python :: 2',
