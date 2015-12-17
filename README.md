@@ -1,4 +1,4 @@
-# `ntfy` - A utility for sending notifications
+# About `ntfy`
 
 `ntfy` is a command line utility (and to a degree, python library) for sending
 push notifications. Unlike many existing utilities for Pushover or Pushbullet,
