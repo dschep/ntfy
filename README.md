@@ -4,6 +4,39 @@
 push notifications. Unlike many existing utilities for Pushover or Pushbullet,
 it supports multiple backends.
 
+## Usage
+```
+usage: ntfy [-h] [-t TITLE] [-d DEVICE] [-c CONFIG_FILE] [-b BACKEND] ...
+
+Send push notification
+
+positional arguments:
+  MESSAGE               notification message
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t TITLE, --title TITLE
+                        a title for the notification (default:
+                        dschep@endgames)
+  -d DEVICE, --device DEVICE
+                        device to notify
+  -c CONFIG_FILE, --config CONFIG_FILE
+                        config file to use (default: ~/.ntfy.json)
+  -b BACKEND, --backend BACKEND
+                        override backend specified in config
+```
+
+## `ntfy-done` - A utility for notifying you when a command finishes
+`ntfy-done` is a CLI utility for sending a notification when a command
+finishes. Instead of passing a message as the extra positional arguments,
+provide the command you wish to run.
+
+### Example:
+```
+ntfy-done sleep 10
+```
+
+
 # Backends
 ### Supported
  * [Pushover](https://pushover.net)
