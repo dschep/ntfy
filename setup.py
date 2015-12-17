@@ -47,7 +47,7 @@ setup(
 
     keywords='push notification',
 
-    packages=['ntfy'],
+    packages=['ntfy', 'ntfy.backends'],
 
     install_requires=[
         'requests',
