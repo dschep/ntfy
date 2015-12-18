@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='ntfy',
 
-    version='0.1.2',
+    version='0.1.3',
 
     description='A utility for sending push notifications',
     long_description=long_description,
@@ -44,6 +44,7 @@ setup(
     keywords='push notification',
 
     packages=['ntfy', 'ntfy.backends'],
+    package_data={'ntfy': ['icon.png']},
 
     install_requires=[
         'requests',
