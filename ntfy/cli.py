@@ -15,16 +15,10 @@ from requests import HTTPError
 def add_common_args(parser):
     default_title = '{}@{}'.format(getuser(), gethostname())
 
-    parser.add_argument('-t', '--title', metavar='TITLE',
-                        default=default_title,
+    parser.add_argument('-t', '--title', default=default_title,
                         help='a title for the notification (default: {})'
                         .format(default_title))
     parser.add_argument('-d', '--device', help='device to notify')
-    parser.add_argument('-c', '--config', metavar='CONFIG_FILE',
-                        default='~/.ntfy.json',
-                        help='config file to use (default: ~/.ntfy.json)')
-    parser.add_argument('-b', '--backend', metavar='BACKEND',
-                        help='override backend specified in config')
 
 
 def load_config(args):
@@ -34,6 +28,16 @@ def load_config(args):
         config['backend'] = args.backend
 
     return config
+
+
+def run_cmd(args):
+    start_time = time()
+    retcode = call(args.command)
+    return '"{}" {} in {:.1f} minutes'.format(
+        ' '.join(args.command),
+        'succeeded' if retcode == 0 else 'failed',
+        (time() - start_time) / 60,
+    )
 
 
 def send_notification(message, args, config):
@@ -51,41 +55,37 @@ def send_notification(message, args, config):
         return 0
 
 
-def notify():
-    parser = argparse.ArgumentParser(
-        description='Send push notification')
-
-    parser.add_argument('message', metavar='MESSAGE', nargs=argparse.REMAINDER,
-                        help='notification message')
-
-    add_common_args(parser)
-    args = parser.parse_args()
-    config = load_config(args)
-
-    message = ' '.join(args.message)
-
-    return send_notification(message, args, config)
-
-def notify_done():
+def main():
     parser = argparse.ArgumentParser(
         description='Send push notification when command finishes')
 
-    parser.add_argument('command', metavar='COMMAND', nargs=argparse.REMAINDER,
-                        help='command to run')
+    parser.add_argument('-c', '--config',
+                        default='~/.ntfy.json',
+                        help='config file to use (default: ~/.ntfy.json)')
+    parser.add_argument('-b', '--backend',
+                        help='override backend specified in config')
 
-    add_common_args(parser)
+    subparsers = parser.add_subparsers()
+
+    send_parser = subparsers.add_parser('send', help='send a notification')
+    add_common_args(send_parser)
+    send_parser.add_argument('message',
+                             help='notification message')
+    send_parser.set_defaults(func=lambda args: args.message)
+
+    done_parser = subparsers.add_parser(
+        'done', help='run a command and send a notification when done')
+    add_common_args(done_parser)
+    done_parser.add_argument('command',
+                             nargs=argparse.REMAINDER,
+                             help='command to run')
+    done_parser.set_defaults(func=run_cmd)
+
     args = parser.parse_args()
     config = load_config(args)
 
-    start_time = time()
-    retcode = call(args.command)
-    message = '"{}" {} in {:.1f} minutes'.format(
-        ' '.join(args.command),
-        'succeeded' if retcode == 0 else 'failed',
-        (time() - start_time) / 60,
-    )
-
-    return send_notification(message, args, config)
+    if hasattr(args, 'func'):
+        send_notification(args.func(args), args, config)
 
 if __name__ == '__main__':
-    exit(notify())
+    exit(main())

@@ -1,40 +1,23 @@
 # About `ntfy`
 
 `ntfy` is a command line utility (and to a degree, python library) for sending
-push notifications. Unlike many existing utilities for Pushover or Pushbullet,
+push notifications. It also can send a notification when a program finishes.
+
+Unlike many existing utilities for Pushover or Pushbullet,
 it supports multiple backends.
 
 ## Usage
 ```
-usage: ntfy [-h] [-t TITLE] [-d DEVICE] [-c CONFIG_FILE] [-b BACKEND] ...
 
-Send push notification
+# send a notification
+ntfy send "Here's a notification!"
 
-positional arguments:
-  MESSAGE               notification message
+# send a notification with custom title (default is $USER@$HOST)
+ntfy send -t 'ntfy' "Here's a notification with a custom title!"
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -t TITLE, --title TITLE
-                        a title for the notification (default:
-                        dschep@endgames)
-  -d DEVICE, --device DEVICE
-                        device to notify
-  -c CONFIG_FILE, --config CONFIG_FILE
-                        config file to use (default: ~/.ntfy.json)
-  -b BACKEND, --backend BACKEND
-                        override backend specified in config
-```
-
-## `ntfy-done` - A utility for notifying you when a command finishes
-`ntfy-done` is a CLI utility for sending a notification when a command
-finishes. Instead of passing a message as the extra positional arguments,
-provide the command you wish to run.
-
-### Example:
-```
-ntfy-done sleep 10
-```
+# send a notification when the command `sleep 10` finishes
+# this send the message '"sleep 10" succeeded in 0.2 minutes'
+ntfy done sleep 10
 
 
 # Backends

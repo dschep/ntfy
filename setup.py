@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='ntfy',
 
-    version='0.1.0',
+    version='0.1.1',
 
     description='A utility for sending push notifications',
     long_description=long_description,
@@ -51,9 +51,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'ntfy = ntfy.cli:notify',
-            'ntfy-done = ntfy.cli:notify_done',
+            'ntfy = ntfy.cli:main',
         ],
     },
 )
-
