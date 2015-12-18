@@ -18,6 +18,7 @@ ntfy send -t 'ntfy' "Here's a notification with a custom title!"
 # send a notification when the command `sleep 10` finishes
 # this send the message '"sleep 10" succeeded in 0.2 minutes'
 ntfy done sleep 10
+```
 
 
 # Backends
