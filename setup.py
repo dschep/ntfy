@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='ntfy',
 
-    version='0.1.1',
+    version='0.1.2',
 
     description='A utility for sending push notifications',
     long_description=long_description,
