@@ -86,6 +86,8 @@ def main():
 
     if hasattr(args, 'func'):
         send_notification(args.func(args), args, config)
+    else:
+        parser.print_help()
 
 if __name__ == '__main__':
     exit(main())
