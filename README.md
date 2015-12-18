@@ -58,6 +58,6 @@ requires at minimum 2 keys: backend & a config for that backend.
 ```
 {
     "backend": "pushbullet",
-    "access_token": "<redacted>"
+    {"pushbullet": {"access_token": "<redacted>"}}
 }
 ```
