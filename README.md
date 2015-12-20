@@ -6,6 +6,13 @@ push notifications. It also can send a notification when a program finishes.
 Unlike many existing utilities for Pushover or Pushbullet,
 it supports multiple backends.
 
+## Demo
+<video autoplay loop>
+  <source src="https://cdn.rawgit.com/dschep/ntfy/master/demo/ntfy-demo.webm" type="video/webm">
+  <source src="https://cdn.rawgit.com/dschep/ntfy/master/demo/ntfy-demo.mp4" type="video/mp4">
+  Your browser does not support the <code>video</code> element.
+</video>
+
 ## Usage
 ```
 
