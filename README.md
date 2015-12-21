@@ -7,7 +7,7 @@ Unlike many existing utilities for Pushover or Pushbullet,
 it supports multiple backends.
 
 ## Demo
-![demo](demo/ntfy-demo.gif)
+[Click for full demo![Click for full demo](demo/ntfy-demo.gif)](https://cdn.rawgit.com/dschep/ntfy/master/demo/ntfy-demo.mp4)
 
 ## Usage
 ```
