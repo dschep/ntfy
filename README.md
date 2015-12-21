@@ -46,6 +46,8 @@ ntfy done sleep 10
 `ntfy` is configured via a json config file stored at `~/.ntfy.json`. It
 requires at minimum 2 keys: backend & a config for that backend.
 
+For full docs consult the [wiki](https://github.com/dschep/ntfy/wiki)
+
 ### Example Config
 ```
 {
