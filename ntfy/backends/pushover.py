@@ -2,6 +2,12 @@ import requests
 
 
 def notify(message, config, subject=None, device=None):
+    """
+    Required config keys:
+        * 'api_token'
+        * 'user_key'
+    """
+
     data = {
         'message': message,
         'token': config['api_token'],

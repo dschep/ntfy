@@ -2,6 +2,11 @@ import requests
 
 
 def notify(subject, config, message=None, device=None):
+    """
+    Required config keys:
+        * 'access_token'
+    """
+
     data = {
         'type': 'note',
         'title': subject,
