@@ -9,6 +9,11 @@ it supports multiple backends.
 ## Demo
 [Click for full demo![Click for full demo](demo/ntfy-demo.gif)](https://cdn.rawgit.com/dschep/ntfy/master/demo/ntfy-demo.mp4)
 
+## Install
+```
+sudo pip install ntfy
+```
+
 ## Usage
 ```
 
