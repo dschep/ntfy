@@ -22,7 +22,11 @@ def add_common_args(parser):
 
 
 def load_config(args):
-    config = json.load(open(expanduser(args.config)))
+    try:
+        config = json.load(open(expanduser(args.config)))
+    except IOError:
+        stderr.write("Couldn't open config file '{.config}'.\n".format(args))
+        config = {'backend': 'default'}
 
     if args.backend:
         config['backend'] = args.backend
