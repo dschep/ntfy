@@ -33,13 +33,13 @@ ntfy done sleep 10
  - [x] [Pushover](https://pushover.net)
  - [x] [Pushbullet](https://pushbullet.com)
  - [x] Linux Desktop Notifications (notify-send)
+ - [x] Mac OS X Notification Center
  - [ ] [Prowl](http://www.prowlapp.com)
  - [ ] [Airgram](http://www.airgramapp.com)
  - [ ] [Pushjet](https://pushjet.io)
  - [ ] [Pushalot](https://pushalot.com)
  - [ ] [Boxcar](https://boxcar.io)
  - [ ] [Instapush](https://instapush.im)
- - [ ] Mac OS X Notification Center
  - [ ] Windows Desktop Notifications?
 
 ## Config
