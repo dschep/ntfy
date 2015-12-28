@@ -3,7 +3,7 @@
 from win32api import *
 from win32gui import *
 import win32con
-import sys, os
+import os
 import struct
 import time
 
@@ -25,7 +25,8 @@ def notify(subject, message, config, device=None):
                     0, 0, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT, \
                     0, 0, hinst, None)
             UpdateWindow(self.hwnd)
-            iconPathName = os.path.abspath(os.path.join( sys.path[0], "balloontip.ico" ))
+            iconPathName = os.path.abspath(os.path.join(os.path.split(
+                os.path.split(__file__)[0])[0], 'icon.ico'))
             icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
             try:
                 hicon = LoadImage(hinst, iconPathName, \
