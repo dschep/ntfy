@@ -33,7 +33,7 @@ ntfy done sleep 10
  - [x] [Pushover](https://pushover.net)
  - [x] [Pushbullet](https://pushbullet.com)
  - [x] Linux Desktop Notifications (notify-send)
- - [X] Windows Desktop Notifications
+ - [X] Windows Desktop Notifications (requires [PyWin32](http://sourceforge.net/projects/pywin32/))
  - [ ] [Prowl](http://www.prowlapp.com)
  - [ ] [Airgram](http://www.airgramapp.com)
  - [ ] [Pushjet](https://pushjet.io)
