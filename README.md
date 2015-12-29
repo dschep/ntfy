@@ -33,6 +33,7 @@ ntfy done sleep 10
  - [x] [Pushover](https://pushover.net)
  - [x] [Pushbullet](https://pushbullet.com)
  - [x] Linux Desktop Notifications (notify-send)
+ - [X] Windows Desktop Notifications
  - [ ] [Prowl](http://www.prowlapp.com)
  - [ ] [Airgram](http://www.airgramapp.com)
  - [ ] [Pushjet](https://pushjet.io)
@@ -40,7 +41,6 @@ ntfy done sleep 10
  - [ ] [Boxcar](https://boxcar.io)
  - [ ] [Instapush](https://instapush.im)
  - [ ] Mac OS X Notification Center
- - [ ] Windows Desktop Notifications?
 
 ## Config
 `ntfy` is configured via a json config file stored at `~/.ntfy.json`. It
