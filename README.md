@@ -14,6 +14,8 @@ it supports multiple backends.
 sudo pip install ntfy
 ```
 
+Note: It is suggested to globally (as indicated above, without a virtualenv) install ntfy. It _can_ be installed in a virtualenv, but Mac OS X notifications won't work.
+
 ## Usage
 ```
 
