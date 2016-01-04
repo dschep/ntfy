@@ -1,20 +1,14 @@
 from setuptools import setup
-from codecs import open  # To use a consistent encoding
 from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-# Get the long description from the relevant file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
-
 setup(
     name='ntfy',
 
-    version='0.1.4',
+    version='0.1.5',
 
     description='A utility for sending push notifications',
-    long_description=long_description,
 
     url='https://github.com/dschep/ntfy',
 
