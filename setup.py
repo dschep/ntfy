@@ -44,7 +44,7 @@ setup(
     keywords='push notification',
 
     packages=['ntfy', 'ntfy.backends'],
-    package_data={'ntfy': ['icon.png']},
+    package_data={'ntfy': ['icon.png', 'icon.ico']},
 
     install_requires=[
         'requests',

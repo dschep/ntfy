@@ -14,7 +14,7 @@ it supports multiple backends.
 sudo pip install ntfy
 ```
 
-Note: It is suggested to globally (as indicated above, without a virtualenv) install ntfy. It _can_ be installed in a virtualenv, but Mac OS X notifications won't work.
+Note: It is suggested to globally (as indicated above, without a virtualenv) install ntfy. It _can_ be installed in a virtualenv, but Mac OS X & Windows notifications won't work.
 
 ## Usage
 ```
@@ -35,6 +35,7 @@ ntfy done sleep 10
  - [x] [Pushover](https://pushover.net)
  - [x] [Pushbullet](https://pushbullet.com)
  - [x] Linux Desktop Notifications (notify-send)
+ - [X] Windows Desktop Notifications (requires [PyWin32](http://sourceforge.net/projects/pywin32/))
  - [x] Mac OS X Notification Center
  - [ ] [Prowl](http://www.prowlapp.com)
  - [ ] [Airgram](http://www.airgramapp.com)
@@ -42,7 +43,6 @@ ntfy done sleep 10
  - [ ] [Pushalot](https://pushalot.com)
  - [ ] [Boxcar](https://boxcar.io)
  - [ ] [Instapush](https://instapush.im)
- - [ ] Windows Desktop Notifications?
 
 ## Config
 `ntfy` is configured via a json config file stored at `~/.ntfy.json`. It
