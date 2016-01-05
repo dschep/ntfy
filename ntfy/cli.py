@@ -38,10 +38,10 @@ def load_config(args):
 def run_cmd(args):
     start_time = time()
     retcode = call(args.command)
-    return '"{}" {} in {:.1f} minutes'.format(
+    return '"{}" {} in {:d}:{:02d} minutes'.format(
         ' '.join(args.command),
         'succeeded' if retcode == 0 else 'failed',
-        (time() - start_time) / 60,
+        *map(int, divmod(time() - start_time, 60))
     )
 
 
