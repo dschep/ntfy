@@ -22,8 +22,9 @@ Install
     sudo pip install ntfy
 
 Note: It is suggested to globally (as indicated above, without a
-virtualenv) install ntfy. It *can* be installed in a virtualenv, but Mac
-OS X & Windows notifications won't work.
+virtualenv) install ntfy. It *can* be installed in a virtualenv, with caveats.
+Linux notifications requires ``--system-site-packages`` to be used and OS X
+notifications don't work at all.
 
 Usage
 -----
@@ -48,7 +49,7 @@ Supported
 ---------
 -  `Pushover <https://pushover.net>`_
 -  `Pushbullet <https://pushbullet.com>`_
--  Linux Desktop Notifications (notify-send)
+-  Linux Desktop Notifications
 -  Windows Desktop Notifications (requires `PyWin32 <http://sourceforge.net/projects/pywin32/>`_)
 -  Mac OS X Notification Center
 
