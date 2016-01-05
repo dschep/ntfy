@@ -77,5 +77,5 @@ Example Config
 
     {
         "backend": "pushbullet",
-        {"pushbullet": {"access_token": "<redacted>"}}
+        "pushbullet": {"access_token": "<redacted>"}
     }
