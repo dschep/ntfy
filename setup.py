@@ -1,7 +1,10 @@
 from setuptools import setup
-from os import path
+from sys import platform
 
-here = path.abspath(path.dirname(__file__))
+deps = ['requests']
+
+if platform == 'win32':
+    deps.append('pypiwin32')
 
 setup(
     name='ntfy',
@@ -40,9 +43,7 @@ setup(
     packages=['ntfy', 'ntfy.backends'],
     package_data={'ntfy': ['icon.png', 'icon.ico']},
 
-    install_requires=[
-        'requests',
-        ],
+    install_requires=deps,
 
     entry_points={
         'console_scripts': [

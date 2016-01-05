@@ -50,7 +50,7 @@ Supported
 -  `Pushover <https://pushover.net>`_
 -  `Pushbullet <https://pushbullet.com>`_
 -  Linux Desktop Notifications
--  Windows Desktop Notifications (requires `PyWin32 <http://sourceforge.net/projects/pywin32/>`_)
+-  Windows Desktop Notifications
 -  Mac OS X Notification Center
 
 ToDo
