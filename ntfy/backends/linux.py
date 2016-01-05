@@ -1,14 +1,14 @@
-from subprocess import call
+import dbus
 from os import path
 
 ICON = path.abspath(path.join(path.split(path.split(__file__)[0])[0],
                               'icon.png'))
 
 def notify(subject, config, message=None, device=None):
-    argv = ['notify-send', '-i', ICON, subject]
-    if message:
-        argv.append(message)
-    retcode = call(argv)
+    bus = dbus.SessionBus()
+    dbus_obj = bus.get_object(
+        'org.freedesktop.Notifications', '/org/freedesktop/Notifications')
+    dbus_iface = dbus.Interface(
+        dbus_obj, dbus_interface='org.freedesktop.Notifications')
 
-    if retcode:
-        raise EnvironmentError('"{}" returned {}'.format(argv, retcode))
+    dbus_iface.Notify('ntfy', 0, ICON, subject, message, [], {}, -1)
