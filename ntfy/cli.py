@@ -25,7 +25,8 @@ def load_config(args):
     try:
         config = json.load(open(expanduser(args.config)))
     except IOError:
-        stderr.write("Couldn't open config file '{.config}'.\n".format(args))
+        stderr.write(
+            "Warning: Couldn't open config file '{.config}'.\n".format(args))
         config = {'backend': 'default'}
 
     if args.backend:
