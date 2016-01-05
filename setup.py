@@ -9,7 +9,7 @@ if platform == 'win32':
 setup(
     name='ntfy',
 
-    version='0.1.5',
+    version='0.2.0',
 
     description='A utility for sending push notifications',
 
@@ -22,7 +22,7 @@ setup(
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
 
         'Environment :: Console',
 
