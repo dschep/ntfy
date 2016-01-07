@@ -90,7 +90,7 @@ def main():
     config = load_config(args)
 
     if hasattr(args, 'func'):
-        send_notification(args.func(args), args, config)
+        return send_notification(args.func(args), args, config)
     else:
         parser.print_help()
 
