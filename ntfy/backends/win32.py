@@ -7,7 +7,7 @@ import os
 import struct
 import time
 
-def notify(title, message, config):
+def notify(title, message, config, **kwargs):
     class WindowsBalloonTip:
         def __init__(self, title, msg):
             message_map = {

@@ -5,7 +5,7 @@ import AppKit
 NSUserNotification = objc.lookUpClass('NSUserNotification')
 NSUserNotificationCenter = objc.lookUpClass('NSUserNotificationCenter')
 
-def notify(title, message, config):
+def notify(title, message, config, **kwargs):
     """
     adapted from https://gist.github.com/baliw/4020619
     """

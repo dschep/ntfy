@@ -4,7 +4,7 @@ from os import path
 ICON = path.abspath(path.join(path.split(path.split(__file__)[0])[0],
                               'icon.png'))
 
-def notify(title, message, config):
+def notify(title, message, config, **kwargs):
     bus = dbus.SessionBus()
     dbus_obj = bus.get_object(
         'org.freedesktop.Notifications', '/org/freedesktop/Notifications')
