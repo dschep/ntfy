@@ -12,15 +12,6 @@ from requests import HTTPError
 
 
 
-def add_common_args(parser):
-    default_title = '{}@{}'.format(getuser(), gethostname())
-
-    parser.add_argument('-t', '--title', default=default_title,
-                        help='a title for the notification (default: {})'
-                        .format(default_title))
-    parser.add_argument('-d', '--device', help='device to notify')
-
-
 def load_config(args):
     try:
         config = json.load(open(expanduser(args.config)))
@@ -80,17 +71,22 @@ def main():
     parser.add_argument('-b', '--backend', action='append',
                         help='override backend specified in config')
 
+    default_title = '{}@{}'.format(getuser(), gethostname())
+
+    parser.add_argument('-t', '--title', default=default_title,
+                        help='a title for the notification (default: {})'
+                        .format(default_title))
+    parser.add_argument('-d', '--device', help='device to notify')
+
     subparsers = parser.add_subparsers()
 
     send_parser = subparsers.add_parser('send', help='send a notification')
-    add_common_args(send_parser)
     send_parser.add_argument('message',
                              help='notification message')
     send_parser.set_defaults(func=lambda args: args.message)
 
     done_parser = subparsers.add_parser(
         'done', help='run a command and send a notification when done')
-    add_common_args(done_parser)
     done_parser.add_argument('command',
                              nargs=argparse.REMAINDER,
                              help='command to run')
