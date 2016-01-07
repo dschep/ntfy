@@ -11,7 +11,6 @@ from time import time
 from requests import HTTPError
 
 
-
 def load_config(args):
     try:
         config = json.load(open(expanduser(args.config)))
