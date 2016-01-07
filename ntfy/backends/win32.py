@@ -7,7 +7,7 @@ import os
 import struct
 import time
 
-def notify(subject, message, config, device=None):
+def notify(title, message, config):
     class WindowsBalloonTip:
         def __init__(self, title, msg):
             message_map = {
@@ -46,4 +46,4 @@ def notify(subject, message, config, device=None):
             PostQuitMessage(0) # Terminate the app.
 
 
-    WindowsBalloonTip(message, subject)
+    WindowsBalloonTip(message, title)

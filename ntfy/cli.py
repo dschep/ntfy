@@ -49,8 +49,9 @@ def send_notification(message, args, config):
         module = import_module('ntfy.backends.{}'.format(backend))
 
         try:
-            module.notify(message=message, subject=args.title,
-                          device=args.device, config=config.get(backend, {}),)
+            module.notify(title=args.title, message=message,
+                          config=config.get(backend, {}),
+                          **dict(args.option))
         except HTTPError as e:
             stderr.write(
                 'Error: status={resp.status_code} body={resp.content}\n'.format(
@@ -69,6 +70,9 @@ def main():
                         help='config file to use (default: ~/.ntfy.json)')
     parser.add_argument('-b', '--backend', action='append',
                         help='override backend specified in config')
+    parser.add_argument('-o', '--option', nargs=2, action='append',
+                        metavar=('key', 'value'), default=[],
+                        help='backend specific options')
 
     default_title = '{}@{}'.format(getuser(), gethostname())
 

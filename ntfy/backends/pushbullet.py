@@ -1,7 +1,7 @@
 import requests
 
 
-def notify(subject, config, message=None, device=None):
+def notify(title, message, config, device=None):
     """
     Required config keys:
         * 'access_token'
@@ -9,10 +9,9 @@ def notify(subject, config, message=None, device=None):
 
     data = {
         'type': 'note',
-        'title': subject,
+        'title': title,
+        'body': message,
     }
-    if message is not None:
-        data['body'] = message
     if device is not None:
         data['device_iden'] = device
 

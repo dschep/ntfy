@@ -1,7 +1,7 @@
 import requests
 
 
-def notify(message, config, subject=None, device=None):
+def notify(title, message, config, device=None):
     """
     Required config keys:
         * 'api_token'
@@ -11,10 +11,9 @@ def notify(message, config, subject=None, device=None):
     data = {
         'message': message,
         'token': config['api_token'],
-        'user': config['user_key']
+        'user': config['user_key'],
+        'title': title,
     }
-    if subject:
-        data['title'] = subject
     if device:
         data['device'] = device
 

@@ -5,12 +5,12 @@ import AppKit
 NSUserNotification = objc.lookUpClass('NSUserNotification')
 NSUserNotificationCenter = objc.lookUpClass('NSUserNotificationCenter')
 
-def notify(subject, config, message=None, device=None):
+def notify(title, message, config):
     """
     adapted from https://gist.github.com/baliw/4020619
     """
     notification = NSUserNotification.alloc().init()
-    notification.setTitle_(subject)
+    notification.setTitle_(title)
     if message is not None:
         notification.setInformativeText_(message)
     notification.setDeliveryDate_(Foundation.NSDate.date())
