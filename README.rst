@@ -66,8 +66,8 @@ Config
 ------
 
 ``ntfy`` is configured via a json config file stored at
-``~/.ntfy.json``. It requires at minimum 2 keys: backend & a config for
-that backend.
+``~/.ntfy.json``. It requires at minimum 1 keys: backends & a config for any
+backend that requires one.
 
 For full docs consult the `wiki <https://github.com/dschep/ntfy/wiki>`_
 
@@ -77,6 +77,6 @@ Example Config
 ::
 
     {
-        "backend": "pushbullet",
+        "backends": ["pushbullet"],
         "pushbullet": {"access_token": "<redacted>"}
     }

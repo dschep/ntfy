@@ -27,10 +27,17 @@ def load_config(args):
     except IOError:
         stderr.write(
             "Warning: Couldn't open config file '{.config}'.\n".format(args))
-        config = {'backend': 'default'}
+        config = {'backends': ['default']}
+
+    if 'backend' in config:
+        if 'backends' in config:
+            stderr.write("Warning: both 'backend' and 'backends' in config, "
+                         "ignoring 'backend'.\n")
+        else:
+            config['backends'] = [config['backend']]
 
     if args.backend:
-        config['backend'] = args.backend
+        config['backends'] = args.backend
 
     return config
 
@@ -46,18 +53,21 @@ def run_cmd(args):
 
 
 def send_notification(message, args, config):
-    module = import_module('ntfy.backends.{}'.format(config['backend']))
+    ret = 0
 
-    try:
-        module.notify(message=message, subject=args.title,
-                    device=args.device, config=config.get(config['backend'], {}),)
-    except HTTPError as e:
-        stderr.write(
-            'Error: status={resp.status_code} body={resp.content}\n'.format(
-                resp=e.response))
-        return 1
-    else:
-        return 0
+    for backend in config['backends']:
+        module = import_module('ntfy.backends.{}'.format(backend))
+
+        try:
+            module.notify(message=message, subject=args.title,
+                          device=args.device, config=config.get(backend, {}),)
+        except HTTPError as e:
+            stderr.write(
+                'Error: status={resp.status_code} body={resp.content}\n'.format(
+                    resp=e.response))
+            ret = 1
+
+    return ret
 
 
 def main():
@@ -67,7 +77,7 @@ def main():
     parser.add_argument('-c', '--config',
                         default='~/.ntfy.json',
                         help='config file to use (default: ~/.ntfy.json)')
-    parser.add_argument('-b', '--backend',
+    parser.add_argument('-b', '--backend', action='append',
                         help='override backend specified in config')
 
     subparsers = parser.add_subparsers()
