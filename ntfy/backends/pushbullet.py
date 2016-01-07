@@ -1,7 +1,7 @@
 import requests
 
 
-def notify(title, message, config, device=None, **kwargs):
+def notify(title, message, config, device_iden=None, **kwargs):
     """
     Required config keys:
         * 'access_token'
@@ -12,8 +12,8 @@ def notify(title, message, config, device=None, **kwargs):
         'title': title,
         'body': message,
     }
-    if device is not None:
-        data['device_iden'] = device
+    if device_iden is not None:
+        data['device_iden'] = device_iden
 
     headers = {'Access-Token': config['access_token']}
 
