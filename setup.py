@@ -9,7 +9,7 @@ if platform == 'win32':
 setup(
     name='ntfy',
 
-    version='0.2.1',
+    version='0.3.0',
 
     description='A utility for sending push notifications',
 
