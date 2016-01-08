@@ -7,7 +7,12 @@ import os
 import struct
 import time
 
-def notify(title, message, config, **kwargs):
+
+DEFAULT_ICON = os.path.join(os.path.split(
+    os.path.split(__file__)[0])[0], 'icon.ico')
+
+
+def notify(title, message, config, icon=DEFAULT_ICON, **kwargs):
     class WindowsBalloonTip:
         def __init__(self, title, msg):
             message_map = {
@@ -25,8 +30,7 @@ def notify(title, message, config, **kwargs):
                     0, 0, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT, \
                     0, 0, hinst, None)
             UpdateWindow(self.hwnd)
-            iconPathName = os.path.abspath(os.path.join(os.path.split(
-                os.path.split(__file__)[0])[0], 'icon.ico'))
+            iconPathName = os.path.abspath(icon)
             icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
             try:
                 hicon = LoadImage(hinst, iconPathName, \

@@ -6,5 +6,6 @@ def notify(title, message, config, **kwargs):
     for os in ['linux', 'win32', 'darwin']:
         if platform.startswith(os):
             module = import_module('ntfy.backends.{}'.format(os))
-            module.notify(title=title, message=message, config=config)
+            module.notify(title=title, message=message,
+                          config=config, **kwargs)
             break
