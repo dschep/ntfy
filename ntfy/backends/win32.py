@@ -12,7 +12,7 @@ DEFAULT_ICON = os.path.join(os.path.split(
     os.path.split(__file__)[0])[0], 'icon.ico')
 
 
-def notify(title, message, config, icon=DEFAULT_ICON, **kwargs):
+def notify(title, message, config=None, icon=DEFAULT_ICON, **kwargs):
     class WindowsBalloonTip:
         def __init__(self, title, msg):
             message_map = {
