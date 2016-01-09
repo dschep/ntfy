@@ -49,6 +49,7 @@ Supported
 ---------
 -  `Pushover <https://pushover.net>`_
 -  `Pushbullet <https://pushbullet.com>`_
+-  XMPP
 -  Linux Desktop Notifications
 -  Windows Desktop Notifications
 -  Mac OS X Notification Center
