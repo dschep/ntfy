@@ -49,9 +49,10 @@ def send_notification(message, args, config):
         module = import_module('ntfy.backends.{}'.format(backend))
 
         try:
+            backend_config = config.get(backend, {})
+            backend_config.update(args.option)
             module.notify(title=args.title, message=message,
-                          config=config.get(backend, {}),
-                          **dict(args.option))
+                          **backend_config)
         except HTTPError as e:
             stderr.write(
                 'Error: status={resp.status_code} body={resp.content}\n'.format(

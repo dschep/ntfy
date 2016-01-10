@@ -3,7 +3,7 @@ from os import path
 
 DEFAULT_ICON = path.join(path.split(path.split(__file__)[0])[0], 'icon.png')
 
-def notify(title, message, config=None, icon=DEFAULT_ICON, **kwargs):
+def notify(title, message, icon=DEFAULT_ICON, **kwargs):
     bus = dbus.SessionBus()
     dbus_obj = bus.get_object(
         'org.freedesktop.Notifications', '/org/freedesktop/Notifications')

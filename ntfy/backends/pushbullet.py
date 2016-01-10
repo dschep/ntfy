@@ -1,7 +1,7 @@
 import requests
 
 
-def notify(title, message, config, device_iden=None, email=None, **kwargs):
+def notify(title, message, access_token, device_iden=None, email=None, **kwargs):
     """
     Required config keys:
         * 'access_token'
@@ -17,7 +17,7 @@ def notify(title, message, config, device_iden=None, email=None, **kwargs):
     if email is not None:
         data['email'] = email
 
-    headers = {'Access-Token': config['access_token']}
+    headers = {'Access-Token': access_token}
 
     resp = requests.post('https://api.pushbullet.com/v2/pushes',
                          data=data, headers=headers)
