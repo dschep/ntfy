@@ -1,7 +1,7 @@
 import requests
 
 
-def notify(title, message, config, device=None, **kwargs):
+def notify(title, message, config, api_token, user_key, device=None, **kwargs):
     """
     Required config keys:
         * 'api_token'
@@ -10,8 +10,8 @@ def notify(title, message, config, device=None, **kwargs):
 
     data = {
         'message': message,
-        'token': config['api_token'],
-        'user': config['user_key'],
+        'token': api_token,
+        'user': user_key,
         'title': title,
     }
     if device:
