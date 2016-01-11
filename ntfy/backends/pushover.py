@@ -1,10 +1,10 @@
 import requests
 
 
-def notify(title, message, api_token, user_key, device=None, **kwargs):
+def notify(title, message, user_key,
+           api_token='aUnsraBiEZVsmrG89AZp47K3S2dX2a', device=None, **kwargs):
     """
     Required config keys:
-        * 'api_token'
         * 'user_key'
     """
 
