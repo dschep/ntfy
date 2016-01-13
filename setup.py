@@ -1,7 +1,7 @@
 from setuptools import setup
 from sys import platform
 
-deps = ['requests']
+deps = ['requests', 'sleekxmpp']
 
 if platform == 'win32':
     deps.append('pypiwin32')
