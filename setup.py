@@ -1,6 +1,7 @@
 from setuptools import setup
 from subprocess import check_output, CalledProcessError
 from sys import platform
+from os import environ
 
 deps = ['requests', 'sleekxmpp']
 
@@ -19,6 +20,8 @@ else:
     else:
         version_parts[-1] = version_parts[-1].replace('+', '.')
         version = '{}.dev{}+{}'.format(*version_parts[:3])
+    if environ.get('CI') == 'true':
+        version = version.split('+')[0]
 
 setup(
     name='ntfy',
