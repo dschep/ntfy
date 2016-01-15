@@ -7,7 +7,7 @@ from ntfy.cli import main as ntfy_main
 
 
 class TestIntegration(TestCase):
-    @patch('ntfy.cli.open', mock_open())
+    @patch('__main__.open', mock_open())
     @patch('ntfy.cli.json.load')
     @patch('ntfy.backends.pushover.requests.post')
     def test_pushover(self, mock_jsonload, mock_post):

@@ -16,9 +16,10 @@ from . import __version__
 def load_config(args):
     try:
         config = json.load(open(expanduser(args.config)))
-    except IOError:
+    except Exception as e:
         stderr.write(
-            "Warning: Couldn't open config file '{.config}'.\n".format(args))
+            "Warning: there was a problem loading {.config} ({})".format(
+                args, e))
         config = {'backends': ['default']}
 
     if 'backend' in config:
