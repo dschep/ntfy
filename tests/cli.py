@@ -8,13 +8,13 @@ from ntfy.cli import load_config, parser
 
 class TestLoadConfig(TestCase):
 
-    @mock_open()
+    @patch('ntfy.cli.open', side_effect=IOError())
     @patch('ntfy.cli.stderr')
     def test_default_config(self, *mocks):
         config = load_config(parser.parse_args(['-c', devnull, 'send', '']))
         self.assertEqual(config, {'backends': ['default']})
 
-    @mock_open()
+    @patch('ntfy.cli.open', mock_open())
     @patch('ntfy.cli.json.load', lambda x: {'backend': 'foobar'})
     def test_backwards_compat(self, *mocks):
         config = load_config(parser.parse_args(['-c', devnull, 'send', '']))
