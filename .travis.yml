@@ -8,6 +8,7 @@ python:
   - "pypy"
 install:
   - "pip install ."
+script: ntfy -v
 deploy:
   - provider: pypi
     user: dschep
