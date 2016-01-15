@@ -11,6 +11,7 @@ install:
 script: ntfy -v
 deploy:
   - provider: pypi
+    distributions: sdist bdist_wheel
     on:
       tags: true
       python: 3.5
@@ -19,6 +20,7 @@ deploy:
       secure: efA3tZAR8qOiQkG+uilQE+XdNn1Et+NBZpR36xXIa5i31zUqQQma6TUEeS989nZYINzXZSjYCuIEf4lgaVI587nszsRnmlkhIEmbqPJdUmpLQGeOvlzAOglTNuu9TxalZZfNV1smFJSj+t9ulZrpTT7WBuR9EsCr6fZ21llPUy8lqeFgSqhabXfM8FsplOrKTywIa241WL5qTU3HEeBBGEgke+oG6UTs0z68Kd/nZM2ETPPcXlrzLv8IetsH388LoiV3USMivIaQoeKt0Ulp0aJaNzUBSdKepAjFejtkYv58QX7sG5Wb7/0CPdWjaEFdqzRQsTnA9SBWz9qqg8FObYbeI5KcGKxIOEfHNXZT0mLRphwWeKKKzmLwI8WR1foHxBnb3G+AJCPTt8chyO1WqU2Fc349pCy1lP9iqZ5UKJYQfhK53oE+PhW1GyyN/nVcjOrdOfuMo55Ok3nui8kTtEFEqWfXo+SeYBSSnNfXW8+SUZYPSKFFaZvykGM50n8Gnr52/lGzHViue68do5HqhXKyKAXhYbIA61YdVViVH5XFnVf1JzlH2KXv1nRLjT/c7A7nUtPQ8WLhq9IIbP4oQlW3PzlMvbgrh2pwXCWcRAKsxbXyizFoNnK89PeYVOZhrJcRtnErCf3gSSJ2SVKwhqEFvVC5Bsy2DJS31/FoEJQ=
   - provider: pypi
     server: https://testpypi.python.org/pypi
+    distributions: sdist bdist_wheel
     on:
       python: 3.5
     user: dschep
