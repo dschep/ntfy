@@ -6,7 +6,7 @@ python:
   - '3.4'
   - '3.5'
   - pypy
-script: python -m unittest tests
+script: python setup.py test
 deploy:
   - provider: pypi
     distributions: sdist bdist_wheel

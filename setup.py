@@ -4,9 +4,9 @@ from sys import platform
 from os import environ
 
 deps = ['requests', 'sleekxmpp']
-
 if platform == 'win32':
     deps.append('pypiwin32')
+test_deps = ['mock']
 
 try:
     version_output = check_output(['git', 'describe',
@@ -60,6 +60,9 @@ setup(
     package_data={'ntfy': ['icon.png', 'icon.ico']},
 
     install_requires=deps,
+
+    tests_require=test_deps,
+    test_suite='tests',
 
     entry_points={
         'console_scripts': [
