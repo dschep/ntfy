@@ -23,6 +23,7 @@ deploy:
     server: https://testpypi.python.org/pypi
     distributions: sdist bdist_wheel
     on:
+      branch: master
       python: 3.5
       repo: dschep/ntfy
     user: dschep
