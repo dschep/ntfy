@@ -10,18 +10,19 @@ if platform == 'win32':
 
 try:
     version_output = check_output(['git', 'describe',
-                                   '--abbrev=1', '--dirty=+dirty'])
+                                   '--match=v*', '--dirty'])
 except (OSError, CalledProcessError):
     version = None
 else:
     version_parts = version_output.decode().strip().lstrip('v').split('-')
     if len(version_parts) == 1:
-        version, = version_parts
-    else:
-        version_parts[-1] = version_parts[-1].replace('+', '.')
-        version = '{}.dev{}+{}'.format(*version_parts[:3])
-    if environ.get('CI') == 'true':
-        version = version.split('+')[0]
+        version = version_parts[0]
+    elif len(version_parts) > 1:
+        version = '-'.join(version_parts[:2])
+    if environ.get('CI') != 'true': # no local version for CI
+        if version_parts[-1] == 'dirty':
+            version += '.dev'
+
 
 setup(
     name='ntfy',
