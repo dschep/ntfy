@@ -13,7 +13,7 @@ class TestLoadConfig(TestCase):
         config = load_config(parser.parse_args(['-c', devnull, 'send', '']))
         self.assertEqual(config, {'backends': ['default']})
 
-    @patch('__main__.open', mock_open())
+    @patch('__builtin__.open', mock_open())
     @patch('ntfy.cli.json.load', lambda x: {'backend': 'foobar'})
     def test_backwards_compat(self, *mocks):
         config = load_config(parser.parse_args(['-c', devnull, 'send', '']))
