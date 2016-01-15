@@ -8,7 +8,8 @@ if platform == 'win32':
     deps.append('pypiwin32')
 
 try:
-    version_output = check_output(['git', 'describe', '--dirty=+dirty'])
+    version_output = check_output(['git', 'describe',
+                                   '--abbrev=1', '--dirty=+dirty'])
 except (OSError, CalledProcessError):
     version = None
 else:
