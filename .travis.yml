@@ -1,16 +1,15 @@
 language: python
 python:
-- '2.7'
-- '3.2'
-- '3.3'
-- '3.4'
-- '3.5'
-- pypy
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "pypy"
 install:
-- pip install .
+  - "pip install ."
 script: ntfy -v
 deploy:
-  matrix:
   - provider: pypi
     user: dschep
     password:
@@ -22,5 +21,3 @@ deploy:
     user: dschep
     password:
       secure: yFKHCoQWOX7M8VaGxHBJLkQeVWN3o7cvNvN9MVBMP+MfKJfm8kT37M7iSC4W3oZdo8scGkZNrcuFy8VNoY64tUhXHx78g+0XPFNgusqk2Uel6PKgr6VE83lp1rbat7L8nO8Yze0EAP4O+zWJWUqPTPNn8dPlwwPtkCQqXC3OuIXlyxExFapXJRZX3ZOgWmoUCbYXvMSriEAa0syQ6m2dfid+ZPF0XWjimijBbLL+QhfHK4QOlRPxhka9pd9TL7D98agrjfAU1AYi9/A3TKmhero8amCuUlgfebMg08b67g5Ommqvz69HVojFqcz/QvOD9p3OpUUt1ZmL0KLWB1b3zuevyMkdGx0TaMxjaqn8rrt8cmf38/jzNm1ocMjWUXzfT5CIdNHXv8AfyqoOhhgp+lVTegPW2BfLqAyOaMjzdbNAVZAyJTUYJyxXK6Xgp0fNjwFGV7BLr9qnkg/sICJ+wRFxbEFY7tOipG9bE96F+J25RoVhHBMYyR7OMSlhHeZBo9cW/1huIkXYO2d5H7tz89JzQC43JW2ubSt5rjWzBHyq4dceKg+SQaebfDlP6FXzb4ig1cKo/U5G/KpkyavUTP1nAdKQwKiMGoqqHrziFvk5M6YA6A9Ftxw8kPx+xGNkmfOweUB2WoKdP3BL2I1vVlK+zbpe9eIyDWM/ca6DLb8=
-  password:
-    secure: tryc7CwNJHzvXRP8a4Y3ARko9K9tkcazqmRHQPE5wwNan9bPFP+uyRBlnyHdeYEyB5AkQFLEsN+WkgSrKRxHBsZ5oS99wQDf6hzBTmyv5psrNBMO4lryXe6fcsfPniUuKZkmvqWa195HQu+EGmSHh44sv1B6LdelZZzbOj4nqFu7lTVaUyqeV2VGLR2gm6yedlQbvz8u91nWJkgxD4pvmS9VAcn3zQLB8YWF8o7sbxbPrI63FxWINlqOFGJqzld9I7HuOPjlx9HNP2l4YQKMCgmYUKrbRP/vEI30qM0I71nq++jrNJx4nTosua14BoLNj4/4hQzq4zKyBhxavqF27EHIqD5jSkrGRnbOjR7eW6/T7Zvw7XCwXVf3a4QlGN0xKyyl82wZSJel+EbL1T3kJm+AREZgb8fe4yDdNImXGqgbKr43bMZBtiOdB6tbQ2QY1krVF5R/gDRsrD2ltKHLDLT+9W+iIUV5Igpq0+76b7Nu3MQ16ZJA9TYUuGJi+6Nc/8VAgWCcWK6NJL4eWiOKCNpGlkx/hVumlY/JGsytpxeL6YrGOMp13EjSamwVAhmttUow1goBFiquHAJPC9eZNGoElmDx/c0UWqq0vIRFfUhV4qEYP5x46klEmrZqgpf5xPWeotpNTlw7VvGc1Gl3EbRYhibA4aVc8u23k8qG6jM=
