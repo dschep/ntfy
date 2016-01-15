@@ -19,9 +19,8 @@ else:
         version = version_parts[0]
     elif len(version_parts) > 1:
         version = '-'.join(version_parts[:2])
-    if environ.get('CI') != 'true': # no local version for CI
-        if version_parts[-1] == 'dirty':
-            version += '.dev'
+    if version_parts[-1] == 'dirty':
+        version += '.dev'
 
 
 setup(
