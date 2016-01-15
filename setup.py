@@ -10,7 +10,7 @@ if platform == 'win32':
 
 try:
     version_output = check_output(['git', 'describe',
-                                   '--match=v*', '--dirty'])
+                                   '--match=v*.*.*', '--dirty'])
 except (OSError, CalledProcessError):
     version = None
 else:
