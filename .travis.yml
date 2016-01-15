@@ -6,8 +6,6 @@ python:
   - '3.4'
   - '3.5'
   - pypy
-install:
-  - pip install .
 script: python -m unittest tests
 deploy:
   - provider: pypi
