@@ -8,18 +8,16 @@ if platform == 'win32':
     deps.append('pypiwin32')
 
 try:
-    version_parts = (check_output(['git', 'describe', '--dirty=+dirty'])
-                    .decode()
-                    .rstrip('\n')
-                    .lstrip('v')
-                    .split('-'))
+    version_output = check_output(['git', 'describe', '--dirty=+dirty'])
+except (OSError, CalledProcessError):
+    version = None
+else:
+    version_parts = version_output.decode().strip().lstrip('v').split('-')
     if len(version_parts) == 1:
         version, = version_parts
     else:
         version_parts[-1] = version_parts[-1].replace('+', '.')
         version = '{}.dev{}+{}'.format(*version_parts[:3])
-except (OSError, CalledProcessError):
-    version = None
 
 setup(
     name='ntfy',
