@@ -10,6 +10,8 @@ from time import time
 
 from requests import HTTPError
 
+from . import __version__
+
 
 def load_config(args):
     try:
@@ -74,6 +76,8 @@ def main():
     parser.add_argument('-o', '--option', nargs=2, action='append',
                         metavar=('key', 'value'), default=[],
                         help='backend specific options')
+    parser.add_argument('-v', '--version', action='version',
+                        version=__version__)
 
     default_title = '{}@{}'.format(getuser(), gethostname())
 
@@ -95,8 +99,8 @@ def main():
                              nargs=argparse.REMAINDER,
                              help='command to run')
     done_parser.set_defaults(func=run_cmd)
-
     args = parser.parse_args()
+
     config = load_config(args)
 
     if hasattr(args, 'func'):
