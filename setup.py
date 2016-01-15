@@ -1,5 +1,5 @@
 from setuptools import setup
-from subprocess import check_output
+from subprocess import check_output, CalledProcessError
 from sys import platform
 
 deps = ['requests', 'sleekxmpp']
@@ -7,16 +7,19 @@ deps = ['requests', 'sleekxmpp']
 if platform == 'win32':
     deps.append('pypiwin32')
 
-version_parts = (check_output(['git', 'describe', '--dirty=+dirty'])
-                 .decode()
-                 .rstrip('\n')
-                 .lstrip('v')
-                 .split('-'))
-if len(version_parts) == 1:
-    version, = version_parts
-else:
-    version_parts[-1] = version_parts[-1].replace('+', '.')
-    version = '{}.dev{}+{}'.format(*version_parts[:3])
+try:
+    version_parts = (check_output(['git', 'describe', '--dirty=+dirty'])
+                    .decode()
+                    .rstrip('\n')
+                    .lstrip('v')
+                    .split('-'))
+    if len(version_parts) == 1:
+        version, = version_parts
+    else:
+        version_parts[-1] = version_parts[-1].replace('+', '.')
+        version = '{}.dev{}+{}'.format(*version_parts[:3])
+except (OSError, CalledProcessError):
+    version = None
 
 setup(
     name='ntfy',
