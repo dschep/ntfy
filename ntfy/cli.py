@@ -5,7 +5,7 @@ from getpass import getuser
 from importlib import import_module
 from socket import gethostname
 from subprocess import call
-from sys import stderr, exit
+from sys import stderr, exit, argv
 from time import time
 
 from requests import HTTPError
@@ -98,8 +98,11 @@ done_parser.add_argument('command',
                             help='command to run')
 done_parser.set_defaults(func=run_cmd)
 
-def main():
-    args = parser.parse_args()
+def main(cli_args=None):
+    if cli_args is not None:
+        args = parser.parse_args(cli_args)
+    else:
+        args = parser.parse_args()
 
     config = load_config(args)
 
