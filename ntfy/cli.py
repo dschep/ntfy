@@ -63,42 +63,42 @@ def send_notification(message, args, config):
 
     return ret
 
+parser = argparse.ArgumentParser(
+    description='Send push notification when command finishes')
+
+parser.add_argument('-c', '--config',
+                    default='~/.ntfy.json',
+                    help='config file to use (default: ~/.ntfy.json)')
+parser.add_argument('-b', '--backend', action='append',
+                    help='override backend specified in config')
+parser.add_argument('-o', '--option', nargs=2, action='append',
+                    metavar=('key', 'value'), default=[],
+                    help='backend specific options')
+parser.add_argument('-v', '--version', action='version',
+                    version=__version__)
+
+default_title = '{}@{}'.format(getuser(), gethostname())
+
+parser.add_argument('-t', '--title', default=default_title,
+                    help='a title for the notification (default: {})'
+                    .format(default_title))
+parser.add_argument('-d', '--device', help='device to notify')
+
+subparsers = parser.add_subparsers()
+
+send_parser = subparsers.add_parser('send', help='send a notification')
+send_parser.add_argument('message',
+                            help='notification message')
+send_parser.set_defaults(func=lambda args: args.message)
+
+done_parser = subparsers.add_parser(
+    'done', help='run a command and send a notification when done')
+done_parser.add_argument('command',
+                            nargs=argparse.REMAINDER,
+                            help='command to run')
+done_parser.set_defaults(func=run_cmd)
 
 def main():
-    parser = argparse.ArgumentParser(
-        description='Send push notification when command finishes')
-
-    parser.add_argument('-c', '--config',
-                        default='~/.ntfy.json',
-                        help='config file to use (default: ~/.ntfy.json)')
-    parser.add_argument('-b', '--backend', action='append',
-                        help='override backend specified in config')
-    parser.add_argument('-o', '--option', nargs=2, action='append',
-                        metavar=('key', 'value'), default=[],
-                        help='backend specific options')
-    parser.add_argument('-v', '--version', action='version',
-                        version=__version__)
-
-    default_title = '{}@{}'.format(getuser(), gethostname())
-
-    parser.add_argument('-t', '--title', default=default_title,
-                        help='a title for the notification (default: {})'
-                        .format(default_title))
-    parser.add_argument('-d', '--device', help='device to notify')
-
-    subparsers = parser.add_subparsers()
-
-    send_parser = subparsers.add_parser('send', help='send a notification')
-    send_parser.add_argument('message',
-                             help='notification message')
-    send_parser.set_defaults(func=lambda args: args.message)
-
-    done_parser = subparsers.add_parser(
-        'done', help='run a command and send a notification when done')
-    done_parser.add_argument('command',
-                             nargs=argparse.REMAINDER,
-                             help='command to run')
-    done_parser.set_defaults(func=run_cmd)
     args = parser.parse_args()
 
     config = load_config(args)

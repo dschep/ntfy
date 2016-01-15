@@ -8,7 +8,7 @@ python:
   - pypy
 install:
   - pip install .
-script: ntfy -v
+script: python -m unittest tests
 deploy:
   - provider: pypi
     distributions: sdist bdist_wheel
