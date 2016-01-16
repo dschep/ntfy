@@ -5,7 +5,7 @@ from getpass import getuser
 from importlib import import_module
 from socket import gethostname
 from subprocess import call
-from sys import stderr, exit
+from sys import stderr, exit, argv
 from time import time
 
 from requests import HTTPError
@@ -16,9 +16,10 @@ from . import __version__
 def load_config(args):
     try:
         config = json.load(open(expanduser(args.config)))
-    except IOError:
+    except Exception as e:
         stderr.write(
-            "Warning: Couldn't open config file '{.config}'.\n".format(args))
+            "Warning: there was a problem loading {.config} ({})".format(
+                args, e))
         config = {'backends': ['default']}
 
     if 'backend' in config:
@@ -63,43 +64,46 @@ def send_notification(message, args, config):
 
     return ret
 
+parser = argparse.ArgumentParser(
+    description='Send push notification when command finishes')
 
-def main():
-    parser = argparse.ArgumentParser(
-        description='Send push notification when command finishes')
+parser.add_argument('-c', '--config',
+                    default='~/.ntfy.json',
+                    help='config file to use (default: ~/.ntfy.json)')
+parser.add_argument('-b', '--backend', action='append',
+                    help='override backend specified in config')
+parser.add_argument('-o', '--option', nargs=2, action='append',
+                    metavar=('key', 'value'), default=[],
+                    help='backend specific options')
+parser.add_argument('-v', '--version', action='version',
+                    version=__version__)
 
-    parser.add_argument('-c', '--config',
-                        default='~/.ntfy.json',
-                        help='config file to use (default: ~/.ntfy.json)')
-    parser.add_argument('-b', '--backend', action='append',
-                        help='override backend specified in config')
-    parser.add_argument('-o', '--option', nargs=2, action='append',
-                        metavar=('key', 'value'), default=[],
-                        help='backend specific options')
-    parser.add_argument('-v', '--version', action='version',
-                        version=__version__)
+default_title = '{}@{}'.format(getuser(), gethostname())
 
-    default_title = '{}@{}'.format(getuser(), gethostname())
+parser.add_argument('-t', '--title', default=default_title,
+                    help='a title for the notification (default: {})'
+                    .format(default_title))
+parser.add_argument('-d', '--device', help='device to notify')
 
-    parser.add_argument('-t', '--title', default=default_title,
-                        help='a title for the notification (default: {})'
-                        .format(default_title))
-    parser.add_argument('-d', '--device', help='device to notify')
+subparsers = parser.add_subparsers()
 
-    subparsers = parser.add_subparsers()
+send_parser = subparsers.add_parser('send', help='send a notification')
+send_parser.add_argument('message',
+                            help='notification message')
+send_parser.set_defaults(func=lambda args: args.message)
 
-    send_parser = subparsers.add_parser('send', help='send a notification')
-    send_parser.add_argument('message',
-                             help='notification message')
-    send_parser.set_defaults(func=lambda args: args.message)
+done_parser = subparsers.add_parser(
+    'done', help='run a command and send a notification when done')
+done_parser.add_argument('command',
+                            nargs=argparse.REMAINDER,
+                            help='command to run')
+done_parser.set_defaults(func=run_cmd)
 
-    done_parser = subparsers.add_parser(
-        'done', help='run a command and send a notification when done')
-    done_parser.add_argument('command',
-                             nargs=argparse.REMAINDER,
-                             help='command to run')
-    done_parser.set_defaults(func=run_cmd)
-    args = parser.parse_args()
+def main(cli_args=None):
+    if cli_args is not None:
+        args = parser.parse_args(cli_args)
+    else:
+        args = parser.parse_args()
 
     config = load_config(args)
 
