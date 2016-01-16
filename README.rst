@@ -94,9 +94,7 @@ Example Config
 
 Testing
 ~~~~~~~
-Tests require the mock library and are standare python unittest tests
 
 ::
 
-    pip install mock
-    python -m unittest tests
+    python setup.py test
