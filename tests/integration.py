@@ -20,6 +20,16 @@ class TestIntegration(TestCase):
         }
         ntfy_main(['send', 'foobar'])
 
+    @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
+    @patch('ntfy.cli.json.load')
+    @patch('ntfy.backends.pushbullet.requests.post')
+    def test_pushbullet(self, mock_jsonload, mock_post):
+        mock_jsonload.return_value = {
+            'backends': ['pushbullet'],
+            'pushbullet': {'access_token': MagicMock()},
+        }
+        ntfy_main(['send', 'foobar'])
+
 
 if __name__ == '__main__':
     main()
