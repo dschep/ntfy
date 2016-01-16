@@ -13,7 +13,7 @@ class TestIntegration(TestCase):
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
     @patch('ntfy.cli.json.load')
     @patch('ntfy.backends.pushover.requests.post')
-    def test_pushover(self, mock_jsonload, mock_post):
+    def test_pushover(self, mock_post, mock_jsonload):
         mock_jsonload.return_value = {
             'backends': ['pushover'],
             'pushover': {'user_key': MagicMock()},
@@ -23,7 +23,7 @@ class TestIntegration(TestCase):
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
     @patch('ntfy.cli.json.load')
     @patch('ntfy.backends.pushbullet.requests.post')
-    def test_pushbullet(self, mock_jsonload, mock_post):
+    def test_pushbullet(self, mock_post, mock_jsonload):
         mock_jsonload.return_value = {
             'backends': ['pushbullet'],
             'pushbullet': {'access_token': MagicMock()},
