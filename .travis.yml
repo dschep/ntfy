@@ -8,7 +8,7 @@ python:
   - pypy
 install:
   - pip install coveralls
-script: coverage run --source=ntfy python setup.py test
+script: coverage run --source=ntfy setup.py test
 after_success: coveralls
 deploy:
   - provider: pypi
