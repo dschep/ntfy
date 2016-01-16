@@ -1,6 +1,6 @@
 from os import devnull
 from unittest import TestCase, main
-from sys import version_info
+from sys import version_info, modules
 
 from mock import patch, mock_open, MagicMock
 
@@ -29,6 +29,20 @@ class TestIntegration(TestCase):
             'pushbullet': {'access_token': MagicMock()},
         }
         ntfy_main(['send', 'foobar'])
+
+    @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
+    @patch('ntfy.cli.json.load')
+    def test_linux(self, mock_jsonload):
+        old_dbus = modules.get('dbus')
+        modules['dbus'] = MagicMock()
+        try:
+            mock_jsonload.return_value = {
+                'backends': ['linux'],
+            }
+            ntfy_main(['send', 'foobar'])
+        finally:
+            if old_dbus is not None:
+                modules['dbus'] = old_dbus
 
 
 if __name__ == '__main__':
