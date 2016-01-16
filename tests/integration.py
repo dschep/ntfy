@@ -66,6 +66,28 @@ class TestIntegration(TestCase):
             if old_appkit is not None:
                 modules['AppKit'] = old_appkit
 
+    @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
+    @patch('ntfy.cli.json.load')
+    def test_win32(self, mock_jsonload):
+        old_win32api = modules.get('win32api')
+        old_win32gui = modules.get('win32gui')
+        old_win32con = modules.get('win32con')
+        modules['win32api'] = MagicMock()
+        modules['win32gui'] = MagicMock()
+        modules['win32con'] = MagicMock()
+        try:
+            mock_jsonload.return_value = {
+                'backends': ['win32'],
+            }
+            ntfy_main(['send', 'foobar'])
+        finally:
+            if old_win32api is not None:
+                modules['win32api'] = old_win32api
+            if old_win32gui is not None:
+                modules['win32gui'] = old_win32gui
+            if old_win32con is not None:
+                modules['win32con'] = old_win32con
+
 
 if __name__ == '__main__':
     main()
