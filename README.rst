@@ -3,6 +3,7 @@ About ``ntfy``
 .. image:: https://img.shields.io/pypi/v/ntfy.svg?style=flat-square
 .. image:: https://img.shields.io/pypi/dm/ntfy.svg?style=flat-square
 .. image:: https://img.shields.io/travis/dschep/ntfy.svg?style=flat-square
+.. image:: https://img.shields.io/coveralls/dschep/ntfy.svg?style=flat-square
 
 ``ntfy`` is a command line utility (and to a degree, python library) for
 sending push notifications. It also can send a notification when a
