@@ -6,7 +6,10 @@ python:
   - '3.4'
   - '3.5'
   - pypy
-script: python setup.py test
+install:
+  - pip install coveralls
+script: coverage run --source=ntfy python setup.py test
+after_success: coveralls
 deploy:
   - provider: pypi
     distributions: sdist bdist_wheel
