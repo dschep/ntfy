@@ -46,7 +46,7 @@ class TestIntegration(TestCase):
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
     @patch('ntfy.cli.json.load')
-    def test_linux(self, mock_jsonload):
+    def test_darwin(self, mock_jsonload):
         old_foundation = modules.get('Foundation')
         old_objc = modules.get('objc')
         old_appkit = modules.get('AppKit')
