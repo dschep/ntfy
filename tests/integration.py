@@ -103,6 +103,21 @@ class TestIntegration(TestCase):
             if old_win32con is not None:
                 modules['win32con'] = old_win32con
 
+    @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
+    @patch('ntfy.cli.json.load')
+    @patch('ntfy.backends.xmpp.NtfySendMsgBot')
+    def test_default(self, mock_bot, mock_jsonload):
+        old_dbus = modules.get('dbus')
+        modules['dbus'] = MagicMock()
+        try:
+            mock_jsonload.return_value = {
+                'backends': ['default'],
+            }
+            ntfy_main(['send', 'foobar'])
+        finally:
+            if old_dbus is not None:
+                modules['dbus'] = old_dbus
+
 
 if __name__ == '__main__':
     main()
