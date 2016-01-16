@@ -31,6 +31,21 @@ class TestIntegration(TestCase):
         ntfy_main(['send', 'foobar'])
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
+    @patch('ntfy.backends.default.platform', 'linux')
+    @patch('ntfy.cli.json.load')
+    def test_default(self, mock_jsonload):
+        old_dbus = modules.get('dbus')
+        modules['dbus'] = MagicMock()
+        try:
+            mock_jsonload.return_value = {
+                'backends': ['default'],
+            }
+            ntfy_main(['send', 'foobar'])
+        finally:
+            if old_dbus is not None:
+                modules['dbus'] = old_dbus
+
+    @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
     @patch('ntfy.cli.json.load')
     def test_linux(self, mock_jsonload):
         old_dbus = modules.get('dbus')
