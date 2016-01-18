@@ -3,7 +3,7 @@ from subprocess import check_output, CalledProcessError
 from sys import platform
 from os import environ
 
-deps = ['requests', 'sleekxmpp']
+deps = ['requests', 'sleekxmpp', 'emoji']
 if platform == 'win32':
     deps.append('pypiwin32')
 test_deps = ['mock']

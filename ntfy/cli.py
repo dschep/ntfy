@@ -9,6 +9,7 @@ from sys import stderr, exit, argv
 from time import time
 
 from requests import HTTPError
+from emoji import emojize
 
 from . import __version__
 
@@ -47,13 +48,23 @@ def run_cmd(args):
 
 def send_notification(message, args, config):
     ret = 0
+    emojized = None
+    orig = message
 
     for backend in config['backends']:
         module = import_module('ntfy.backends.{}'.format(backend))
 
+        backend_config = config.get(backend, {})
+        backend_config.update(args.option)
+        if backend_config.get('disable_emoji', 'false').lower() \
+                              in ('true','t','yes','y','1'):
+            message = orig
+        else:
+            if emojized is None:
+                emojized = emojize(message, use_aliases=True)
+            message = emojized
+
         try:
-            backend_config = config.get(backend, {})
-            backend_config.update(args.option)
             module.notify(title=args.title, message=message,
                           **backend_config)
         except HTTPError as e:
