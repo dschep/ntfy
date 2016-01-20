@@ -5,7 +5,7 @@ from getpass import getuser
 from importlib import import_module
 from socket import gethostname
 from subprocess import call
-from sys import stderr, exit, argv
+from sys import stderr, exit
 from time import time
 
 from requests import HTTPError
@@ -100,15 +100,16 @@ subparsers = parser.add_subparsers()
 
 send_parser = subparsers.add_parser('send', help='send a notification')
 send_parser.add_argument('message',
-                            help='notification message')
+                         help='notification message')
 send_parser.set_defaults(func=lambda args: args.message)
 
 done_parser = subparsers.add_parser(
     'done', help='run a command and send a notification when done')
 done_parser.add_argument('command',
-                            nargs=argparse.REMAINDER,
-                            help='command to run')
+                         nargs=argparse.REMAINDER,
+                         help='command to run')
 done_parser.set_defaults(func=run_cmd)
+
 
 def main(cli_args=None):
     if cli_args is not None:
