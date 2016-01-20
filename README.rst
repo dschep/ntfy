@@ -101,5 +101,5 @@ Testing
 
 Contributors
 ~~~~~~~~~~~~
-- @dschep - Maintainer & Lead Developer
-- @danryder - XMPP Backend
+- `dschep <https://github.com/dschep>`_ - Maintainer & Lead Developer
+- `danryder <https://github.com/danryder>`_ - XMPP Backend
