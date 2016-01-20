@@ -3,3 +3,6 @@
 build
 dist
 *travis.log
+.eggs
+htmlcov
+*.orig
