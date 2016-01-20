@@ -98,3 +98,8 @@ Testing
 ::
 
     python setup.py test
+
+Contributors
+~~~~~~~~~~~~
+- @dschep - Maintainer & Lead Developer
+- @danryder - XMPP Backend
