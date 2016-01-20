@@ -20,9 +20,7 @@ multiple backends.
 
 Demo
 ----
-`Click here for full demo <https://cdn.rawgit.com/dschep/ntfy/master/demo/ntfy-demo.mp4>`_
-
-.. image:: https://raw.githubusercontent.com/dschep/ntfy/master/demo/ntfy-demo.gif
+.. image:: https://raw.githubusercontent.com/dschep/ntfy/master/demo.gif
 
 Install
 -------
