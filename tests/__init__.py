@@ -1,1 +1,1 @@
-import ntfy_test
+from . import ntfy_test
