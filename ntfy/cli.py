@@ -14,6 +14,17 @@ from emoji import emojize
 from . import __version__
 
 
+def truthyish(value):
+    """
+    same as standard python truthyness except that strings are different.
+    True, t, yes, y and 1 (case insensitive) are considered truthy.
+    """
+    if isinstance(value, str):
+        return value.lower() in ('true', 't', 'yes', 'y', '1')
+    else:
+        return bool(value)
+
+
 def load_config(args):
     try:
         config = json.load(open(expanduser(args.config)))
@@ -48,24 +59,18 @@ def run_cmd(args):
 
 def send_notification(message, args, config):
     ret = 0
-    emojized = None
-    orig = message
 
     for backend in config['backends']:
         module = import_module('ntfy.backends.{}'.format(backend))
 
         backend_config = config.get(backend, {})
         backend_config.update(args.option)
-        if backend_config.get('disable_emoji', 'false').lower() \
-                              in ('true','t','yes','y','1'):
-            message = orig
-        else:
-            if emojized is None:
-                emojized = emojize(message, use_aliases=True)
-            message = emojized
+        use_emoji = not truthyish(backend_config.get('disable_emoji', ''))
 
         try:
-            module.notify(title=args.title, message=message,
+            module.notify(title=args.title,
+                          message=(emojize(message, use_aliases=True)
+                                   if use_emoji else message),
                           **backend_config)
         except HTTPError as e:
             stderr.write(
