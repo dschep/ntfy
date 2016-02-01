@@ -1,5 +1,5 @@
 import os
-import sys
+import logging
 import sleekxmpp
 
 class NtfySendMsgBot(sleekxmpp.ClientXMPP):
@@ -78,4 +78,4 @@ def notify(title, message, jid, password, recipient,
     if xmpp_bot.connect(*([(hostname, int(port)) if hostname else []])):
         xmpp_bot.process(block=True)
     else:
-        sys.stderr.write("Unable to connect\n")
+        logging.getLogger(__name__).error('Unable to connect', exc_info=True)

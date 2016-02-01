@@ -1,14 +1,16 @@
 import argparse
+import errno
 import json
+import logging
+import logging.config
 from os.path import expanduser
 from getpass import getuser
 from importlib import import_module
 from socket import gethostname
 from subprocess import call
-from sys import stderr, exit
+from sys import exit
 from time import time
 
-from requests import HTTPError
 from emoji import emojize
 
 from . import __version__
@@ -26,18 +28,28 @@ def truthyish(value):
 
 
 def load_config(args):
+    logger = logging.getLogger(__name__)
+
+    #import pdb;pdb.set_trace()
     try:
         config = json.load(open(expanduser(args.config)))
-    except Exception as e:
-        stderr.write(
-            "Warning: there was a problem loading {.config} ({})".format(
-                args, e))
-        config = {'backends': ['default']}
+    except IOError as e:
+        if e.errno == errno.ENOENT and args.config == '~/.ntfy.json':
+            logger.warning('{.config} not found'.format(args))
+            config = {'backends': ['default']}
+        else:
+            logger.error('Failed to open {.config}'.format(args),
+                         exc_info=True)
+            exit(1)
+    except ValueError as e:
+        logger.error('Failed to load {.config}', exc_info=True)
+        import pdb;pdb.set_trace()
+        exit(1)
 
     if 'backend' in config:
         if 'backends' in config:
-            stderr.write("Warning: both 'backend' and 'backends' in config, "
-                         "ignoring 'backend'.\n")
+            logger.warning("Both 'backend' and 'backends' in config, "
+                           "ignoring 'backend'.")
         else:
             config['backends'] = [config['backend']]
 
@@ -72,10 +84,12 @@ def send_notification(message, args, config):
                           message=(emojize(message, use_aliases=True)
                                    if use_emoji else message),
                           **backend_config)
-        except HTTPError as e:
-            stderr.write(
-                'Error: status={resp.status_code} body={resp.content}\n'.format(
-                    resp=e.response))
+        except (SystemExit, KeyboardInterrupt):
+            raise
+        except Exception:
+            logging.getLogger(__name__).error(
+                'Failed to send notification using {}'.format(backend),
+                exc_info=True)
             ret = 1
 
     return ret
@@ -91,6 +105,11 @@ parser.add_argument('-b', '--backend', action='append',
 parser.add_argument('-o', '--option', nargs=2, action='append',
                     metavar=('key', 'value'), default=[],
                     help='backend specific options')
+parser.add_argument('-l', '--log-level', action='store',
+                    default='WARNING', choices=[
+                        'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
+                    help=('Specify the how verbose CLI output is '
+                          '(default: WARNING)'))
 parser.add_argument('-v', '--version', action='version',
                     version=__version__)
 
@@ -121,6 +140,31 @@ def main(cli_args=None):
         args = parser.parse_args(cli_args)
     else:
         args = parser.parse_args()
+
+    logging.config.dictConfig({
+        'version': 1,
+        'disable_existing_loggers': False,
+
+        'formatters': {
+            'default': {
+                'format': '%(levelname)s: %(message)s'
+            },
+        },
+        'handlers': {
+            'default': {
+                'level': args.log_level,
+                'class': 'logging.StreamHandler',
+                'formatter': 'default',
+            },
+        },
+        'loggers': {
+            '': {
+                'handlers': ['default'],
+                'level': args.log_level,
+                'propagate': True,
+            }
+        }
+    })
 
     config = load_config(args)
 
