@@ -1,6 +1,18 @@
-import Foundation
-import objc
-import AppKit
+try:
+    import Foundation
+    import objc
+except ImportError:
+    import sys
+    import logging
+
+
+    logger = logging.getLogger(__name__)
+    if sys.platform.startswith('darwin') and hasattr(sys, 'real_prefix'):
+        logger.error("Using ntfy with the MacOS Notification Center doesn't "
+                     "work within a virtualenv")
+        sys.exit(1)
+    else:
+        raise
 
 NSUserNotification = objc.lookUpClass('NSUserNotification')
 NSUserNotificationCenter = objc.lookUpClass('NSUserNotificationCenter')

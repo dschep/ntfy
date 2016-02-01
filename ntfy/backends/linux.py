@@ -1,4 +1,16 @@
-import dbus
+try:
+    import dbus
+except ImportError:
+    import sys
+    import logging
+    logger = logging.getLogger(__name__)
+    if sys.platform.startswith('linux') and hasattr(sys, 'real_prefix'):
+        logger.error('Using ntfy for Linux desktop notifications with '
+                     'virtualenv requires creating your virtualenv with the '
+                     '--system-site-packages option')
+        sys.exit(1)
+    else:
+        raise
 from os import path
 
 DEFAULT_ICON = path.join(path.split(path.split(__file__)[0])[0], 'icon.png')
