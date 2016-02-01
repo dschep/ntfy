@@ -1,4 +1,3 @@
-from os import devnull
 from unittest import TestCase, main
 from sys import version_info, modules
 
