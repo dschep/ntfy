@@ -41,7 +41,7 @@ def load_config(args):
                          exc_info=True)
             exit(1)
     except ValueError as e:
-        logger.error('Failed to load {.config}', exc_info=True)
+        logger.error('Failed to load {.config}'.format(args), exc_info=True)
         exit(1)
 
     if 'backend' in config:
