@@ -30,7 +30,6 @@ def truthyish(value):
 def load_config(args):
     logger = logging.getLogger(__name__)
 
-    #import pdb;pdb.set_trace()
     try:
         config = json.load(open(expanduser(args.config)))
     except IOError as e:
@@ -43,7 +42,6 @@ def load_config(args):
             exit(1)
     except ValueError as e:
         logger.error('Failed to load {.config}', exc_info=True)
-        import pdb;pdb.set_trace()
         exit(1)
 
     if 'backend' in config:
