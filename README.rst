@@ -34,6 +34,17 @@ virtualenv) install ntfy. It *can* be installed in a virtualenv, with caveats.
 Linux notifications requires ``--system-site-packages`` to be used and OS X
 notifications don't work at all.
 
+
+XMPP Support
+~~~~~~~~~~~~
+
+The xmpp module requires sleekxmpp. To install this extra install ntfy like
+this:
+
+::
+
+    sudo pip install ntfy[xmpp]
+
 Usage
 -----
 
