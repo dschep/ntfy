@@ -1,7 +1,6 @@
 from setuptools import setup
 from subprocess import check_output, CalledProcessError
 from sys import platform
-from os import environ
 
 deps = ['requests', 'sleekxmpp', 'emoji']
 if platform == 'win32':
