@@ -5,8 +5,8 @@ from sys import platform
 deps = ['requests', 'emoji']
 if platform == 'win32':
     deps.append('pypiwin32')
-test_deps = ['mock']
 extra_deps = {'xmpp': ['sleekxmpp']}
+test_deps = ['mock', 'sleekxmpp']
 
 try:
     version_output = check_output(['git', 'describe',
