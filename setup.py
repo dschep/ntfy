@@ -2,10 +2,11 @@ from setuptools import setup
 from subprocess import check_output, CalledProcessError
 from sys import platform
 
-deps = ['requests', 'sleekxmpp', 'emoji']
+deps = ['requests', 'emoji']
 if platform == 'win32':
     deps.append('pypiwin32')
 test_deps = ['mock']
+extra_deps = {'xmpp': ['sleekxmpp']}
 
 try:
     version_output = check_output(['git', 'describe',
@@ -60,6 +61,8 @@ setup(
     package_data={'ntfy': ['icon.png', 'icon.ico']},
 
     install_requires=deps,
+
+    extras_require=extra_deps,
 
     tests_require=test_deps,
     test_suite='tests',
