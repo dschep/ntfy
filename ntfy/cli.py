@@ -1,6 +1,5 @@
 import argparse
 import errno
-import json
 import logging
 import logging.config
 from os.path import expanduser
@@ -11,6 +10,7 @@ from subprocess import call
 from sys import exit
 from time import time
 
+import yaml
 from emoji import emojize
 
 from . import __version__
@@ -31,7 +31,7 @@ def load_config(args):
     logger = logging.getLogger(__name__)
 
     try:
-        config = json.load(open(expanduser(args.config)))
+        config = yaml.load(open(expanduser(args.config)))
     except IOError as e:
         if e.errno == errno.ENOENT and args.config == '~/.ntfy.json':
             logger.warning('{.config} not found'.format(args))
