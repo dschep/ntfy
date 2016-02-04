@@ -96,10 +96,11 @@ Example Config
 
 ::
 
-    {
-        "backends": ["pushbullet"],
-        "pushbullet": {"access_token": "<redacted>"}
-    }
+    ---
+    backends
+        - pushbullet
+    pushbullet
+        access_token: T0K3N
 
 Testing
 ~~~~~~~
