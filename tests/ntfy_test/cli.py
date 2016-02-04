@@ -22,7 +22,7 @@ class TestLoadConfig(TestCase):
         self.assertEqual(config, {'backends': ['default']})
 
     @patch(('__builtin__' if py == 2 else 'builtins') + '.open',
-           mock_open(read_data='backend: foobar'))
+           mock_open(read_data='---\nbackend: foobar\n'))
     def test_backwards_compat(self,):
         config = load_config(parser.parse_args(['send', '']))
         self.assertIn('backends', config)
