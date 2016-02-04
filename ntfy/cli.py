@@ -64,7 +64,7 @@ def run_cmd(args):
     start_time = time()
     retcode = call(args.command)
     if emojize is not None and not args.no_emoji:
-        prefix = '\u2714 ' if retcode == 0 else '\u274C '
+        prefix = '\u2705 ' if retcode == 0 else '\u274C '
     else:
         prefix = ''
     return '{}"{}" {} in {:d}:{:02d} minutes'.format(
