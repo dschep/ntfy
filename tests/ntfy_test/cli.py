@@ -4,7 +4,7 @@ from sys import version_info
 
 from mock import patch, mock_open, MagicMock
 
-from ntfy.cli import load_config, parser, truthyish
+from ntfy.cli import load_config, parser, truthyish, run_cmd
 
 
 py = version_info.major
@@ -53,6 +53,15 @@ class TestTruthyish(TestCase):
         self.assertFalse(truthyish('n'))
         self.assertFalse(truthyish('no'))
         self.assertFalse(truthyish('NO'))
+
+class TestRunCmd(TestCase):
+    @patch('subprocess.call')
+    def test_runcmd(self, mock_call):
+        mock_call.return_value = 0
+        args = MagicMock()
+        args.command = ['true']
+        self.assertEqual('"true" succeeded in 0:00 minutes',
+                         run_cmd(args))
 
 
 if __name__ == '__main__':
