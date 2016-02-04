@@ -4,7 +4,7 @@ from sys import version_info
 
 from mock import patch, mock_open, MagicMock
 
-from ntfy.cli import load_config, parser
+from ntfy.cli import load_config, parser, truthyish
 
 
 py = version_info.major
@@ -28,6 +28,31 @@ class TestLoadConfig(TestCase):
         config = load_config(parser.parse_args(['send', '']))
         self.assertIn('backends', config)
         self.assertEqual(config['backends'], ['foobar'])
+
+class TestTruthyish(TestCase):
+    def test_truthyish(self):
+        self.assertTrue(truthyish('t'))
+        self.assertTrue(truthyish('T'))
+        self.assertTrue(truthyish('true'))
+        self.assertTrue(truthyish('True'))
+        self.assertTrue(truthyish('TRUE'))
+        self.assertTrue(truthyish('1'))
+        self.assertTrue(truthyish('Y'))
+        self.assertTrue(truthyish('y'))
+        self.assertTrue(truthyish('yes'))
+        self.assertTrue(truthyish('YES'))
+
+    def test_falseyish(self):
+        self.assertFalse(truthyish('f'))
+        self.assertFalse(truthyish('F'))
+        self.assertFalse(truthyish('false'))
+        self.assertFalse(truthyish('False'))
+        self.assertFalse(truthyish('FALSE'))
+        self.assertFalse(truthyish('0'))
+        self.assertFalse(truthyish('N'))
+        self.assertFalse(truthyish('n'))
+        self.assertFalse(truthyish('no'))
+        self.assertFalse(truthyish('NO'))
 
 
 if __name__ == '__main__':
