@@ -63,8 +63,12 @@ def load_config(args):
 def run_cmd(args):
     start_time = time()
     retcode = call(args.command)
-    return '"{}" {} in {:d}:{:02d} minutes'.format(
-        ' '.join(args.command),
+    if emojize is not None and not args.no_emoji:
+        prefix = '\u2714 ' if retcode == 0 else '\u274C '
+    else:
+        prefix = ''
+    return '{}"{}" {} in {:d}:{:02d} minutes'.format(
+        prefix, ' '.join(args.command),
         'succeeded' if retcode == 0 else 'failed',
         *map(int, divmod(time() - start_time, 60))
     )
