@@ -116,7 +116,6 @@ default_title = '{}@{}'.format(getuser(), gethostname())
 parser.add_argument('-t', '--title', default=default_title,
                     help='a title for the notification (default: {})'
                     .format(default_title))
-parser.add_argument('-d', '--device', help='device to notify')
 
 subparsers = parser.add_subparsers()
 
