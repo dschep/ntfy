@@ -2,11 +2,11 @@ from setuptools import setup
 from subprocess import check_output, CalledProcessError
 from sys import platform
 
-deps = ['requests', 'PyYAML', 'emoji']
+deps = ['requests', 'PyYAML']
 if platform == 'win32':
     deps.append('pypiwin32')
-extra_deps = {'xmpp': ['sleekxmpp']}
-test_deps = ['mock', 'sleekxmpp']
+extra_deps = {'xmpp': ['sleekxmpp'], 'emoji': ['emoji']}
+test_deps = ['mock', 'sleekxmpp', 'emoji']
 
 try:
     version_output = check_output(['git', 'describe',

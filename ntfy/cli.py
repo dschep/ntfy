@@ -11,7 +11,10 @@ from sys import exit
 from time import time
 
 import yaml
-from emoji import emojize
+try:
+    from emoji import emojize
+except ImportError:
+    emojize = None
 
 from . import __version__
 
@@ -75,13 +78,9 @@ def send_notification(message, args, config):
 
         backend_config = config.get(backend, {})
         backend_config.update(args.option)
-        use_emoji = not truthyish(backend_config.get('disable_emoji', ''))
 
         try:
-            module.notify(title=args.title,
-                          message=(emojize(message, use_aliases=True)
-                                   if use_emoji else message),
-                          **backend_config)
+            module.notify(title=args.title, message=message, **backend_config)
         except (SystemExit, KeyboardInterrupt):
             raise
         except Exception:
@@ -110,6 +109,9 @@ parser.add_argument('-l', '--log-level', action='store',
                           '(default: WARNING)'))
 parser.add_argument('-v', '--version', action='version',
                     version=__version__)
+if emojize is not None:
+    parser.add_argument('-E', '--no-emoji', action='store_true',
+                        help='Disable emoji support')
 
 default_title = '{}@{}'.format(getuser(), gethostname())
 
@@ -166,7 +168,10 @@ def main(cli_args=None):
     config = load_config(args)
 
     if hasattr(args, 'func'):
-        return send_notification(args.func(args), args, config)
+        message = args.func(args)
+        if emojize is not None and not args.no_emoji:
+            message = emojize(message, use_aliases=True)
+        return send_notification(message, args, config)
     else:
         parser.print_help()
 
