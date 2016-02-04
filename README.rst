@@ -85,8 +85,8 @@ ToDo
 Config
 ------
 
-``ntfy`` is configured via a json config file stored at
-``~/.ntfy.json``. It requires at minimum 1 keys: backends & a config for any
+``ntfy`` is configured via a yaml config file stored at
+``~/.ntfy.yml``. It requires at minimum 1 keys: backends & a config for any
 backend that requires one.
 
 For full docs consult the `wiki <https://github.com/dschep/ntfy/wiki>`_
@@ -96,10 +96,11 @@ Example Config
 
 ::
 
-    {
-        "backends": ["pushbullet"],
-        "pushbullet": {"access_token": "<redacted>"}
-    }
+    ---
+    backends
+        - pushbullet
+    pushbullet
+        access_token: T0K3N
 
 Testing
 ~~~~~~~

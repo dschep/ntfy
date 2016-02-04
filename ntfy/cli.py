@@ -1,6 +1,5 @@
 import argparse
 import errno
-import json
 import logging
 import logging.config
 from os.path import expanduser
@@ -11,6 +10,7 @@ from subprocess import call
 from sys import exit
 from time import time
 
+import yaml
 from emoji import emojize
 
 from . import __version__
@@ -31,9 +31,9 @@ def load_config(args):
     logger = logging.getLogger(__name__)
 
     try:
-        config = json.load(open(expanduser(args.config)))
+        config = yaml.load(open(expanduser(args.config)))
     except IOError as e:
-        if e.errno == errno.ENOENT and args.config == '~/.ntfy.json':
+        if e.errno == errno.ENOENT and args.config == '~/.ntfy.yml':
             logger.warning('{.config} not found'.format(args))
             config = {'backends': ['default']}
         else:
@@ -96,8 +96,8 @@ parser = argparse.ArgumentParser(
     description='Send push notification when command finishes')
 
 parser.add_argument('-c', '--config',
-                    default='~/.ntfy.json',
-                    help='config file to use (default: ~/.ntfy.json)')
+                    default='~/.ntfy.yml',
+                    help='config file to use (default: ~/.ntfy.yml)')
 parser.add_argument('-b', '--backend', action='append',
                     help='override backend specified in config')
 parser.add_argument('-o', '--option', nargs=2, action='append',
