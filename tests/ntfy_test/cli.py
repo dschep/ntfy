@@ -21,9 +21,10 @@ class TestLoadConfig(TestCase):
         config = load_config(parser.parse_args(['send', '']))
         self.assertEqual(config, {'backends': ['default']})
 
-    @patch(('__builtin__' if py == 2 else 'builtins') + '.open',
-           mock_open(read_data='---\nbackend: foobar\n'))
-    def test_backwards_compat(self,):
+    @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
+    @patch('ntfy.cli.yaml.load')
+    def test_backwards_compat(self, mock_yamlload):
+        mock_yamlload.return_value = {'backend': 'foobar'}
         config = load_config(parser.parse_args(['send', '']))
         self.assertIn('backends', config)
         self.assertEqual(config['backends'], ['foobar'])
