@@ -37,7 +37,7 @@ class NtfySendMsgBot(sleekxmpp.ClientXMPP):
 
 def notify(title, message, jid, password, recipient,
            hostname=None, port=5222, path_to_certs=None,
-           mtype=None, debug=False, **kwargs):
+           mtype=None, **kwargs):
     """
     Optional parameters
         * hostname (if not from jid)
@@ -57,11 +57,6 @@ def notify(title, message, jid, password, recipient,
     Specify port if other than 5222.
     NOTE: Ignored without specified hostname
     """
-
-    if debug and debug.lower() in ('true','t','yes','y','1'):
-        import logging
-        logging.basicConfig(level=logging.DEBUG,
-                        format='%(levelname)-8s %(message)s')
 
     xmpp_bot = NtfySendMsgBot(jid, password, recipient,
                               title, message, mtype)
