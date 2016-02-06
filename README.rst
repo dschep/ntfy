@@ -35,6 +35,17 @@ Linux notifications requires ``--system-site-packages`` to be used and OS X
 notifications don't work at all.
 
 
+Emoji Support :tada:
+~~~~~~~~~~~~
+
+``ntfy`` features emoji support, it is installable as an extra, just install
+like this:
+
+::
+
+    sudo pip install ntfy[emoji]
+
+
 XMPP Support
 ~~~~~~~~~~~~
 
@@ -44,6 +55,7 @@ this:
 ::
 
     sudo pip install ntfy[xmpp]
+
 
 Usage
 -----
