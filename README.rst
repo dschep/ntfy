@@ -115,13 +115,13 @@ Example Config
         access_token: T0K3N
 
 Testing
-~~~~~~~
+-------
 
 ::
 
     python setup.py test
 
 Contributors
-~~~~~~~~~~~~
+------------
 - `dschep <https://github.com/dschep>`_ - Maintainer & Lead Developer
 - `danryder <https://github.com/danryder>`_ - XMPP Backend & emoji support
