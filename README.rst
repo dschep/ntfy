@@ -35,7 +35,7 @@ Linux notifications requires ``--system-site-packages`` to be used and OS X
 notifications don't work at all.
 
 
-:tada: Emoji Support :tada:
+Emoji Support :tada:
 ~~~~~~~~~~~~
 
 ``ntfy`` features emoji support, it is installable as an extra, just install
