@@ -36,7 +36,7 @@ notifications don't work at all.
 
 
 Emoji Support :tada:
-~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 ``ntfy`` features emoji support, it is installable as an extra, just install
 like this:
