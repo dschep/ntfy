@@ -10,7 +10,7 @@ py = version_info.major
 
 class TestIntegration(TestCase):
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
-    @patch('ntfy.cli.yaml.load')
+    @patch('ntfy.config.yaml.load')
     @patch('ntfy.backends.pushover.requests.post')
     def test_pushover(self, mock_post, mock_yamlload):
         mock_yamlload.return_value = {
@@ -20,7 +20,7 @@ class TestIntegration(TestCase):
         ntfy_main(['send', 'foobar'])
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
-    @patch('ntfy.cli.yaml.load')
+    @patch('ntfy.config.yaml.load')
     @patch('ntfy.backends.pushbullet.requests.post')
     def test_pushbullet(self, mock_post, mock_yamlload):
         mock_yamlload.return_value = {
@@ -31,7 +31,7 @@ class TestIntegration(TestCase):
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
     @patch('ntfy.backends.default.platform', 'linux')
-    @patch('ntfy.cli.yaml.load')
+    @patch('ntfy.config.yaml.load')
     def test_default(self, mock_yamlload):
         old_dbus = modules.get('dbus')
         modules['dbus'] = MagicMock()
@@ -45,7 +45,7 @@ class TestIntegration(TestCase):
                 modules['dbus'] = old_dbus
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
-    @patch('ntfy.cli.yaml.load')
+    @patch('ntfy.config.yaml.load')
     def test_linux(self, mock_yamlload):
         old_dbus = modules.get('dbus')
         modules['dbus'] = MagicMock()
@@ -59,7 +59,7 @@ class TestIntegration(TestCase):
                 modules['dbus'] = old_dbus
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
-    @patch('ntfy.cli.yaml.load')
+    @patch('ntfy.config.yaml.load')
     def test_darwin(self, mock_yamlload):
         old_foundation = modules.get('Foundation')
         old_objc = modules.get('objc')
@@ -81,7 +81,7 @@ class TestIntegration(TestCase):
                 modules['AppKit'] = old_appkit
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
-    @patch('ntfy.cli.yaml.load')
+    @patch('ntfy.config.yaml.load')
     def test_win32(self, mock_yamlload):
         old_win32api = modules.get('win32api')
         old_win32gui = modules.get('win32gui')
@@ -103,7 +103,7 @@ class TestIntegration(TestCase):
                 modules['win32con'] = old_win32con
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
-    @patch('ntfy.cli.yaml.load')
+    @patch('ntfy.config.yaml.load')
     @patch('ntfy.backends.xmpp.NtfySendMsgBot')
     def test_default(self, mock_bot, mock_yamlload):
         old_dbus = modules.get('dbus')

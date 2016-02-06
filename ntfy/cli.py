@@ -1,63 +1,19 @@
 import argparse
-import errno
 import logging
 import logging.config
-from os.path import expanduser
 from getpass import getuser
-from importlib import import_module
 from socket import gethostname
 from subprocess import call
 from sys import exit
 from time import time
 
-import yaml
 try:
     from emoji import emojize
 except ImportError:
     emojize = None
 
-from . import __version__
-
-
-def truthyish(value):
-    """
-    same as standard python truthyness except that strings are different.
-    True, t, yes, y and 1 (case insensitive) are considered truthy.
-    """
-    if isinstance(value, str):
-        return value.lower() in ('true', 't', 'yes', 'y', '1')
-    else:
-        return bool(value)
-
-
-def load_config(args):
-    logger = logging.getLogger(__name__)
-
-    try:
-        config = yaml.load(open(expanduser(args.config)))
-    except IOError as e:
-        if e.errno == errno.ENOENT and args.config == '~/.ntfy.yml':
-            logger.warning('{.config} not found'.format(args))
-            config = {'backends': ['default']}
-        else:
-            logger.error('Failed to open {.config}'.format(args),
-                         exc_info=True)
-            exit(1)
-    except ValueError as e:
-        logger.error('Failed to load {.config}'.format(args), exc_info=True)
-        exit(1)
-
-    if 'backend' in config:
-        if 'backends' in config:
-            logger.warning("Both 'backend' and 'backends' in config, "
-                           "ignoring 'backend'.")
-        else:
-            config['backends'] = [config['backend']]
-
-    if args.backend:
-        config['backends'] = args.backend
-
-    return config
+from . import __version__, notify
+from .config import load_config, DEFAULT_CONFIG
 
 
 def run_cmd(args):
@@ -74,33 +30,13 @@ def run_cmd(args):
     )
 
 
-def send_notification(message, args, config):
-    ret = 0
-
-    for backend in config['backends']:
-        module = import_module('ntfy.backends.{}'.format(backend))
-
-        backend_config = config.get(backend, {})
-        backend_config.update(args.option)
-
-        try:
-            module.notify(title=args.title, message=message, **backend_config)
-        except (SystemExit, KeyboardInterrupt):
-            raise
-        except Exception:
-            logging.getLogger(__name__).error(
-                'Failed to send notification using {}'.format(backend),
-                exc_info=True)
-            ret = 1
-
-    return ret
-
 parser = argparse.ArgumentParser(
     description='Send push notification when command finishes')
 
 parser.add_argument('-c', '--config',
-                    default='~/.ntfy.yml',
-                    help='config file to use (default: ~/.ntfy.yml)')
+                    default=DEFAULT_CONFIG,
+                    help='config file to use (default: {})'.format(
+                        DEFAULT_CONFIG))
 parser.add_argument('-b', '--backend', action='append',
                     help='override backend specified in config')
 parser.add_argument('-o', '--option', nargs=2, action='append',
@@ -169,13 +105,15 @@ def main(cli_args=None):
         }
     })
 
-    config = load_config(args)
+    config = load_config(args.config)
+    if args.backend:
+        config['backends'] = args.backend
 
     if hasattr(args, 'func'):
         message = args.func(args)
         if emojize is not None and not args.no_emoji:
             message = emojize(message, use_aliases=True)
-        return send_notification(message, args, config)
+        return notify(message, args.title, config, **dict(args.option))
     else:
         parser.print_help()
 
