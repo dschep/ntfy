@@ -101,7 +101,7 @@ Config
 ``~/.ntfy.yml``. It requires at minimum 1 keys: backends & a config for any
 backend that requires one.
 
-For full docs consult the `wiki <https://github.com/dschep/ntfy/wiki>`_
+See the `Configuration docs <http://pythonhosted.org/ntfy/configuring-ntfy.html>`_ for more.
 
 Example Config
 ~~~~~~~~~~~~~~
