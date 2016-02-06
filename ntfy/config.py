@@ -8,17 +8,6 @@ import yaml
 DEFAULT_CONFIG = '~/.ntfy.yml'
 
 
-def truthyish(value):
-    """
-    same as standard python truthyness except that strings are different.
-    True, t, yes, y and 1 (case insensitive) are considered truthy.
-    """
-    if isinstance(value, str):
-        return value.lower() in ('true', 't', 'yes', 'y', '1')
-    else:
-        return bool(value)
-
-
 def load_config(config_path=DEFAULT_CONFIG):
     logger = logging.getLogger(__name__)
 
