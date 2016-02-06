@@ -20,14 +20,6 @@ ntfy.backends.default module
     :undoc-members:
     :show-inheritance:
 
-ntfy.backends.http module
--------------------------
-
-.. automodule:: ntfy.backends.http
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 ntfy.backends.linux module
 --------------------------
 
