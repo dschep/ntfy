@@ -1,6 +1,6 @@
 import errno
 import logging
-from os.path import expanduser
+from os.path import expanduser, isfile
 from sys import exit
 
 import yaml
@@ -26,6 +26,9 @@ def load_config(config_path=DEFAULT_CONFIG):
         config = yaml.load(open(expanduser(config_path)))
     except IOError as e:
         if e.errno == errno.ENOENT and config_path == DEFAULT_CONFIG:
+            if isfile(expanduser('~/.ntfy.json')):
+                logger.error('~/.ntfy.json no longer supported, use {}'.format(
+                    DEFAULT_CONFIG))
             logger.warning('{} not found'.format(config_path))
             config = {'backends': ['default']}
         else:
