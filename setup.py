@@ -35,7 +35,7 @@ setup(
     author='Daniel Schep',
     author_email='dschep@gmail.com',
 
-    license='MIT',
+    license='GPLv3',
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
