@@ -1,0 +1,78 @@
+ntfy.backends package
+=====================
+
+Submodules
+----------
+
+ntfy.backends.darwin module
+---------------------------
+
+.. automodule:: ntfy.backends.darwin
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ntfy.backends.default module
+----------------------------
+
+.. automodule:: ntfy.backends.default
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ntfy.backends.http module
+-------------------------
+
+.. automodule:: ntfy.backends.http
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ntfy.backends.linux module
+--------------------------
+
+.. automodule:: ntfy.backends.linux
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ntfy.backends.pushbullet module
+-------------------------------
+
+.. automodule:: ntfy.backends.pushbullet
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ntfy.backends.pushover module
+-----------------------------
+
+.. automodule:: ntfy.backends.pushover
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ntfy.backends.win32 module
+--------------------------
+
+.. automodule:: ntfy.backends.win32
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ntfy.backends.xmpp module
+-------------------------
+
+.. automodule:: ntfy.backends.xmpp
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: ntfy.backends
+    :members:
+    :undoc-members:
+    :show-inheritance:
