@@ -53,7 +53,7 @@ def notify(title, message, icon=DEFAULT_ICON, **kwargs):
         def OnDestroy(self, hwnd, msg, wparam, lparam):
             nid = (self.hwnd, 0)
             win32gui.Shell_NotifyIcon(win32gui.NIM_DELETE, nid)
-            win32apiPostQuitMessage(0) # Terminate the app.
+            win32api.PostQuitMessage(0) # Terminate the app.
 
 
     WindowsBalloonTip(message, title)
