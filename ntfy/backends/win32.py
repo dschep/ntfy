@@ -1,8 +1,5 @@
 # -- coding: utf-8 --
 
-import win32api
-import win32con
-import win32gui
 import os
 import struct
 import time
@@ -13,6 +10,10 @@ DEFAULT_ICON = os.path.join(os.path.split(
 
 
 def notify(title, message, icon=DEFAULT_ICON, **kwargs):
+    import win32api
+    import win32con
+    import win32gui
+
     class WindowsBalloonTip:
         def __init__(self, title, msg):
             message_map = {

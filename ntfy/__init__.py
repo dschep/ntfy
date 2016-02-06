@@ -17,7 +17,13 @@ def notify(message, title, config=None, **kwargs):
     ret = 0
 
     for backend in config['backends']:
-        module = import_module('ntfy.backends.{}'.format(backend))
+        try:
+            module = import_module('ntfy.backends.{}'.format(backend))
+        except ImportError:
+            ret = 1
+            logging.getLogger(__name__).error(
+                'failed to load backend {}'.format(backend), exc_info=True)
+            continue
 
         backend_config = config.get(backend, {})
         backend_config.update(kwargs)
