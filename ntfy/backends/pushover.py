@@ -4,8 +4,12 @@ import requests
 def notify(title, message, user_key,
            api_token='aUnsraBiEZVsmrG89AZp47K3S2dX2a', device=None, **kwargs):
     """
-    Required config keys:
-        * 'user_key'
+    Required parameters:
+        * ``user_key``
+
+    Optional parameters
+        * ``access_token`` - use your own application token
+        * ``device`` - target a device, if omitted, notification is sent to all devices
     """
 
     data = {

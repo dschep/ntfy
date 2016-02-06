@@ -40,10 +40,10 @@ def notify(title, message, jid, password, recipient,
            mtype=None, **kwargs):
     """
     Optional parameters
-        * hostname (if not from jid)
-        * port
-        * path_to_certs
-        * mtype ('chat' required for Google Hangouts)
+        * ``hostname`` (if not from jid)
+        * ``port``
+        * ``path_to_certs``
+        * ``mtype`` ('chat' required for Google Hangouts)
 
     To verify the SSL certificates offered by a server:
     path_to_certs = "path/to/ca/cert"

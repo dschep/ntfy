@@ -10,6 +10,11 @@ DEFAULT_ICON = os.path.join(os.path.split(
 
 
 def notify(title, message, icon=DEFAULT_ICON, **kwargs):
+    """
+    Optional parameters:
+        * ``icon`` - path to an ICO file to display instead of the ntfy icon
+    """
+
     import win32api
     import win32con
     import win32gui
