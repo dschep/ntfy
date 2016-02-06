@@ -74,10 +74,10 @@ Usage
     ntfy done sleep 10
 
 Backends
-========
+--------
 
 Supported
----------
+~~~~~~~~~
 -  `Pushover <https://pushover.net>`_
 -  `Pushbullet <https://pushbullet.com>`_
 -  XMPP
@@ -86,7 +86,7 @@ Supported
 -  Mac OS X Notification Center
 
 ToDo
-----
+~~~~
 -  `Prowl <http://www.prowlapp.com>`_
 -  `Airgram <http://www.airgramapp.com>`_
 -  `Pushjet <https://pushjet.io>`_
@@ -95,7 +95,7 @@ ToDo
 -  `Instapush <https://instapush.im>`_
 
 Config
-------
+~~~~~~
 
 ``ntfy`` is configured via a yaml config file stored at
 ``~/.ntfy.yml``. It requires at minimum 1 keys: backends & a config for any
@@ -103,8 +103,7 @@ backend that requires one.
 
 See the `Configuration docs <http://pythonhosted.org/ntfy/configuring-ntfy.html>`_ for more.
 
-Example Config
-~~~~~~~~~~~~~~
+Example Config:
 
 ::
 
