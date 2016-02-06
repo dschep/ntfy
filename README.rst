@@ -70,7 +70,7 @@ Usage
     ntfy -t 'ntfy' send "Here's a notification with a custom title!"
 
     # send a notification when the command `sleep 10` finishes
-    # this send the message ':white_check_mark: "sleep 10" succeeded in 0:10 minutes'
+    # this send the message '"sleep 10" succeeded in 0:10 minutes'
     ntfy done sleep 10
 
 Backends
