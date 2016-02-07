@@ -2,6 +2,7 @@ import os
 import logging
 import sleekxmpp
 
+
 class NtfySendMsgBot(sleekxmpp.ClientXMPP):
     """
     Modified the commented sleekxmpp example:
@@ -34,6 +35,7 @@ class NtfySendMsgBot(sleekxmpp.ClientXMPP):
         self.send_message(**msg_args)
 
         self.disconnect(wait=True)
+
 
 def notify(title, message, jid, password, recipient,
            hostname=None, port=5222, path_to_certs=None,
