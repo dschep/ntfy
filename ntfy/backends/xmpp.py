@@ -60,26 +60,19 @@ def notify(title, message, jid, password, recipient,
     NOTE: Ignored without specified hostname
     """
 
-    loglevel = logging.getEffectiveLevel()
-    try:
-        logging.disable(logging.ERROR)
-        xmpp_bot = NtfySendMsgBot(jid, password, recipient,
-                                  title, message, mtype)
+    xmpp_bot = NtfySendMsgBot(jid, password, recipient,
+                              title, message, mtype)
 
-        # NOTE: Below plugins weren't needed for Google Hangouts
-        # but may be useful (from original sleekxmpp example)
-        # xmpp_bot.register_plugin('xep_0030') # Service Discovery
-        # xmpp_bot.register_plugin('xep_0199') # XMPP Ping
+    # NOTE: Below plugins weren't needed for Google Hangouts
+    # but may be useful (from original sleekxmpp example)
+    # xmpp_bot.register_plugin('xep_0030') # Service Discovery
+    # xmpp_bot.register_plugin('xep_0199') # XMPP Ping
 
-        if path_to_certs and os.path.isdir(path_to_certs):
-            xmpp_bot.ca_certs = path_to_certs
+    if path_to_certs and os.path.isdir(path_to_certs):
+        xmpp_bot.ca_certs = path_to_certs
 
-        # Connect to the XMPP server and start processing XMPP stanzas.
-        if xmpp_bot.connect(*([(hostname, int(port)) if hostname else []])):
-            xmpp_bot.process(block=True)
-        else:
-            logging.disable(loglevel)
-            logging.getLogger(__name__).error('Unable to connect',
-                                              exc_info=True)
-    finally:
-        logging.disable(loglevel)
+    # Connect to the XMPP server and start processing XMPP stanzas.
+    if xmpp_bot.connect(*([(hostname, int(port)) if hostname else []])):
+        xmpp_bot.process(block=True)
+    else:
+        logging.getLogger(__name__).error('Unable to connect', exc_info=True)
