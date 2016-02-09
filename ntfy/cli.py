@@ -47,8 +47,13 @@ parser.add_argument('-l', '--log-level', action='store',
                         'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
                     help=('Specify the how verbose CLI output is '
                           '(default: WARNING)'))
-parser.add_argument('-v', '--version', action='version',
-                    version=__version__)
+parser.add_argument('-v', '--verbose', dest='log_level',
+                    action='store_const', const='DEBUG',
+                    help='a shortcut for --log-level=DEBUG')
+parser.add_argument('-q', '--quiet', dest='log_level',
+                    action='store_const', const='CRITICAL',
+                    help='a shortcut for --log-level=CRITICAL')
+parser.add_argument('--version', action='version', version=__version__)
 if emojize is not None:
     parser.add_argument('-E', '--no-emoji', action='store_true',
                         help='Disable emoji support')
