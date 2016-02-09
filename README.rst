@@ -1,11 +1,13 @@
 About ``ntfy``
 ==============
-|Version|_ |Downloads|_ |Build|_ |Coverage|_
+|Version|_ |Downloads|_ |Docs|_ |Build|_ |Coverage|_
 
 .. |Version| image:: https://img.shields.io/pypi/v/ntfy.svg
 .. _Version: https://pypi.python.org/pypi/ntfy
 .. |Downloads| image:: https://img.shields.io/pypi/dm/ntfy.svg
 .. _Downloads: https://pypi.python.org/pypi/ntfy#downloads
+.. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
+.. _Docs: http://ntfy.rtfd.org
 .. |Build| image:: https://img.shields.io/travis/dschep/ntfy.svg
 .. _Build: https://travis-ci.org/dschep/ntfy
 .. |Coverage| image:: https://img.shields.io/coveralls/dschep/ntfy.svg
