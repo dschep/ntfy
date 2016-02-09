@@ -60,7 +60,8 @@ def notify(title, message, jid, password, recipient,
     NOTE: Ignored without specified hostname
     """
 
-    loglevel = logging.getEffectiveLevel()
+    logger = logging.getLogger(__name__)
+    loglevel = logger.getEffectiveLevel()
     try:
         logging.disable(logging.ERROR)
         xmpp_bot = NtfySendMsgBot(jid, password, recipient,
@@ -79,7 +80,6 @@ def notify(title, message, jid, password, recipient,
             xmpp_bot.process(block=True)
         else:
             logging.disable(loglevel)
-            logging.getLogger(__name__).error('Unable to connect',
-                                              exc_info=True)
+            logger.error('Unable to connect', exc_info=True)
     finally:
         logging.disable(loglevel)
