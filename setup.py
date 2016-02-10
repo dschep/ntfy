@@ -12,7 +12,7 @@ test_deps = ['mock', 'sleekxmpp', 'emoji']
 
 try:
     version_output = check_output(['git', 'describe',
-                                   '--match=v*.*.*', '--dirty'])
+                                   '--match=v*.*.*'])
 except (OSError, CalledProcessError):
     version = None
 else:
@@ -20,9 +20,7 @@ else:
     if len(version_parts) == 1:
         version = version_parts[0]
     elif len(version_parts) > 1:
-        version = '-'.join(version_parts[:2])
-    if version_parts[-1] == 'dirty':
-        version += '.dev'
+        version = '-'.join(version_parts[:-1])
 
 
 setup(
