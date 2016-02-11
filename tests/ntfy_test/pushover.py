@@ -2,6 +2,7 @@ from unittest import TestCase, main
 from mock import patch
 
 from ntfy.backends.pushover import notify
+from ntfy.config import USER_AGENT
 
 
 class TestPushover(TestCase):
@@ -11,7 +12,8 @@ class TestPushover(TestCase):
         mock_post.assert_called_once_with(
             'https://api.pushover.net/1/messages.json',
             data={'user': 'user_key', 'message': 'message', 'token':
-                  'aUnsraBiEZVsmrG89AZp47K3S2dX2a', 'title': 'title'})
+                  'aUnsraBiEZVsmrG89AZp47K3S2dX2a', 'title': 'title'},
+            headers={'User-Agent': USER_AGENT})
 
     @patch('requests.post')
     def test_device(self, mock_post):
@@ -20,7 +22,8 @@ class TestPushover(TestCase):
             'https://api.pushover.net/1/messages.json',
             data={'user': 'user_key', 'message': 'message', 'token':
                   'aUnsraBiEZVsmrG89AZp47K3S2dX2a', 'title': 'title',
-                  'device': 'foobar'})
+                  'device': 'foobar'},
+            headers={'User-Agent': USER_AGENT})
 
 if __name__ == '__main__':
     main()

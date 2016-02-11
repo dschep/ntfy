@@ -2,8 +2,6 @@ import pkg_resources
 import logging
 from importlib import import_module
 
-from .config import load_config
-
 try:
     __version__ = pkg_resources.get_distribution(__name__).version
 except:
@@ -11,6 +9,8 @@ except:
 
 
 def notify(message, title, config=None, **kwargs):
+    from .config import load_config
+
     if config is None:
         config = load_config()
 

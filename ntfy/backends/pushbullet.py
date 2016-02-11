@@ -1,5 +1,7 @@
 import requests
 
+from ..config import USER_AGENT
+
 
 def notify(title, message, access_token, device_iden=None, email=None, **kwargs):
     """
@@ -21,7 +23,8 @@ def notify(title, message, access_token, device_iden=None, email=None, **kwargs)
     if email is not None:
         data['email'] = email
 
-    headers = {'Access-Token': access_token}
+    headers = {'Access-Token': access_token,
+               'User-Agent': USER_AGENT}
 
     resp = requests.post('https://api.pushbullet.com/v2/pushes',
                          data=data, headers=headers)

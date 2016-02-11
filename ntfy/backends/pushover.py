@@ -1,6 +1,8 @@
 import requests
 import logging
 
+from ..config import USER_AGENT
+
 
 def notify(title, message, user_key,
            api_token='aUnsraBiEZVsmrG89AZp47K3S2dX2a', device=None,
@@ -75,6 +77,6 @@ def notify(title, message, user_key,
         raise ValueError('priority must be an integer from -2 to 2')
 
     resp = requests.post('https://api.pushover.net/1/messages.json',
-                         data=data)
+                         data=data, headers={'User-Agent': USER_AGENT})
 
     resp.raise_for_status()

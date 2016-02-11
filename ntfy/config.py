@@ -4,8 +4,15 @@ from os.path import expanduser, isfile
 from sys import exit
 
 import yaml
+import requests
+
+from . import __version__
+
 
 DEFAULT_CONFIG = '~/.ntfy.yml'
+
+USER_AGENT = 'ntfy/{version} {default_user_agent}'.format(
+    version=__version__, default_user_agent=requests.utils.default_user_agent())
 
 
 def load_config(config_path=DEFAULT_CONFIG):
