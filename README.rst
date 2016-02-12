@@ -97,7 +97,7 @@ ToDo
 -  `Instapush <https://instapush.im>`_
 
 Config
-~~~~~~
+------
 
 ``ntfy`` is configured via a yaml config file stored at
 ``~/.ntfy.yml``. It requires at minimum 1 keys: backends & a config for any
