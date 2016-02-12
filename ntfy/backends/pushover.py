@@ -7,7 +7,8 @@ from ..config import USER_AGENT
 def notify(title, message, user_key,
            api_token='aUnsraBiEZVsmrG89AZp47K3S2dX2a', device=None,
            sound=None, priority=0, expire=None,
-           retry=None, callback=None, **kwargs):
+           retry=None, callback=None, url=None, url_title=None,
+           html=False, **kwargs):
     """
     Required parameters:
         * ``user_key``
@@ -20,6 +21,9 @@ def notify(title, message, user_key,
         * ``callback``
         * ``access_token`` - use your own application token
         * ``device`` - target a device, if omitted, notification is sent to all devices
+        * ``url``
+        * ``url_title``
+        * ``html``
     """
 
     data = {
@@ -33,6 +37,19 @@ def notify(title, message, user_key,
 
     if sound:
         data['sound'] = sound
+
+    if url:
+        data['url'] = url
+
+    if url_title:
+        if not url:
+            logging.getLogger(__name__).warning(
+                'url_title specified without specifying url')
+        else:
+            data['url_title'] = url_title
+
+    if html:
+        data['html'] = 1
 
     if priority <= 2 and priority >= -2:
         if priority != 0:
