@@ -11,8 +11,7 @@ extra_deps = {'xmpp': ['sleekxmpp',
 test_deps = ['mock', 'sleekxmpp', 'emoji']
 
 try:
-    version_output = check_output(['git', 'describe',
-                                   '--match=v*.*.*'])
+    version_output = check_output(['git', 'describe', '--match=v*.*.*'])
 except (OSError, CalledProcessError):
     version = None
 else:
