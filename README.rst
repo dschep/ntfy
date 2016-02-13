@@ -22,7 +22,7 @@ multiple backends.
 
 Demo
 ----
-.. image:: https://raw.githubusercontent.com/dschep/ntfy/master/demo.gif
+.. image:: https://raw.githubusercontent.com/dschep/ntfy/master/docs/demo.gif
 
 Install
 -------
