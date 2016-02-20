@@ -1,14 +1,17 @@
 import errno
 import logging
 from os.path import expanduser, isfile
+from os.path import join as join_path
 from sys import exit
 
 import yaml
 import requests
+from appdirs import user_config_dir
 
 from . import __version__
 
-DEFAULT_CONFIG = '~/.ntfy.yml'
+DEFAULT_CONFIG = join_path(user_config_dir('ntfy', 'dschep'), 'ntfy.yml')
+OLD_DEFAULT_CONFIG = '~/.ntfy.yml'
 
 USER_AGENT = 'ntfy/{version} {default_user_agent}'.format(
     version=__version__,

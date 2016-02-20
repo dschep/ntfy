@@ -2,6 +2,7 @@ import argparse
 import logging
 import logging.config
 from getpass import getuser
+from os import path
 from socket import gethostname
 from subprocess import call
 from sys import exit
@@ -13,7 +14,7 @@ except ImportError:
     emojize = None
 
 from . import __version__, notify
-from .config import load_config, DEFAULT_CONFIG
+from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
 
 
 def run_cmd(args):
@@ -34,7 +35,6 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     '-c',
     '--config',
-    default=DEFAULT_CONFIG,
     help='config file to use (default: {})'.format(DEFAULT_CONFIG))
 parser.add_argument('-b',
                     '--backend',
@@ -128,7 +128,15 @@ def main(cli_args=None):
         }
     })
 
-    config = load_config(args.config)
+    if args.config is not None:
+        config = load_config(args.config)
+    elif path.exists(path.expanduser(DEFAULT_CONFIG)):
+        config = load_config(DEFAULT_CONFIG)
+    elif path.exists(path.expanduser(OLD_DEFAULT_CONFIG)):
+        config = load_config(OLD_DEFAULT_CONFIG)
+    else:  # get default config and print message about missing file
+        config = load_config()
+
     if args.backend:
         config['backends'] = args.backend
 

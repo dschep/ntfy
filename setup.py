@@ -2,7 +2,7 @@ from setuptools import setup
 from subprocess import check_output, CalledProcessError
 from sys import platform, version_info
 
-deps = ['requests', 'PyYAML']
+deps = ['requests', 'PyYAML', 'appdirs']
 if platform == 'win32':
     deps.append('pypiwin32')
 extra_deps = {'xmpp': ['sleekxmpp',
