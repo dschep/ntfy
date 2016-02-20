@@ -43,6 +43,8 @@ def load_config(config_path=DEFAULT_CONFIG):
             logger.warning("Both 'backend' and 'backends' in config, "
                            "ignoring 'backend'.")
         else:
+            logger.warning(
+                "The 'backend' config option is deprecated, use 'backends'")
             config['backends'] = [config['backend']]
 
     return config
