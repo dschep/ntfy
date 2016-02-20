@@ -120,7 +120,7 @@ it's own configuration, stored in a key of it's own name. For example:
 
 Note: versions prior to v1.0.0 used JSON instead of YAML.
 
-The available backends are in `ntfy.backends <ntfy.backends.html>`_,
+The available backends are in `ntfy.backends <http://ntfy.readthedocs.org/en/stable/ntfy.backends.html>`_,
 include only the module name in your config (eg: ``pushbullet`` not
 ``ntfy.backends.pushbullet``).
 
