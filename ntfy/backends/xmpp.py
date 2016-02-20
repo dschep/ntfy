@@ -37,9 +37,16 @@ class NtfySendMsgBot(sleekxmpp.ClientXMPP):
         self.disconnect(wait=True)
 
 
-def notify(title, message, jid, password, recipient,
-           hostname=None, port=5222, path_to_certs=None,
-           mtype=None, **kwargs):
+def notify(title,
+           message,
+           jid,
+           password,
+           recipient,
+           hostname=None,
+           port=5222,
+           path_to_certs=None,
+           mtype=None,
+           **kwargs):
     """
     Optional parameters
         * ``hostname`` (if not from jid)
@@ -60,8 +67,7 @@ def notify(title, message, jid, password, recipient,
     NOTE: Ignored without specified hostname
     """
 
-    xmpp_bot = NtfySendMsgBot(jid, password, recipient,
-                              title, message, mtype)
+    xmpp_bot = NtfySendMsgBot(jid, password, recipient, title, message, mtype)
 
     # NOTE: Below plugins weren't needed for Google Hangouts
     # but may be useful (from original sleekxmpp example)

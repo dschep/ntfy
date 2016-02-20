@@ -9,18 +9,17 @@ def notify(title, message, **kwargs):
         import sys
         import logging
 
-
         logger = logging.getLogger(__name__)
         if sys.platform.startswith('darwin') and hasattr(sys, 'real_prefix'):
-            logger.error("Using ntfy with the MacOS Notification Center doesn't "
-                        "work within a virtualenv")
+            logger.error(
+                "Using ntfy with the MacOS Notification Center doesn't "
+                "work within a virtualenv")
             sys.exit(1)
         else:
             raise
 
     NSUserNotification = objc.lookUpClass('NSUserNotification')
     NSUserNotificationCenter = objc.lookUpClass('NSUserNotificationCenter')
-
 
     notification = NSUserNotification.alloc().init()
     notification.setTitle_(title)

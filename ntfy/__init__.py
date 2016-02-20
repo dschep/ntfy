@@ -22,7 +22,8 @@ def notify(message, title, config=None, **kwargs):
         except ImportError:
             ret = 1
             logging.getLogger(__name__).error(
-                'failed to load backend {}'.format(backend), exc_info=True)
+                'failed to load backend {}'.format(backend),
+                exc_info=True)
             continue
 
         backend_config = config.get(backend, {})
