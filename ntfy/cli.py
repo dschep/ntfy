@@ -98,11 +98,12 @@ done_parser = subparsers.add_parser(
 done_parser.add_argument('command',
                          nargs=argparse.REMAINDER,
                          help='command to run')
-done_parser.add_argument('-L',
-                         '--longer-than',
-                         type=int,
-                         metavar='N',
-                         help="Don't notify if command finishes ")
+done_parser.add_argument(
+    '-L',
+    '--longer-than',
+    type=int,
+    metavar='N',
+    help="Only notify if the command runs longer than N seconds")
 done_parser.set_defaults(func=run_cmd)
 
 
