@@ -11,6 +11,7 @@ class TestRunCmd(TestCase):
     def test_runcmd(self, mock_call):
         mock_call.return_value = 0
         args = MagicMock()
+        args.longer_than = 0
         args.command = ['true']
         self.assertEqual('"true" succeeded in 0:00 minutes',
                          run_cmd(args))
