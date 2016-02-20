@@ -149,7 +149,7 @@ def main(cli_args=None):
     if args.backend:
         config['backends'] = args.backend
 
-    if args.func == run_cmd and args.longer_than is None and \
+    if getattr(args, 'func', None) == run_cmd and args.longer_than is None and \
             'longer_than' in config:
         args.longer_than = config['longer_than']
 
