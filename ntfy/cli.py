@@ -24,7 +24,7 @@ def run_cmd(args):
     if duration <= args.longer_than:
         return
     if emojize is not None and not args.no_emoji:
-        prefix = '\u2705 ' if retcode == 0 else '\u274C '
+        prefix = ':white_check_mark: ' if retcode == 0 else ':x: '
     else:
         prefix = ''
     return '{}"{}" {} in {:d}:{:02d} minutes'.format(
