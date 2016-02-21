@@ -2,7 +2,7 @@ import argparse
 import logging
 import logging.config
 from getpass import getuser
-from os import path
+from os import path, getcwd
 from socket import gethostname
 from subprocess import call
 from sys import exit
@@ -78,7 +78,8 @@ if emojize is not None:
                         action='store_true',
                         help='Disable emoji support')
 
-default_title = '{}@{}'.format(getuser(), gethostname())
+default_title = '{}@{}:{}'.format(getuser(), gethostname(), getcwd().replace(
+    path.expanduser('~'), '~'))
 
 parser.add_argument('-t',
                     '--title',

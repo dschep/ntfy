@@ -68,7 +68,7 @@ Usage
     # send a notification
     ntfy send "Here's a notification!"
 
-    # send a notification with custom title (default is $USER@$HOST)
+    # send a notification with custom title (default is $USER@$HOST:$PWD)
     ntfy -t 'ntfy' send "Here's a notification with a custom title!"
 
     # send a notification when the command `sleep 10` finishes
