@@ -104,6 +104,7 @@ done_parser.add_argument(
     '--longer-than',
     type=int,
     metavar='N',
+    default=0,
     help="Only notify if the command runs longer than N seconds")
 done_parser.set_defaults(func=run_cmd)
 
