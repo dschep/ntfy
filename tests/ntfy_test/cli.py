@@ -8,7 +8,7 @@ from ntfy.cli import main as ntfy_main
 
 class TestRunCmd(TestCase):
 
-    @patch('subprocess.call')
+    @patch('ntfy.cli.call')
     def test_runcmd(self, mock_call):
         mock_call.return_value = 0
         args = MagicMock()
