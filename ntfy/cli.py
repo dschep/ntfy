@@ -6,12 +6,17 @@ from os import path, getcwd
 from socket import gethostname
 from subprocess import call
 from sys import exit
-from time import time
+from time import time, strftime
 
 try:
     from emoji import emojize
 except ImportError:
     emojize = None
+
+try:
+    import psutil
+except ImportError:
+    psutil = None
 
 from . import __version__, notify
 from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
@@ -30,6 +35,28 @@ def run_cmd(args):
     return '{}"{}" {} in {:d}:{:02d} minutes'.format(
         prefix, ' '.join(args.command), 'succeeded' if retcode == 0 else
         'failed', *map(int, divmod(duration, 60)))
+
+
+def watch_pid(args):
+    if psutil is None:
+        logging.error(
+            "This command requires psutil module. Pleases install psutil.")
+        exit(1)
+    try:
+        p = psutil.Process(args.pid)
+        cmd = p.cmdline()
+    except psutil.NoSuchProcess:
+        logging.error("PID {} not found".format(args.pid))
+        exit(1)
+    p.wait()
+    if emojize is not None and not args.no_emoji:
+        prefix = '\u2705 ' if retcode == 0 else '\u274C '
+    else:
+        prefix = ''
+    return '{}"Process[{}]: {}" was finished at {}'.format(
+        prefix, p.pid, ' '.join(cmd),
+        strftime('%a, %d %b %Y %H:%M:%S')
+    )
 
 
 parser = argparse.ArgumentParser(
@@ -107,6 +134,13 @@ done_parser.add_argument(
     default=0,
     help="Only notify if the command runs longer than N seconds")
 done_parser.set_defaults(func=run_cmd)
+
+watch_parser = subparsers.add_parser(
+    "watch", help="watch a process and send a notification when it terminates")
+watch_parser.add_argument('pid',
+                          type=int,
+                          help="PID to watch")
+watch_parser.set_defaults(func=watch_pid)
 
 
 def main(cli_args=None):
