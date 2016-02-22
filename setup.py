@@ -7,7 +7,9 @@ if platform == 'win32':
     deps.append('pypiwin32')
 extra_deps = {'xmpp': ['sleekxmpp',
                        'dnspython' if version_info[0] < 3 else 'dnspython3'],
-              'emoji': ['emoji']}
+              'emoji': ['emoji'],
+              'psutil':['psutil'],
+              }
 test_deps = ['mock', 'sleekxmpp', 'emoji']
 
 try:
