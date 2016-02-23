@@ -136,10 +136,16 @@ it's own configuration, stored in a key of it's own name. For example:
     backends:
         - pushover
         - linux
+        - xmpp
     pushover:
         user_key: hunter2
     pushbullet:
         access_token: hunter2
+    xmpp:
+         jid: "user@gmail.com"
+         password: "xxxx"
+         mtype: "chat"
+         recipient: "me@jit.si"
 
 Note: versions prior to v1.0.0 used JSON instead of YAML.
 
