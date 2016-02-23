@@ -2,7 +2,7 @@ from unittest import TestCase, main
 
 from mock import patch, MagicMock
 
-from ntfy.cli import run_cmd
+from ntfy.cli import run_cmd, auto_done
 from ntfy.cli import main as ntfy_main
 
 
@@ -24,6 +24,13 @@ class TestMain(TestCase):
                    'send', 'test'])
         mock_notify.assert_called_once_with(message='test', title='TITLE',
                                             foo='bar')
+
+
+class ShellIntegrationTestCase(TestCase):
+    def test_shellintegration_printout(self):
+        # not mocking print to check calls because test runner uses print...
+        args = MagicMock()
+        auto_done(args)
 
 
 if __name__ == '__main__':

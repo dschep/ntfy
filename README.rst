@@ -75,6 +75,29 @@ Usage
     # this send the message '"sleep 10" succeeded in 0:10 minutes'
     ntfy done sleep 10
 
+Shell integration
+~~~~~~~~~~~~~~~~~~~~
+``ntfy`` has support for **automatically** sending notifications when long
+running commands finish in bash and zsh. In bash it emulates zsh's preexec and
+precmd functionality with `rcaloras/bash-preexec <https://github.com/rcaloras/bash-preexec>`_.
+To enable it add the following to your ``.bashrc`` or ``.zshrc``:
+
+::
+
+    eval "$(ntfy shell-integration)"
+
+By default it will only send notifications for commands lasting longer than 10
+seconds. This can be configured with the ``AUTO_NTFY_DONE_TIMEOUT`` environment
+variable.
+
+To avoid unnecessary notifications when running interactive programs programs
+listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. for example:
+
+::
+
+    export AUTO_NTFY_DONE_IGNORE="vim screen meld"
+
+
 Backends
 --------
 

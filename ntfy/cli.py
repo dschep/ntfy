@@ -2,7 +2,7 @@ import argparse
 import logging
 import logging.config
 from getpass import getuser
-from os import path, getcwd
+from os import environ, getcwd, path
 from socket import gethostname
 from subprocess import call
 from sys import exit
@@ -30,6 +30,18 @@ def run_cmd(args):
     return '{}"{}" {} in {:d}:{:02d} minutes'.format(
         prefix, ' '.join(args.command), 'succeeded' if retcode == 0 else
         'failed', *map(int, divmod(duration, 60)))
+
+
+def auto_done(args):
+    shell_path = path.join(path.split(__file__)[0], 'shell_integration')
+    if emojize is not None and not args.no_emoji:
+        print('export AUTO_NTFY_DONE_EMOJI=true')
+    if args.shell == 'bash':
+        print('source {}/bash-preexec.sh'.format(shell_path))
+    print('source {}/auto-ntfy-done.sh'.format(shell_path))
+    print("# To use ntfy's shell integration, run "
+          "this and and it to your shell's rc file:")
+    print('# eval "$(ntfy shell-integration)"')
 
 
 parser = argparse.ArgumentParser(
@@ -104,9 +116,19 @@ done_parser.add_argument(
     '--longer-than',
     type=int,
     metavar='N',
-    default=0,
     help="Only notify if the command runs longer than N seconds")
 done_parser.set_defaults(func=run_cmd)
+
+shell_integration_parser = subparsers.add_parser(
+    'shell-integration',
+    help='automatically get notifications when long running commands finish')
+shell_integration_parser.add_argument(
+    '-s',
+    '--shell',
+    default=path.split(environ.get('SHELL', ''))[1],
+    choices=['bash', 'zsh'],
+    help='The shell to integrate ntfy with (default: your login shell)')
+shell_integration_parser.set_defaults(func=auto_done)
 
 
 def main(cli_args=None):
