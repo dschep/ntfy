@@ -5,7 +5,7 @@ from getpass import getuser
 from os import environ, getcwd, path
 from socket import gethostname
 from subprocess import call
-from sys import exit
+from sys import exit, stderr
 from time import time
 
 try:
@@ -18,6 +18,12 @@ from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
 
 
 def run_cmd(args):
+    if not args.command:
+        stderr.write('usage: ntfy done [-h|-L N] command\n'
+                     'ntfy done: error: the following arguments '
+                     'are required: command\n')
+        exit(1)
+
     start_time = time()
     retcode = call(args.command)
     duration = time() - start_time
