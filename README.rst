@@ -106,7 +106,7 @@ Supported
 -  `Pushover <https://pushover.net>`_
 -  `Pushbullet <https://pushbullet.com>`_
 -  XMPP
--  Linux Desktop Notifications
+-  `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ (via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify)
 -  Windows Desktop Notifications
 -  Mac OS X Notification Center
 
