@@ -10,6 +10,7 @@ except:
 try:
     from dbus.exceptions import DBusException
 except ImportError:
+
     class DBusException(Exception):
         pass
 
