@@ -21,7 +21,7 @@ def run_cmd(args):
     start_time = time()
     retcode = call(args.command)
     duration = time() - start_time
-    if duration <= args.longer_than:
+    if args.longer_than is not None and duration <= args.longer_than:
         return
     if emojize is not None and not args.no_emoji:
         prefix = ':white_check_mark: ' if retcode == 0 else ':x: '
