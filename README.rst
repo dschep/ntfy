@@ -147,6 +147,16 @@ it's own configuration, stored in a key of it's own name. For example:
          mtype: "chat"
          recipient: "me@jit.si"
 
+Other options
+~~~~~~~~~~~~~
+
+Title is configurable with the `title` key in the config. Example:
+
+::
+
+    ---
+    title: Customized Title
+
 Note: versions prior to v1.0.0 used JSON instead of YAML.
 
 The available backends are in `ntfy.backends <http://ntfy.readthedocs.org/en/stable/ntfy.backends.html>`_,

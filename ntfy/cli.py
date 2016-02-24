@@ -101,7 +101,6 @@ default_title = '{}@{}:{}'.format(getuser(), gethostname(), getcwd().replace(
 
 parser.add_argument('-t',
                     '--title',
-                    default=default_title,
                     help='a title for the notification (default: {})'
                     .format(default_title))
 
@@ -182,6 +181,9 @@ def main(cli_args=None):
     if getattr(args, 'func', None) == run_cmd and args.longer_than is None and \
             'longer_than' in config:
         args.longer_than = config['longer_than']
+
+    if args.title is None:
+        args.title = config.get('title', default_title)
 
     if hasattr(args, 'func'):
         message = args.func(args)
