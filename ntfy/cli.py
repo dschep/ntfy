@@ -50,6 +50,25 @@ def auto_done(args):
     print('# eval "$(ntfy shell-integration)"')
 
 
+class BackendOptionAction(argparse.Action):
+    backend = None
+
+    def __call__(self, parser, args, values, option_string=None):
+        if self.dest == 'backend':
+            self.__class__.backend = values
+            if args.backend is None:
+                args.backend = []
+            args.backend.append(values)
+        elif self.dest == 'option':
+            if args.option is None:
+                args.option = {}
+            args.option.setdefault(
+                self.__class__.backend, {})[values[0]] = values[1]
+        else:
+            raise Exception("'BackendOptionAction only supports dest of "
+                            "'backend' and 'option'")
+
+
 parser = argparse.ArgumentParser(
     description='Send push notification when command finishes')
 
@@ -59,14 +78,14 @@ parser.add_argument(
     help='config file to use (default: {})'.format(DEFAULT_CONFIG))
 parser.add_argument('-b',
                     '--backend',
-                    action='append',
+                    action=BackendOptionAction,
                     help='override backend specified in config')
 parser.add_argument('-o',
                     '--option',
                     nargs=2,
-                    action='append',
+                    default={},
+                    action=BackendOptionAction,
                     metavar=('key', 'value'),
-                    default=[],
                     help='backend specific options')
 parser.add_argument('-l',
                     '--log-level',
@@ -178,6 +197,11 @@ def main(cli_args=None):
     if args.backend:
         config['backends'] = args.backend
 
+    for backend, backend_options in args.option.items():
+        if backend is not None:
+            config.setdefault(backend, {}).update(backend_options)
+
+
     if getattr(args, 'func', None) == run_cmd and args.longer_than is None and \
             'longer_than' in config:
         args.longer_than = config['longer_than']
@@ -191,7 +215,8 @@ def main(cli_args=None):
             return 0
         if emojize is not None and not args.no_emoji:
             message = emojize(message, use_aliases=True)
-        return notify(message, args.title, config, **dict(args.option))
+        return notify(message, args.title, config, **dict(
+            args.option.get(None, [])))
     else:
         parser.print_help()
 
