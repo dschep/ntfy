@@ -28,7 +28,7 @@ def load_config(config_path=DEFAULT_CONFIG):
             if isfile(expanduser('~/.ntfy.json')):
                 logger.error('~/.ntfy.json no longer supported, use {}'.format(
                     DEFAULT_CONFIG))
-            logger.warning('{} not found'.format(config_path))
+            logger.info('{} not found'.format(config_path))
             config = {'backends': ['default']}
         else:
             logger.error('Failed to open {}'.format(config_path),
