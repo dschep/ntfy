@@ -122,7 +122,7 @@ ToDo
 Configuring ``ntfy``
 --------------------
 
-``ntfy`` is configured with a YAML file stored at ``~/.ntfy.yml``
+``ntfy`` is configured with a YAML file stored at ``~/.config/ntfy/ntfy.yml``
 
 Backends
 ~~~~~~~~
