@@ -34,7 +34,7 @@ def run_cmd(args):
     else:
         prefix = ''
     return '{}"{}" {} in {:d}:{:02d} minutes'.format(
-        prefix, ' '.join(args.command), 'succeeded' if retcode == 0 else
+        prefix, ' '.join(args.command), 'completed' if retcode == 0 else
         'failed', *map(int, divmod(duration, 60)))
 
 
