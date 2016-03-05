@@ -4,7 +4,7 @@
 # Default timeout is 10 seconds.
 AUTO_NTFY_DONE_TIMEOUT=${AUTO_NTFY_DONE_TIMEOUT:-10}
 # Default to ignoring some well known interactive programs
-AUTO_NTFY_DONE_IGNORE=${AUTO_NTFY_DONE_IGNORE:-vi vim nano emacs screen tmux ssh less tail man meld}
+AUTO_NTFY_DONE_IGNORE=${AUTO_NTFY_DONE_IGNORE:-emacs info less mail man meld most mutt nano screen ssh sudo tail tmux vi vim}
 # Bash option example
 #AUTO_NTFY_DONE_OPTS='-b default'
 # Zsh option example
