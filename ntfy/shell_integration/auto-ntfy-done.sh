@@ -23,7 +23,7 @@ function ntfy_precmd () {
 
     local human_duration=$(printf '%d:%02d\n' $(($duration/60)) $(($duration%60)))
     local human_retcode
-    [ "$ret_value" -eq 0 ] && human_retcode='succeeded' || human_retcode='failed'
+    [ "$ret_value" -eq 0 ] && human_retcode='completed' || human_retcode='failed'
     local prefix
     if [[ "$AUTO_NTFY_DONE_EMOJI" == "true" ]]; then
         [ "$ret_value" -eq 0 ] && prefix=':white_check_mark: ' || prefix=':x: '
