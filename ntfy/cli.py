@@ -6,18 +6,25 @@ from os import environ, getcwd, path
 from socket import gethostname
 from subprocess import call
 from sys import exit, stderr
-from time import time
+from time import time, strftime
 
 try:
     from emoji import emojize
 except ImportError:
     emojize = None
 
+try:
+    import psutil
+except ImportError:
+    psutil = None
+
 from . import __version__, notify
 from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
 
 
 def run_cmd(args):
+    if args.pid:
+        return watch_pid(args)
     if not args.command:
         stderr.write('usage: ntfy done [-h|-L N] command\n'
                      'ntfy done: error: the following arguments '
@@ -36,6 +43,27 @@ def run_cmd(args):
     return '{}"{}" {} in {:d}:{:02d} minutes'.format(
         prefix, ' '.join(args.command), 'succeeded' if retcode == 0 else
         'failed', *map(int, divmod(duration, 60)))
+
+
+def watch_pid(args):
+    if psutil is None:
+        logging.error(
+            "This command requires psutil module. Pleases install psutil.")
+        exit(1)
+    try:
+        p = psutil.Process(args.pid)
+        cmd = p.cmdline()
+        start_time = p.create_time()
+    except psutil.NoSuchProcess:
+        logging.error("PID {} not found".format(args.pid))
+        exit(1)
+    try:
+        p.wait()
+    except psutil.NoSuchProcess:
+        pass
+    duration = time() - start_time
+    return 'PID[{}]: "{}" finished in {:d}:{:02d} minutes'.format(
+        p.pid, ' '.join(cmd), *map(int, divmod(duration, 60)))
 
 
 def auto_done(args):
@@ -62,8 +90,8 @@ class BackendOptionAction(argparse.Action):
         elif self.dest == 'option':
             if args.option is None:
                 args.option = {}
-            args.option.setdefault(
-                self.__class__.backend, {})[values[0]] = values[1]
+            args.option.setdefault(self.__class__.backend,
+                                   {})[values[0]] = values[1]
         else:
             raise Exception("'BackendOptionAction only supports dest of "
                             "'backend' and 'option'")
@@ -141,6 +169,12 @@ done_parser.add_argument(
     type=int,
     metavar='N',
     help="Only notify if the command runs longer than N seconds")
+if psutil is not None:
+    done_parser.add_argument(
+        '-p',
+        '--pid',
+        type=int,
+        help="Watch a PID instead of running a new command")
 done_parser.set_defaults(func=run_cmd)
 
 shell_integration_parser = subparsers.add_parser(
@@ -215,8 +249,8 @@ def main(cli_args=None):
             return 0
         if emojize is not None and not args.no_emoji:
             message = emojize(message, use_aliases=True)
-        return notify(message, args.title, config, **dict(
-            args.option.get(None, [])))
+        return notify(message, args.title, config,
+                      **dict(args.option.get(None, [])))
     else:
         parser.print_help()
 
