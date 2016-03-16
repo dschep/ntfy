@@ -117,21 +117,54 @@ Backends
 
 `Pushover <https://pushover.net>`_ - ``pushover``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Required Options:
+Required parameters:
+    * ``user_key``
 
--  ``user_key``
+Optional parameters:
+    * ``sound``
+    * ``priority``
+    * ``expire``
+    * ``retry``
+    * ``callback``
+    * ``access_token`` - use your own application token
+    * ``device`` - target a device, if omitted, notification is sent to all devices
+    * ``url``
+    * ``url_title``
+    * ``html``
 
 `Pushbullet <https://pushbullet.com>`_ - ``pushbullet``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Required Options:
+Required parameter:
+    * ``access_token`` - Your Pushbullet access token, created at https://www.pushbullet.com/#settings/account
 
--  ``user_key``
+Optional parameters:
+    * ``device_iden`` - a device identifier, if omited, notification is sent to all devices
+    * ``email`` - send notification to pushbullte user with the specified email or send an email if they aren't a pushullet user
+Required Options:
 
 XMPP - ``xmpp``
 ~~~~~~~~~~~~~~~
-Required Options:
+Requires parameters:
+    * ``jid``
+    * ``password``
+    * ``recipient``
+Optional parameters
+    * ``hostname`` (if not from jid)
+    * ``port``
+    * ``path_to_certs``
+    * ``mtype`` ('chat' required for Google Hangouts)
 
--  ``access_token``
+To verify the SSL certificates offered by a server:
+path_to_certs = "path/to/ca/cert"
+
+Without dnspython library installed, you will need
+to specify the server hostname if it doesn't match the jid.
+
+For example, to use Google Talk you would need to use:
+hostname = 'talk.google.com'
+
+Specify port if other than 5222.
+NOTE: Ignored without specified hostname
 
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
