@@ -71,28 +71,6 @@ listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. for example:
 
     export AUTO_NTFY_DONE_IGNORE="vim screen meld"
 
-
-Backends
---------
-
-Supported
-~~~~~~~~~
--  `Pushover <https://pushover.net>`_
--  `Pushbullet <https://pushbullet.com>`_
--  XMPP
--  `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ (via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify)
--  Windows Desktop Notifications
--  Mac OS X Notification Center
-
-ToDo
-~~~~
--  `Prowl <http://www.prowlapp.com>`_
--  `Airgram <http://www.airgramapp.com>`_
--  `Pushjet <https://pushjet.io>`_
--  `Pushalot <https://pushalot.com>`_
--  `Boxcar <https://boxcar.io>`_
--  `Instapush <https://instapush.im>`_
-
 Configuring ``ntfy``
 --------------------
 
@@ -134,6 +112,28 @@ Title is configurable with the `title` key in the config. Example:
 
     ---
     title: Customized Title
+
+
+Backends
+--------
+
+Supported
+~~~~~~~~~
+-  `Pushover <https://pushover.net>`_
+-  `Pushbullet <https://pushbullet.com>`_
+-  XMPP
+-  `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ (via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify)
+-  Windows Desktop Notifications
+-  Mac OS X Notification Center
+
+ToDo
+~~~~
+-  `Prowl <http://www.prowlapp.com>`_
+-  `Airgram <http://www.airgramapp.com>`_
+-  `Pushjet <https://pushjet.io>`_
+-  `Pushalot <https://pushalot.com>`_
+-  `Boxcar <https://boxcar.io>`_
+-  `Instapush <https://instapush.im>`_
 
 Testing
 -------
