@@ -24,6 +24,10 @@ def notify(message, title, config=None, **kwargs):
     ret = 0
 
     for backend in config.get('backends', ['default']):
+        backend_config = config.get(backend, {})
+        backend_config.update(kwargs)
+        if 'backend' in backend_config:
+            backend = backend_config['backend']
         try:
             module = import_module('ntfy.backends.{}'.format(backend))
         except ImportError:
@@ -32,9 +36,6 @@ def notify(message, title, config=None, **kwargs):
                 'failed to load backend {}'.format(backend),
                 exc_info=True)
             continue
-
-        backend_config = config.get(backend, {})
-        backend_config.update(kwargs)
 
         try:
             module.notify(message=message, title=title, **backend_config)
