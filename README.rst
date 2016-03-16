@@ -99,21 +99,7 @@ it's own configuration, stored in a key of it's own name. For example:
          mtype: "chat"
          recipient: "me@jit.si"
 
-See `Backends <#backends-1>`_ for available backends and options.
-
-Other options
-~~~~~~~~~~~~~
-
-Title is configurable with the `title` key in the config. Example:
-
-::
-
-    ---
-    title: Customized Title
-
-
-Backends
---------
+See the backends bellow for available backends and options.
 
 `Pushover <https://pushover.net>`_ - ``pushover``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -177,8 +163,19 @@ Mac OS X Notification Center - ``darwin``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Requires ``ntfy`` to be installed globally (not in a virtualenv).
 
-ToDo
-~~~~
+Other options
+~~~~~~~~~~~~~
+
+Title is configurable with the `title` key in the config. Example:
+
+::
+
+    ---
+    title: Customized Title
+
+
+Backends ToDo
+~~~~~~~~~~~~~
 -  `Prowl <http://www.prowlapp.com>`_
 -  `Airgram <http://www.airgramapp.com>`_
 -  `Pushjet <https://pushjet.io>`_
