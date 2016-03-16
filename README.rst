@@ -118,17 +118,20 @@ Backends
 `Pushover <https://pushover.net>`_ - ``pushover``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Required Options:
-- ``user_key``
+
+-  ``user_key``
 
 `Pushbullet <https://pushbullet.com>`_ - ``pushbullet``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Required Options:
-- ``user_key``
+
+-  ``user_key``
 
 XMPP - ``xmpp``
 ~~~~~~~~~~~~~~~
 Required Options:
-- ``access_token``
+
+-  ``access_token``
 
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
