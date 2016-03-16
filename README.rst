@@ -99,9 +99,7 @@ it's own configuration, stored in a key of it's own name. For example:
          mtype: "chat"
          recipient: "me@jit.si"
 
-The available backends are in `ntfy.backends <http://ntfy.readthedocs.org/en/stable/ntfy.backends.html>`_,
-include only the module name in your config (eg: ``pushbullet`` not
-``ntfy.backends.pushbullet``).
+See `Backends <#Backends>`_ for available backends and options.
 
 Other options
 ~~~~~~~~~~~~~
@@ -117,14 +115,32 @@ Title is configurable with the `title` key in the config. Example:
 Backends
 --------
 
-Supported
-~~~~~~~~~
--  `Pushover <https://pushover.net>`_
--  `Pushbullet <https://pushbullet.com>`_
--  XMPP
--  `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ (via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify)
--  Windows Desktop Notifications
--  Mac OS X Notification Center
+`Pushover <https://pushover.net>`_ - ``pushover``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required Options:
+- ``user_key``
+
+`Pushbullet <https://pushbullet.com>`_ - ``pushbullet``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required Options:
+- ``user_key``
+
+XMPP - ``xmpp``
+~~~~~~~~~~~~~~~
+Required Options:
+- ``access_token``
+
+`Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
+
+Windows Desktop Notifications - ``win32``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Uses ``pywin32``.
+
+Mac OS X Notification Center - ``darwin``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires ``ntfy`` to be installed globally (not in a virtualenv).
 
 ToDo
 ~~~~
