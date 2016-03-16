@@ -99,6 +99,18 @@ it's own configuration, stored in a key of it's own name. For example:
          mtype: "chat"
          recipient: "me@jit.si"
 
+If you want mulitple configs for the same backend type, you can specify any
+name and then specify the backend with a backend key. For example:
+
+::
+
+    ---
+    pushover:
+        user_key: hunter2
+    cellphone:
+        backend: pushover
+        user_key: hunter2
+
 See the backends bellow for available backends and options.
 
 `Pushover <https://pushover.net>`_ - ``pushover``
