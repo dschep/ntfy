@@ -19,7 +19,7 @@ class TestLoadConfig(TestCase):
            mock_open_error)
     def test_default_config(self):
         config = load_config(DEFAULT_CONFIG)
-        self.assertEqual(config, {'backends': ['default']})
+        self.assertEqual(config, {})
 
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
     @patch('ntfy.config.yaml.load')

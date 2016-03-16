@@ -29,7 +29,7 @@ def load_config(config_path=DEFAULT_CONFIG):
                 logger.error('~/.ntfy.json no longer supported, use {}'.format(
                     DEFAULT_CONFIG))
             logger.info('{} not found'.format(config_path))
-            config = {'backends': ['default']}
+            config = {}
         else:
             logger.error('Failed to open {}'.format(config_path),
                          exc_info=True)

@@ -23,7 +23,7 @@ def notify(message, title, config=None, **kwargs):
 
     ret = 0
 
-    for backend in config['backends']:
+    for backend in config.get('backends', ['default']):
         try:
             module = import_module('ntfy.backends.{}'.format(backend))
         except ImportError:
