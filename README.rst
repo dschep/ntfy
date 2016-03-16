@@ -99,7 +99,7 @@ it's own configuration, stored in a key of it's own name. For example:
          mtype: "chat"
          recipient: "me@jit.si"
 
-See `Backends <#Backends>`_ for available backends and options.
+See `Backends <#backends-1>`_ for available backends and options.
 
 Other options
 ~~~~~~~~~~~~~
