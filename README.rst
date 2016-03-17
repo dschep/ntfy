@@ -32,7 +32,7 @@ Quickstart
     $ ntfy done sleep 10
     $ ntfy -b pushover -o user_key t0k3n send 'Pushover test!'
     $ ntfy -t 'ntfy' send "Here's a custom notification title!"
-    $ echo -e 'backends: ["pushover"]\npushover: {"user_token": "t0k3n"} > ~/.config/ntfy/ntfy.yml'
+    $ echo -e 'backends: ["pushover"]\npushover: {"user_token": "t0k3n"}' > ~/.config/ntfy/ntfy.yml
     $ ntfy send "Pushover via config file!"
 
 Install
