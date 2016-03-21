@@ -23,7 +23,7 @@ from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
 
 
 def run_cmd(args):
-    if args.pid:
+    if getattr(args, 'pid', False):
         return watch_pid(args)
     if not args.command:
         stderr.write('usage: ntfy done [-h|-L N] command\n'
