@@ -9,9 +9,9 @@ About ``ntfy``
 .. |Docs| image:: http://readthedocs.org/projects/ntfy/badge/?version=latest
 .. _Docs: http://ntfy.readthedocs.org/en/latest/?badge=latest
 .. |Build| image:: https://travis-ci.org/dschep/ntfy.svg?branch=master
-.. _Build: https://ci.appveyor.com/project/dschep/ntfy
+.. _Build: https://travis-ci.org/dschep/ntfy
 .. |WinBuild| image:: https://ci.appveyor.com/api/projects/status/fw6oycy7px0k23gi/branch/master?svg=true
-.. _WinBuild: https://travis-ci.org/dschep/ntfy
+.. _WinBuild: https://ci.appveyor.com/project/dschep/ntfy
 .. |Coverage| image:: https://coveralls.io/repos/github/dschep/ntfy/badge.svg?branch=master
 .. _Coverage: https://coveralls.io/github/dschep/ntfy?brach=master
 
