@@ -1,6 +1,6 @@
 About ``ntfy``
 ==============
-|Version|_ |Downloads|_ |Docs|_ |Build|_ |WinBuild|_| Coverage|_
+|Version|_ |Downloads|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_
 
 .. |Version| image:: https://img.shields.io/pypi/v/ntfy.svg
 .. _Version: https://pypi.python.org/pypi/ntfy
@@ -10,7 +10,7 @@ About ``ntfy``
 .. _Docs: http://ntfy.readthedocs.org/en/latest/?badge=latest
 .. |Build| image:: https://travis-ci.org/dschep/ntfy.svg?branch=master
 .. _Build: https://travis-ci.org/dschep/ntfy
-.. |WinBuild| image:: https://ci.appveyo.rcom/api/projects/status/fw6oycy7px0k23gi/branch/master?svg=true
+.. |WinBuild| image:: https://ci.appveyor.com/api/projects/status/fw6oycy7px0k23gi/branch/master?svg=true
 .. _WinBuild: https://travis-ci.org/dschep/ntfy
 .. |Coverage| image:: https://coveralls.io/repos/github/dschep/ntfy/badge.svg?branch=master
 .. _Coverage: https://coveralls.io/github/dschep/ntfy?brach=master
