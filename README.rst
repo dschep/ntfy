@@ -1,17 +1,20 @@
 About ``ntfy``
 ==============
-|Version|_ |Downloads|_ |Docs|_ |Build|_ |Coverage|_
+|Version|_ |Downloads|_ |Docs|_ |Build|_ |WinBuild|_| Coverage|_
 
 .. |Version| image:: https://img.shields.io/pypi/v/ntfy.svg
 .. _Version: https://pypi.python.org/pypi/ntfy
 .. |Downloads| image:: https://img.shields.io/pypi/dm/ntfy.svg
 .. _Downloads: https://pypi.python.org/pypi/ntfy#downloads
-.. |Docs| image:: https://img.shields.io/badge/docs-stable-brightgreen.svg
-.. _Docs: http://ntfy.rtfd.org
-.. |Build| image:: https://img.shields.io/travis/dschep/ntfy.svg
+.. |Docs| image:: http://readthedocs.org/projects/ntfy/badge/?version=latest
+.. _Docs: http://ntfy.readthedocs.org/en/latest/?badge=latest
+.. |Build| image:: https://travis-ci.org/dschep/ntfy.svg?branch=master
 .. _Build: https://travis-ci.org/dschep/ntfy
-.. |Coverage| image:: https://img.shields.io/coveralls/dschep/ntfy.svg
-.. _Coverage: https://coveralls.io/github/dschep/ntfy
+.. |WinBuild| image:: https://ci.appveyo.rcom/api/projects/status/fw6oycy7px0k23gi/branch/master?svg=true
+.. _WinBuild: https://travis-ci.org/dschep/ntfy
+.. |Coverage| image:: https://coveralls.io/repos/github/dschep/ntfy/badge.svg?branch=master
+.. _Coverage: https://coveralls.io/github/dschep/ntfy?brach=master
+
 
 ``ntfy`` is a utility for sending notifications, on demand and when commands
 finish. It supports many delivery mechanisms, both local and remote.
