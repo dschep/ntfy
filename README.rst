@@ -34,6 +34,8 @@ Quickstart
     $ ntfy -t 'ntfy' send "Here's a custom notification title!"
     $ echo -e 'backends: ["pushover"]\npushover: {"user_token": "t0k3n"}' > ~/.config/ntfy/ntfy.yml
     $ ntfy send "Pushover via config file!"
+    $ ntfy done --pid 6379  # PID extra
+    $ ntfy send ":tada: ntfy supports emoji! :100:"  # emoji extra
 
 Install
 -------
@@ -47,7 +49,7 @@ Extras
 ``ntfy`` supports emoji shortcodes, support can be installed by installing
 ``ntfy[emoji]``. XMPP support requires SleekXMPP which can be installed by
 installing ``ntfy[xmpp]``. ``ntfy done`` can watch existing processes by their
-PID if you install ``ntfy[pid]``.
+PID if you install ``ntfy[pid]``. See the quickstart for usage examples.
 
 Shell integration
 ~~~~~~~~~~~~~~~~~
