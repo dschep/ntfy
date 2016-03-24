@@ -74,6 +74,11 @@ class TestWatchPID(TestCase):
         self.assertEqual('PID[1]: "cmd" finished in 0:00 minutes',
                          run_cmd(args))
 
+    def test_watch_bad_pid(self):
+        args = MagicMock()
+        args.pid = 100000
+        self.assertRaises(SystemExit, run_cmd, args)
+
 
 if __name__ == '__main__':
     main()

@@ -46,7 +46,7 @@ def run_cmd(args):
 
 
 def watch_pid(args):
-    if psutil is None:
+    if psutil is None:  # pragma: no cover
         logging.error(
             "This command requires psutil module. Pleases install psutil.")
         exit(1)
@@ -59,8 +59,8 @@ def watch_pid(args):
         exit(1)
     try:
         p.wait()
-    except psutil.NoSuchProcess:
-        pass
+    except psutil.NoSuchProcess:  # pragma: no cover
+        pass  # this happens when the PID disapears
     duration = time() - start_time
     return 'PID[{}]: "{}" finished in {:d}:{:02d} minutes'.format(
         p.pid, ' '.join(cmd), *map(int, divmod(duration, 60)))
