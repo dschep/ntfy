@@ -105,17 +105,12 @@ class TestIntegration(TestCase):
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
     @patch('ntfy.config.yaml.load')
     @patch('ntfy.backends.xmpp.NtfySendMsgBot')
-    def test_default(self, mock_bot, mock_yamlload):
-        old_dbus = modules.get('dbus')
-        modules['dbus'] = MagicMock()
-        try:
-            mock_yamlload.return_value = {
-                'backends': ['default'],
-            }
-            ntfy_main(['send', 'foobar'])
-        finally:
-            if old_dbus is not None:
-                modules['dbus'] = old_dbus
+    def test_xmpp(self, mock_bot, mock_yamlload):
+        mock_yamlload.return_value = {'backends': ['xmpp'],
+                                      'xmpp': {'jid': 'foo@bar',
+                                               'password': 'hunter2',
+                                               'recipient': 'bar@foo'}}
+        ntfy_main(['send', 'foobar'])
 
 
 if __name__ == '__main__':
