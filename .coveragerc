@@ -1,0 +1,2 @@
+[report]
+exclude_lines = except ImportError:
