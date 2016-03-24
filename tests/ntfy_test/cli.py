@@ -8,20 +8,20 @@ from ntfy.cli import main as ntfy_main
 
 
 class TestRunCmd(TestCase):
-    @patch('subprocess.call')
+    @patch('ntfy.cli.call')
     def test_default(self, mock_call):
         mock_call.return_value = 0
         args = MagicMock()
-        args.longer_than = 0
+        args.longer_than = -1
         args.command = ['true']
         args.pid = None
         self.assertEqual('"true" succeeded in 0:00 minutes', run_cmd(args))
 
-    @patch('subprocess.call')
+    @patch('ntfy.cli.call')
     def test_emoji(self, mock_call):
         mock_call.return_value = 0
         args = MagicMock()
-        args.longer_than = 0
+        args.longer_than = -1
         args.command = ['true']
         args.pid = None
         args.no_emoji = False
@@ -34,7 +34,7 @@ class TestRunCmd(TestCase):
         args.command = []
         self.assertRaises(SystemExit, run_cmd, args)
 
-    @patch('subprocess.call')
+    @patch('ntfy.cli.call')
     def test_longerthan(self, mock_call):
         mock_call.return_value = 0
         args = MagicMock()
