@@ -3,9 +3,9 @@ from subprocess import check_output, CalledProcessError
 from sys import platform, version_info
 
 deps = ['requests', 'PyYAML', 'appdirs']
-if platform == 'win32':
-    deps.append('pypiwin32')
-extra_deps = {'xmpp': ['sleekxmpp',
+extra_deps = {
+    ':sys_platform == "win32"': ['pypiwin32'],
+    'xmpp': ['sleekxmpp',
                        'dnspython' if version_info[0] < 3 else 'dnspython3'],
               'emoji': ['emoji'],
               'pid':['psutil'],
