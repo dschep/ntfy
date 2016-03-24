@@ -1,2 +1,4 @@
 [report]
-exclude_lines = except ImportError:
+exclude_lines =
+    pragma: no cover
+    except ImportError:
