@@ -45,10 +45,6 @@ virtualenv) install ntfy. It *can* be installed in a virtualenv, with caveats.
 Linux notifications requires ``--system-site-packages`` to be used and OS X
 notifications don't work at all.
 
-**Windows Note:** PyWin32 is required, ``setup.py`` lists ``pypwin32`` as a
-dependency but it seems pip somtimes doesn't find it like that. Just install it
-explicitly: ``pip install pypiwin32``
-
 Extras
 ~~~~~~
 ``ntfy`` supports emoji shortcodes, support can be installed by installing
