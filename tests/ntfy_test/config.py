@@ -1,6 +1,6 @@
-
 from errno import ENOENT
-from unittest import TestCase, main
+from os import environ
+from unittest import TestCase, main, skipIf
 from sys import version_info
 
 from mock import patch, mock_open
@@ -31,6 +31,9 @@ class TestLoadConfig(TestCase):
         self.assertIn('backends', config)
         self.assertEqual(config['backends'], ['foobar'])
 
+    @skipIf(
+        environ.get('CI') and (py, py_) in [(3, 3), (3, 4)],
+        'Python 3.3 and 3.4 fail in TravisCI, but 3.4 works on Ubuntu 14.04')
     @patch(('__builtin__' if py == 2 else 'builtins') +'.open', mock_open())
     @patch('ntfy.config.yaml.load')
     def test_parse_error(self, mock_yamlload):
