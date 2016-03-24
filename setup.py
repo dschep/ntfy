@@ -4,7 +4,7 @@ from sys import platform, version_info
 
 deps = ['requests', 'PyYAML', 'appdirs']
 extra_deps = {
-    ':sys_platform == "win32"': ['pypiwin32'],
+    ':sys_platform == "win32"': ['pypiwin32==219'],
     'xmpp': ['sleekxmpp',
                        'dnspython' if version_info[0] < 3 else 'dnspython3'],
               'emoji': ['emoji'],
