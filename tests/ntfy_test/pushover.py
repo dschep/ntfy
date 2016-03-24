@@ -144,10 +144,10 @@ class TestPushover(TestCase):
         mock_post.assert_called_once_with(
             'https://api.pushover.net/1/messages.json',
             data={'user': 'user_key',
-                    'message': 'message',
-                    'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
-                    'title': 'title',
-                    'device': 'foobar'},
+                  'message': 'message',
+                  'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
+                  'title': 'title',
+                  'device': 'foobar'},
             headers={'User-Agent': USER_AGENT})
 
     @patch('requests.post')
@@ -156,10 +156,10 @@ class TestPushover(TestCase):
         mock_post.assert_called_once_with(
             'https://api.pushover.net/1/messages.json',
             data={'user': 'user_key',
-                    'message': 'message',
-                    'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
-                    'title': 'title',
-                    'sound': 'foobar'},
+                  'message': 'message',
+                  'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
+                  'title': 'title',
+                  'sound': 'foobar'},
             headers={'User-Agent': USER_AGENT})
 
     @patch('requests.post')
@@ -168,10 +168,10 @@ class TestPushover(TestCase):
         mock_post.assert_called_once_with(
             'https://api.pushover.net/1/messages.json',
             data={'user': 'user_key',
-                    'message': 'message',
-                    'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
-                    'title': 'title',
-                    'url': 'foobar'},
+                  'message': 'message',
+                  'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
+                  'title': 'title',
+                  'url': 'foobar'},
             headers={'User-Agent': USER_AGENT})
 
 
