@@ -18,3 +18,15 @@ class OverrideBackendTestCase(TestCase):
             }
         })
         self.assertEqual(ret, 0)
+
+
+class ErrorTestCase(TestCase):
+    def test_invalidbackend(self):
+        ret = notify('message', 'title', {'backends': ['foobar']})
+        self.assertEqual(ret, 1)
+
+    @patch('ntfy.backends.default.notify')
+    def test_backenderror(self, mock_default_notify):
+        mock_default_notify.side_effect = Exception
+        ret = notify('message', 'title')
+        self.assertEqual(ret, 1)
