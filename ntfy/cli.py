@@ -6,7 +6,7 @@ from os import environ, getcwd, path
 from socket import gethostname
 from subprocess import call
 from sys import exit, stderr
-from time import time, strftime
+from time import time
 
 try:
     from emoji import emojize
