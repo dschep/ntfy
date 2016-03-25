@@ -62,13 +62,11 @@ class ShellIntegrationTestCase(TestCase):
 
 
 class TestWatchPID(TestCase):
-    @patch('ntfy.cli.strftime')
     @patch('psutil.Process')
-    def test_watch_pid(self, mock_process, mock_strftime):
+    def test_watch_pid(self, mock_process):
         mock_process.return_value.pid = 1
         mock_process.return_value.create_time.return_value = time()
         mock_process.return_value.cmdline.return_value = ['cmd']
-        mock_strftime.return_value = 'now'
         args = MagicMock()
         args.pid = 1
         self.assertEqual('PID[1]: "cmd" finished in 0:00 minutes',
