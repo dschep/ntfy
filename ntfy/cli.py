@@ -26,16 +26,21 @@ def run_cmd(args):
     if getattr(args, 'pid', False):
         return watch_pid(args)
     if not args.command:
-        stderr.write('usage: ntfy done [-h|-L N] command\n'
-                     'ntfy done: error: the following arguments '
-                     'are required: command\n')
-        exit(1)
-
-    start_time = time()
-    retcode = call(args.command)
-    duration = time() - start_time
-    if args.longer_than is not None and duration <= args.longer_than:
-        return
+        if args.formatter:
+            args.command, retcode, duration = args.formatter
+            args.command, retcode, duration = (
+                [args.command], int(retcode), int(duration))
+        else:
+            stderr.write('usage: ntfy done [-h|-L N] command\n'
+                        'ntfy done: error: the following arguments '
+                        'are required: command\n')
+            exit(1)
+    else:
+        start_time = time()
+        retcode = call(args.command)
+        duration = time() - start_time
+        if args.longer_than is not None and duration <= args.longer_than:
+            return
     if emojize is not None and not args.no_emoji:
         prefix = ':white_check_mark: ' if retcode == 0 else ':x: '
     else:
@@ -68,8 +73,6 @@ def watch_pid(args):
 
 def auto_done(args):
     shell_path = path.join(path.split(__file__)[0], 'shell_integration')
-    if emojize is not None and not args.no_emoji:
-        print('export AUTO_NTFY_DONE_EMOJI=true')
     if args.shell == 'bash':
         print('source {}/bash-preexec.sh'.format(shell_path))
     print('source {}/auto-ntfy-done.sh'.format(shell_path))
@@ -169,6 +172,12 @@ done_parser.add_argument(
     type=int,
     metavar='N',
     help="Only notify if the command runs longer than N seconds")
+done_parser.add_argument(
+    '--formatter',
+    metavar=('command', 'retcode', 'duration'),
+    nargs=3,
+    help="Format and send cmd, retcode & duration instead of running command. "
+         "Used internally by shell-integration")
 if psutil is not None:
     done_parser.add_argument(
         '-p',

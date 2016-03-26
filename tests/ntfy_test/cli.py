@@ -31,6 +31,7 @@ class TestRunCmd(TestCase):
     def tests_usage(self):
         args = MagicMock()
         args.pid = False
+        args.formatter = False
         args.command = []
         self.assertRaises(SystemExit, run_cmd, args)
 
