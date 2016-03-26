@@ -28,7 +28,7 @@ function _ntfy_precmd () {
     if [[ "$AUTO_NTFY_DONE_EMOJI" == "true" ]]; then
         [ "$ret_value" -eq 0 ] && prefix=':white_check_mark: ' || prefix=':x: '
     fi
-    ntfy $AUTO_NTFY_DONE_OPTS -l ERROR send "$prefix\"$ntfy_command\" $human_retcode in $human_duration minutes"
+    ntfy $AUTO_NTFY_DONE_OPTS send "$prefix\"$ntfy_command\" $human_retcode in $human_duration minutes"
 }
 
 function _ntfy_preexec () {
