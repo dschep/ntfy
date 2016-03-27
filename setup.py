@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from subprocess import check_output, CalledProcessError
 from sys import platform, version_info
 
@@ -58,7 +58,7 @@ setup(
 
     keywords='push notification',
 
-    packages=['ntfy', 'ntfy.backends'],
+    packages=find_packages(exclude=['tests', 'tests.*']),
     package_data={'ntfy': ['icon.png', 'icon.ico', 'shell_integration/*.sh']},
 
     install_requires=deps,
