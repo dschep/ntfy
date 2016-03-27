@@ -20,6 +20,7 @@ except ImportError:
 
 from . import __version__, notify
 from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
+from .data import scripts
 
 
 def run_cmd(args):
@@ -67,12 +68,11 @@ def watch_pid(args):
 
 
 def auto_done(args):
-    shell_path = path.join(path.split(__file__)[0], 'shell_integration')
     if emojize is not None and not args.no_emoji:
         print('export AUTO_NTFY_DONE_EMOJI=true')
     if args.shell == 'bash':
-        print('source {}/bash-preexec.sh'.format(shell_path))
-    print('source {}/auto-ntfy-done.sh'.format(shell_path))
+        print('source {}'.format(scripts['bash-preexec.sh']))
+    print('source {}'.format(scripts['auto-ntfy-done.sh']))
     print("# To use ntfy's shell integration, run "
           "this and and it to your shell's rc file:")
     print('# eval "$(ntfy shell-integration)"')

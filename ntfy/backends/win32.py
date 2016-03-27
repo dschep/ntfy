@@ -4,11 +4,10 @@ import os
 import struct
 import time
 
-DEFAULT_ICON = os.path.join(
-    os.path.split(os.path.split(__file__)[0])[0], 'icon.ico')
+from ..data import icon
 
 
-def notify(title, message, icon=DEFAULT_ICON, **kwargs):
+def notify(title, message, icon=icon.ico, **kwargs):
     """
     Optional parameters:
         * ``icon`` - path to an ICO file to display instead of the ntfy icon
