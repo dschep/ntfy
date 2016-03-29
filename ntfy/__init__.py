@@ -14,6 +14,8 @@ except ImportError:
     class DBusException(Exception):
         pass
 
+from . import vendor
+
 
 def notify(message, title, config=None, **kwargs):
     from .config import load_config

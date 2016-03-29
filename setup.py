@@ -1,16 +1,13 @@
 from setuptools import setup, find_packages
 from subprocess import check_output, CalledProcessError
-from sys import platform, version_info
+from sys import version_info
 
-deps = ['requests', 'PyYAML', 'appdirs']
 extra_deps = {
     ':sys_platform == "win32"': ['pypiwin32==219'],
-    'xmpp': ['sleekxmpp',
-                       'dnspython' if version_info[0] < 3 else 'dnspython3'],
-              'emoji': ['emoji'],
-              'pid':['psutil'],
-              }
-test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
+    'xmpp': ['sleekxmpp', 'dnspython' if version_info[0] < 3 else 'dnspython3'],
+    'pid': ['psutil'],
+}
+test_deps = ['mock', 'sleekxmpp', 'psutil']
 
 try:
     version_output = check_output(['git', 'describe', '--match=v*.*.*'])
@@ -61,11 +58,7 @@ setup(
     packages=find_packages(exclude=['tests', 'tests.*']),
     package_data={'ntfy': ['icon.png', 'icon.ico', 'shell_integration/*.sh']},
 
-    install_requires=deps,
-
-    extras_require=extra_deps,
-
-    tests_require=test_deps,
+    tests_require=['mock'],
     test_suite='tests',
 
     entry_points={
