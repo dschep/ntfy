@@ -20,7 +20,10 @@ except ImportError:
 
 from . import __version__, notify
 from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
-from .terminal import is_focused
+try:
+    from .terminal import is_focused
+except ImportError:
+    is_focused = lambda: True
 
 
 def run_cmd(args):
