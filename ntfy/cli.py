@@ -76,6 +76,8 @@ def watch_pid(args):
 
 def auto_done(args):
     shell_path = path.join(path.split(__file__)[0], 'shell_integration')
+    if args.longer_than:
+        print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(args.longer_than))
     if args.unfocused_only:
         print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
     if args.shell == 'bash':
@@ -207,6 +209,12 @@ shell_integration_parser.add_argument(
     default=path.split(environ.get('SHELL', ''))[1],
     choices=['bash', 'zsh'],
     help='The shell to integrate ntfy with (default: your login shell)')
+shell_integration_parser.add_argument(
+    '-L',
+    '--longer-than',
+    type=int,
+    metavar='N',
+    help="Only notify if the command runs longer than N seconds")
 shell_integration_parser.add_argument(
     '-f',
     '--foreground-too',
