@@ -9,6 +9,8 @@ AUTO_NTFY_DONE_IGNORE=${AUTO_NTFY_DONE_IGNORE:-ntfy emacs info less mail man mel
 #AUTO_NTFY_DONE_OPTS='-b default'
 # Zsh option example
 #AUTO_NTFY_DONE_OPTS=(-b default)
+# notify for unfocused only
+#AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b
 
 function _ntfy_precmd () {
     [ -n "$ntfy_start_time" ] || return
@@ -19,8 +21,8 @@ function _ntfy_precmd () {
     local appname=$(basename "${ntfy_command%% *}")
     [[ " $AUTO_NTFY_DONE_IGNORE " == *" $appname "* ]] && return
 
-    ntfy $AUTO_NTFY_DONE_OPTS done --formatter \
-        "$ntfy_command" $ret_value $duration
+    ntfy $AUTO_NTFY_DONE_OPTS done $AUTO_NTFY_DONE_UNFOCUSED_ONLY \
+        --formatter "$ntfy_command" $ret_value $duration
 }
 
 function _ntfy_preexec () {

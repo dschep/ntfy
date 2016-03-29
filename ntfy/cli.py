@@ -20,6 +20,7 @@ except ImportError:
 
 from . import __version__, notify
 from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
+from .terminal import is_focused
 
 
 def run_cmd(args):
@@ -41,6 +42,8 @@ def run_cmd(args):
         duration = time() - start_time
         if args.longer_than is not None and duration <= args.longer_than:
             return
+    if args.unfocused_only and is_focused():
+        return
     if emojize is not None and not args.no_emoji:
         prefix = ':white_check_mark: ' if retcode == 0 else ':x: '
     else:
@@ -73,6 +76,8 @@ def watch_pid(args):
 
 def auto_done(args):
     shell_path = path.join(path.split(__file__)[0], 'shell_integration')
+    if args.unfocused_only:
+        print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
     if args.shell == 'bash':
         print('source {}/bash-preexec.sh'.format(shell_path))
     print('source {}/auto-ntfy-done.sh'.format(shell_path))
@@ -173,6 +178,13 @@ done_parser.add_argument(
     metavar='N',
     help="Only notify if the command runs longer than N seconds")
 done_parser.add_argument(
+    '-b',
+    '--background-only',
+    action='store_true',
+    default=False,
+    dest='unfocused_only',
+    help="Only notify if shell isn't in the foreground")
+done_parser.add_argument(
     '--formatter',
     metavar=('command', 'retcode', 'duration'),
     nargs=3,
@@ -195,6 +207,13 @@ shell_integration_parser.add_argument(
     default=path.split(environ.get('SHELL', ''))[1],
     choices=['bash', 'zsh'],
     help='The shell to integrate ntfy with (default: your login shell)')
+shell_integration_parser.add_argument(
+    '-f',
+    '--foreground-too',
+    action='store_false',
+    default=True,
+    dest='unfocused_only',
+    help="Also notify if shell is in the foreground")
 shell_integration_parser.set_defaults(func=auto_done)
 
 

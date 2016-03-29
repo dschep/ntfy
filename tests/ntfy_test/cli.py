@@ -15,6 +15,7 @@ class TestRunCmd(TestCase):
         args.longer_than = -1
         args.command = ['true']
         args.pid = None
+        args.unfocused_only = False
         self.assertEqual('"true" succeeded in 0:00 minutes', run_cmd(args))
 
     @patch('ntfy.cli.call')
@@ -25,6 +26,7 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.no_emoji = False
+        args.unfocused_only = False
         self.assertEqual(':white_check_mark: "true" succeeded in 0:00 minutes',
                          run_cmd(args))
 
@@ -42,6 +44,7 @@ class TestRunCmd(TestCase):
         args.longer_than = 1
         args.command = ['true']
         args.pid = None
+        args.unfocused_only = False
         self.assertEqual(None, run_cmd(args))
 
 
@@ -70,6 +73,7 @@ class TestWatchPID(TestCase):
         mock_process.return_value.cmdline.return_value = ['cmd']
         args = MagicMock()
         args.pid = 1
+        args.unfocused_only = False
         self.assertEqual('PID[1]: "cmd" finished in 0:00 minutes',
                          run_cmd(args))
 
