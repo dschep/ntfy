@@ -176,7 +176,7 @@ Uses ``pywin32``.
 
 Mac OS X Notification Center - ``darwin``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Requires ``ntfy`` to be installed globally (not in a virtualenv).
+Uses [terminal-notifier.app](https://github.com/julienXX/terminal-notifier) internally
 
 Other options
 ~~~~~~~~~~~~~
