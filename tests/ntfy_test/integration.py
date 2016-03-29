@@ -3,6 +3,7 @@ from sys import version_info, modules
 
 from mock import patch, mock_open, MagicMock
 
+from ntfy import vendor  # NOQA
 from ntfy.cli import main as ntfy_main
 
 py = version_info.major
