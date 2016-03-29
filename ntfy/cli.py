@@ -8,10 +8,7 @@ from subprocess import call
 from sys import exit, stderr
 from time import time
 
-try:
-    from emoji import emojize
-except ImportError:
-    emojize = None
+from emoji import emojize
 
 try:
     import psutil
@@ -37,10 +34,7 @@ def run_cmd(args):
     duration = time() - start_time
     if args.longer_than is not None and duration <= args.longer_than:
         return
-    if emojize is not None and not args.no_emoji:
-        prefix = ':white_check_mark: ' if retcode == 0 else ':x: '
-    else:
-        prefix = ''
+    prefix = emojize(':white_check_mark: ' if retcode == 0 else ':x: ')
     return '{}"{}" {} in {:d}:{:02d} minutes'.format(
         prefix, ' '.join(args.command), 'succeeded' if retcode == 0 else
         'failed', *map(int, divmod(duration, 60)))
@@ -137,11 +131,6 @@ parser.add_argument('-q',
                     const='CRITICAL',
                     help='a shortcut for --log-level=CRITICAL')
 parser.add_argument('--version', action='version', version=__version__)
-if emojize is not None:
-    parser.add_argument('-E',
-                        '--no-emoji',
-                        action='store_true',
-                        help='Disable emoji support')
 
 default_title = '{}@{}:{}'.format(getuser(), gethostname(), getcwd().replace(
     path.expanduser('~'), '~'))
@@ -155,7 +144,11 @@ subparsers = parser.add_subparsers()
 
 send_parser = subparsers.add_parser('send', help='send a notification')
 send_parser.add_argument('message', help='notification message')
-send_parser.set_defaults(func=lambda args: args.message)
+send_parser.add_argument('-E', '--no-emoji', action='store_const', dest='func',
+                         const=lambda args: args.message,
+                         help='Disable emoji support')
+send_parser.set_defaults(func=lambda args: emojize(args.message,
+                                                   use_aliases=True))
 
 done_parser = subparsers.add_parser(
     'done',
@@ -247,8 +240,6 @@ def main(cli_args=None):
         message = args.func(args)
         if message is None:
             return 0
-        if emojize is not None and not args.no_emoji:
-            message = emojize(message, use_aliases=True)
         return notify(message, args.title, config,
                       **dict(args.option.get(None, [])))
     else:
