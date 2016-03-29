@@ -15,16 +15,6 @@ class TestRunCmd(TestCase):
         args.longer_than = -1
         args.command = ['true']
         args.pid = None
-        self.assertEqual('"true" succeeded in 0:00 minutes', run_cmd(args))
-
-    @patch('ntfy.cli.call')
-    def test_emoji(self, mock_call):
-        mock_call.return_value = 0
-        args = MagicMock()
-        args.longer_than = -1
-        args.command = ['true']
-        args.pid = None
-        args.no_emoji = False
         self.assertEqual(':white_check_mark: "true" succeeded in 0:00 minutes',
                          run_cmd(args))
 

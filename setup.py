@@ -72,5 +72,8 @@ setup(
         'console_scripts': [
             'ntfy = ntfy.cli:main',
         ],
+        'setuptools.installation': [
+            'eggsecutable = ntfy.cli:main',
+        ],
     },
 )
