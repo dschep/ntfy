@@ -208,7 +208,7 @@ shell_integration_parser.add_argument(
     '--shell',
     default=path.split(environ.get('SHELL', ''))[1],
     choices=['bash', 'zsh'],
-    help='The shell to integrate ntfy with (default: your login shell)')
+    help='The shell to integrate ntfy with (default: $SHELL)')
 shell_integration_parser.add_argument(
     '-L',
     '--longer-than',
