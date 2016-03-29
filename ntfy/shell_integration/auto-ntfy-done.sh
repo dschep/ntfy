@@ -2,7 +2,7 @@
 # If sourcing this via ntfy auto-done, it is sourced for you.
 
 # Default timeout is 10 seconds.
-AUTO_NTFY_DONE_TIMEOUT=${AUTO_NTFY_DONE_TIMEOUT:-10}
+AUTO_NTFY_DONE_TIMEOUT=${AUTO_NTFY_DONE_TIMEOUT:-0}
 # Default to ignoring some well known interactive programs
 AUTO_NTFY_DONE_IGNORE=${AUTO_NTFY_DONE_IGNORE:-ntfy emacs info less mail man meld most mutt nano screen ssh sudo tail tmux vi vim}
 # Bash option example
