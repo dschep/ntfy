@@ -1,7 +1,7 @@
 *.py[co]
 *.egg-info
-build
-dist
+/build
+/dist
 *travis.log
 .eggs
 htmlcov

@@ -1,9 +1,9 @@
 from os import path
 
-DEFAULT_ICON = path.join(path.split(path.split(__file__)[0])[0], 'icon.png')
+from ..data import icon
 
 
-def notify(title, message, icon=DEFAULT_ICON, **kwargs):
+def notify(title, message, icon=icon.png, **kwargs):
     try:
         import dbus
     except ImportError:
