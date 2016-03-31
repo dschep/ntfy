@@ -1,4 +1,3 @@
-#!/usr/bin/python2
 import sys
 
 from ntfy.cli import main
