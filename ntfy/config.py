@@ -4,7 +4,7 @@ from os.path import expanduser, isfile
 from os.path import join as join_path
 from sys import exit
 
-import yaml
+from ruamel import yaml
 import requests
 from appdirs import user_config_dir
 
