@@ -21,21 +21,32 @@ except ImportError:
 from . import __version__, notify
 from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
 from .data import scripts
+try:
+    from .terminal import is_focused
+except ImportError:
+    is_focused = lambda: True
 
 
 def run_cmd(args):
     if getattr(args, 'pid', False):
         return watch_pid(args)
     if not args.command:
-        stderr.write('usage: ntfy done [-h|-L N] command\n'
-                     'ntfy done: error: the following arguments '
-                     'are required: command\n')
-        exit(1)
-
-    start_time = time()
-    retcode = call(args.command)
-    duration = time() - start_time
+        if args.formatter:
+            args.command, retcode, duration = args.formatter
+            args.command, retcode, duration = (
+                [args.command], int(retcode), int(duration))
+        else:
+            stderr.write('usage: ntfy done [-h|-L N] command\n'
+                        'ntfy done: error: the following arguments '
+                        'are required: command\n')
+            exit(1)
+    else:
+        start_time = time()
+        retcode = call(args.command)
+        duration = time() - start_time
     if args.longer_than is not None and duration <= args.longer_than:
+        return
+    if args.unfocused_only and is_focused():
         return
     if emojize is not None and not args.no_emoji:
         prefix = ':white_check_mark: ' if retcode == 0 else ':x: '
@@ -68,8 +79,10 @@ def watch_pid(args):
 
 
 def auto_done(args):
-    if emojize is not None and not args.no_emoji:
-        print('export AUTO_NTFY_DONE_EMOJI=true')
+    if args.longer_than:
+        print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(args.longer_than))
+    if args.unfocused_only:
+        print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
     if args.shell == 'bash':
         print('source {}'.format(scripts['bash-preexec.sh']))
     print('source {}'.format(scripts['auto-ntfy-done.sh']))
@@ -169,6 +182,19 @@ done_parser.add_argument(
     type=int,
     metavar='N',
     help="Only notify if the command runs longer than N seconds")
+done_parser.add_argument(
+    '-b',
+    '--background-only',
+    action='store_true',
+    default=False,
+    dest='unfocused_only',
+    help="Only notify if shell isn't in the foreground")
+done_parser.add_argument(
+    '--formatter',
+    metavar=('command', 'retcode', 'duration'),
+    nargs=3,
+    help="Format and send cmd, retcode & duration instead of running command. "
+         "Used internally by shell-integration")
 if psutil is not None:
     done_parser.add_argument(
         '-p',
@@ -185,7 +211,20 @@ shell_integration_parser.add_argument(
     '--shell',
     default=path.split(environ.get('SHELL', ''))[1],
     choices=['bash', 'zsh'],
-    help='The shell to integrate ntfy with (default: your login shell)')
+    help='The shell to integrate ntfy with (default: $SHELL)')
+shell_integration_parser.add_argument(
+    '-L',
+    '--longer-than',
+    type=int,
+    metavar='N',
+    help="Only notify if the command runs longer than N seconds")
+shell_integration_parser.add_argument(
+    '-f',
+    '--foreground-too',
+    action='store_false',
+    default=True,
+    dest='unfocused_only',
+    help="Also notify if shell is in the foreground")
 shell_integration_parser.set_defaults(func=auto_done)
 
 
