@@ -16,7 +16,6 @@ function _ntfy_precmd () {
     [ -n "$ntfy_start_time" ] || return
     local duration=$(( $(date +%s) - $ntfy_start_time ))
     ntfy_start_time=''
-    [ $duration -gt $AUTO_NTFY_DONE_TIMEOUT ] || return
 
     local appname=$(basename "${ntfy_command%% *}")
     [[ " $AUTO_NTFY_DONE_IGNORE " == *" $appname "* ]] && return
