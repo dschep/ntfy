@@ -4,8 +4,8 @@ About ``ntfy``
 
 .. |Version| image:: https://img.shields.io/pypi/v/ntfy.svg
 .. _Version: https://pypi.python.org/pypi/ntfy
-.. |Docs| image:: http://readthedocs.org/projects/ntfy/badge/?version=latest
-.. _Docs: http://ntfy.readthedocs.org/en/latest/?badge=latest
+.. |Docs| image:: http://readthedocs.org/projects/ntfy/badge/?version=stable
+.. _Docs: http://ntfy.readthedocs.org/en/latest/?badge=stable
 .. |Build| image:: https://travis-ci.org/dschep/ntfy.svg?branch=master
 .. _Build: https://travis-ci.org/dschep/ntfy
 .. |WinBuild| image:: https://ci.appveyor.com/api/projects/status/fw6oycy7px0k23gi/branch/master?svg=true
