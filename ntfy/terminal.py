@@ -62,4 +62,4 @@ def is_focused():
     elif platform == 'darwin':
         return darwin_app_shell_is_focused()
     else:
-        return True
+        return False
