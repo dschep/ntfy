@@ -19,7 +19,8 @@ except ImportError:
     psutil = None
 
 from . import __version__, notify
-from .config import load_config, DEFAULT_CONFIG, OLD_DEFAULT_CONFIG
+from .config import (load_config, DEFAULT_CONFIG,
+                     SITE_DEFAULT_CONFIG, OLD_DEFAULT_CONFIG)
 from .data import scripts
 try:
     from .terminal import is_focused
@@ -262,8 +263,10 @@ def main(cli_args=None):
         config = load_config(args.config)
     elif path.exists(path.expanduser(DEFAULT_CONFIG)):
         config = load_config(DEFAULT_CONFIG)
-    elif path.exists(path.expanduser(OLD_DEFAULT_CONFIG)):
+    elif path.exists(OLD_DEFAULT_CONFIG):
         config = load_config(OLD_DEFAULT_CONFIG)
+    elif path.exists(path.expanduser(SITE_DEFAULT_CONFIG)):
+        config = load_config(SITE_DEFAULT_CONFIG)
     else:  # get default config and print message about missing file
         config = load_config()
 

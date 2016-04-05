@@ -6,11 +6,12 @@ from sys import exit
 
 from ruamel import yaml
 import requests
-from appdirs import user_config_dir
+from appdirs import site_config_dir, user_config_dir
 
 from . import __version__
 
 DEFAULT_CONFIG = join_path(user_config_dir('ntfy', 'dschep'), 'ntfy.yml')
+SITE_DEFAULT_CONFIG = join_path(site_config_dir('ntfy', 'dschep'), 'ntfy.yml')
 OLD_DEFAULT_CONFIG = '~/.ntfy.yml'
 
 USER_AGENT = 'ntfy/{version} {default_user_agent}'.format(
