@@ -1,4 +1,4 @@
-from os import path
+from os import environ, path
 
 from ..data import icon
 
@@ -15,7 +15,12 @@ def notify(title, message, icon=icon.png, **kwargs):
                 'Using ntfy for Linux desktop notifications with '
                 'virtualenv requires creating your virtualenv with the '
                 '--system-site-packages option')
-        raise
+            return
+        elif not environ.get('DISPLAY'):
+            logger.warn('DISPLAY not set')
+            return
+        else:
+            raise
     bus = dbus.SessionBus()
     dbus_obj = bus.get_object('org.freedesktop.Notifications',
                               '/org/freedesktop/Notifications')
