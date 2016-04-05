@@ -57,7 +57,7 @@ def darwin_app_shell_is_focused():
 
 
 def is_focused():
-    if platform.startswith('linux'):
+    if platform.startswith('linux') and environ.get('DISPLAY'):
         return linux_window_is_focused()
     elif platform == 'darwin':
         return darwin_app_shell_is_focused()
