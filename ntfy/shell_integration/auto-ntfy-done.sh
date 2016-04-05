@@ -2,7 +2,7 @@
 # If sourcing this via ntfy auto-done, it is sourced for you.
 
 # Default to ignoring some well known interactive programs
-AUTO_NTFY_DONE_IGNORE=${AUTO_NTFY_DONE_IGNORE:-ntfy emacs info less mail man meld most mutt nano screen ssh sudo tail tmux vi vim}
+AUTO_NTFY_DONE_IGNORE=${AUTO_NTFY_DONE_IGNORE:-ntfy emacs info less mail man meld most mutt nano screen ssh sudo tail tmux vi vim watch}
 # Bash option example
 #AUTO_NTFY_DONE_OPTS='-b default'
 # Zsh option example
