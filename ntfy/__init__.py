@@ -7,13 +7,6 @@ try:
 except:
     __version__ = 'unknown'
 
-try:
-    from dbus.exceptions import DBusException
-except ImportError:
-
-    class DBusException(Exception):
-        pass
-
 
 def notify(message, title, config=None, **kwargs):
     from .config import load_config
@@ -41,9 +34,6 @@ def notify(message, title, config=None, **kwargs):
             module.notify(message=message, title=title, **backend_config)
         except (SystemExit, KeyboardInterrupt):
             raise
-        except DBusException:
-            logging.getLogger(__name__).warning(
-                'Failed to send notification using {}'.format(backend))
         except Exception:
             logging.getLogger(__name__).error(
                 'Failed to send notification using {}'.format(backend),
