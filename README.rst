@@ -1,6 +1,6 @@
 About ``ntfy``
 ==============
-|Version|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_
+|Version|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_ |Requires|_
 
 .. |Version| image:: https://img.shields.io/pypi/v/ntfy.svg
 .. _Version: https://pypi.python.org/pypi/ntfy
@@ -12,6 +12,8 @@ About ``ntfy``
 .. _WinBuild: https://ci.appveyor.com/project/dschep/ntfy
 .. |Coverage| image:: https://coveralls.io/repos/github/dschep/ntfy/badge.svg?branch=master
 .. _Coverage: https://coveralls.io/github/dschep/ntfy?brach=master
+.. |Requires| image:: https://requires.io/github/dschep/ntfy/requirements.svg?branch=master
+.. _Requires: https://requires.io/github/dschep/ntfy/requirements/?branch=master
 
 
 ``ntfy`` is a utility for sending notifications, on demand and when commands
