@@ -4,8 +4,6 @@ from mock import patch
 
 from ntfy import notify
 
-from . import cli
-
 
 class OverrideBackendTestCase(TestCase):
     @patch('requests.post')
