@@ -18,8 +18,8 @@ except (OSError, CalledProcessError):
     version = None
 else:
     version_parts = version_output.decode().strip().lstrip('v').split('-')
-    if len(version_parts) == 1:
-        version = version_parts[0]
+    if len(version_parts) <= 2:
+        version = '-'.join(version_parts)
     elif len(version_parts) > 1:
         version = '-'.join(version_parts[:-1])
 
