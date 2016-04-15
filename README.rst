@@ -28,7 +28,8 @@ Quickstart
 
 ::
 
-    $ sudo pip install ntfy
+    $ sudo curl -L -o /usr/bin/ntfy https://github.com/dschep/ntfy/releases/download/v2.0.0-beta0/ntfy
+    $ sudo chmod +x /usr/bin/ntfy
     $ ntfy send test
     # send a notification when the command `sleep 10` finishes
     # this send the message '"sleep 10" succeeded in 0:10 minutes'
@@ -42,17 +43,12 @@ Quickstart
 
 Install
 -------
-It is suggested to globally (as indicated in quickstart above, without a
-virtualenv) install ntfy. It *can* be installed in a virtualenv, with caveats.
-Linux notifications requires ``--system-site-packages`` to be used and OS X
-notifications don't work at all.
-
-Extras
-~~~~~~
-``ntfy`` supports emoji shortcodes, support can be installed by installing
-``ntfy[emoji]``. XMPP support requires SleekXMPP which can be installed by
-installing ``ntfy[xmpp]``. ``ntfy done`` can watch existing processes by their
-PID if you install ``ntfy[pid]``. See the quickstart for usage examples.
+The single file executable installed in the quickstart above includes all
+dependencies and only requires python to be installed. As such, it works on
+Mac OS and most Linux distros. It can also be installed via pip, but should be
+globally for destop notifications to work on MacOS or Linux.  It *can* be
+installed in a virtualenv, with caveats.  Linux notifications requires
+``--system-site-packages`` to be used and OS X notifications don't work at all.
 
 Shell integration
 ~~~~~~~~~~~~~~~~~
