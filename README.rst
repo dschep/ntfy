@@ -40,6 +40,8 @@ Quickstart
     $ ntfy send "Pushover via config file!"
     $ ntfy done --pid 6379  # PID extra
     $ ntfy send ":tada: ntfy supports emoji! :100:"  # emoji extra
+    # Enable shell integration
+    $ echo 'eval "$(ntfy shell-integration)"' >> ~/.bashrc
 
 Install
 -------
