@@ -216,6 +216,7 @@ shell_integration_parser.add_argument(
 shell_integration_parser.add_argument(
     '-L',
     '--longer-than',
+    default=10,
     type=int,
     metavar='N',
     help="Only notify if the command runs longer than N seconds")
