@@ -66,8 +66,9 @@ To enable it add the following to your ``.bashrc`` or ``.zshrc``:
     eval "$(ntfy shell-integration)"
 
 By default it will only send notifications for commands lasting longer than 10
-seconds. This can be configured with the ``AUTO_NTFY_DONE_TIMEOUT`` environment
-variable.
+seconds and the terminal is focused. Terminal focus works on X11(Linux) and
+with Terminal.app and iTerm2 on MacOS. Both options can be configured via
+the ``--longer-than`` and ``--foreground-too`` options.
 
 To avoid unnecessary notifications when running interactive programs programs
 listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. for example:
