@@ -16,11 +16,10 @@ About ``ntfy``
 .. _Requires: https://requires.io/github/dschep/ntfy/requirements/?branch=master
 
 
-``ntfy`` is a utility for sending notifications, on demand and when commands
-finish. It supports many delivery mechanisms, both local and remote.
-
-Demo
-----
+``ntfy`` brings notification to your shell. It can automatically provide
+desktop notifications when long running commands finish or it can send
+push notifications to your phone when a specific command finishes.
+Confused? This video demonstrates some of this functionality:
 .. image:: https://raw.githubusercontent.com/dschep/ntfy/master/docs/demo.gif
 
 Quickstart
