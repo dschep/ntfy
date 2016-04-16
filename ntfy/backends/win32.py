@@ -1,8 +1,6 @@
 # -- coding: utf-8 --
 
 import os
-import struct
-import time
 
 from ..data import icon
 
@@ -28,28 +26,29 @@ def notify(title, message, icon=icon.ico, **kwargs):
             classAtom = win32gui.RegisterClass(wc)
             # Create the Window.
             style = win32con.WS_OVERLAPPED | win32con.WS_SYSMENU
-            self.hwnd = win32gui.CreateWindow( classAtom, "Taskbar", style, \
-                    0, 0, win32con.CW_USEDEFAULT, win32con.CW_USEDEFAULT, \
-                    0, 0, hinst, None)
+            self.hwnd = win32gui.CreateWindow(
+                classAtom, "Taskbar", style, 0, 0, win32con.CW_USEDEFAULT,
+                win32con.CW_USEDEFAULT, 0, 0, hinst, None)
             win32gui.UpdateWindow(self.hwnd)
             iconPathName = os.path.abspath(icon)
             icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
             try:
-                hicon = win32gui.LoadImage(hinst, iconPathName, \
-                        win32con.IMAGE_ICON, 0, 0, icon_flags)
+                hicon = win32gui.LoadImage(hinst, iconPathName,
+                                           win32con.IMAGE_ICON, 0, 0,
+                                           icon_flags)
             except:
                 hicon = win32gui.LoadIcon(0, win32con.IDI_APPLICATION)
             flags = win32gui.NIF_ICON | win32gui.NIF_MESSAGE | win32gui.NIF_TIP
             nid = (self.hwnd, 0, flags, win32con.WM_USER + 20, hicon,
                    "tooltip")
             win32gui.Shell_NotifyIcon(win32gui.NIM_ADD, nid)
-            win32gui.Shell_NotifyIcon(win32gui.NIM_MODIFY, \
-                            (self.hwnd, 0, win32gui.NIF_INFO, win32con.WM_USER+20,\
-                            hicon, "Balloon  tooltip",title,200,msg))
+            win32gui.Shell_NotifyIcon(win32gui.NIM_MODIFY,
+                                      (self.hwnd, 0, win32gui.NIF_INFO,
+                                       win32con.WM_USER + 20, hicon,
+                                       "Balloon tooltip", title, 200, msg))
             win32gui.DestroyWindow(self.hwnd)
 
         def OnDestroy(self, hwnd, msg, wparam, lparam):
-            nid = (self.hwnd, 0)
             win32api.PostQuitMessage(0)  # Terminate the app.
 
     WindowsBalloonTip(message, title)

@@ -11,11 +11,14 @@ def notify(title,
            **kwargs):
     """
     Required parameter:
-        * ``access_token`` - Your Pushbullet access token, created at https://www.pushbullet.com/#settings/account
+        * ``access_token`` - Your Pushbullet access token, created at
+            https://www.pushbullet.com/#settings/account
 
     Optional parameters:
-        * ``device_iden`` - a device identifier, if omited, notification is sent to all devices
-        * ``email`` - send notification to pushbullte user with the specified email or send an email if they aren't a pushullet user
+        * ``device_iden`` - a device identifier, if omited, notification is
+                            sent to all devices
+        * ``email`` - send notification to pushbullte user with the specified
+                      email or send an email if they aren't a pushullet user
     """
 
     data = {'type': 'note', 'title': title, 'body': message, }

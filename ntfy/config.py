@@ -1,6 +1,6 @@
 import errno
 import logging
-from os.path import expanduser, isfile
+from os.path import expanduser
 from os.path import join as join_path
 from sys import exit
 

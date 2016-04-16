@@ -29,7 +29,7 @@ def notify(title,
         * ``retry``
         * ``callback``
         * ``access_token`` - use your own application token
-        * ``device`` - target a device, if omitted, notification is sent to all devices
+        * ``device`` - target a device, if omitted, target all devices
         * ``url``
         * ``url_title``
         * ``html``

@@ -4,7 +4,6 @@ from sys import platform, stdout
 
 
 def get_tty():
-
     window_id = int(check_output(['xprop', '-root', '\t$0',
                                   '_NET_ACTIVE_WINDOW']).split()[1], 16)
     return int(environ['WINDOWID']) == window_id

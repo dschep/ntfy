@@ -25,7 +25,8 @@ from .data import scripts
 try:
     from .terminal import is_focused
 except ImportError:
-    is_focused = lambda: True
+    def is_focused():
+        return True
 
 
 def run_cmd(args):
@@ -38,8 +39,8 @@ def run_cmd(args):
                 [args.command], int(retcode), int(duration))
         else:
             stderr.write('usage: ntfy done [-h|-L N] command\n'
-                        'ntfy done: error: the following arguments '
-                        'are required: command\n')
+                         'ntfy done: error: the following arguments '
+                         'are required: command\n')
             exit(1)
     else:
         start_time = time()
@@ -81,7 +82,8 @@ def watch_pid(args):
 
 def auto_done(args):
     if args.longer_than:
-        print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(args.longer_than))
+        print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(
+            args.longer_than))
     if args.unfocused_only:
         print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
     if args.shell == 'bash':
@@ -278,8 +280,7 @@ def main(cli_args=None):
         if backend is not None:
             config.setdefault(backend, {}).update(backend_options)
 
-
-    if getattr(args, 'func', None) == run_cmd and args.longer_than is None and \
+    if getattr(args, 'func', None) == run_cmd and args.longer_than is None and\
             'longer_than' in config:
         args.longer_than = config['longer_than']
 
