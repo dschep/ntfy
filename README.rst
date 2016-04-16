@@ -20,6 +20,7 @@ About ``ntfy``
 desktop notifications when long running commands finish or it can send
 push notifications to your phone when a specific command finishes.
 Confused? This video demonstrates some of this functionality:
+
 .. image:: https://raw.githubusercontent.com/dschep/ntfy/master/docs/demo.gif
 
 Quickstart
