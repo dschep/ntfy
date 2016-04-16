@@ -47,8 +47,7 @@ Install
 -------
 The single file executable installed in the quickstart above includes all
 dependencies and only requires python to be installed. As such, it works on
-Mac OS and most Linux distros. It can also be installed via pip, but should be
-globally for destop notifications to work on MacOS or Linux.  It *can* be
+Mac OS and most Linux distros. It can also be installed via pip. It *can* be
 installed in a virtualenv, with caveats.  Linux notifications requires
 ``--system-site-packages`` to be used and OS X notifications don't work at all.
 
