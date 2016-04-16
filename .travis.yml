@@ -6,8 +6,8 @@ python:
   - '3.5'
   - pypy
 install:
-  - pip install coveralls
-script: coverage run --source=ntfy setup.py test && bash zipapp.sh
+  - pip install coveralls flake8
+script: coverage run --source=ntfy setup.py test && bash zipapp.sh && flake8 ntfy
 after_success: coveralls
 deploy:
   - provider: pypi
