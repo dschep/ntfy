@@ -26,7 +26,7 @@ Confused? This video demonstrates some of this functionality:
 Quickstart
 ----------
 
-::
+.. code:: shell
 
     $ sudo curl -L -o /usr/bin/ntfy https://github.com/dschep/ntfy/releases/download/v2.0.0-beta0/ntfy
     $ sudo chmod +x /usr/bin/ntfy
@@ -59,7 +59,7 @@ running commands finish in bash and zsh. In bash it emulates zsh's preexec and
 precmd functionality with `rcaloras/bash-preexec <https://github.com/rcaloras/bash-preexec>`_.
 To enable it add the following to your ``.bashrc`` or ``.zshrc``:
 
-::
+.. code:: shell
 
     eval "$(ntfy shell-integration)"
 
@@ -71,7 +71,7 @@ the ``--longer-than`` and ``--foreground-too`` options.
 To avoid unnecessary notifications when running interactive programs programs
 listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. for example:
 
-::
+.. code:: shell
 
     export AUTO_NTFY_DONE_IGNORE="vim screen meld"
 
@@ -86,7 +86,7 @@ Backends
 The backends key specifies what backends to use by default. Each backend has
 it's own configuration, stored in a key of it's own name. For example:
 
-::
+.. code:: yaml
 
     ---
     backends:
@@ -106,7 +106,7 @@ it's own configuration, stored in a key of it's own name. For example:
 If you want mulitple configs for the same backend type, you can specify any
 name and then specify the backend with a backend key. For example:
 
-::
+.. code:: yaml
 
     ---
     pushover:
@@ -184,7 +184,7 @@ Other options
 
 Title is configurable with the `title` key in the config. Example:
 
-::
+.. code:: yaml
 
     ---
     title: Customized Title
@@ -202,7 +202,7 @@ Backends ToDo
 Testing
 -------
 
-::
+.. code:: shell
 
     python setup.py test
 
