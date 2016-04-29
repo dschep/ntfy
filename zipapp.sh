@@ -8,6 +8,6 @@ touch build/zipapp/ruamel/__init__.py  # ruamel is a namespace package
 find build/zipapp/ -name '*.pyc' -delete
 find build/zipapp/ -name '*.so' -delete
 find build/zipapp/ -name '*.pth' -delete
-python -m zipapp -h &> /dev/null && \
-    python -m zipapp -o dist/ntfy --python /usr/bin/python build/zipapp || \
+python3 -m zipapp -h &> /dev/null && \
+    python3 -m zipapp -o dist/ntfy --python /usr/bin/python build/zipapp || \
     echo 'zipapp only supported in Python3.5, zip build/zipapp yourself'
