@@ -50,7 +50,8 @@ dependencies and only requires python to be installed. As such, it works on
 Mac OS and most Linux distros. It can also be installed via pip:
 ``pip install ntfy```. It can be installed in a virtualenv, with caveats.
 Linux notifications requires ``--system-site-packages`` to be used and OS X
-notifications don't work at all.
+notifications don't work at all. ``ntfy`` can also be installed via pip, but
+pid support, emojis and xmpp are extras.
 
 Shell integration
 ~~~~~~~~~~~~~~~~~
