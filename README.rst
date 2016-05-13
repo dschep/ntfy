@@ -28,7 +28,7 @@ Quickstart
 
 .. code:: shell
 
-    $ sudo curl -L -o /usr/bin/ntfy https://github.com/dschep/ntfy/releases/download/v2.0.0/ntfy
+    $ sudo curl -L -o /usr/bin/ntfy https://github.com/dschep/ntfy/releases/download/v2.0.1/ntfy
     $ sudo chmod +x /usr/bin/ntfy
     $ ntfy send test
     # send a notification when the command `sleep 10` finishes
