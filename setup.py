@@ -1,6 +1,8 @@
 from setuptools import setup, find_packages
-from subprocess import check_output, CalledProcessError
 from sys import version_info
+
+from ntfy import __version__
+
 
 deps = ['requests', 'ruamel.yaml', 'appdirs']
 extra_deps = {
@@ -12,22 +14,11 @@ extra_deps = {
 }
 test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
 
-try:
-    version_output = check_output(['git', 'describe', '--match=v*.*.*'])
-except (OSError, CalledProcessError):
-    version = None
-else:
-    version_parts = version_output.decode().strip().lstrip('v').split('-')
-    if len(version_parts) <= 2:
-        version = '-'.join(version_parts)
-    elif len(version_parts) > 1:
-        version = '-'.join(version_parts[:-1])
-
 
 setup(
     name='ntfy',
 
-    version=version,
+    version=__version__,
 
     description='A utility for sending push notifications',
 

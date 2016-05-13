@@ -1,11 +1,7 @@
-import pkg_resources
 import logging
 from importlib import import_module
 
-try:
-    __version__ = pkg_resources.get_distribution(__name__).version
-except:
-    __version__ = 'unknown'
+__version__ = '2.0.1'
 
 
 def notify(message, title, config=None, **kwargs):
