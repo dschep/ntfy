@@ -5,13 +5,13 @@
 #
 #
 # 'preexec' functions are executed before each interactive command is
-# executed, with the interactive command as its argument.  The 'precmd'
+# executed, with the interactive command as its argument. The 'precmd'
 # function is executed before each prompt is displayed.
 #
 # Author: Ryan Caloras (ryan@bashhub.com)
 # Forked from Original Author: Glyph Lefkowitz
 #
-# V0.2.3
+# V0.3.0
 #
 
 # General Usage:
@@ -40,6 +40,13 @@ if [[ "$__bp_imported" == "defined" ]]; then
 fi
 __bp_imported="defined"
 
+# Should be available to each precmd and preexec
+# functions, should they want it.
+__bp_last_command_ret_value="$?"
+
+# Command to set our preexec trap. It's invoked once via
+# PROMPT_COMMAND and then removed.
+__bp_trap_install_string="trap '__bp_preexec_invoke_exec' DEBUG;"
 
 # Remove ignorespace and or replace ignoreboth from HISTCONTROL
 # so we can accurately invoke preexec with a command from our
@@ -81,7 +88,7 @@ __bp_interactive_mode() {
 __bp_precmd_invoke_cmd() {
 
     # Should be available to each precmd function, should it want it.
-    local ret_value="$?"
+    __bp_last_ret_value="$?"
 
     # For every function defined in our function array. Invoke it.
     local precmd_function
@@ -90,7 +97,7 @@ __bp_precmd_invoke_cmd() {
         # Only execute this function if it actually exists.
         # Test existence of functions with: declare -[Ff]
         if type -t "$precmd_function" 1>/dev/null; then
-            __bp_set_ret_value $ret_value
+            __bp_set_ret_value $__bp_last_ret_value
             $precmd_function
         fi
     done
@@ -130,14 +137,19 @@ __bp_in_prompt_command() {
 # interactively, and invoke 'preexec' if so.
 __bp_preexec_invoke_exec() {
 
-    if [[ -n "$COMP_LINE" ]]
-    then
-        # We're in the middle of a completer.  This obviously can't be
+    # Checks if the file descriptor is not standard out (i.e. '1')
+    # __bp_delay_install checks if we're in test. Needed for bats to run.
+    # Prevents preexec from being invoked for functions in PS1
+    if [[ ! -t 1 && -z "$__bp_delay_install" ]]; then
+        return
+    fi
+
+    if [[ -n "$COMP_LINE" ]]; then
+        # We're in the middle of a completer. This obviously can't be
         # an interactively issued command.
         return
     fi
-    if [[ -z "$__bp_preexec_interactive_mode" ]]
-    then
+    if [[ -z "$__bp_preexec_interactive_mode" ]]; then
         # We're doing something related to displaying the prompt.  Let the
         # prompt set the title instead of me.
         return
@@ -147,8 +159,7 @@ __bp_preexec_invoke_exec() {
         # In other words, if you have a subshell like
         #   (sleep 1; sleep 2)
         # You want to see the 'sleep 2' as a set_command_title as well.
-        if [[ 0 -eq "$BASH_SUBSHELL" ]]
-        then
+        if [[ 0 -eq "$BASH_SUBSHELL" ]]; then
             __bp_preexec_interactive_mode=""
         fi
     fi
@@ -156,7 +167,6 @@ __bp_preexec_invoke_exec() {
     if  __bp_in_prompt_command "$BASH_COMMAND"; then
         # If we're executing something inside our prompt_command then we don't
         # want to call preexec. Bash prior to 3.1 can't detect this at all :/
-
         __bp_preexec_interactive_mode=""
         return
     fi
@@ -180,18 +190,41 @@ __bp_preexec_invoke_exec() {
         # Only execute each function if it actually exists.
         # Test existence of function with: declare -[fF]
         if type -t "$preexec_function" 1>/dev/null; then
+            __bp_set_ret_value $__bp_last_ret_value
             $preexec_function "$this_command"
         fi
     done
 }
 
-# Execute this to set up preexec and precmd execution.
-__bp_preexec_and_precmd_install() {
+# Returns PROMPT_COMMAND with a semicolon appended
+# if it doesn't already have one.
+__bp_prompt_command_with_semi_colon() {
 
-    # Make sure this is bash that's running this and return otherwise.
-    if [[ -z "$BASH_VERSION" ]]; then
-        return 1;
+    # Trim our existing PROMPT_COMMAND
+    local trimmed
+    trimmed=$(__bp_trim_whitespace "$PROMPT_COMMAND")
+
+    # Take our existing prompt command and append a semicolon to it
+    # if it doesn't already have one.
+    local existing_prompt_command
+    if [[ -n "$trimmed" ]]; then
+        existing_prompt_command=${trimmed%${trimmed##*[![:space:]]}}
+        existing_prompt_command=${existing_prompt_command%;}
+        existing_prompt_command=${existing_prompt_command/%/;}
+    else
+        existing_prompt_command=""
     fi
+
+    echo -n "$existing_prompt_command"
+}
+
+__bp_install() {
+
+    # Remove setting our trap from PROMPT_COMMAND
+    PROMPT_COMMAND="${PROMPT_COMMAND//$__bp_trap_install_string}"
+
+    # Remove this function from our PROMPT_COMMAND
+    PROMPT_COMMAND="${PROMPT_COMMAND//__bp_install;}"
 
     # Exit if we already have this installed.
     if [[ "$PROMPT_COMMAND" == *"__bp_precmd_invoke_cmd"* ]]; then
@@ -201,19 +234,16 @@ __bp_preexec_and_precmd_install() {
     # Adjust our HISTCONTROL Variable if needed.
     __bp_adjust_histcontrol
 
-    # Take our existing prompt command and append a semicolon to it
-    # if it doesn't already have one.
+    # Set so debug trap will work be invoked in subshells.
+    set -o functrace > /dev/null 2>&1
+    shopt -s extdebug > /dev/null 2>&1
+
+
     local existing_prompt_command
+    existing_prompt_command=$(__bp_prompt_command_with_semi_colon)
 
-    if [[ -n "$PROMPT_COMMAND" ]]; then
-        existing_prompt_command=${PROMPT_COMMAND%${PROMPT_COMMAND##*[![:space:]]}}
-        existing_prompt_command=${existing_prompt_command%;}
-        existing_prompt_command=${existing_prompt_command/%/;}
-    else
-        existing_prompt_command=""
-    fi
-
-    # Finally install our traps.
+    # Install our hooks in PROMPT_COMMAND to allow our trap to know when we've
+    # actually entered something.
     PROMPT_COMMAND="__bp_precmd_invoke_cmd; ${existing_prompt_command} __bp_interactive_mode;"
     trap '__bp_preexec_invoke_exec' DEBUG;
 
@@ -221,9 +251,34 @@ __bp_preexec_and_precmd_install() {
     # of definition.
     precmd_functions+=(precmd)
     preexec_functions+=(preexec)
+
+    # Since this is in PROMPT_COMMAND, invoke any precmd functions we have defined.
+    __bp_precmd_invoke_cmd
+    # Put us in interactive mode for our first command.
+    __bp_interactive_mode
+}
+
+# Sets our trap and __bp_install as part of our PROMPT_COMMAND to install
+# after our session has started. This allows bash-preexec to be inlucded
+# at any point in our bash profile. Ideally we could set our trap inside
+# __bp_install, but if a trap already exists it'll only set locally to
+# the function.
+__bp_install_after_session_init() {
+
+    # Make sure this is bash that's running this and return otherwise.
+    if [[ -z "$BASH_VERSION" ]]; then
+        return 1;
+    fi
+
+    local existing_prompt_command
+    existing_prompt_command=$(__bp_prompt_command_with_semi_colon)
+
+    # Add our installation to be done last via our PROMPT_COMMAND. These are
+    # removed by __bp_install when it's invoked so it only runs once.
+    PROMPT_COMMAND="${existing_prompt_command} $__bp_trap_install_string __bp_install;"
 }
 
 # Run our install so long as we're not delaying it.
 if [[ -z "$__bp_delay_install" ]]; then
-    __bp_preexec_and_precmd_install
+    __bp_install_after_session_init
 fi;
