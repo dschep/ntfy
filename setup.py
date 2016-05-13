@@ -1,15 +1,15 @@
 from setuptools import setup, find_packages
 from subprocess import check_output, CalledProcessError
-from sys import platform, version_info
+from sys import version_info
 
 deps = ['requests', 'ruamel.yaml', 'appdirs']
 extra_deps = {
     ':sys_platform == "win32"': ['pypiwin32==219'],
-    'xmpp': ['sleekxmpp',
-                       'dnspython' if version_info[0] < 3 else 'dnspython3'],
-              'emoji': ['emoji'],
-              'pid':['psutil'],
-              }
+    'xmpp': [
+        'sleekxmpp', 'dnspython' if version_info[0] < 3 else 'dnspython3'],
+    'emoji': ['emoji'],
+    'pid':['psutil'],
+}
 test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
 
 try:
