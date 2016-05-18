@@ -28,8 +28,7 @@ Quickstart
 
 .. code:: shell
 
-    $ sudo curl -L -o /usr/bin/ntfy https://github.com/dschep/ntfy/releases/download/v2.0.1/ntfy
-    $ sudo chmod +x /usr/bin/ntfy
+    $ sudo pip install ntfy
     $ ntfy send test
     # send a notification when the command `sleep 10` finishes
     # this send the message '"sleep 10" succeeded in 0:10 minutes'
@@ -45,10 +44,8 @@ Quickstart
 
 Install
 -------
-The single file executable installed in the quickstart above includes all
-dependencies and only requires python to be installed. As such, it works on
-Mac OS and most Linux distros. It can also be installed via pip:
-``pip install ntfy```. It can be installed in a virtualenv, with caveats.
+The install technique in the quickstart is the suggested method of installation.
+It can be installed in a virtualenv, with caveats.
 Linux notifications requires ``--system-site-packages`` to be used and OS X
 notifications don't work at all. ``ntfy`` can also be installed via pip, but
 pid support, emojis and xmpp are extras.
