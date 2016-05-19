@@ -60,6 +60,7 @@ def notify(title,
     if html:
         data['html'] = 1
 
+    priority = int(priority)
     if priority <= 2 and priority >= -2:
         if priority != 0:
             data['priority'] = priority
