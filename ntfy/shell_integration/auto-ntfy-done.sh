@@ -13,6 +13,7 @@ AUTO_NTFY_DONE_IGNORE=${AUTO_NTFY_DONE_IGNORE:-ntfy emacs info less mail man mel
 #AUTO_NTFY_DONE_LONGER_THAN=-L10
 
 function _ntfy_precmd () {
+    local ret_value="$?"
     [ -n "$ntfy_start_time" ] || return
     local duration=$(( $(date +%s) - $ntfy_start_time ))
     ntfy_start_time=''
@@ -22,7 +23,7 @@ function _ntfy_precmd () {
 
     ntfy $AUTO_NTFY_DONE_OPTS done \
         $AUTO_NTFY_DONE_UNFOCUSED_ONLY $AUTO_NTFY_DONE_LONGER_THAN \
-        --formatter "$ntfy_command" $__bp_last_ret_value $duration
+        --formatter "$ntfy_command" "$ret_value" "$duration"
 }
 
 function _ntfy_preexec () {
