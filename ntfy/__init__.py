@@ -1,7 +1,7 @@
 import logging
 from importlib import import_module
 
-__version__ = '2.0.2'
+__version__ = '2.0.3'
 
 
 def notify(message, title, config=None, **kwargs):
