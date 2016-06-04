@@ -45,10 +45,10 @@ Quickstart
 Install
 -------
 The install technique in the quickstart is the suggested method of installation.
-It can be installed in a virtualenv, with caveats.
-Linux notifications requires ``--system-site-packages`` to be used and OS X
-notifications don't work at all. ``ntfy`` can also be installed via pip, but
-pid support, emojis and xmpp are extras.
+It can be installed in a virtualenv, but with some caveats: Linux notifications
+require ``--system-site-packages`` for the virtualenv and OS X notifications
+don't work at all. ``ntfy`` can also be installed via pip, but pid support,
+emojis and xmpp are extras.
 
 Shell integration
 ~~~~~~~~~~~~~~~~~
