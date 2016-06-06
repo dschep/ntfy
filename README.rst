@@ -31,7 +31,7 @@ Quickstart
     $ sudo pip install ntfy
     $ ntfy send test
     # send a notification when the command `sleep 10` finishes
-    # this send the message '"sleep 10" succeeded in 0:10 minutes'
+    # this sends the message '"sleep 10" succeeded in 0:10 minutes'
     $ ntfy done sleep 10
     $ ntfy -b pushover -o user_key t0k3n send 'Pushover test!'
     $ ntfy -t 'ntfy' send "Here's a custom notification title!"
@@ -45,10 +45,10 @@ Quickstart
 Install
 -------
 The install technique in the quickstart is the suggested method of installation.
-It can be installed in a virtualenv, with caveats.
-Linux notifications requires ``--system-site-packages`` to be used and OS X
-notifications don't work at all. ``ntfy`` can also be installed via pip, but
-pid support, emojis and xmpp are extras.
+It can be installed in a virtualenv, but with some caveats: Linux notifications
+require ``--system-site-packages`` for the virtualenv and OS X notifications
+don't work at all. ``ntfy`` can also be installed via pip, but pid support,
+emojis and xmpp are extras.
 
 Shell integration
 ~~~~~~~~~~~~~~~~~
@@ -62,12 +62,12 @@ To enable it add the following to your ``.bashrc`` or ``.zshrc``:
     eval "$(ntfy shell-integration)"
 
 By default it will only send notifications for commands lasting longer than 10
-seconds and the terminal is focused. Terminal focus works on X11(Linux) and
-with Terminal.app and iTerm2 on MacOS. Both options can be configured via
-the ``--longer-than`` and ``--foreground-too`` options.
+seconds and if the terminal is focused. Terminal focus works on X11(Linux) and
+with Terminal.app and iTerm2 on MacOS. Both options can be configured via the
+``--longer-than`` and ``--foreground-too`` options.
 
-To avoid unnecessary notifications when running interactive programs programs
-listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. for example:
+To avoid unnecessary notifications when running interactive programs, programs
+listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. For example:
 
 .. code:: shell
 
@@ -82,7 +82,7 @@ Backends
 ~~~~~~~~
 
 The backends key specifies what backends to use by default. Each backend has
-it's own configuration, stored in a key of it's own name. For example:
+its own configuration, stored in a key of its own name. For example:
 
 .. code:: yaml
 
