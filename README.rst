@@ -49,16 +49,6 @@ It can be installed in a virtualenv, but with some caveats: Linux notifications
 require ``--system-site-packages`` for the virtualenv and OS X notifications
 don't work at all.
 
-Extras
-~~~~~~
-``ntfy`` can also a has a few features that require extra dependencies.
-
-    * ``nfty done -p $PID`` requires installing as ``pip[pid]``
-    * XMPP requires installing as ``pip[XMPP]``
-    * Telegram requires installing as ``pip[telegram]``
-
-emojis, Telegram and xmpp are extras.
-
 Shell integration
 ~~~~~~~~~~~~~~~~~
 ``ntfy`` has support for **automatically** sending notifications when long
@@ -81,6 +71,16 @@ listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. For example:
 .. code:: shell
 
     export AUTO_NTFY_DONE_IGNORE="vim screen meld"
+
+Extras
+~~~~~~
+``ntfy`` can also a has a few features that require extra dependencies.
+
+    * ``nfty done -p $PID`` requires installing as ``pip[pid]``
+    * XMPP requires installing as ``pip[XMPP]``
+    * Telegram requires installing as ``pip[telegram]``
+
+emojis, Telegram and xmpp are extras.
 
 Configuring ``ntfy``
 --------------------
