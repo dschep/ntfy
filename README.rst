@@ -76,9 +76,9 @@ Extras
 ~~~~~~
 ``ntfy`` can also a has a few features that require extra dependencies.
 
-    * ``nfty done -p $PID`` requires installing as ``pip[pid]``
-    * XMPP requires installing as ``pip[XMPP]``
-    * Telegram requires installing as ``pip[telegram]``
+    * ``nfty done -p $PID`` requires installing as ``ntfy[pid]``
+    * XMPP requires installing as ``ntfy[XMPP]``
+    * Telegram requires installing as ``ntfy[telegram]``
 
 emojis, Telegram and xmpp are extras.
 
