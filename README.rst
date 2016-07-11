@@ -47,7 +47,15 @@ Install
 The install technique in the quickstart is the suggested method of installation.
 It can be installed in a virtualenv, but with some caveats: Linux notifications
 require ``--system-site-packages`` for the virtualenv and OS X notifications
-don't work at all. ``ntfy`` can also be installed via pip, but pid support,
+don't work at all.
+Extras
+~~~~~~
+``ntfy`` can also a has a few features that require extra dependencies.
+
+ * ``nfty done -p $PID`` requires installing as ``pip[pid]``
+ * XMPP requires installing as ``pip[XMPP]``
+ * Telegram requires installing as ``pip[telegram]``
+
 emojis, Telegram and xmpp are extras.
 
 Shell integration
@@ -153,6 +161,8 @@ Optional parameters
     * ``path_to_certs``
     * ``mtype`` ('chat' required for Google Hangouts)
 
+Require extras, install like this: ``pip install ntfy[xmpp]``.
+
 To verify the SSL certificates offered by a server:
 path_to_certs = "path/to/ca/cert"
 
@@ -167,6 +177,8 @@ NOTE: Ignored without specified hostname
 
 `Telegram <https://telegram.org>`_ - ``telegram``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Require extras, install like this: ``pip install ntfy[telegram]``.
+
 Requires ``ntfy`` to be installed as ``ntfy[telegram]``. This backend is
 configured the first time you will try to use it: ``ntfy -b telegram send
 "Telegram configured for ntfy"``.
