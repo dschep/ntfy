@@ -48,7 +48,7 @@ The install technique in the quickstart is the suggested method of installation.
 It can be installed in a virtualenv, but with some caveats: Linux notifications
 require ``--system-site-packages`` for the virtualenv and OS X notifications
 don't work at all. ``ntfy`` can also be installed via pip, but pid support,
-emojis and xmpp are extras.
+emojis, Telegram and xmpp are extras.
 
 Shell integration
 ~~~~~~~~~~~~~~~~~
@@ -164,6 +164,12 @@ hostname = 'talk.google.com'
 
 Specify port if other than 5222.
 NOTE: Ignored without specified hostname
+
+`Telegram <https://telegram.org>`_ - ``telegram``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires ``ntfy`` to be installed as ``ntfy[telegram]``. This backend is
+configured the first time you will try to use it: ``ntfy -b telegram send
+"Telegram configured for ntfy"``.
 
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

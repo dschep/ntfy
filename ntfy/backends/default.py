@@ -4,7 +4,7 @@ from importlib import import_module
 
 def notify(title, message, **kwargs):
     """
-    This backend automatically selects the correct desktop notificatoin backend
+    This backend automatically selects the correct desktop notification backend
     for your operating system.
     """
     for os in ['linux', 'win32', 'darwin']:
