@@ -26,6 +26,6 @@ def notify(title, message, icon=icon.png, **kwargs):
                               '/org/freedesktop/Notifications')
     dbus_iface = dbus.Interface(dbus_obj,
                                 dbus_interface='org.freedesktop.Notifications')
-
-    dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], {},
+    hints = {'urgency': dbus.Byte(2)} if 'failed' in message else {}
+    dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], hints,
                       -1)
