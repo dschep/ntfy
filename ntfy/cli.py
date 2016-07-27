@@ -47,16 +47,16 @@ def run_cmd(args):
         retcode = call(args.command)
         duration = time() - start_time
     if args.longer_than is not None and duration <= args.longer_than:
-        return
+        return None, None
     if args.unfocused_only and is_focused():
-        return
+        return None, None
     if emojize is not None and not args.no_emoji:
         prefix = ':white_check_mark: ' if retcode == 0 else ':x: '
     else:
         prefix = ''
     return '{}"{}" {} in {:d}:{:02d} minutes'.format(
         prefix, ' '.join(args.command), 'succeeded' if retcode == 0 else
-        'failed', *map(int, divmod(duration, 60)))
+        'failed', *map(int, divmod(duration, 60))), retcode
 
 
 def watch_pid(args):
@@ -171,7 +171,13 @@ subparsers = parser.add_subparsers()
 
 send_parser = subparsers.add_parser('send', help='send a notification')
 send_parser.add_argument('message', help='notification message')
-send_parser.set_defaults(func=lambda args: args.message)
+
+
+def default_sender(args):
+    return args.message, 0
+
+send_parser.set_defaults(func=default_sender)
+
 
 done_parser = subparsers.add_parser(
     'done',
@@ -288,12 +294,12 @@ def main(cli_args=None):
         args.title = config.get('title', default_title)
 
     if hasattr(args, 'func'):
-        message = args.func(args)
+        message, retcode = args.func(args)
         if message is None:
             return 0
         if emojize is not None and not args.no_emoji:
             message = emojize(message, use_aliases=True)
-        return notify(message, args.title, config,
+        return notify(message, args.title, config, retcode=retcode,
                       **dict(args.option.get(None, [])))
     else:
         parser.print_help()
