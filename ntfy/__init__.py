@@ -1,5 +1,7 @@
 import logging
 from importlib import import_module
+from inspect import getargspec
+from .backends.default import DefaultNotifierError
 
 __version__ = '2.0.4'
 
@@ -23,41 +25,53 @@ def notify(message, title, config=None, **kwargs):
     if config is None:
         config = load_config()
 
-    ret = 1
+    ret = 0
     retcode = kwargs.pop('retcode', None)
 
     for backend in config.get('backends', ['default']):
         backend_config = config.get(backend, {})
         backend_config.update(kwargs)
         if 'backend' in backend_config:
-            backend = backend_config['backend']
+            backend = backend_config.pop('backend')
 
         notifier = None
-        try:
-            notifier = notifiers[backend]
-        except KeyError:
+        notifier = notifiers.get(backend)
+        if notifier is None:
             logging.getLogger(__name__).error(
                 'Invalid backend {}'.format(backend))
+            ret = 1
+            continue
 
-        if not notifier:
-            logging.getLogger(__name__).error(
-                'failed to load backend {}'.format(backend))
-        else:
-            try:
-                notifier.notify(message=message, title=title, retcode=retcode,
-                                **backend_config)
-                ret = 0
-            except (SystemExit, KeyboardInterrupt):
-                raise
-            except Exception:
-                import sys
-                major, minor = sys.version_info.major, sys.version_info.minor
-                if major == 3 and minor not in [0, 1, 2, 3, 4]:
-                    exc_info = False
-                else:
-                    exc_info = True
+        try:
+            notifier.notify(message=message, title=title, retcode=retcode,
+                            **backend_config)
+        except (SystemExit, KeyboardInterrupt):
+            raise
+        except Exception as e:
+            ret = 1
+            if isinstance(e, DefaultNotifierError):
+                notifier = e.module
+                e = e.exception
+
+            args, _, _, defaults = getargspec(notifier.notify)
+            possible_args = set(args)
+            print(notifier)
+            required_args = set(args[:-len(defaults)])
+            required_args -= set(['title', 'message', 'retcode'])
+            unknown_args = set(backend_config) - possible_args
+            missing_args =  required_args - set(backend_config)
+
+            if unknown_args:
+                logging.getLogger(__name__).error(
+                    'Got unknown arguments: {}'.format(unknown_args))
+
+            if missing_args:
+                logging.getLogger(__name__).error(
+                    'Missing arguments: {}'.format(missing_args))
+
+            if not any([unknown_args, missing_args]):
                 logging.getLogger(__name__).error(
                     'Failed to send notification using {}'.format(backend),
-                    exc_info=exc_info)
+                    exc_info=True)
 
     return ret

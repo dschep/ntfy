@@ -5,7 +5,7 @@ import os
 from ..data import icon
 
 
-def notify(title, message, icon=icon.ico, **kwargs):
+def notify(title, message, icon=icon.ico, retcode=None):
     """
     Optional parameters:
         * ``icon`` - path to an ICO file to display instead of the ntfy icon

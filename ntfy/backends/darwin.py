@@ -1,4 +1,4 @@
-def notify(title, message, **kwargs):
+def notify(title, message, retcode=None):
     """
     adapted from https://gist.github.com/baliw/4020619
     """

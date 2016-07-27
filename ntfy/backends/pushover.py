@@ -17,7 +17,7 @@ def notify(title,
            url=None,
            url_title=None,
            html=False,
-           **kwargs):
+           retcode=None):
     """
     Required parameters:
         * ``user_key``

@@ -7,7 +7,7 @@ import ntfy
 
 class DummyModule:
 
-    def notify(message, title, retcode):
+    def notify(message, title, retcode=None):
         raise Exception
 
 class OverrideBackendTestCase(TestCase):

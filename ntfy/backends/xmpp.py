@@ -46,7 +46,7 @@ def notify(title,
            port=5222,
            path_to_certs=None,
            mtype=None,
-           **kwargs):
+           retcode=None):
     """
     Optional parameters
         * ``hostname`` (if not from jid)

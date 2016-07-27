@@ -8,7 +8,7 @@ def notify(title,
            access_token,
            device_iden=None,
            email=None,
-           **kwargs):
+           retcode=None):
     """
     Required parameter:
         * ``access_token`` - Your Pushbullet access token, created at

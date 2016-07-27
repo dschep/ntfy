@@ -3,8 +3,7 @@ from os import environ, path
 from ..data import icon
 
 
-def notify(title, message, icon=icon.png, **kwargs):
-    retcode = kwargs.pop('retcode', 0)
+def notify(title, message, icon=icon.png, retcode=0):
     try:
         import dbus
     except ImportError:
