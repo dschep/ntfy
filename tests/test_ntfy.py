@@ -13,7 +13,6 @@ class DummyModule:
 class OverrideBackendTestCase(TestCase):
     @patch('requests.post')
     def test_runcmd(self, mock_post):
-        import pdb; pdb.set_trace()
         ret = notify('message', 'title', {
             'backends': ['foobar'],
             'foobar': {
