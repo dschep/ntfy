@@ -92,6 +92,7 @@ def auto_done(args):
     print("# To use ntfy's shell integration, run "
           "this and add it to your shell's rc file:")
     print('# eval "$(ntfy shell-integration)"')
+    return None, None
 
 
 class BackendOptionAction(argparse.Action):
