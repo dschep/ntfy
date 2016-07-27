@@ -51,7 +51,8 @@ def notify(message, title, config=None, **kwargs):
                 raise
             except Exception:
                 import sys
-                if sys.version_info.major == 3 and sys.version_info.minor not in [0, 1, 2, 3, 4]:
+                major, minor = sys.version_info.major, sys.version_info.minor
+                if major == 3 and minor not in [0, 1, 2, 3, 4]:
                     exc_info = False
                 else:
                     exc_info = True
