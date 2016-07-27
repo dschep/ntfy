@@ -13,6 +13,7 @@ class DummyModule:
 class OverrideBackendTestCase(TestCase):
     @patch('requests.post')
     def test_runcmd(self, mock_post):
+        import pdb; pdb.set_trace()
         ret = notify('message', 'title', {
             'backends': ['foobar'],
             'foobar': {
@@ -20,7 +21,7 @@ class OverrideBackendTestCase(TestCase):
                 'user_key': 't0k3n',
             }
         })
-        self.assertEqual(ret, 1)
+        self.assertEqual(ret, 0)
 
 
 class ErrorTestCase(TestCase):
