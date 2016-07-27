@@ -46,15 +46,15 @@ def notify(message, title, config=None, **kwargs):
             logging.getLogger(__name__).error(
                 'failed to load backend {}'.format(backend),
                 exc_info=True)
-
-        try:
-            notifier.notify(message=message, title=title, retcode=retcode, **backend_config)
-        except (SystemExit, KeyboardInterrupt):
-            raise
-        except Exception:
-            logging.getLogger(__name__).error(
-                'Failed to send notification using {}'.format(backend),
-                exc_info=True)
-            ret = 1
+        else:
+            try:
+                notifier.notify(message=message, title=title, retcode=retcode, **backend_config)
+            except (SystemExit, KeyboardInterrupt):
+                raise
+            except Exception:
+                logging.getLogger(__name__).error(
+                    'Failed to send notification using {}'.format(backend),
+                    exc_info=True)
+                ret = 1
 
     return ret
