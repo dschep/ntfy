@@ -7,6 +7,7 @@ class DefaultNotifierError(Exception):
         self.exception = exception
         self.module = module
 
+
 def notify(title, message, **kwargs):
     """
     This backend automatically selects the correct desktop notification backend

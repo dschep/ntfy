@@ -58,7 +58,7 @@ def notify(message, title, config=None, **kwargs):
             required_args = set(args[:-len(defaults)])
             required_args -= set(['title', 'message', 'retcode'])
             unknown_args = set(backend_config) - possible_args
-            missing_args =  required_args - set(backend_config)
+            missing_args = required_args - set(backend_config)
 
             if unknown_args:
                 logging.getLogger(__name__).error(
