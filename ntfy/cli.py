@@ -172,6 +172,7 @@ subparsers = parser.add_subparsers()
 send_parser = subparsers.add_parser('send', help='send a notification')
 send_parser.add_argument('message', help='notification message')
 
+
 def default_sender(args):
     return args.message, 0
 

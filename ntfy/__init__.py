@@ -46,7 +46,8 @@ def notify(message, title, config=None, **kwargs):
                 exc_info=True)
         else:
             try:
-                notifier.notify(message=message, title=title, retcode=retcode, **backend_config)
+                notifier.notify(message=message, title=title, retcode=retcode,
+                                **backend_config)
                 ret = 0
             except (SystemExit, KeyboardInterrupt):
                 raise
