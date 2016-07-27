@@ -4,6 +4,19 @@ from importlib import import_module
 __version__ = '2.0.4'
 
 
+notifiers = {'default': None, 'darwin': None, 'linux': None,
+             'darwin': None, 'pushbullet': None, 'pushover': None,
+             'telegram': None, 'win32': None, 'xmpp': None}
+
+
+for k, v in notifiers.items():
+    try:
+        module = import_module('ntfy.backends.{}'.format(k))
+        notifiers[k] = module
+    except (ImportError, OSError):
+        continue
+
+
 def notify(message, title, config=None, **kwargs):
     from .config import load_config
 
@@ -18,17 +31,24 @@ def notify(message, title, config=None, **kwargs):
         backend_config.update(kwargs)
         if 'backend' in backend_config:
             backend = backend_config['backend']
+
+        notifier = None
         try:
-            module = import_module('ntfy.backends.{}'.format(backend))
-        except ImportError:
+            notifier = notifiers[backend]
+        except KeyError:
+            ret = 1
+            logging.getLogger(__name__).error(
+                'Invalid backend {}'.format(backend),
+                exc_info=True)
+
+        if not notifier:
             ret = 1
             logging.getLogger(__name__).error(
                 'failed to load backend {}'.format(backend),
                 exc_info=True)
-            continue
 
         try:
-            module.notify(message=message, title=title, retcode=retcode, **backend_config)
+            notifier.notify(message=message, title=title, retcode=retcode, **backend_config)
         except (SystemExit, KeyboardInterrupt):
             raise
         except Exception:
