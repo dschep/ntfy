@@ -4,6 +4,7 @@ from ..data import icon
 
 
 def notify(title, message, icon=icon.png, **kwargs):
+    retcode = kwargs.pop('retcode', 0)
     try:
         import dbus
     except ImportError:
@@ -21,11 +22,12 @@ def notify(title, message, icon=icon.png, **kwargs):
             return
         else:
             raise
+
     bus = dbus.SessionBus()
     dbus_obj = bus.get_object('org.freedesktop.Notifications',
                               '/org/freedesktop/Notifications')
     dbus_iface = dbus.Interface(dbus_obj,
                                 dbus_interface='org.freedesktop.Notifications')
-    hints = {'urgency': dbus.Byte(2)} if 'failed' in message else {}
+    hints = {'urgency': dbus.Byte(2)} if retcode else {}
     dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], hints,
                       -1)

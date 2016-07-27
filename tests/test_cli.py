@@ -16,7 +16,7 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.unfocused_only = False
-        self.assertEqual('"true" succeeded in 0:00 minutes', run_cmd(args))
+        self.assertEqual(('"true" succeeded in 0:00 minutes', 0), run_cmd(args))
 
     @patch('ntfy.cli.call')
     def test_emoji(self, mock_call):
@@ -27,7 +27,7 @@ class TestRunCmd(TestCase):
         args.pid = None
         args.no_emoji = False
         args.unfocused_only = False
-        self.assertEqual(':white_check_mark: "true" succeeded in 0:00 minutes',
+        self.assertEqual((':white_check_mark: "true" succeeded in 0:00 minutes', 0),
                          run_cmd(args))
 
     def tests_usage(self):
@@ -45,7 +45,7 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.unfocused_only = False
-        self.assertEqual(None, run_cmd(args))
+        self.assertEqual((None,None), run_cmd(args))
 
 
 class TestMain(TestCase):
@@ -55,7 +55,8 @@ class TestMain(TestCase):
                    'test'])
         mock_notify.assert_called_once_with(message='test',
                                             title='TITLE',
-                                            foo='bar')
+                                            foo='bar',
+                                            retcode=0)
 
 
 class ShellIntegrationTestCase(TestCase):

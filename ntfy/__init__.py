@@ -11,6 +11,7 @@ def notify(message, title, config=None, **kwargs):
         config = load_config()
 
     ret = 0
+    retcode = kwargs.pop('retcode', None)
 
     for backend in config.get('backends', ['default']):
         backend_config = config.get(backend, {})
@@ -27,7 +28,7 @@ def notify(message, title, config=None, **kwargs):
             continue
 
         try:
-            module.notify(message=message, title=title, **backend_config)
+            module.notify(message=message, title=title, retcode=retcode, **backend_config)
         except (SystemExit, KeyboardInterrupt):
             raise
         except Exception:
