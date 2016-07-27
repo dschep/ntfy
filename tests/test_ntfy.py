@@ -3,7 +3,12 @@ from unittest import TestCase
 from mock import patch
 
 from ntfy import notify
+import ntfy
 
+class DummyModule:
+
+    def notify(message, title, retcode):
+        raise Exception
 
 class OverrideBackendTestCase(TestCase):
     @patch('requests.post')
@@ -15,7 +20,7 @@ class OverrideBackendTestCase(TestCase):
                 'user_key': 't0k3n',
             }
         })
-        self.assertEqual(ret, 0)
+        self.assertEqual(ret, 1)
 
 
 class ErrorTestCase(TestCase):
@@ -23,8 +28,7 @@ class ErrorTestCase(TestCase):
         ret = notify('message', 'title', {'backends': ['foobar']})
         self.assertEqual(ret, 1)
 
-    @patch('ntfy.backends.default.notify')
-    def test_backenderror(self, mock_default_notify):
-        mock_default_notify.side_effect = Exception
-        ret = notify('message', 'title')
+    @patch('ntfy.notifiers', {'default': DummyModule})
+    def test_backenderror(self):
+        ret = ntfy.notify('message', 'title')
         self.assertEqual(ret, 1)

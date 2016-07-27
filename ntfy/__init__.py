@@ -23,7 +23,7 @@ def notify(message, title, config=None, **kwargs):
     if config is None:
         config = load_config()
 
-    ret = 0
+    ret = 1
     retcode = kwargs.pop('retcode', None)
 
     for backend in config.get('backends', ['default']):
@@ -36,25 +36,23 @@ def notify(message, title, config=None, **kwargs):
         try:
             notifier = notifiers[backend]
         except KeyError:
-            ret = 1
             logging.getLogger(__name__).error(
                 'Invalid backend {}'.format(backend),
                 exc_info=True)
 
         if not notifier:
-            ret = 1
             logging.getLogger(__name__).error(
                 'failed to load backend {}'.format(backend),
                 exc_info=True)
         else:
             try:
                 notifier.notify(message=message, title=title, retcode=retcode, **backend_config)
+                ret = 0
             except (SystemExit, KeyboardInterrupt):
                 raise
             except Exception:
                 logging.getLogger(__name__).error(
                     'Failed to send notification using {}'.format(backend),
                     exc_info=True)
-                ret = 1
 
     return ret
