@@ -75,7 +75,6 @@ listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. For example:
 Extras
 ~~~~~~
 ``ntfy`` can also a has a few features that require extra dependencies.
-
     * ``nfty done -p $PID`` requires installing as ``ntfy[pid]``
     * XMPP requires installing as ``ntfy[XMPP]``
     * Telegram requires installing as ``ntfy[telegram]``
