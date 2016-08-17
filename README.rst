@@ -187,6 +187,8 @@ configured the first time you will try to use it: ``ntfy -b telegram send
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
 
+You will need to install some font that supports emojis (in Debian `fonts-symbola` or Gentoo `media-fonts/symbola`).
+
 Windows Desktop Notifications - ``win32``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Uses ``pywin32``.
@@ -226,3 +228,4 @@ Contributors
 ------------
 - `dschep <https://github.com/dschep>`_ - Maintainer & Lead Developer
 - `danryder <https://github.com/danryder>`_ - XMPP Backend & emoji support
+- `oz123 <https://github.com/oz123>` - Linux desktop notification improvements
