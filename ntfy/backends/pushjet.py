@@ -6,6 +6,7 @@ from ..config import USER_AGENT
 def notify(title,
            message,
            secret,
+           endpoint=None,
            level=3,
            link=None,
            retcode=None):
@@ -15,6 +16,7 @@ def notify(title,
             http://docs.pushjet.io/docs/creating-a-new-service
 
     Optional parameters:
+        * ``endpoint`` - custom Pushjet API endpoint (defaults to https://api.pushjet.io)
         * ``level`` - The importance level from 1(low) to 5(high)
         * ``url``
     """
@@ -31,7 +33,10 @@ def notify(title,
 
     headers = {'User-Agent': USER_AGENT}
 
-    resp = requests.post('https://api.pushjet.io/message',
+    if endpoint is None:
+        endpoint = 'https://api.pushjet.io'
+
+    resp = requests.post(endpoint + '/message',
                          data=data,
                          headers=headers)
 

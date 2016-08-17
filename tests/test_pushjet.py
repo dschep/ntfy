@@ -28,3 +28,14 @@ class TestPushjet(TestCase):
                   'level': 3,
                   'link': 'foobar'},
             headers={'User-Agent': USER_AGENT})
+
+    @patch('requests.post')
+    def test_endpoint(self, mock_post):
+        notify('title', 'message', secret='secret', endpoint='http://foobar')
+        mock_post.assert_called_once_with(
+            'http://foobar/message',
+            data={'title': 'title',
+                  'message': 'message',
+                  'secret': 'secret',
+                  'level': 3},
+            headers={'User-Agent': USER_AGENT})
