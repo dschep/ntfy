@@ -189,7 +189,8 @@ Required parameter:
     * ``secret`` - The Pushjet service secret token, created with http://docs.pushjet.io/docs/creating-a-new-service
 
 Optional parameters:
-    * ``endpoint`` - custom Pushjet API endpoint (defaults to https://api.pushjet.io)
+    * ``endpoint`` - custom Pushjet API endpoint
+        (defaults to https://api.pushjet.io)
     * ``level`` - The importance level from 1(low) to 5(high)
     * ``link``
 
