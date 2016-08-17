@@ -8,7 +8,8 @@ __version__ = '2.0.4'
 
 notifiers = {'default': None, 'darwin': None, 'linux': None,
              'darwin': None, 'pushbullet': None, 'pushover': None,
-             'telegram': None, 'win32': None, 'xmpp': None}
+             'pushjet': None, 'telegram': None, 'win32': None,
+             'xmpp': None}
 
 
 for k, v in notifiers.items():

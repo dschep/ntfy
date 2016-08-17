@@ -183,6 +183,16 @@ Requires ``ntfy`` to be installed as ``ntfy[telegram]``. This backend is
 configured the first time you will try to use it: ``ntfy -b telegram send
 "Telegram configured for ntfy"``.
 
+`Pushjet <https://pushjet.io/>`_ - ``pushjet``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required parameter:
+    * ``secret`` - The Pushjet service secret token, created with http://docs.pushjet.io/docs/creating-a-new-service
+
+Optional parameters:
+    * ``endpoint`` - custom Pushjet API endpoint (defaults to https://api.pushjet.io)
+    * ``level`` - The importance level from 1(low) to 5(high)
+    * ``link``
+
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
@@ -210,7 +220,6 @@ Backends ToDo
 ~~~~~~~~~~~~~
 -  `Prowl <http://www.prowlapp.com>`_
 -  `Airgram <http://www.airgramapp.com>`_
--  `Pushjet <https://pushjet.io>`_
 -  `Pushalot <https://pushalot.com>`_
 -  `Boxcar <https://boxcar.io>`_
 -  `Instapush <https://instapush.im>`_
