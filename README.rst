@@ -238,4 +238,10 @@ Contributors
 ------------
 - `dschep <https://github.com/dschep>`_ - Maintainer & Lead Developer
 - `danryder <https://github.com/danryder>`_ - XMPP Backend & emoji support
-- `oz123 <https://github.com/oz123>` - Linux desktop notification improvements
+- `oz123 <https://github.com/oz123>`_ - Linux desktop notification improvements
+- `schwert <https://github.com/schwert>`_ - PushJet support
+- `rahiel <https://github.com/rahiel>`_ - Telegram support
+- `jungle-boogie <https://github.com/jungle-boogie>`_ - Documentation updates
+- `tjbenator <https://github.com/tjbenator>`_ - Advanced Pushover options
+- `mobiusklein <https://github.com/mobiusklein>`_ - Win32 Bugfix
+- `rcaloras <https://github.com/rcaloras>`_ - Creator of `bash-prexec`, without which there woudn't be bash shell integration for `ntfy`
