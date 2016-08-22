@@ -11,7 +11,7 @@
 # Author: Ryan Caloras (ryan@bashhub.com)
 # Forked from Original Author: Glyph Lefkowitz
 #
-# V0.3.0
+# V0.3.1
 #
 
 # General Usage:
@@ -42,7 +42,7 @@ __bp_imported="defined"
 
 # Should be available to each precmd and preexec
 # functions, should they want it.
-__bp_last_command_ret_value="$?"
+__bp_last_ret_value="$?"
 
 # Command to set our preexec trap. It's invoked once via
 # PROMPT_COMMAND and then removed.
@@ -87,7 +87,7 @@ __bp_interactive_mode() {
 # It will invoke any functions defined in the precmd_functions array.
 __bp_precmd_invoke_cmd() {
 
-    # Should be available to each precmd function, should it want it.
+    # Save the returned value from our last command
     __bp_last_ret_value="$?"
 
     # For every function defined in our function array. Invoke it.
@@ -234,9 +234,17 @@ __bp_install() {
     # Adjust our HISTCONTROL Variable if needed.
     __bp_adjust_histcontrol
 
-    # Set so debug trap will work be invoked in subshells.
-    set -o functrace > /dev/null 2>&1
-    shopt -s extdebug > /dev/null 2>&1
+
+    # Issue #25. Setting debug trap for subshells causes sessions to exit for
+    # backgrounded subshell commands (e.g. (pwd)& ). Believe this is a bug in Bash.
+    #
+    # Disabling this by default. It can be enabled by setting this variable.
+    if [[ -n "$__bp_enable_subshells" ]]; then
+
+        # Set so debug trap will work be invoked in subshells.
+        set -o functrace > /dev/null 2>&1
+        shopt -s extdebug > /dev/null 2>&1
+    fi;
 
 
     local existing_prompt_command
