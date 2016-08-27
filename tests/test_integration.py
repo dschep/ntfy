@@ -32,6 +32,16 @@ class TestIntegration(TestCase):
         ntfy_main(['send', 'foobar'])
 
     @patch(builtin_module + '.open', mock_open())
+    @patch('ntfy.config.yaml.load')
+    @patch('ntfy.backends.simplepush.requests.post')
+    def test_simplepush(self, mock_post, mock_yamlload):
+        mock_yamlload.return_value = {
+            'backends': ['simplepush'],
+            'simplepush': {'key': MagicMock()},
+        }
+        ntfy_main(['send', 'foobar'])
+
+    @patch(builtin_module + '.open', mock_open())
     @patch('ntfy.backends.default.platform', 'linux')
     @patch('ntfy.config.yaml.load')
     def test_default(self, mock_yamlload):

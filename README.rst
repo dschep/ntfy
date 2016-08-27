@@ -97,12 +97,15 @@ its own configuration, stored in a key of its own name. For example:
     ---
     backends:
         - pushover
+        - simplepush
         - linux
         - xmpp
     pushover:
         user_key: hunter2
     pushbullet:
         access_key: hunter2
+    simplepush:
+        key: hunter2
     xmpp:
          jid: "user@gmail.com"
          password: "xxxx"
@@ -148,6 +151,11 @@ Required parameter:
 Optional parameters:
     * ``device_iden`` - a device identifier, if omited, notification is sent to all devices
     * ``email`` - send notification to pushbullte user with the specified email or send an email if they aren't a pushullet user
+
+`Simplepush <https://simplepush.io>`_ - ``simplepush``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required parameter:
+    * ``key`` - Your Simplepush key, created by installing the Android App (no registration required) at https://simplepush.io
 
 XMPP - ``xmpp``
 ~~~~~~~~~~~~~~~
@@ -241,6 +249,7 @@ Contributors
 - `oz123 <https://github.com/oz123>`_ - Linux desktop notification improvements
 - `schwert <https://github.com/schwert>`_ - PushJet support
 - `rahiel <https://github.com/rahiel>`_ - Telegram support
+- `tymm <https://github.com/tymm>`_ - Simplepush support
 - `jungle-boogie <https://github.com/jungle-boogie>`_ - Documentation updates
 - `tjbenator <https://github.com/tjbenator>`_ - Advanced Pushover options
 - `mobiusklein <https://github.com/mobiusklein>`_ - Win32 Bugfix
