@@ -4,7 +4,8 @@ from ..config import USER_AGENT
 
 def notify(title,
            message,
-           key):
+           key,
+           retcode=None):
     """
     Required paramter:
         * ``key`` - The Simplepush identification key, created by
