@@ -28,7 +28,7 @@ def notify(title,
         * ``expire``
         * ``retry``
         * ``callback``
-        * ``access_token`` - use your own application token
+        * ``api_token`` - use your own application token
         * ``device`` - target a device, if omitted, target all devices
         * ``url``
         * ``url_title``

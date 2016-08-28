@@ -102,7 +102,7 @@ its own configuration, stored in a key of its own name. For example:
     pushover:
         user_key: hunter2
     pushbullet:
-        access_key: hunter2
+        access_token: hunter2
     xmpp:
          jid: "user@gmail.com"
          password: "xxxx"
@@ -134,7 +134,7 @@ Optional parameters:
     * ``expire``
     * ``retry``
     * ``callback``
-    * ``access_token`` - use your own application token
+    * ``api_token`` - use your own application token
     * ``device`` - target a device, if omitted, notification is sent to all devices
     * ``url``
     * ``url_title``
