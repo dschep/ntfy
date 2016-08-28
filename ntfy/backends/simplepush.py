@@ -2,6 +2,7 @@ import requests
 
 from ..config import USER_AGENT
 
+
 def notify(title,
            message,
            key,
