@@ -13,7 +13,7 @@ def notify(title,
     """
 
     data = {
-        'title': title,
+        'title': title if len(title) <= 20 else title[:19] + u'\u2026',
         'msg': message,
         'key': key
     }
