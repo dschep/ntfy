@@ -9,7 +9,7 @@ __version__ = '2.1.1'
 notifiers = {'default': None, 'darwin': None, 'linux': None,
              'darwin': None, 'pushbullet': None, 'pushover': None,
              'pushjet': None, 'telegram': None, 'win32': None,
-             'xmpp': None}
+             'xmpp': None, 'simplepush': None}
 
 
 for k, v in notifiers.items():
