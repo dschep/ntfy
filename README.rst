@@ -206,6 +206,13 @@ Optional parameters:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
 
+The following dependecies should be installed.
+
+.. code:: shell
+
+    $ sudo apt-get install libdbus-glib-1-dev libdbus-1-dev
+    $ pip install --user dbus-python
+
 You will need to install some font that supports emojis (in Debian `fonts-symbola` or Gentoo `media-fonts/symbola`).
 
 Windows Desktop Notifications - ``win32``
