@@ -71,13 +71,14 @@ def watch_pid(args):
     except psutil.NoSuchProcess:
         logging.error("PID {} not found".format(args.pid))
         exit(1)
+    ret = None
     try:
-        p.wait()
+        ret = p.wait()
     except psutil.NoSuchProcess:  # pragma: no cover
         pass  # this happens when the PID disapears
     duration = time() - start_time
     return 'PID[{}]: "{}" finished in {:d}:{:02d} minutes'.format(
-        p.pid, ' '.join(cmd), *map(int, divmod(duration, 60)))
+        p.pid, ' '.join(cmd), *map(int, divmod(duration, 60))), ret
 
 
 def auto_done(args):
