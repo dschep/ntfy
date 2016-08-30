@@ -12,7 +12,7 @@ __version__ = '2.1.1'
 notifiers = {'default': None, 'darwin': None, 'linux': None,
              'darwin': None, 'pushbullet': None, 'pushover': None,
              'pushjet': None, 'telegram': None, 'win32': None,
-             'xmpp': None, 'simplepush': None}
+             'xmpp': None, 'simplepush': None, 'notifico': None}
 
 default_title = '{}@{}:{}'.format(getuser(), gethostname(), getcwd().replace(
     path.expanduser('~'), '~'))

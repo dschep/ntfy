@@ -45,9 +45,17 @@ ntfy.backends.pushover module
     :show-inheritance:
 
 ntfy.backends.simplepush module
------------------------------
+-------------------------------
 
 .. automodule:: ntfy.backends.simplepush
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ntfy.backends.notifico module
+-----------------------------
+
+.. automodule:: ntfy.backends.notifico
     :members:
     :undoc-members:
     :show-inheritance:
