@@ -6,7 +6,7 @@ def notify(title, message, retcode=None, webhook=None):
     """
     Required parameter:
         * ``webhook`` - The webhook link, created at https://n.tkte.ch/
-                        (choose ``Plain Text`` service when creating the webhook)
+              (choose ``Plain Text`` service when creating the webhook)
     """
 
     logger = logging.getLogger(__name__)
