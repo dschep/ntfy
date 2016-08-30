@@ -1,4 +1,7 @@
 import logging
+from getpass import getuser
+from os import getcwd, path
+from socket import gethostname
 from importlib import import_module
 from inspect import getargspec
 from .backends.default import DefaultNotifierError
@@ -10,6 +13,9 @@ notifiers = {'default': None, 'darwin': None, 'linux': None,
              'darwin': None, 'pushbullet': None, 'pushover': None,
              'pushjet': None, 'telegram': None, 'win32': None,
              'xmpp': None, 'simplepush': None}
+
+default_title = '{}@{}:{}'.format(getuser(), gethostname(), getcwd().replace(
+    path.expanduser('~'), '~'))
 
 
 for k, v in notifiers.items():
@@ -34,6 +40,12 @@ def notify(message, title, config=None, **kwargs):
         backend_config.update(kwargs)
         if 'backend' in backend_config:
             backend = backend_config.pop('backend')
+
+        if title is None:
+            title = backend_config.pop('title', config.get('title',
+                                                           default_title))
+        elif 'title' in backend_config:
+            del backend_config['title']
 
         notifier = None
         notifier = notifiers.get(backend)

@@ -1,9 +1,7 @@
 import argparse
 import logging
 import logging.config
-from getpass import getuser
-from os import environ, getcwd, path
-from socket import gethostname
+from os import environ, path
 from subprocess import call
 from sys import exit, stderr
 from time import time
@@ -18,7 +16,7 @@ try:
 except ImportError:
     psutil = None
 
-from . import __version__, notify
+from . import __version__, notify, default_title
 from .config import (load_config, DEFAULT_CONFIG,
                      SITE_DEFAULT_CONFIG, OLD_DEFAULT_CONFIG)
 from .data import scripts
@@ -71,13 +69,14 @@ def watch_pid(args):
     except psutil.NoSuchProcess:
         logging.error("PID {} not found".format(args.pid))
         exit(1)
+    ret = None
     try:
-        p.wait()
+        ret = p.wait()
     except psutil.NoSuchProcess:  # pragma: no cover
         pass  # this happens when the PID disapears
     duration = time() - start_time
     return 'PID[{}]: "{}" finished in {:d}:{:02d} minutes'.format(
-        p.pid, ' '.join(cmd), *map(int, divmod(duration, 60)))
+        p.pid, ' '.join(cmd), *map(int, divmod(duration, 60))), ret
 
 
 def auto_done(args):
@@ -159,9 +158,6 @@ if emojize is not None:
                         '--no-emoji',
                         action='store_true',
                         help='Disable emoji support')
-
-default_title = '{}@{}:{}'.format(getuser(), gethostname(), getcwd().replace(
-    path.expanduser('~'), '~'))
 
 parser.add_argument('-t',
                     '--title',
@@ -290,9 +286,6 @@ def main(cli_args=None):
     if getattr(args, 'func', None) == run_cmd and args.longer_than is None and\
             'longer_than' in config:
         args.longer_than = config['longer_than']
-
-    if args.title is None:
-        args.title = config.get('title', default_title)
 
     if hasattr(args, 'func'):
         message, retcode = args.func(args)

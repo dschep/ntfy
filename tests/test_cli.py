@@ -76,7 +76,7 @@ class TestWatchPID(TestCase):
         args.pid = 1
         args.unfocused_only = False
         self.assertEqual('PID[1]: "cmd" finished in 0:00 minutes',
-                         run_cmd(args))
+                         run_cmd(args)[0])
 
     def test_watch_bad_pid(self):
         args = MagicMock()
