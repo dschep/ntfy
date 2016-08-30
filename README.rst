@@ -260,3 +260,4 @@ Contributors
 - `tjbenator <https://github.com/tjbenator>`_ - Advanced Pushover options
 - `mobiusklein <https://github.com/mobiusklein>`_ - Win32 Bugfix
 - `rcaloras <https://github.com/rcaloras>`_ - Creator of `bash-prexec`, without which there woudn't be bash shell integration for `ntfy`
+- `eightnoteight <https://github.com/eightnoteight`_ - Notifico support
