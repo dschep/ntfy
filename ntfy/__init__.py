@@ -14,8 +14,13 @@ notifiers = {'default': None, 'darwin': None, 'linux': None,
              'pushjet': None, 'telegram': None, 'win32': None,
              'xmpp': None, 'simplepush': None, 'notifico': None}
 
-default_title = '{}@{}:{}'.format(getuser(), gethostname(), getcwd().replace(
-    path.expanduser('~'), '~'))
+_user_home = path.expanduser('~')
+_cwd = getcwd()
+if _cwd.startswith(_user_home):
+    default_title = '{}@{}:{}'.format(getuser(), gethostname(),
+                                      path.join('~', _cwd[len(_user_home):]))
+else:
+    default_title = '{}@{}:{}'.format(getuser(), gethostname(), _cwd)
 
 
 for k, v in notifiers.items():
