@@ -202,6 +202,12 @@ Optional parameters:
     * ``level`` - The importance level from 1(low) to 5(high)
     * ``link``
 
+`Notifico <https://n.tkte.ch/>`_ - ``notifico``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required parameter:
+    * ``webhook`` - The webhook link, created at https://n.tkte.ch/
+                    (choose ``Plain Text`` service when creating the webhook)
+
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
