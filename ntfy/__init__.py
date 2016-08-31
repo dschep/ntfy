@@ -6,7 +6,7 @@ from importlib import import_module
 from inspect import getargspec
 from .backends.default import DefaultNotifierError
 
-__version__ = '2.1.1'
+__version__ = '2.2.0'
 
 
 notifiers = dict.fromkeys(['default', 'darwin', 'linux', 'notifico',
