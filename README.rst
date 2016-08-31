@@ -35,7 +35,7 @@ Quickstart
     $ ntfy done sleep 10
     $ ntfy -b pushover -o user_key t0k3n send 'Pushover test!'
     $ ntfy -t 'ntfy' send "Here's a custom notification title!"
-    $ echo -e 'backends: ["pushover"]\npushover: {"user_key": "t0k3n"}' > ~/.config/ntfy/ntfy.yml
+    $ echo -e 'backends: ["pushover"]\npushover: {"user_key": "t0k3n"}' > ~/.ntfy.yml
     $ ntfy send "Pushover via config file!"
     $ ntfy done --pid 6379  # PID extra
     $ ntfy send ":tada: ntfy supports emoji! :100:"  # emoji extra
