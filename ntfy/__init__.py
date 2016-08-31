@@ -1,6 +1,6 @@
 import logging
 from getpass import getuser
-from os import getcwd, path
+from os import getcwd, path, name
 from socket import gethostname
 from importlib import import_module
 from inspect import getargspec
@@ -9,14 +9,13 @@ from .backends.default import DefaultNotifierError
 __version__ = '2.1.1'
 
 
-notifiers = {'default': None, 'darwin': None, 'linux': None,
-             'darwin': None, 'pushbullet': None, 'pushover': None,
-             'pushjet': None, 'telegram': None, 'win32': None,
-             'xmpp': None, 'simplepush': None, 'notifico': None}
+notifiers = dict.fromkeys(['default', 'darwin', 'linux', 'notifico',
+                           'pushbullet', 'pushjet', 'pushover',
+                           'simplepush', 'telegram', 'win32', 'xmpp'])
 
 _user_home = path.expanduser('~')
 _cwd = getcwd()
-if _cwd.startswith(_user_home):
+if name != 'nt' and _cwd.startswith(_user_home):
     default_title = '{}@{}:{}'.format(getuser(), gethostname(),
                                       path.join('~', _cwd[len(_user_home):]))
 else:
