@@ -209,7 +209,7 @@ Required parameter:
     * ``webhook`` - The webhook link, created at https://n.tkte.ch/
                     (choose ``Plain Text`` service when creating the webhook)
 
-`Instapush <https://instapush.im/>`_ - ``instapush``
+`Instapush <https://instapush.im/>`_ - ``insta``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Require extras, install like this ``pip install ntfy[telegram]``.
 
