@@ -1,6 +1,11 @@
-import sys
 import logging
 from instapush import App
+
+class WrongMessageCountException(Exception):
+    pass
+
+class ApiException(Exception):
+    pass
 
 def notify(title, message, event_name, appid, secret, trackers, retcode=None):
     logger = logging.getLogger(__name__)
@@ -8,7 +13,7 @@ def notify(title, message, event_name, appid, secret, trackers, retcode=None):
 
     if len(msgs) != len(trackers):
         logger.error("Wrong number of messages! There are {} trackers so you have to provide {} messages. Remember to separate eah message with ':' (example: send \"msg1:msg2\")".format(len(trackers), len(trackers)))
-        sys.exit(1)
+        raise WrongMessageCountException()
 
     to_send = {}
 
@@ -20,4 +25,4 @@ def notify(title, message, event_name, appid, secret, trackers, retcode=None):
 
     if res["status"] != 200:
         logger.error(res["msg"])
-        sys.exit(1)
+        raise ApiException()
