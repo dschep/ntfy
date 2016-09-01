@@ -11,6 +11,7 @@ extra_deps = {
     'xmpp': [
         'sleekxmpp', 'dnspython' if version_info[0] < 3 else 'dnspython3'],
     'telegram': ['telegram-send'],
+    'instapush': ['instapush'],
     'emoji': ['emoji'],
     'pid':['psutil'],
 }
