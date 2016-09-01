@@ -60,6 +60,15 @@ ntfy.backends.notifico module
     :undoc-members:
     :show-inheritance:
 
+ntfy.backends.insta module
+-----------------------------
+
+.. automodule:: ntfy.backends.insta
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 ntfy.backends.win32 module
 --------------------------
 

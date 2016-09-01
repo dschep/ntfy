@@ -8,6 +8,13 @@ class ApiException(Exception):
     pass
 
 def notify(title, message, event_name, appid, secret, trackers, retcode=None):
+    """
+    Required parameter:
+        * ``event_name`` - Instapush event (the notification template)
+        * ``appid`` - The appid found on the dashboard
+        * ``secret`` - The secret found on the dashboard
+        * ``traskers`` - List of the placeholders for the selected event
+    """
     logger = logging.getLogger(__name__)
     msgs = message.split(":")
 

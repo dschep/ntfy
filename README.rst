@@ -262,7 +262,6 @@ Backends ToDo
 -  `Airgram <http://www.airgramapp.com>`_
 -  `Pushalot <https://pushalot.com>`_
 -  `Boxcar <https://boxcar.io>`_
--  `Instapush <https://instapush.im>`_
 
 Testing
 -------
