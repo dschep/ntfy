@@ -78,6 +78,7 @@ Extras
     * ``nfty done -p $PID`` requires installing as ``ntfy[pid]``
     * XMPP requires installing as ``ntfy[XMPP]``
     * Telegram requires installing as ``ntfy[telegram]``
+    * Instapush requires installing as ``ntfy[instapush]``
 
 emojis, Telegram and xmpp are extras.
 
@@ -208,6 +209,27 @@ Required parameter:
     * ``webhook`` - The webhook link, created at https://n.tkte.ch/
                     (choose ``Plain Text`` service when creating the webhook)
 
+`Instapush <https://instapush.im/>`_ - ``instapush``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Require extras, install like this ``pip install ntfy[telegram]``.
+
+Instapush does not support notification title.
+It sends template-driven notifications, so you have to setup you events on the dashboard first.
+The backend is called insta due to homonymy with the instapush python wrapper
+
+Required parameters:
+    * ``appid`` - The application id
+    * ``secret`` - The application secret
+    * ``event_name`` - The instapush event to be used
+    * ``trackers`` - The array of trakers to use
+Note on trackers:
+Trackers are placeholders for events (a sort of notification template). If you defined more than one tracker in your event
+you'll have to provide more messages. At the moment, the only way to do so is to separate each message with a colon (:) character.
+Example:
+.. code:: shell
+
+    ntfy -b insta send "message1:message2"
+
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
@@ -261,3 +283,4 @@ Contributors
 - `mobiusklein <https://github.com/mobiusklein>`_ - Win32 Bugfix
 - `rcaloras <https://github.com/rcaloras>`_ - Creator of `bash-prexec`, without which there woudn't be bash shell integration for `ntfy`
 - `eightnoteight <https://github.com/eightnoteight>`_ - Notifico support
+- `giuseongit <https://github.com/giuseongit>`_ Instapush support
