@@ -116,6 +116,25 @@ class TestIntegration(TestCase):
                                                'recipient': 'bar@foo'}}
         ntfy_main(['send', 'foobar'])
 
+    @patch(builtin_module + '.open', mock_open())
+    @patch('ntfy.config.yaml.load')
+    @patch('instapush.App')
+    def test_instapush(self, mock_app, mock_yamlload):
+        def nt(event_name=None,trackers=None):
+            return { 'status': 200 }
+
+        mock_app.notify = nt
+
+        mock_yamlload.return_value = {
+            'backends': ['insta'],
+            'insta': {
+                'appid': 'appid',
+                'secret': 'secret',
+                'event_name': 'event',
+                'trackers': ['a']
+            }
+        }
+        ntfy_main(['send', 'ms'])
 
 if __name__ == '__main__':
     main()
