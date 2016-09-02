@@ -8,9 +8,13 @@ def notify(title,
            fmt='[{title}] {message}',
            retcode=None):
     """
+    Uses the ``syslog`` core Python module, which is not available on Windows
+    platforms.
+
     Optional parameters:
         * ``prio`` - Syslog prority level.  Default is ``ALERT``.  Possible
           values are:
+
           * EMERG
           * ALERT
           * CRIT
@@ -22,6 +26,7 @@ def notify(title,
 
         * ``facility`` - Syslog facility.  Default is ``LOCAL5``.  Possible
           values are:
+
           * KERN
           * USER
           * MAIL
@@ -43,6 +48,7 @@ def notify(title,
 
       * ``fmt`` - Format of the message to be sent to the system logger.  The
         title and the message are specified using the following placeholders:
+
         * ``{title}``
         * ``{message}``
 

@@ -224,9 +224,13 @@ Requires ``ntfy`` to be installed globally (not in a virtualenv).
 
 System log - ``systemlog``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+Uses the ``syslog`` core Python module, which is not available on Windows
+platforms.
+
 Optional parameters:
     * ``prio`` - Syslog priority level.  Default is ``ALERT``.  Possible values
       are:
+
       * EMERG
       * ALERT
       * CRIT
@@ -238,6 +242,7 @@ Optional parameters:
 
     * ``facility`` - Syslog facility.  Default is ``LOCAL5``.  Possible values
       are:
+
       * KERN
       * USER
       * MAIL
@@ -259,6 +264,7 @@ Optional parameters:
 
     * ``fmt`` - Format of the message to be sent to the system logger.  The
       title and the message are specified using the following placeholders:
+
       * ``{title}``
       * ``{message}``
 
