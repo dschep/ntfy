@@ -222,6 +222,47 @@ Mac OS X Notification Center - ``darwin``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Requires ``ntfy`` to be installed globally (not in a virtualenv).
 
+System log - ``systemlog``
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Optional parameters:
+    * ``prio`` - Syslog priority level.  Default is ``ALERT``.  Possible values
+      are:
+      * EMERG
+      * ALERT
+      * CRIT
+      * ERR
+      * WARNING
+      * NOTICE
+      * INFO
+      * DEBUG
+
+    * ``facility`` - Syslog facility.  Default is ``LOCAL5``.  Possible values
+      are:
+      * KERN
+      * USER
+      * MAIL
+      * DAEMON
+      * AUTH
+      * LPR
+      * NEWS
+      * UUCP
+      * CRON
+      * SYSLOG
+      * LOCAL0
+      * LOCAL1
+      * LOCAL2
+      * LOCAL3
+      * LOCAL4
+      * LOCAL5
+      * LOCAL6
+      * LOCAL7
+
+    * ``fmt`` - Format of the message to be sent to the system logger.  The
+      title and the message are specified using the following placeholders:
+      * ``{title}``
+      * ``{message}``
+
+      Default is ``[{title}] {message}``.
 Other options
 ~~~~~~~~~~~~~
 
@@ -261,3 +302,4 @@ Contributors
 - `mobiusklein <https://github.com/mobiusklein>`_ - Win32 Bugfix
 - `rcaloras <https://github.com/rcaloras>`_ - Creator of `bash-prexec`, without which there woudn't be bash shell integration for `ntfy`
 - `eightnoteight <https://github.com/eightnoteight>`_ - Notifico support
+- `jlesage <https://github.com/jlesage>`_ - Systemlog backend support
