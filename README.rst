@@ -225,11 +225,13 @@ Required parameters:
 Note on trackers:
 Trackers are placeholders for events (a sort of notification template). If you defined more than one tracker in your event
 you'll have to provide more messages. At the moment, the only way to do so is to separate each message with a colon (:) character.
+You can also escape the separator character:
 Example:
 
 .. code:: shell
 
     ntfy -b insta send "message1:message2"
+    ntfy -b insta send "message1:message2\:with\:colons"
 
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
