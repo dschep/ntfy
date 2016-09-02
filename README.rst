@@ -98,6 +98,7 @@ its own configuration, stored in a key of its own name. For example:
     backends:
         - pushover
         - simplepush
+        - slack
         - linux
         - xmpp
     pushover:
@@ -106,6 +107,9 @@ its own configuration, stored in a key of its own name. For example:
         access_token: hunter2
     simplepush:
         key: hunter2
+    slack:
+        token: slacktoken
+        user: slackuser
     xmpp:
          jid: "user@gmail.com"
          password: "xxxx"
@@ -208,6 +212,14 @@ Required parameter:
     * ``webhook`` - The webhook link, created at https://n.tkte.ch/
                     (choose ``Plain Text`` service when creating the webhook)
 
+`Slack <https://slack.com>`_ - ``Slack``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Require extras, install like this: ``pip install ntfy[slack]``.
+
+Required parameter:
+    * ``token`` - The Slack service secret token, created in https://api.slack.com/web#authentication
+    * ``user`` - The Slack user to send notification.
+
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
@@ -261,3 +273,4 @@ Contributors
 - `mobiusklein <https://github.com/mobiusklein>`_ - Win32 Bugfix
 - `rcaloras <https://github.com/rcaloras>`_ - Creator of `bash-prexec`, without which there woudn't be bash shell integration for `ntfy`
 - `eightnoteight <https://github.com/eightnoteight>`_ - Notifico support
+- `juanpabloaj <https://github.com/juanpabloaj>`_ - Slack support
