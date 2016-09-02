@@ -1,11 +1,17 @@
-from unittest import TestCase
+from unittest import TestCase, skipIf
 from mock import patch, call
-import syslog
 
 from ntfy.backends.systemlog import notify
 
+try:
+    import syslog
+    syslog_supported = True
+except ImportError:
+    syslog_supported = False
+
 
 class TestSystemlog(TestCase):
+    @skipIf(not syslog_supported, 'Syslog not supported')
     @patch('syslog.syslog')
     def test_basic(self, mock_post):
         notify('title', 'message')
@@ -13,6 +19,7 @@ class TestSystemlog(TestCase):
             syslog.LOG_LOCAL5|syslog.LOG_ALERT,
             '[title] message')
 
+    @skipIf(not syslog_supported, 'Syslog not supported')
     @patch('syslog.syslog')
     def test_facility(self, mock_post):
         notify('title', 'message', facility='MAIL')
@@ -20,6 +27,7 @@ class TestSystemlog(TestCase):
             syslog.LOG_MAIL|syslog.LOG_ALERT,
             '[title] message')
 
+    @skipIf(not syslog_supported, 'Syslog not supported')
     @patch('syslog.syslog')
     def test_prio(self, mock_post):
         notify('title', 'message', prio='DEBUG')
@@ -27,6 +35,7 @@ class TestSystemlog(TestCase):
             syslog.LOG_LOCAL5|syslog.LOG_DEBUG,
             '[title] message')
 
+    @skipIf(not syslog_supported, 'Syslog not supported')
     @patch('syslog.syslog')
     def test_fmt(self, mock_post):
         notify('title', 'message', fmt='Title: {title} Message: {message}')
@@ -34,6 +43,7 @@ class TestSystemlog(TestCase):
             syslog.LOG_LOCAL5|syslog.LOG_ALERT,
             'Title: title Message: message')
 
+    @skipIf(not syslog_supported, 'Syslog not supported')
     @patch('syslog.syslog')
     def test_multiple_lines(self, mock_post):
         notify('title', 'message\non multiple\nlines')
@@ -46,6 +56,7 @@ class TestSystemlog(TestCase):
                 ]
         mock_post.assert_has_calls(calls)
 
+    @skipIf(not syslog_supported, 'Syslog not supported')
     @patch('syslog.syslog')
     def test_invalid_prio(self, mock_post):
         self.assertRaises(ValueError,
@@ -54,6 +65,7 @@ class TestSystemlog(TestCase):
                           'message',
                           prio='INVALID_PRIO')
 
+    @skipIf(not syslog_supported, 'Syslog not supported')
     @patch('syslog.syslog')
     def test_invalid_facility(self, mock_post):
         self.assertRaises(ValueError,
