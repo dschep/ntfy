@@ -1,13 +1,14 @@
 from unittest import TestCase, skipIf
 from mock import patch, call
 
-from ntfy.backends.systemlog import notify
-
 try:
     import syslog
     syslog_supported = True
 except ImportError:
     syslog_supported = False
+
+if syslog_supported:
+  from ntfy.backends.systemlog import notify
 
 
 class TestSystemlog(TestCase):
