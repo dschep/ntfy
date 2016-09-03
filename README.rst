@@ -109,7 +109,7 @@ its own configuration, stored in a key of its own name. For example:
         key: hunter2
     slack:
         token: slacktoken
-        user: slackuser
+        channel: "#slackchannel"
     xmpp:
          jid: "user@gmail.com"
          password: "xxxx"
@@ -218,7 +218,7 @@ Require extras, install like this: ``pip install ntfy[slack]``.
 
 Required parameter:
     * ``token`` - The Slack service secret token, created in https://api.slack.com/web#authentication
-    * ``user`` - The Slack user to send notification.
+    * ``#channel`` - The Slack channel to send notification. If you use the ``#`` symbol the message is send to a Slack channel and if you use the ``@`` symbol the message is send to a Slack user.
 
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
