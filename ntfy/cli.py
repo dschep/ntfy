@@ -86,8 +86,8 @@ def auto_done(args):
     if args.unfocused_only:
         print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
     if args.shell == 'bash':
-        print('source {}'.format(scripts['bash-preexec.sh']))
-    print('source {}'.format(scripts['auto-ntfy-done.sh']))
+        print('source "{}"'.format(scripts['bash-preexec.sh']))
+    print('source "{}"'.format(scripts['auto-ntfy-done.sh']))
     print("# To use ntfy's shell integration, run "
           "this and add it to your shell's rc file:")
     print('# eval "$(ntfy shell-integration)"')
