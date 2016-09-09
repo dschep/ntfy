@@ -74,7 +74,7 @@ listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. For example:
 
 Extras
 ~~~~~~
-``ntfy`` can also a has a few features that require extra dependencies.
+``ntfy`` has a few features that require extra dependencies.
     * ``nfty done -p $PID`` requires installing as ``ntfy[pid]``
     * XMPP requires installing as ``ntfy[XMPP]``
     * Telegram requires installing as ``ntfy[telegram]``
@@ -124,7 +124,7 @@ name and then specify the backend with a backend key. For example:
         backend: pushover
         user_key: hunter2
 
-See the backends bellow for available backends and options.
+See the backends below for available backends and options.
 
 `Pushover <https://pushover.net>`_ - ``pushover``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -150,7 +150,7 @@ Required parameter:
 
 Optional parameters:
     * ``device_iden`` - a device identifier, if omited, notification is sent to all devices
-    * ``email`` - send notification to pushbullte user with the specified email or send an email if they aren't a pushullet user
+    * ``email`` - send notification to pushbullet user with the specified email or send an email if they aren't a pushullet user
 
 `Simplepush <https://simplepush.io>`_ - ``simplepush``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
