@@ -23,6 +23,16 @@ class TestIntegration(TestCase):
 
     @patch(builtin_module + '.open', mock_open())
     @patch('ntfy.config.yaml.load')
+    @patch('ntfy.backends.prowl.requests.post')
+    def test_prowl(self, mock_post, mock_yamlload):
+        mock_yamlload.return_value = {
+            'backends': ['prowl'],
+            'prowl': {'apikey': MagicMock()},
+        }
+        ntfy_main(['send', 'foobar'])
+
+    @patch(builtin_module + '.open', mock_open())
+    @patch('ntfy.config.yaml.load')
     @patch('ntfy.backends.pushbullet.requests.post')
     def test_pushbullet(self, mock_post, mock_yamlload):
         mock_yamlload.return_value = {
