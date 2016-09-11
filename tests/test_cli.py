@@ -116,6 +116,24 @@ class TestRunCmd(TestCase):
         args.stderr = True
         self.assertEqual(('"true" failed (code 1) in 0:00 minutes:\noutputerror', 1), run_cmd(args))
 
+    def test_formatter(self):
+        args = MagicMock()
+        args.pid = None
+        args.command = None
+        args.formatter = ("true", 0, 65)
+        args.longer_than = -1
+        args.unfocused_only = False
+        self.assertEqual(('"true" succeeded in 1:05 minutes', 0), run_cmd(args))
+
+    def test_formatter_failure(self):
+        args = MagicMock()
+        args.pid = None
+        args.command = None
+        args.formatter = ("false", 1, 10)
+        args.longer_than = -1
+        args.unfocused_only = False
+        self.assertEqual(('"false" failed (code 1) in 0:10 minutes', 1), run_cmd(args))
+
 
 class TestMain(TestCase):
     @patch('ntfy.backends.default.notify')

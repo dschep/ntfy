@@ -40,6 +40,7 @@ def run_cmd(args):
             args.command, retcode, duration = args.formatter
             args.command, retcode, duration = (
                 [args.command], int(retcode), int(duration))
+            stdout, stderr = None, None
         else:
             sys.stderr.write('usage: ntfy done [-h|-L N] command\n'
                              'ntfy done: error: the following arguments '
@@ -57,17 +58,18 @@ def run_cmd(args):
         stdout, stderr = process.communicate()
         process.wait()
         duration = time() - start_time
+        retcode = process.returncode
     if args.longer_than is not None and duration <= args.longer_than:
         return None, None
     if args.unfocused_only and is_focused():
         return None, None
     message = _result_message(args.command,
-                              process.returncode,
+                              retcode,
                               stdout,
                               stderr,
                               duration,
                               emojize is not None and not args.no_emoji)
-    return message, process.returncode
+    return message, retcode
 
 
 def _result_message(command, return_code, stdout, stderr, duration, emoji):
