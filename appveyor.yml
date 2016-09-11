@@ -12,7 +12,7 @@ init:
 install:
   # FIXME: updating pip fails with PermissionError
   # - "%PYTHON%/Scripts/pip.exe install -U pip setuptools"
-  - "%PYTHON%/Scripts/pip.exe install -e ."
+  - "%PYTHON%/Scripts/pip.exe install -e . .[xmpp]"
 
 test_script:
   - "%PYTHON%/Scripts/pip.exe --version"
