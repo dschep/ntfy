@@ -51,8 +51,10 @@ class TestRunCmd(TestCase):
 class TestMain(TestCase):
     @patch('ntfy.backends.default.notify')
     def test_args(self, mock_notify):
-        ntfy_main(['-o', 'foo', 'bar', '-b', 'default', '-t', 'TITLE', 'send',
-                   'test'])
+        self.assertEquals(0, ntfy_main(['-o', 'foo', 'bar',
+                                        '-b', 'default',
+                                        '-t', 'TITLE',
+                                        'send', 'test']))
         mock_notify.assert_called_once_with(message='test',
                                             title='TITLE',
                                             foo='bar',
