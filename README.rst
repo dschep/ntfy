@@ -78,6 +78,7 @@ Extras
     * ``nfty done -p $PID`` requires installing as ``ntfy[pid]``
     * XMPP requires installing as ``ntfy[XMPP]``
     * Telegram requires installing as ``ntfy[telegram]``
+    * Instapush requires installing as ``ntfy[instapush]``
 
 emojis, Telegram and xmpp are extras.
 
@@ -220,6 +221,29 @@ Required parameter:
     * ``token`` - The Slack service secret token, created in https://api.slack.com/web#authentication
     * ``#channel`` - The Slack channel to send notification. If you use the ``#`` symbol the message is send to a Slack channel and if you use the ``@`` symbol the message is send to a Slack user.
 
+`Instapush <https://instapush.im/>`_ - ``insta``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Require extras, install like this ``pip install ntfy[instapush]``.
+
+Instapush does not support notification title.
+It sends template-driven notifications, so you have to setup you events on the dashboard first.
+The backend is called insta due to homonymy with the instapush python wrapper
+
+Required parameters:
+    * ``appid`` - The application id
+    * ``secret`` - The application secret
+    * ``event_name`` - The instapush event to be used
+    * ``trackers`` - The array of trakers to use
+Note on trackers:
+Trackers are placeholders for events (a sort of notification template). If you defined more than one tracker in your event
+you'll have to provide more messages. At the moment, the only way to do so is to separate each message with a colon (:) character.
+You can also escape the separator character:
+Example:
+
+.. code:: shell
+
+    ntfy -b insta send "message1:message2"
+    ntfy -b insta send "message1:message2\:with\:colons"
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
@@ -251,7 +275,6 @@ Backends ToDo
 -  `Airgram <http://www.airgramapp.com>`_
 -  `Pushalot <https://pushalot.com>`_
 -  `Boxcar <https://boxcar.io>`_
--  `Instapush <https://instapush.im>`_
 
 Testing
 -------
@@ -274,3 +297,4 @@ Contributors
 - `rcaloras <https://github.com/rcaloras>`_ - Creator of `bash-prexec`, without which there woudn't be bash shell integration for `ntfy`
 - `eightnoteight <https://github.com/eightnoteight>`_ - Notifico support
 - `juanpabloaj <https://github.com/juanpabloaj>`_ - Slack support
+- `giuseongit <https://github.com/giuseongit>`_ Instapush support
