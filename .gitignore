@@ -6,3 +6,5 @@
 .eggs
 htmlcov
 *.orig
+.coverage
+cover
