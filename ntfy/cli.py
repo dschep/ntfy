@@ -3,7 +3,7 @@ import logging
 import logging.config
 from os import environ, path
 from subprocess import call
-from sys import exit, stderr
+from sys import exit, stderr, stdin
 from time import time
 
 try:
@@ -303,7 +303,11 @@ def main(cli_args=None):
         return notify(message, args.title, config, retcode=retcode,
                       **dict(args.option.get(None, [])))
     else:
-        parser.print_help()
+        if getattr(stdin, 'isatty', lambda: False)():
+            parser.print_help()
+        else:
+            message = stdin.read()
+            return notify(message, args.title)
 
 
 if __name__ == '__main__':
