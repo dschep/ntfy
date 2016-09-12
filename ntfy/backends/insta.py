@@ -2,11 +2,14 @@ import logging
 from instapush import App
 import re
 
+
 class WrongMessageCountException(Exception):
     pass
 
+
 class ApiException(Exception):
     pass
+
 
 def notify(title, message, event_name, appid, secret, trackers, retcode=None):
     """
@@ -16,6 +19,7 @@ def notify(title, message, event_name, appid, secret, trackers, retcode=None):
         * ``secret`` - The secret found on the dashboard
         * ``traskers`` - List of the placeholders for the selected event
     """
+
     logger = logging.getLogger(__name__)
     _msgs = re.split(r'(?<!\\):', message)
     msgs = []
@@ -25,7 +29,10 @@ def notify(title, message, event_name, appid, secret, trackers, retcode=None):
         msgs.append(msg)
 
     if len(msgs) != len(trackers):
-        logger.error("Wrong number of messages! There are {} trackers so you have to provide {} messages. Remember to separate eah message with ':' (example: send \"msg1:msg2\")".format(len(trackers), len(trackers)))
+        logger.error(('Wrong number of messages! There are {} trackers so you '
+                      'have to provide {} messages. Remember to separate each '
+                      'message with \':\' (example: send "msg1:msg2")'
+                      ).format(len(trackers), len(trackers)))
         raise WrongMessageCountException()
 
     to_send = {}
@@ -33,8 +40,8 @@ def notify(title, message, event_name, appid, secret, trackers, retcode=None):
     for tracker, msg in zip(trackers, msgs):
         to_send[tracker] = msg
 
-    app = App(appid=appid, secret=secret) 
-    res = app.notify(event_name=event_name,trackers=to_send)
+    app = App(appid=appid, secret=secret)
+    res = app.notify(event_name=event_name, trackers=to_send)
 
     if res["status"] != 200:
         logger.error(res["msg"])
