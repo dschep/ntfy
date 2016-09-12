@@ -132,7 +132,7 @@ parser.add_argument('-b',
 parser.add_argument('-o',
                     '--option',
                     nargs=2,
-                    default={},
+                    default=None,
                     action=BackendOptionAction,
                     metavar=('key', 'value'),
                     help='backend specific options')
@@ -284,6 +284,8 @@ def main(cli_args=None):
     if args.backend:
         config['backends'] = args.backend
 
+    if args.option is None:
+        args.option = {}
     for backend, backend_options in args.option.items():
         if backend is not None:
             config.setdefault(backend, {}).update(backend_options)

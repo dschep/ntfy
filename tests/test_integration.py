@@ -19,7 +19,7 @@ class TestIntegration(TestCase):
             'backends': ['pushover'],
             'pushover': {'user_key': MagicMock()},
         }
-        ntfy_main(['send', 'foobar'])
+        self.assertEqual(0, ntfy_main(['send', 'foobar']))
 
     @patch(builtin_module + '.open', mock_open())
     @patch('ntfy.config.yaml.load')
@@ -29,7 +29,7 @@ class TestIntegration(TestCase):
             'backends': ['pushbullet'],
             'pushbullet': {'access_token': MagicMock()},
         }
-        ntfy_main(['send', 'foobar'])
+        self.assertEqual(0, ntfy_main(['send', 'foobar']))
 
     @patch(builtin_module + '.open', mock_open())
     @patch('ntfy.config.yaml.load')
@@ -39,7 +39,7 @@ class TestIntegration(TestCase):
             'backends': ['simplepush'],
             'simplepush': {'key': MagicMock()},
         }
-        ntfy_main(['send', 'foobar'])
+        self.assertEqual(0, ntfy_main(['send', 'foobar']))
 
     @patch(builtin_module + '.open', mock_open())
     @patch('ntfy.backends.default.platform', 'linux')
@@ -49,7 +49,7 @@ class TestIntegration(TestCase):
         modules['dbus'] = MagicMock()
         try:
             mock_yamlload.return_value = {'backends': ['default'], }
-            ntfy_main(['send', 'foobar'])
+            self.assertEqual(0, ntfy_main(['send', 'foobar']))
         finally:
             if old_dbus is not None:
                 modules['dbus'] = old_dbus
@@ -61,7 +61,7 @@ class TestIntegration(TestCase):
         modules['dbus'] = MagicMock()
         try:
             mock_yamlload.return_value = {'backends': ['linux'], }
-            ntfy_main(['send', 'foobar'])
+            self.assertEqual(0, ntfy_main(['send', 'foobar']))
         finally:
             if old_dbus is not None:
                 modules['dbus'] = old_dbus
@@ -77,7 +77,7 @@ class TestIntegration(TestCase):
         modules['AppKit'] = MagicMock()
         try:
             mock_yamlload.return_value = {'backends': ['darwin'], }
-            ntfy_main(['send', 'foobar'])
+            self.assertEqual(0, ntfy_main(['send', 'foobar']))
         finally:
             if old_foundation is not None:
                 modules['Foundation'] = old_foundation
@@ -97,7 +97,7 @@ class TestIntegration(TestCase):
         modules['win32con'] = MagicMock()
         try:
             mock_yamlload.return_value = {'backends': ['win32'], }
-            ntfy_main(['send', 'foobar'])
+            self.assertEqual(0, ntfy_main(['send', 'foobar']))
         finally:
             if old_win32api is not None:
                 modules['win32api'] = old_win32api
@@ -114,7 +114,7 @@ class TestIntegration(TestCase):
                                       'xmpp': {'jid': 'foo@bar',
                                                'password': 'hunter2',
                                                'recipient': 'bar@foo'}}
-        ntfy_main(['send', 'foobar'])
+        self.assertEqual(0, ntfy_main(['send', 'foobar']))
 
 
 if __name__ == '__main__':
