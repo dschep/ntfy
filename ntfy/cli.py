@@ -47,7 +47,7 @@ def run_cmd(args):
             exit(1)
     else:
         start_time = time()
-        retcode = call(args.command)
+        retcode = call(args.command, shell=True)
         duration = time() - start_time
     if args.longer_than is not None and duration <= args.longer_than:
         return None, None
