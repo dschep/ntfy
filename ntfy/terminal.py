@@ -18,7 +18,8 @@ def linux_window_is_focused():
 def osascript_tell(app, script):
     p = Popen(['osascript'], stdin=PIPE, stdout=PIPE)
     stdout, stderr = p.communicate(
-        'tell application "{}"\n{}\nend tell'.format(app, script).encode('utf-8'))
+        ('tell application "{}"\n{}\nend tell'.format(app, script)
+         .encode('utf-8')))
     return stdout.decode('utf-8').rstrip('\n')
 
 
