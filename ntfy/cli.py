@@ -1,9 +1,9 @@
 import argparse
 import logging
 import logging.config
+import sys
 from os import environ, path
-from subprocess import call
-from sys import exit, stderr
+from subprocess import Popen, STDOUT, PIPE
 from time import time
 
 try:
@@ -40,40 +40,72 @@ def run_cmd(args):
             args.command, retcode, duration = args.formatter
             args.command, retcode, duration = (
                 [args.command], int(retcode), int(duration))
+            stdout, stderr = None, None
         else:
-            stderr.write('usage: ntfy done [-h|-L N] command\n'
-                         'ntfy done: error: the following arguments '
-                         'are required: command\n')
-            exit(1)
+            sys.stderr.write('usage: ntfy done [-h|-L N] command\n'
+                             'ntfy done: error: the following arguments '
+                             'are required: command\n')
+            sys.exit(1)
     else:
+        if args.stdout and args.stderr:
+            out = PIPE
+            err = STDOUT
+        else:
+            out = PIPE if args.stdout else None
+            err = PIPE if args.stderr else None
         start_time = time()
-        retcode = call(args.command)
+        process = Popen(args.command, stdout=out, stderr=err)
+        stdout, stderr = process.communicate()
+        process.wait()
         duration = time() - start_time
+        retcode = process.returncode
     if args.longer_than is not None and duration <= args.longer_than:
         return None, None
     if args.unfocused_only and is_focused():
         return None, None
-    if emojize is not None and not args.no_emoji:
-        prefix = ':white_check_mark: ' if retcode == 0 else ':x: '
+    message = _result_message(args.command,
+                              retcode,
+                              stdout,
+                              stderr,
+                              duration,
+                              emojize is not None and not args.no_emoji)
+    return message, retcode
+
+
+def _result_message(command, return_code, stdout, stderr, duration, emoji):
+    if emoji:
+        prefix = ':white_check_mark: ' if return_code == 0 else ':x: '
     else:
         prefix = ''
-    return '{}"{}" {} in {:d}:{:02d} minutes'.format(
-        prefix, ' '.join(args.command), 'succeeded' if retcode == 0 else
-        'failed', *map(int, divmod(duration, 60))), retcode
+    if return_code == 0:
+        result = 'succeeded'
+    else:
+        result = 'failed (code {:d})'.format(return_code)
+    if stdout is not None or stderr is not None:
+        all_output = ':\n{}{}'.format(stdout if stdout is not None else '',
+                                      stderr if stderr is not None else '')
+    else:
+        all_output = ''
+    template = '{prefix}"{command}" {result} in {:d}:{:02d} minutes{output}'
+    return template.format(prefix=prefix,
+                           command=' '.join(command),
+                           result=result,
+                           output=all_output,
+                           *map(int, divmod(duration, 60)))
 
 
 def watch_pid(args):
     if psutil is None:  # pragma: no cover
         logging.error(
             "This command requires psutil module. Pleases install psutil.")
-        exit(1)
+        sys.exit(1)
     try:
         p = psutil.Process(args.pid)
         cmd = p.cmdline()
         start_time = p.create_time()
     except psutil.NoSuchProcess:
         logging.error("PID {} not found".format(args.pid))
-        exit(1)
+        sys.exit(1)
     ret = None
     try:
         ret = p.wait()
@@ -212,6 +244,16 @@ if psutil is not None:
         '--pid',
         type=int,
         help="Watch a PID instead of running a new command")
+done_parser.add_argument(
+    '-o',
+    '--stdout',
+    action='store_true',
+    help="Capture and send standard output")
+done_parser.add_argument(
+    '-e',
+    '--stderr',
+    action='store_true',
+    help="Capture and send standard error")
 done_parser.set_defaults(func=run_cmd)
 
 shell_integration_parser = subparsers.add_parser(
@@ -307,4 +349,4 @@ def main(cli_args=None):
 
 
 if __name__ == '__main__':
-    exit(main())
+    sys.exit(main())
