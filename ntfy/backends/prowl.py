@@ -3,7 +3,7 @@ import requests
 from ..config import USER_AGENT
 
 
-NTFY_API_KEY = ''
+NTFY_API_KEY = '7fb59b2bedc4df26afa306d5dc54495b6394295a'
 API_URL = 'https://api.prowlapp.com/publicapi/add'
 MIN_PRIORITY = -2
 MAX_PRIORITY = 2
