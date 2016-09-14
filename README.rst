@@ -321,6 +321,7 @@ Optional parameters:
       * ``{message}``
 
       Default is ``[{title}] {message}``.
+
 Other options
 ~~~~~~~~~~~~~
 
