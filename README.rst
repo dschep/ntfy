@@ -244,6 +244,15 @@ Example:
 
     ntfy -b insta send "message1:message2"
     ntfy -b insta send "message1:message2\:with\:colons"
+
+`Prowl <https://www.prowlapp.com/>`_ - ``prowl``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Optional parameters:
+    * ``api_key``
+    * ``provider_key``
+    * ``priority``
+    * ``url``
+
 `Linux Desktop Notifications <https://developer.gnome.org/notification-spec/>`_ - ``linux``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Works via `dbus`, works with most DEs like Gnome, KDE, XFCE and with libnotify.
@@ -325,7 +334,6 @@ Title is configurable with the `title` key in the config. Example:
 
 Backends ToDo
 ~~~~~~~~~~~~~
--  `Prowl <http://www.prowlapp.com>`_
 -  `Airgram <http://www.airgramapp.com>`_
 -  `Pushalot <https://pushalot.com>`_
 -  `Boxcar <https://boxcar.io>`_
@@ -351,5 +359,6 @@ Contributors
 - `rcaloras <https://github.com/rcaloras>`_ - Creator of `bash-prexec`, without which there woudn't be bash shell integration for `ntfy`
 - `eightnoteight <https://github.com/eightnoteight>`_ - Notifico support
 - `juanpabloaj <https://github.com/juanpabloaj>`_ - Slack support
-- `giuseongit <https://github.com/giuseongit>`_ Instapush support
-- `jlesage <https://github.com/jlesage>`_ - Systemlog backend support
+- `giuseongit <https://github.com/giuseongit>`_ - Instapush support
+- `jlesage <https://github.com/jlesage>`_ - Systemlog support
+- `sambrightman <https://github.com/sambrightman>`_ - Prowl support
