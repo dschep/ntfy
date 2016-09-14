@@ -12,7 +12,7 @@ __version__ = '2.2.0'
 notifiers = dict.fromkeys(['default', 'darwin', 'linux', 'notifico',
                            'pushbullet', 'pushjet', 'pushover', 'prowl',
                            'simplepush', 'telegram', 'win32', 'xmpp',
-                           'slack', 'insta'])
+                           'slack', 'insta', 'systemlog'])
 
 _user_home = path.expanduser('~')
 _cwd = getcwd()

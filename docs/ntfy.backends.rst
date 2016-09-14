@@ -85,6 +85,14 @@ ntfy.backends.xmpp module
     :undoc-members:
     :show-inheritance:
 
+ntfy.backends.systemlog module
+-------------------------
+
+.. automodule:: ntfy.backends.systemlog
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------

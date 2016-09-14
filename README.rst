@@ -265,6 +265,53 @@ Mac OS X Notification Center - ``darwin``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Requires ``ntfy`` to be installed globally (not in a virtualenv).
 
+System log - ``systemlog``
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Uses the ``syslog`` core Python module, which is not available on Windows
+platforms.
+
+Optional parameters:
+    * ``prio`` - Syslog priority level.  Default is ``ALERT``.  Possible values
+      are:
+
+      * EMERG
+      * ALERT
+      * CRIT
+      * ERR
+      * WARNING
+      * NOTICE
+      * INFO
+      * DEBUG
+
+    * ``facility`` - Syslog facility.  Default is ``LOCAL5``.  Possible values
+      are:
+
+      * KERN
+      * USER
+      * MAIL
+      * DAEMON
+      * AUTH
+      * LPR
+      * NEWS
+      * UUCP
+      * CRON
+      * SYSLOG
+      * LOCAL0
+      * LOCAL1
+      * LOCAL2
+      * LOCAL3
+      * LOCAL4
+      * LOCAL5
+      * LOCAL6
+      * LOCAL7
+
+    * ``fmt`` - Format of the message to be sent to the system logger.  The
+      title and the message are specified using the following placeholders:
+
+      * ``{title}``
+      * ``{message}``
+
+      Default is ``[{title}] {message}``.
 Other options
 ~~~~~~~~~~~~~
 
@@ -305,3 +352,4 @@ Contributors
 - `eightnoteight <https://github.com/eightnoteight>`_ - Notifico support
 - `juanpabloaj <https://github.com/juanpabloaj>`_ - Slack support
 - `giuseongit <https://github.com/giuseongit>`_ Instapush support
+- `jlesage <https://github.com/jlesage>`_ - Systemlog backend support
