@@ -234,6 +234,7 @@ Required parameters:
     * ``secret`` - The application secret
     * ``event_name`` - The instapush event to be used
     * ``trackers`` - The array of trakers to use
+
 Note on trackers:
 Trackers are placeholders for events (a sort of notification template). If you defined more than one tracker in your event
 you'll have to provide more messages. At the moment, the only way to do so is to separate each message with a colon (:) character.
