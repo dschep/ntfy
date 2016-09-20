@@ -37,7 +37,7 @@ Quickstart
     $ ntfy -t 'ntfy' send "Here's a custom notification title!"
     $ echo -e 'backends: ["pushover"]\npushover: {"user_key": "t0k3n"}' > ~/.ntfy.yml
     $ ntfy send "Pushover via config file!"
-    $ ntfy done --pid 6379  # PID extra
+    $ ntfy done --pid 6379  # pid extra
     $ ntfy send ":tada: ntfy supports emoji! :100:"  # emoji extra
     # Enable shell integration
     $ echo 'eval "$(ntfy shell-integration)"' >> ~/.bashrc
@@ -75,12 +75,14 @@ listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. For example:
 Extras
 ~~~~~~
 ``ntfy`` has a few features that require extra dependencies.
-    * ``nfty done -p $PID`` requires installing as ``ntfy[pid]``
-    * XMPP requires installing as ``ntfy[XMPP]``
-    * Telegram requires installing as ``ntfy[telegram]``
-    * Instapush requires installing as ``ntfy[instapush]``
+    * ``ntfy done -p $PID`` requires installing as ``ntfy[pid]``
+    * emjoi support requires installing as ``ntfy[emoji]``
+    * XMPP support requires installing as ``ntfy[xmpp]``
+    * Telegram support requires installing as ``ntfy[telegram]``
+    * Instapush support requires installing as ``ntfy[instapush]``
+    * Slack support requires installing as ``ntfy[slack]``
 
-emojis, Telegram and xmpp are extras.
+To install multiple extras, separate with commas: e.g., ``ntfy[pid,emjoi]``.
 
 Configuring ``ntfy``
 --------------------
@@ -110,7 +112,7 @@ its own configuration, stored in a key of its own name. For example:
         key: hunter2
     slack:
         token: slacktoken
-        channel: "#slackchannel"
+        recipient: "#slackchannel"
     xmpp:
          jid: "user@gmail.com"
          password: "xxxx"
@@ -174,7 +176,7 @@ Optional parameters
     * ``path_to_certs``
     * ``mtype`` ('chat' required for Google Hangouts)
 
-Require extras, install like this: ``pip install ntfy[xmpp]``.
+Requires extras, install like this: ``pip install ntfy[xmpp]``.
 
 To verify the SSL certificates offered by a server:
 path_to_certs = "path/to/ca/cert"
@@ -190,7 +192,7 @@ NOTE: Ignored without specified hostname
 
 `Telegram <https://telegram.org>`_ - ``telegram``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Require extras, install like this: ``pip install ntfy[telegram]``.
+Requires extras, install like this: ``pip install ntfy[telegram]``.
 
 Requires ``ntfy`` to be installed as ``ntfy[telegram]``. This backend is
 configured the first time you will try to use it: ``ntfy -b telegram send
@@ -215,15 +217,15 @@ Required parameter:
 
 `Slack <https://slack.com>`_ - ``Slack``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Require extras, install like this: ``pip install ntfy[slack]``.
+Requires extras, install like this: ``pip install ntfy[slack]``.
 
 Required parameter:
     * ``token`` - The Slack service secret token, created in https://api.slack.com/web#authentication
-    * ``#channel`` - The Slack channel to send notification. If you use the ``#`` symbol the message is send to a Slack channel and if you use the ``@`` symbol the message is send to a Slack user.
+    * ``recipient`` - The Slack channel or user to send notifications to. If you use the ``#`` symbol the message is send to a Slack channel and if you use the ``@`` symbol the message is send to a Slack user.
 
 `Instapush <https://instapush.im/>`_ - ``insta``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Require extras, install like this ``pip install ntfy[instapush]``.
+Requires extras, install like this ``pip install ntfy[instapush]``.
 
 Instapush does not support notification title.
 It sends template-driven notifications, so you have to setup you events on the dashboard first.
