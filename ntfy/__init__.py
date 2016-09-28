@@ -10,8 +10,8 @@ __version__ = '2.3.0'
 
 
 notifiers = dict.fromkeys(['default', 'darwin', 'linux', 'notifico',
-                           'pushbullet', 'pushjet', 'pushover', 'prowl',
-                           'simplepush', 'telegram', 'win32', 'xmpp',
+                           'pushalot', 'pushbullet', 'pushjet', 'pushover',
+                           'prowl', 'simplepush', 'telegram', 'win32', 'xmpp',
                            'slack', 'insta', 'systemlog'])
 
 _user_home = path.expanduser('~')

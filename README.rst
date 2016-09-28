@@ -325,6 +325,21 @@ Optional parameters:
 
       Default is ``[{title}] {message}``.
 
+`Pushalot <https://pushalot.com>`_ - ``pushalot``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required parameter:
+    * ``auth_token`` - Your private Pushalot auth token, found here https://pushalot.com/manager/authorizations
+
+Optional parameters:
+    * ``source`` - source of the notification
+    * ``ttl`` - message expire time in minutes (time to live)
+    * ``url`` - URL to include in the notifications
+    * ``url_title`` - visible URL title (ignored if no url specified)
+    * ``image`` - URL of image included in the notifications
+    * ``important`` - mark notifications as important
+    * ``silent`` - mark notifications as silent
+
+
 Other options
 ~~~~~~~~~~~~~
 
@@ -339,7 +354,6 @@ Title is configurable with the `title` key in the config. Example:
 Backends ToDo
 ~~~~~~~~~~~~~
 -  `Airgram <http://www.airgramapp.com>`_
--  `Pushalot <https://pushalot.com>`_
 -  `Boxcar <https://boxcar.io>`_
 
 Testing
@@ -366,3 +380,4 @@ Contributors
 - `giuseongit <https://github.com/giuseongit>`_ - Instapush support
 - `jlesage <https://github.com/jlesage>`_ - Systemlog support
 - `sambrightman <https://github.com/sambrightman>`_ - Prowl support
+- `mlesniew <https://github.com/mlesniew>`_ - Pushalot support
