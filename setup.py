@@ -18,6 +18,7 @@ extra_deps = {
 }
 test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
 
+long_description = open('README.rst').read()
 
 setup(
     name='ntfy',
@@ -25,6 +26,7 @@ setup(
     version=__version__,
 
     description='A utility for sending push notifications',
+    long_description=long_description,
 
     url='https://github.com/dschep/ntfy',
 
