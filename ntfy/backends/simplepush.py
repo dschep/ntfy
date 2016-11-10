@@ -6,11 +6,15 @@ from ..config import USER_AGENT
 def notify(title,
            message,
            key,
+           event=None,
            retcode=None):
     """
     Required paramter:
         * ``key`` - The Simplepush identification key, created by
         installing the Android App (https://simplepush.io)
+
+    Optional parameters:
+        * ``event`` - use custom ringtones and vibration patterns
     """
 
     data = {
@@ -18,6 +22,9 @@ def notify(title,
         'msg': message,
         'key': key
     }
+
+    if event:
+        data['event'] = event
 
     headers = {'User-Agent': USER_AGENT}
 
