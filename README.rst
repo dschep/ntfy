@@ -276,6 +276,10 @@ Uses ``pywin32``.
 Mac OS X Notification Center - ``darwin``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Requires ``ntfy`` to be installed globally (not in a virtualenv).
+**NOTE**: since MacOS 10.12 PyObjC has issues due to the removal of QTKit. To
+get this working on older version of MacOS just `pip install pyobjc pyobjc-core`.
+on 10.12.. goodluck. see:
+https://bitbucket.org/ronaldoussoren/pyobjc/issues/161/update-bindings-for-osx-1012
 
 System log - ``systemlog``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
