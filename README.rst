@@ -100,10 +100,6 @@ its own configuration, stored in a key of its own name. For example:
     ---
     backends:
         - pushover
-        - simplepush
-        - slack
-        - linux
-        - xmpp
     pushover:
         user_key: hunter2
     pushbullet:
