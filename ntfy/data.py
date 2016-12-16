@@ -28,7 +28,7 @@ for script in ['auto-ntfy-done.sh', 'bash-preexec.sh']:
     script_path = path.abspath(path.join(ntfy_data_dir, script))
     scripts[script] = script_path
     if not path.isfile(script_path) or progmtime > path.getmtime(
-            script_path).st_mtime:
+            script_path):
         with open(script_path, 'wb') as script_file:
             script_file.write(get_data('ntfy', path.join('shell_integration',
                                                          script)))

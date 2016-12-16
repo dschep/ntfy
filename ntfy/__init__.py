@@ -25,6 +25,7 @@ else:
 
 
 def _initialize():
+    global _initialized
     if _initialized:
         return
     for k, v in notifiers.items():
