@@ -9,6 +9,7 @@ from .backends.default import DefaultNotifierError
 __version__ = '2.4.1'
 
 
+_initialized = False
 notifiers = dict.fromkeys(['default', 'darwin', 'linux', 'notifico',
                            'pushalot', 'pushbullet', 'pushjet', 'pushover',
                            'prowl', 'simplepush', 'telegram', 'win32', 'xmpp',
@@ -23,12 +24,16 @@ else:
     default_title = '{}@{}:{}'.format(getuser(), gethostname(), _cwd)
 
 
-for k, v in notifiers.items():
-    try:
-        module = import_module('ntfy.backends.{}'.format(k))
-        notifiers[k] = module
-    except (ImportError, OSError):
-        continue
+def _initialize():
+    if _initialized:
+        return
+    for k, v in notifiers.items():
+        try:
+            module = import_module('ntfy.backends.{}'.format(k))
+            notifiers[k] = module
+        except (ImportError, OSError):
+            continue
+    _initialized = True
 
 
 def notify(message, title, config=None, **kwargs):
@@ -37,6 +42,7 @@ def notify(message, title, config=None, **kwargs):
     if config is None:
         config = load_config()
 
+    _initialize()
     ret = 0
     retcode = kwargs.pop('retcode', None)
 
