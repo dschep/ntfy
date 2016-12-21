@@ -160,6 +160,9 @@ Optional parameters:
 Required parameter:
     * ``key`` - Your Simplepush key, created by installing the Android App (no registration required) at https://simplepush.io
 
+Optional parameters:
+    * ``event`` - sets ringtone and vibration pattern for incoming notifications (can be defined in the simplepush app)
+
 XMPP - ``xmpp``
 ~~~~~~~~~~~~~~~
 Requires parameters:
