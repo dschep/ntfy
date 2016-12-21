@@ -9,11 +9,6 @@ from .backends.default import DefaultNotifierError
 __version__ = '2.4.1'
 
 
-notifiers = dict.fromkeys(['default', 'darwin', 'linux', 'notifico',
-                           'pushalot', 'pushbullet', 'pushjet', 'pushover',
-                           'prowl', 'simplepush', 'telegram', 'win32', 'xmpp',
-                           'slack', 'insta', 'systemlog'])
-
 _user_home = path.expanduser('~')
 _cwd = getcwd()
 if name != 'nt' and _cwd.startswith(_user_home):
@@ -21,14 +16,6 @@ if name != 'nt' and _cwd.startswith(_user_home):
                                       path.join('~', _cwd[len(_user_home)+1:]))
 else:
     default_title = '{}@{}:{}'.format(getuser(), gethostname(), _cwd)
-
-
-for k, v in notifiers.items():
-    try:
-        module = import_module('ntfy.backends.{}'.format(k))
-        notifiers[k] = module
-    except (ImportError, OSError):
-        continue
 
 
 def notify(message, title, config=None, **kwargs):
@@ -52,9 +39,9 @@ def notify(message, title, config=None, **kwargs):
         elif 'title' in backend_config:
             del backend_config['title']
 
-        notifier = None
-        notifier = notifiers.get(backend)
-        if notifier is None:
+        try:
+            notifier = import_module('ntfy.backends.{}'.format(backend))
+        except ImportError:
             logging.getLogger(__name__).error(
                 'Invalid backend {}'.format(backend))
             ret = 1

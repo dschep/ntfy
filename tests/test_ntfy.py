@@ -5,10 +5,8 @@ from mock import patch
 from ntfy import notify
 import ntfy
 
-class DummyModule:
-
-    def notify(message, title, retcode=None):
-        raise Exception
+def mock_notify(message, title, retcode=None):
+    raise Exception
 
 class OverrideBackendTestCase(TestCase):
     @patch('requests.post')
@@ -28,7 +26,7 @@ class ErrorTestCase(TestCase):
         ret = notify('message', 'title', {'backends': ['foobar']})
         self.assertEqual(ret, 1)
 
-    @patch('ntfy.notifiers', {'default': DummyModule})
+    @patch('ntfy.backends.default.notify', mock_notify)
     def test_backenderror(self):
         ret = ntfy.notify('message', 'title')
         self.assertEqual(ret, 1)
