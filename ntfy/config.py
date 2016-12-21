@@ -23,7 +23,7 @@ def load_config(config_path=DEFAULT_CONFIG):
     logger = logging.getLogger(__name__)
 
     try:
-        config = yaml.load(open(expanduser(config_path)))
+        config = yaml.safe_load(open(expanduser(config_path)))
     except IOError as e:
         if e.errno == errno.ENOENT and config_path == DEFAULT_CONFIG:
             logger.info('{} not found'.format(config_path))

@@ -210,6 +210,7 @@ send_parser.add_argument('message', help='notification message')
 def default_sender(args):
     return args.message, 0
 
+
 send_parser.set_defaults(func=default_sender)
 
 
