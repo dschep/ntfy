@@ -18,7 +18,7 @@ _user_home = path.expanduser('~')
 _cwd = getcwd()
 if name != 'nt' and _cwd.startswith(_user_home):
     default_title = '{}@{}:{}'.format(getuser(), gethostname(),
-                                      path.join('~', _cwd[len(_user_home):]))
+                                      path.join('~', _cwd[len(_user_home)+1:]))
 else:
     default_title = '{}@{}:{}'.format(getuser(), gethostname(), _cwd)
 
