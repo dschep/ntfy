@@ -1,4 +1,5 @@
 import requests
+from simplepush import generate_payload
 
 from ..config import USER_AGENT
 
@@ -7,6 +8,7 @@ def notify(title,
            message,
            key,
            event=None,
+           password=None,
            retcode=None):
     """
     Required paramter:
@@ -14,17 +16,12 @@ def notify(title,
         installing the Android App (https://simplepush.io)
 
     Optional parameters:
+        * ``password`` - password for end-to-end encryption (can
+        be set in the app)
         * ``event`` - use custom ringtones and vibration patterns
     """
 
-    data = {
-        'title': title if len(title) <= 20 else title[:19] + u'\u2026',
-        'msg': message,
-        'key': key
-    }
-
-    if event:
-        data['event'] = event
+    data = generate_payload(key, title if len(title) <= 200 else title[:199] + u'\u2026', message, event, password)
 
     headers = {'User-Agent': USER_AGENT}
 

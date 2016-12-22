@@ -81,6 +81,7 @@ Extras
     * Telegram support requires installing as ``ntfy[telegram]``
     * Instapush support requires installing as ``ntfy[instapush]``
     * Slack support requires installing as ``ntfy[slack]``
+    * Simplepush support requires installing as ``ntfy[simplepush]``
 
 To install multiple extras, separate with commas: e.g., ``ntfy[pid,emjoi]``.
 
@@ -157,11 +158,14 @@ Optional parameters:
 
 `Simplepush <https://simplepush.io>`_ - ``simplepush``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires extras, install like this: pip install ntfy[simplepush].
+
 Required parameter:
     * ``key`` - Your Simplepush key, created by installing the Android App (no registration required) at https://simplepush.io
 
 Optional parameters:
-    * ``event`` - sets ringtone and vibration pattern for incoming notifications (can be defined in the simplepush app)
+    * ``password`` - password for end-to-end encryption (has to be also defined in the app)
+    * ``event`` - identifier for ringtone and vibration pattern for incoming notifications (can be defined in the simplepush app)
 
 XMPP - ``xmpp``
 ~~~~~~~~~~~~~~~

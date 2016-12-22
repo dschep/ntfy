@@ -15,6 +15,7 @@ extra_deps = {
     'emoji': ['emoji'],
     'pid':['psutil'],
     'slack':['slacker'],
+    'simplepush':['simplepush'],
 }
 test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
 
