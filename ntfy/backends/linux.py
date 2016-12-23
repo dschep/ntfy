@@ -28,5 +28,6 @@ def notify(title, message, icon=icon.png, retcode=0):
     dbus_iface = dbus.Interface(dbus_obj,
                                 dbus_interface='org.freedesktop.Notifications')
     hints = {'urgency': dbus.Byte(2)} if retcode else {}
+    message = message.replace('&', '&amp;')
     dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], hints,
                       -1)
