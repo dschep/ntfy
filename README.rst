@@ -89,9 +89,9 @@ Configuring ``ntfy``
 
 ``ntfy`` is configured with a YAML file stored at ``~/.ntfy.yml`` or in standard platform specific locations:
 
- * Linux - ``~/config/ntfy/ntfy.yml``
- * macOS - ``~/Library/Application Support/ntfy/ntfy.yml``
- * Windows - ``C:\Users\<User>\AppData\Local\dschep\ntfy.yml``
+* Linux - ``~/config/ntfy/ntfy.yml``
+* macOS - ``~/Library/Application Support/ntfy/ntfy.yml``
+* Windows - ``C:\Users\<User>\AppData\Local\dschep\ntfy.yml``
 
 Backends
 ~~~~~~~~
