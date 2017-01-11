@@ -1,6 +1,7 @@
 from os import environ, ttyname
 from subprocess import check_output, Popen, PIPE
 from sys import platform, stdout
+import shlex
 
 
 def get_tty():
@@ -10,9 +11,10 @@ def get_tty():
 
 
 def linux_window_is_focused():
-    window_id = int(check_output(['xprop', '-root', '\t$0',
-                                  '_NET_ACTIVE_WINDOW']).split()[1], 16)
-    return int(environ['WINDOWID']) == window_id
+    xprop_cmd = shlex.split('xprop -root _NET_ACTIVE_WINDOW')
+    xprop_window_id = int(check_output(xprop_cmd).split()[-1], 16)
+    env_window_id = int(environ.get('WINDOWID', '0'))
+    return env_window_id == xprop_window_id
 
 
 def osascript_tell(app, script):
