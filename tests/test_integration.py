@@ -129,11 +129,8 @@ class TestIntegration(TestCase):
     @patch(builtin_module + '.open', mock_open())
     @patch('ntfy.config.yaml.safe_load')
     def test_instapush(self, mock_yamlload):
-        def nt(event_name=None,trackers=None):
-            return { 'status': 200 }
-
         modules['instapush'] = MagicMock()
-        modules['instapush'].App.notify = nt
+        modules['instapush'].App().notify.return_value = { 'status': 200 }
 
         mock_yamlload.return_value = {
             'backends': ['insta'],
