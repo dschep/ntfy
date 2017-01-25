@@ -4,12 +4,6 @@ from sys import platform, stdout
 import shlex
 
 
-def get_tty():
-    window_id = int(check_output(['xprop', '-root', '\t$0',
-                                  '_NET_ACTIVE_WINDOW']).split()[1], 16)
-    return int(environ['WINDOWID']) == window_id
-
-
 def linux_window_is_focused():
     xprop_cmd = shlex.split('xprop -root _NET_ACTIVE_WINDOW')
     xprop_window_id = int(check_output(xprop_cmd).split()[-1], 16)
