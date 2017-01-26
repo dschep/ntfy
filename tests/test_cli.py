@@ -23,6 +23,7 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.unfocused_only = False
+        args.hide_command = False
         self.assertEqual(('"true" succeeded in 0:00 minutes', 0), run_cmd(args))
 
     @patch('ntfy.cli.Popen')
@@ -34,6 +35,7 @@ class TestRunCmd(TestCase):
         args.pid = None
         args.no_emoji = False
         args.unfocused_only = False
+        args.hide_command = False
         self.assertEqual((':white_check_mark: "true" succeeded in 0:00 minutes', 0),
                          run_cmd(args))
 
@@ -52,6 +54,7 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.unfocused_only = False
+        args.hide_command = False
         self.assertEqual((None, None), run_cmd(args))
 
     @patch('ntfy.cli.Popen')
@@ -62,6 +65,7 @@ class TestRunCmd(TestCase):
         args.command = ['false']
         args.pid = None
         args.unfocused_only = False
+        args.hide_command = False
         self.assertEqual(('"false" failed (code 42) in 0:00 minutes', 42), run_cmd(args))
 
     @patch('ntfy.cli.Popen')
@@ -72,6 +76,7 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.unfocused_only = False
+        args.hide_command = False
         # not actually used
         args.stdout = True
         args.stderr = False
@@ -85,6 +90,7 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.unfocused_only = False
+        args.hide_command = False
         # not actually used
         args.stdout = False
         args.stderr = True
@@ -98,6 +104,7 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.unfocused_only = False
+        args.hide_command = False
         # not actually used
         args.stdout = True
         args.stderr = True
@@ -111,10 +118,22 @@ class TestRunCmd(TestCase):
         args.command = ['true']
         args.pid = None
         args.unfocused_only = False
+        args.hide_command = False
         # not actually used
         args.stdout = True
         args.stderr = True
         self.assertEqual(('"true" failed (code 1) in 0:00 minutes:\noutputerror', 1), run_cmd(args))
+
+    @patch('ntfy.cli.Popen')
+    def test_hide_command(self, mock_Popen):
+        mock_Popen.return_value = process_mock()
+        args = MagicMock()
+        args.longer_than = -1
+        args.command = ['true']
+        args.pid = None
+        args.unfocused_only = False
+        args.hide_command = True
+        self.assertEqual(('Your command succeeded in 0:00 minutes', 0), run_cmd(args))
 
     def test_formatter(self):
         args = MagicMock()
@@ -123,6 +142,7 @@ class TestRunCmd(TestCase):
         args.formatter = ("true", 0, 65)
         args.longer_than = -1
         args.unfocused_only = False
+        args.hide_command = False
         self.assertEqual(('"true" succeeded in 1:05 minutes', 0), run_cmd(args))
 
     def test_formatter_failure(self):
@@ -132,6 +152,7 @@ class TestRunCmd(TestCase):
         args.formatter = ("false", 1, 10)
         args.longer_than = -1
         args.unfocused_only = False
+        args.hide_command = False
         self.assertEqual(('"false" failed (code 1) in 0:10 minutes', 1), run_cmd(args))
 
 

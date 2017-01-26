@@ -63,7 +63,7 @@ def run_cmd(args):
         return None, None
     if args.unfocused_only and is_focused():
         return None, None
-    message = _result_message(args.command,
+    message = _result_message(args.command if not args.hide_command else None,
                               retcode,
                               stdout,
                               stderr,
@@ -81,14 +81,18 @@ def _result_message(command, return_code, stdout, stderr, duration, emoji):
         result = 'succeeded'
     else:
         result = 'failed (code {:d})'.format(return_code)
+    if command is None:
+        command = 'Your command'
+    else:
+        command = '"{command}"'.format(command=' '.join(command))
     if stdout is not None or stderr is not None:
         all_output = ':\n{}{}'.format(stdout if stdout is not None else '',
                                       stderr if stderr is not None else '')
     else:
         all_output = ''
-    template = '{prefix}"{command}" {result} in {:d}:{:02d} minutes{output}'
+    template = '{prefix}{command} {result} in {:d}:{:02d} minutes{output}'
     return template.format(prefix=prefix,
-                           command=' '.join(command),
+                           command=command,
                            result=result,
                            output=all_output,
                            *map(int, divmod(duration, 60)))
@@ -255,6 +259,12 @@ done_parser.add_argument(
     '--stderr',
     action='store_true',
     help="Capture and send standard error")
+done_parser.add_argument(
+    '-H',
+    '--hide-command',
+    action='store_true',
+    default=False,
+    help="Do not display the executed command in any notifications")
 done_parser.set_defaults(func=run_cmd)
 
 shell_integration_parser = subparsers.add_parser(
@@ -336,6 +346,9 @@ def main(cli_args=None):
     if getattr(args, 'func', None) == run_cmd and args.longer_than is None and\
             'longer_than' in config:
         args.longer_than = config['longer_than']
+
+    if getattr(args, 'func', None) == run_cmd and 'hide_command' in config:
+        args.hide_command = config['hide_commnad']
 
     if hasattr(args, 'func'):
         message, retcode = args.func(args)
