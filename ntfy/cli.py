@@ -334,6 +334,9 @@ def main(cli_args=None):
     else:  # get default config and print message about missing file
         config = load_config()
 
+    if 'NTFY_BACKENDS' in environ:
+        config['backends'] = environ['NTFY_BACKENDS'].split(',')
+
     if args.backend:
         config['backends'] = args.backend
 
