@@ -1,6 +1,6 @@
 About ``ntfy``
 ==============
-|Version|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_ |Requires|_ |Gitter|_
+|Version|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_ |Gitter|_
 
 .. |Version| image:: https://img.shields.io/pypi/v/ntfy.svg
 .. _Version: https://pypi.python.org/pypi/ntfy
