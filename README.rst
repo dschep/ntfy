@@ -1,6 +1,6 @@
 About ``ntfy``
 ==============
-|Version|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_ |Requires|_
+|Version|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_ |Requires|_ |Gitter|_
 
 .. |Version| image:: https://img.shields.io/pypi/v/ntfy.svg
 .. _Version: https://pypi.python.org/pypi/ntfy
@@ -14,6 +14,8 @@ About ``ntfy``
 .. _Coverage: https://coveralls.io/github/dschep/ntfy?brach=master
 .. |Requires| image:: https://requires.io/github/dschep/ntfy/requirements.svg?branch=master
 .. _Requires: https://requires.io/github/dschep/ntfy/requirements/?branch=master
+.. |Gitter| image:: https://badges.gitter.im/.svg
+.. _Gitter: https://gitter.im/ntfy/Lobby
 
 
 ``ntfy`` brings notification to your shell. It can automatically provide
