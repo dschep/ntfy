@@ -3,7 +3,7 @@ from os import environ, path
 from ..data import icon
 
 
-def notify(title, message, icon=icon.png, retcode=0):
+def notify(title, message, icon=icon.png, urgency=None, retcode=0):
     try:
         import dbus
     except ImportError:
@@ -27,7 +27,20 @@ def notify(title, message, icon=icon.png, retcode=0):
                               '/org/freedesktop/Notifications')
     dbus_iface = dbus.Interface(dbus_obj,
                                 dbus_interface='org.freedesktop.Notifications')
-    hints = {'urgency': dbus.Byte(2)} if retcode else {}
+
+    hints = {}
+
+    # Override the retcode if the urgency
+    if urgency == 'low':
+        hints = {'urgency': dbus.Byte(0)}
+    elif urgency == 'normal':
+        hints = {'urgency': dbus.Byte(1)}
+    elif urgency == 'critical':
+        hints = {'urgency': dbus.Byte(2)}
+    # Fallback to the return code to determine the urgency flag.
+    elif retcode:
+        hints = {'urgency': dbus.Byte(2)}
+
     message = message.replace('&', '&amp;')
     dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], hints,
                       -1)

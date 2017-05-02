@@ -274,6 +274,9 @@ The following dependecies should be installed.
 
 You will need to install some font that supports emojis (in Debian `fonts-symbola` or Gentoo `media-fonts/symbola`).
 
+Optional parameters:
+    * ``urgency``
+
 Windows Desktop Notifications - ``win32``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Uses ``pywin32``.
