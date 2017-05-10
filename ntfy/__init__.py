@@ -48,8 +48,10 @@ def notify(message, title, config=None, **kwargs):
             continue
 
         try:
-            notifier.notify(message=message, title=title, retcode=retcode,
-                            **backend_config)
+            notify_ret = notifier.notify(message=message, title=title,
+                                         retcode=retcode, **backend_config)
+            if notify_ret:
+                ret = notify_ret
         except (SystemExit, KeyboardInterrupt):
             raise
         except Exception as e:

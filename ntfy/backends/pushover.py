@@ -107,4 +107,10 @@ def notify(title,
                          data=data,
                          headers={'User-Agent': USER_AGENT})
 
+    if resp.status_code == 429:
+        print ("ntfy's default api_token has reached pushover's rate limit")
+        print ("create your own app at https://pushover.net/apps/build")
+        print ("and set api_token in your config file.")
+        return 1
+
     resp.raise_for_status()
