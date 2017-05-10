@@ -6,7 +6,7 @@ from importlib import import_module
 from inspect import getargspec
 from .backends.default import DefaultNotifierError
 
-__version__ = '2.4.2'
+__version__ = '2.4.3'
 
 
 _user_home = path.expanduser('~')
