@@ -109,7 +109,7 @@ def notify(title,
 
     if resp.status_code == 429:
         print ("ntfy's default api_token has reached pushover's rate limit")
-        print ("create your own app at https://pushover.net/apps/build")
+        print ("create your own app at https://pushover.net/apps/clone/ntfy")
         print ("and set api_token in your config file.")
         return 1
 
