@@ -333,6 +333,11 @@ Optional parameters:
 
       Default is ``[{title}] {message}``.
 
+`Termux:API <https://play.google.com/store/apps/details?id=com.termux.api&hl=en>`_ - ``termux``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires the app to be install from the Play store and the CLI utility be
+installed with ``apt install termux-api``.
+
 `Pushalot <https://pushalot.com>`_ - ``pushalot``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Required parameter:
