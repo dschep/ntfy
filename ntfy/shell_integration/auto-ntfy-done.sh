@@ -28,7 +28,7 @@ function _ntfy_precmd () {
 
 function _ntfy_preexec () {
     ntfy_start_time=$(date +%s)
-    ntfy_command=$(echo "$1")
+    ntfy_command="$1"
 }
 
 function _contains_element() {
