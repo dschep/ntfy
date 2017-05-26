@@ -10,7 +10,7 @@ install:
   - pip install -U pip setuptools
   - pip install . .[xmpp]
   - pip install coveralls yapf twine
-script: coverage run --source=ntfy setup.py test && bash zipapp.sh && [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
+script: coverage run --source=ntfy setup.py test && bash zipapp.sh && yapf -r ntfy -d && [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
 after_success: coveralls
 deploy:
   - provider: pypi
