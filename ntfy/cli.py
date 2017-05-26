@@ -22,12 +22,13 @@ except ImportError:
     psutil = None
 
 from . import __version__, notify, default_title
-from .config import (load_config, DEFAULT_CONFIG,
-                     SITE_DEFAULT_CONFIG, OLD_DEFAULT_CONFIG)
+from .config import (load_config, DEFAULT_CONFIG, SITE_DEFAULT_CONFIG,
+                     OLD_DEFAULT_CONFIG)
 from .data import scripts
 try:
     from .terminal import is_focused
 except ImportError:
+
     def is_focused():
         return True
 
@@ -38,8 +39,8 @@ def run_cmd(args):
     if not args.command:
         if args.formatter:
             args.command, retcode, duration = args.formatter
-            args.command, retcode, duration = (
-                [args.command], int(retcode), int(duration))
+            args.command, retcode, duration = ([args.command], int(retcode),
+                                               int(duration))
             stdout, stderr = None, None
         else:
             sys.stderr.write('usage: ntfy done [-h|-L N] command\n'
@@ -64,10 +65,7 @@ def run_cmd(args):
     if args.unfocused_only and is_focused():
         return None, None
     message = _result_message(args.command if not args.hide_command else None,
-                              retcode,
-                              stdout,
-                              stderr,
-                              duration,
+                              retcode, stdout, stderr, duration,
                               emojize is not None and not args.no_emoji)
     return message, retcode
 
@@ -86,16 +84,18 @@ def _result_message(command, return_code, stdout, stderr, duration, emoji):
     else:
         command = '"{command}"'.format(command=' '.join(command))
     if stdout is not None or stderr is not None:
-        all_output = ':\n{}{}'.format(stdout if stdout is not None else '',
-                                      stderr if stderr is not None else '')
+        all_output = ':\n{}{}'.format(stdout
+                                      if stdout is not None else '', stderr
+                                      if stderr is not None else '')
     else:
         all_output = ''
     template = '{prefix}{command} {result} in {:d}:{:02d} minutes{output}'
-    return template.format(prefix=prefix,
-                           command=command,
-                           result=result,
-                           output=all_output,
-                           *map(int, divmod(duration, 60)))
+    return template.format(
+        prefix=prefix,
+        command=command,
+        result=result,
+        output=all_output,
+        *map(int, divmod(duration, 60)))
 
 
 def watch_pid(args):
@@ -122,8 +122,8 @@ def watch_pid(args):
 
 def auto_done(args):
     if args.longer_than:
-        print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(
-            args.longer_than))
+        print(
+            'export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(args.longer_than))
     if args.unfocused_only:
         print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
     if args.shell == 'bash':
@@ -161,49 +161,50 @@ parser.add_argument(
     '-c',
     '--config',
     help='config file to use (default: {})'.format(DEFAULT_CONFIG))
-parser.add_argument('-b',
-                    '--backend',
-                    action=BackendOptionAction,
-                    help='override backend specified in config')
-parser.add_argument('-o',
-                    '--option',
-                    nargs=2,
-                    default=None,
-                    action=BackendOptionAction,
-                    metavar=('key', 'value'),
-                    help='backend specific options')
-parser.add_argument('-l',
-                    '--log-level',
-                    action='store',
-                    default='WARNING',
-                    choices=[
-                        'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'
-                    ],
-                    help=('Specify the how verbose CLI output is '
-                          '(default: WARNING)'))
-parser.add_argument('-v',
-                    '--verbose',
-                    dest='log_level',
-                    action='store_const',
-                    const='DEBUG',
-                    help='a shortcut for --log-level=DEBUG')
-parser.add_argument('-q',
-                    '--quiet',
-                    dest='log_level',
-                    action='store_const',
-                    const='CRITICAL',
-                    help='a shortcut for --log-level=CRITICAL')
+parser.add_argument(
+    '-b',
+    '--backend',
+    action=BackendOptionAction,
+    help='override backend specified in config')
+parser.add_argument(
+    '-o',
+    '--option',
+    nargs=2,
+    default=None,
+    action=BackendOptionAction,
+    metavar=('key', 'value'),
+    help='backend specific options')
+parser.add_argument(
+    '-l',
+    '--log-level',
+    action='store',
+    default='WARNING',
+    choices=['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
+    help=('Specify the how verbose CLI output is '
+          '(default: WARNING)'))
+parser.add_argument(
+    '-v',
+    '--verbose',
+    dest='log_level',
+    action='store_const',
+    const='DEBUG',
+    help='a shortcut for --log-level=DEBUG')
+parser.add_argument(
+    '-q',
+    '--quiet',
+    dest='log_level',
+    action='store_const',
+    const='CRITICAL',
+    help='a shortcut for --log-level=CRITICAL')
 parser.add_argument('--version', action='version', version=__version__)
 if emojize is not None:
-    parser.add_argument('-E',
-                        '--no-emoji',
-                        action='store_true',
-                        help='Disable emoji support')
+    parser.add_argument(
+        '-E', '--no-emoji', action='store_true', help='Disable emoji support')
 
-parser.add_argument('-t',
-                    '--title',
-                    help='a title for the notification (default: {})'
-                    .format(default_title))
+parser.add_argument(
+    '-t',
+    '--title',
+    help='a title for the notification (default: {})'.format(default_title))
 
 subparsers = parser.add_subparsers()
 
@@ -217,13 +218,10 @@ def default_sender(args):
 
 send_parser.set_defaults(func=default_sender)
 
-
 done_parser = subparsers.add_parser(
-    'done',
-    help='run a command and send a notification when done')
-done_parser.add_argument('command',
-                         nargs=argparse.REMAINDER,
-                         help='command to run')
+    'done', help='run a command and send a notification when done')
+done_parser.add_argument(
+    'command', nargs=argparse.REMAINDER, help='command to run')
 done_parser.add_argument(
     '-L',
     '--longer-than',
@@ -242,7 +240,7 @@ done_parser.add_argument(
     metavar=('command', 'retcode', 'duration'),
     nargs=3,
     help="Format and send cmd, retcode & duration instead of running command. "
-         "Used internally by shell-integration")
+    "Used internally by shell-integration")
 if psutil is not None:
     done_parser.add_argument(
         '-p',
@@ -359,8 +357,12 @@ def main(cli_args=None):
             return 0
         if emojize is not None and not args.no_emoji:
             message = emojize(message, use_aliases=True)
-        return notify(message, args.title, config, retcode=retcode,
-                      **dict(args.option.get(None, [])))
+        return notify(
+            message,
+            args.title,
+            config,
+            retcode=retcode,
+            **dict(args.option.get(None, [])))
     else:
         parser.print_help()
 

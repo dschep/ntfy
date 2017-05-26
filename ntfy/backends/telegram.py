@@ -3,7 +3,6 @@ from os import path, makedirs
 from appdirs import user_config_dir
 from telegram_send import send, configure
 
-
 config_dir = user_config_dir('ntfy', 'dschep')
 config_file = path.join(config_dir, 'telegram.ini')
 

@@ -3,11 +3,7 @@ import requests
 from ..config import USER_AGENT
 
 
-def notify(title,
-           message,
-           key,
-           event=None,
-           retcode=None):
+def notify(title, message, key, event=None, retcode=None):
     """
     Required paramter:
         * ``key`` - The Simplepush identification key, created by
@@ -30,8 +26,6 @@ def notify(title,
 
     endpoint = "https://api.simplepush.io"
 
-    resp = requests.post(endpoint + '/send',
-                         data=data,
-                         headers=headers)
+    resp = requests.post(endpoint + '/send', data=data, headers=headers)
 
     resp.raise_for_status()

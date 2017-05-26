@@ -71,10 +71,10 @@ def notify(title,
         if priority == 2:
             # Retry can not be less than 30 per the API
             if not retry or retry < 30:
-                logging.getLogger(
-                    __name__).error('retry is less than 30 or is not set, '
-                                    'setting retry to 30 to comply with '
-                                    'pushover API requirements')
+                logging.getLogger(__name__).error(
+                    'retry is less than 30 or is not set, '
+                    'setting retry to 30 to comply with '
+                    'pushover API requirements')
                 data['retry'] = 30
             else:
                 data['retry'] = retry
@@ -105,9 +105,10 @@ def notify(title,
     else:
         raise ValueError('priority must be an integer from -2 to 2')
 
-    resp = requests.post('https://api.pushover.net/1/messages.json',
-                         data=data,
-                         headers={'User-Agent': USER_AGENT})
+    resp = requests.post(
+        'https://api.pushover.net/1/messages.json',
+        data=data,
+        headers={'User-Agent': USER_AGENT})
 
     if resp.status_code == 429:
         print("ntfy's default api_token has reached pushover's rate limit")

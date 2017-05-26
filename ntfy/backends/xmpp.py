@@ -26,9 +26,11 @@ class NtfySendMsgBot(sleekxmpp.ClientXMPP):
 
         self.send_presence()
         self.get_roster()
-        msg_args = {'mto': self.recipient,
-                    'msubject': self.title,
-                    'mbody': self.msg}
+        msg_args = {
+            'mto': self.recipient,
+            'msubject': self.title,
+            'mbody': self.msg
+        }
         if self.mtype:
             msg_args['mtype'] = self.mtype
 

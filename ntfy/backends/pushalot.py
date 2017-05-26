@@ -2,7 +2,6 @@ import requests
 
 from ..config import USER_AGENT
 
-
 # URL to pushalot.com notification sending endpoint
 PUSHALOT_API_URL = 'https://pushalot.com/api/sendmessage'
 
@@ -54,7 +53,5 @@ def notify(title,
         data['IsSilent'] = 'True'
 
     headers = {'User-Agent': USER_AGENT}
-    response = requests.post(PUSHALOT_API_URL,
-                             data=data,
-                             headers=headers)
+    response = requests.post(PUSHALOT_API_URL, data=data, headers=headers)
     response.raise_for_status()

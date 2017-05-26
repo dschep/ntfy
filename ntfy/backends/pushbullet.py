@@ -21,7 +21,11 @@ def notify(title,
                       email or send an email if they aren't a pushullet user
     """
 
-    data = {'type': 'note', 'title': title, 'body': message, }
+    data = {
+        'type': 'note',
+        'title': title,
+        'body': message,
+    }
     if device_iden is not None:
         data['device_iden'] = device_iden
     if email is not None:
@@ -29,8 +33,7 @@ def notify(title,
 
     headers = {'Access-Token': access_token, 'User-Agent': USER_AGENT}
 
-    resp = requests.post('https://api.pushbullet.com/v2/pushes',
-                         data=data,
-                         headers=headers)
+    resp = requests.post(
+        'https://api.pushbullet.com/v2/pushes', data=data, headers=headers)
 
     resp.raise_for_status()

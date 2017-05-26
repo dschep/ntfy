@@ -17,7 +17,9 @@ def notify(title, message, icon=icon.ico, retcode=None):
 
     class WindowsBalloonTip:
         def __init__(self, title, msg):
-            message_map = {win32con.WM_DESTROY: self.OnDestroy, }
+            message_map = {
+                win32con.WM_DESTROY: self.OnDestroy,
+            }
             # Register the Window class.
             wc = win32gui.WNDCLASS()
             hinst = wc.hInstance = win32api.GetModuleHandle(None)
@@ -33,9 +35,8 @@ def notify(title, message, icon=icon.ico, retcode=None):
             iconPathName = os.path.abspath(icon)
             icon_flags = win32con.LR_LOADFROMFILE | win32con.LR_DEFAULTSIZE
             try:
-                hicon = win32gui.LoadImage(hinst, iconPathName,
-                                           win32con.IMAGE_ICON, 0, 0,
-                                           icon_flags)
+                hicon = win32gui.LoadImage(
+                    hinst, iconPathName, win32con.IMAGE_ICON, 0, 0, icon_flags)
             except:
                 hicon = win32gui.LoadIcon(0, win32con.IDI_APPLICATION)
             flags = win32gui.NIF_ICON | win32gui.NIF_MESSAGE | win32gui.NIF_TIP

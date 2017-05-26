@@ -31,8 +31,8 @@ def notify(title, message, event_name, appid, secret, trackers, retcode=None):
     if len(msgs) != len(trackers):
         logger.error(('Wrong number of messages! There are {} trackers so you '
                       'have to provide {} messages. Remember to separate each '
-                      'message with \':\' (example: send "msg1:msg2")'
-                      ).format(len(trackers), len(trackers)))
+                      'message with \':\' (example: send "msg1:msg2")').format(
+                          len(trackers), len(trackers)))
         raise WrongMessageCountException()
 
     to_send = {}

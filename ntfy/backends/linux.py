@@ -25,8 +25,8 @@ def notify(title, message, icon=icon.png, urgency=None, retcode=0):
     bus = dbus.SessionBus()
     dbus_obj = bus.get_object('org.freedesktop.Notifications',
                               '/org/freedesktop/Notifications')
-    dbus_iface = dbus.Interface(dbus_obj,
-                                dbus_interface='org.freedesktop.Notifications')
+    dbus_iface = dbus.Interface(
+        dbus_obj, dbus_interface='org.freedesktop.Notifications')
 
     hints = {}
 
@@ -42,5 +42,5 @@ def notify(title, message, icon=icon.png, urgency=None, retcode=0):
         hints = {'urgency': dbus.Byte(2)}
 
     message = message.replace('&', '&amp;')
-    dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], hints,
-                      -1)
+    dbus_iface.Notify('ntfy', 0,
+                      path.abspath(icon), title, message, [], hints, -1)

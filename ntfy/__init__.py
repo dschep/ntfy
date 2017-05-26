@@ -8,12 +8,13 @@ from .backends.default import DefaultNotifierError
 
 __version__ = '2.4.3'
 
-
 _user_home = path.expanduser('~')
 _cwd = getcwd()
 if name != 'nt' and _cwd.startswith(_user_home):
-    default_title = '{}@{}:{}'.format(getuser(), gethostname(),
-                                      path.join('~', _cwd[len(_user_home)+1:]))
+    default_title = '{}@{}:{}'.format(getuser(),
+                                      gethostname(),
+                                      path.join('~',
+                                                _cwd[len(_user_home) + 1:]))
 else:
     default_title = '{}@{}:{}'.format(getuser(), gethostname(), _cwd)
 
@@ -34,8 +35,8 @@ def notify(message, title, config=None, **kwargs):
             backend = backend_config.pop('backend')
 
         if title is None:
-            title = backend_config.pop('title', config.get('title',
-                                                           default_title))
+            title = backend_config.pop('title',
+                                       config.get('title', default_title))
         elif 'title' in backend_config:
             del backend_config['title']
 
@@ -48,8 +49,11 @@ def notify(message, title, config=None, **kwargs):
             continue
 
         try:
-            notify_ret = notifier.notify(message=message, title=title,
-                                         retcode=retcode, **backend_config)
+            notify_ret = notifier.notify(
+                message=message,
+                title=title,
+                retcode=retcode,
+                **backend_config)
             if notify_ret:
                 ret = notify_ret
         except (SystemExit, KeyboardInterrupt):
