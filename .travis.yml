@@ -14,7 +14,7 @@ script: |
   set -e
   coverage run --source=ntfy setup.py test
   bash zipapp.sh
-  if python --version 2>&1 |egrep 'Python 3.3' ; then
+  if ! python --version 2>&1 |egrep 'Python 3.3' ; then
     yapf -r ntfy -d
     [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
   fi
