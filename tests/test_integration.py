@@ -12,7 +12,7 @@ builtin_module = '__builtin__' if py == 2 else 'builtins'
 
 class TestIntegration(TestCase):
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     @patch('ntfy.backends.pushover.requests.post')
     def test_pushover(self, mock_post, mock_yamlload):
         mock_yamlload.return_value = {
@@ -22,7 +22,7 @@ class TestIntegration(TestCase):
         self.assertEqual(0, ntfy_main(['send', 'foobar']))
 
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     @patch('ntfy.backends.prowl.requests.post')
     def test_prowl(self, mock_post, mock_yamlload):
         mock_yamlload.return_value = {
@@ -32,7 +32,7 @@ class TestIntegration(TestCase):
         ntfy_main(['send', 'foobar'])
 
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     @patch('ntfy.backends.pushbullet.requests.post')
     def test_pushbullet(self, mock_post, mock_yamlload):
         mock_yamlload.return_value = {
@@ -42,7 +42,7 @@ class TestIntegration(TestCase):
         self.assertEqual(0, ntfy_main(['send', 'foobar']))
 
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     @patch('ntfy.backends.simplepush.requests.post')
     def test_simplepush(self, mock_post, mock_yamlload):
         mock_yamlload.return_value = {
@@ -53,7 +53,7 @@ class TestIntegration(TestCase):
 
     @patch(builtin_module + '.open', mock_open())
     @patch('ntfy.backends.default.platform', 'linux')
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     def test_default(self, mock_yamlload):
         old_dbus = modules.get('dbus')
         modules['dbus'] = MagicMock()
@@ -65,7 +65,7 @@ class TestIntegration(TestCase):
                 modules['dbus'] = old_dbus
 
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     def test_linux(self, mock_yamlload):
         old_dbus = modules.get('dbus')
         modules['dbus'] = MagicMock()
@@ -77,7 +77,7 @@ class TestIntegration(TestCase):
                 modules['dbus'] = old_dbus
 
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     def test_darwin(self, mock_yamlload):
         old_foundation = modules.get('Foundation')
         old_objc = modules.get('objc')
@@ -97,7 +97,7 @@ class TestIntegration(TestCase):
                 modules['AppKit'] = old_appkit
 
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     def test_win32(self, mock_yamlload):
         old_win32api = modules.get('win32api')
         old_win32gui = modules.get('win32gui')
@@ -117,7 +117,7 @@ class TestIntegration(TestCase):
                 modules['win32con'] = old_win32con
 
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     @patch('ntfy.backends.xmpp.NtfySendMsgBot')
     def test_xmpp(self, mock_bot, mock_yamlload):
         mock_yamlload.return_value = {'backends': ['xmpp'],
@@ -127,7 +127,7 @@ class TestIntegration(TestCase):
         self.assertEqual(0, ntfy_main(['send', 'foobar']))
 
     @patch(builtin_module + '.open', mock_open())
-    @patch('ntfy.config.yaml.safe_load')
+    @patch('ntfy.config.safe_load')
     def test_instapush(self, mock_yamlload):
         modules['instapush'] = MagicMock()
         modules['instapush'].App().notify.return_value = { 'status': 200 }

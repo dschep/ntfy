@@ -8,6 +8,12 @@ from ruamel import yaml
 import requests
 from appdirs import site_config_dir, user_config_dir
 
+if yaml.version_info < (0, 15):
+    safe_load = yaml.safe_load
+else:
+    yml = yaml.YAML(typ='safe', pure=True)
+    safe_load = lambda stream: yml.load(stream)
+
 from . import __version__
 
 DEFAULT_CONFIG = join_path(user_config_dir('ntfy', 'dschep'), 'ntfy.yml')
@@ -23,7 +29,7 @@ def load_config(config_path=DEFAULT_CONFIG):
     logger = logging.getLogger(__name__)
 
     try:
-        config = yaml.safe_load(open(expanduser(config_path)))
+        config = safe_load(open(expanduser(config_path)))
     except IOError as e:
         if e.errno == errno.ENOENT and config_path == DEFAULT_CONFIG:
             logger.info('{} not found'.format(config_path))
