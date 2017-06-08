@@ -28,8 +28,8 @@ def lightlocker_detect():
 
 
 def lightlocker_is_active():
-    return 'The screensaver is active' in check_output(split(
-        'light-locker-command -q'))
+    return 'The screensaver is active' in check_output(
+        split('light-locker-command -q'))
 
 
 def gnomescreensaver_detect():
@@ -38,10 +38,9 @@ def gnomescreensaver_detect():
     except ImportError:
         return False
     bus = dbus.SessionBus()
-    dbus_obj = bus.get_object('org.freedesktop.DBus',
-                              '/org/freedesktop/DBus')
-    dbus_iface = dbus.Interface(dbus_obj,
-                                dbus_interface='org.freedesktop.DBus')
+    dbus_obj = bus.get_object('org.freedesktop.DBus', '/org/freedesktop/DBus')
+    dbus_iface = dbus.Interface(
+        dbus_obj, dbus_interface='org.freedesktop.DBus')
     try:
         dbus_iface.GetNameOwner('org.gnome.ScreenSaver')
     except dbus.DBusException as e:
@@ -58,8 +57,8 @@ def gnomescreensaver_is_locked():
     bus = dbus.SessionBus()
     dbus_obj = bus.get_object('org.gnome.ScreenSaver',
                               '/org/gnome/ScreenSaver')
-    dbus_iface = dbus.Interface(dbus_obj,
-                                dbus_interface='org.gnome.ScreenSaver')
+    dbus_iface = dbus.Interface(
+        dbus_obj, dbus_interface='org.gnome.ScreenSaver')
     return bool(dbus_iface.GetActive())
 
 
@@ -69,10 +68,9 @@ def matescreensaver_detect():
     except ImportError:
         return False
     bus = dbus.SessionBus()
-    dbus_obj = bus.get_object('org.freedesktop.DBus',
-                              '/org/freedesktop/DBus')
-    dbus_iface = dbus.Interface(dbus_obj,
-                                dbus_interface='org.freedesktop.DBus')
+    dbus_obj = bus.get_object('org.freedesktop.DBus', '/org/freedesktop/DBus')
+    dbus_iface = dbus.Interface(
+        dbus_obj, dbus_interface='org.freedesktop.DBus')
     try:
         dbus_iface.GetNameOwner('org.mate.ScreenSaver')
     except dbus.DBusException as e:
@@ -87,10 +85,9 @@ def matescreensaver_detect():
 def matescreensaver_is_locked():
     import dbus
     bus = dbus.SessionBus()
-    dbus_obj = bus.get_object('org.mate.ScreenSaver',
-                              '/org/mate/ScreenSaver')
-    dbus_iface = dbus.Interface(dbus_obj,
-                                dbus_interface='org.mate.ScreenSaver')
+    dbus_obj = bus.get_object('org.mate.ScreenSaver', '/org/mate/ScreenSaver')
+    dbus_iface = dbus.Interface(
+        dbus_obj, dbus_interface='org.mate.ScreenSaver')
     return bool(dbus_iface.GetActive())
 
 
