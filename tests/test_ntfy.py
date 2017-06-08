@@ -1,12 +1,13 @@
 from unittest import TestCase
 
-from mock import patch
-
-from ntfy import notify
 import ntfy
+from mock import patch
+from ntfy import notify
+
 
 def mock_notify(message, title, retcode=None):
     raise Exception
+
 
 class OverrideBackendTestCase(TestCase):
     @patch('requests.post')

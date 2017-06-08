@@ -1,7 +1,8 @@
 from unittest import TestCase, main
-from mock import patch
-from requests import Response, HTTPError
 
+from requests import HTTPError, Response
+
+from mock import patch
 from ntfy.backends.notifico import notify
 
 
@@ -16,10 +17,7 @@ class TestNotifico(TestCase):
         mock_get.return_value = resp
         notify('title', 'message', webhook=self.webhook)
         mock_get.assert_called_once_with(
-            self.webhook,
-            params={
-                'payload': 'title\nmessage'
-            })
+            self.webhook, params={'payload': 'title\nmessage'})
 
     @patch('requests.get')
     def test_none_webhook(self, mock_get):
@@ -34,12 +32,8 @@ class TestNotifico(TestCase):
         with self.assertRaises(HTTPError):
             notify('title', 'message', webhook=self.webhook)
         mock_get.assert_called_once_with(
-            self.webhook,
-            params={
-                'payload': 'title\nmessage'
-            })
+            self.webhook, params={'payload': 'title\nmessage'})
+
 
 if __name__ == '__main__':
     main()
-
-

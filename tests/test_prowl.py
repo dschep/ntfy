@@ -1,9 +1,8 @@
 from unittest import TestCase, main
+
 from mock import patch
-
-from ntfy.backends.prowl import notify, API_URL, NTFY_API_KEY
+from ntfy.backends.prowl import API_URL, NTFY_API_KEY, notify
 from ntfy.config import USER_AGENT
-
 
 TITLE = 'title'
 MESSAGE = 'message'
@@ -31,9 +30,7 @@ class TestProwl(TestCase):
         }
         data.update(kwargs)
         self.mock_post.assert_called_once_with(
-            API_URL,
-            data=data,
-            headers={'User-Agent': USER_AGENT})
+            API_URL, data=data, headers={'User-Agent': USER_AGENT})
         self.mock_response.raise_for_status.assert_called_once()
 
     def test_basic(self):
@@ -49,18 +46,10 @@ class TestProwl(TestCase):
         self.verify_post(priority=-2)
 
     def test_priority_too_high(self):
-        self.assertRaises(ValueError,
-                          notify,
-                          TITLE,
-                          MESSAGE,
-                          priority=3)
+        self.assertRaises(ValueError, notify, TITLE, MESSAGE, priority=3)
 
     def test_priority_too_low(self):
-        self.assertRaises(ValueError,
-                          notify,
-                          TITLE,
-                          MESSAGE,
-                          priority=-3)
+        self.assertRaises(ValueError, notify, TITLE, MESSAGE, priority=-3)
 
     def test_url(self):
         notify(TITLE, MESSAGE, url='foobar')
@@ -69,6 +58,7 @@ class TestProwl(TestCase):
     def test_provider_key(self):
         notify(TITLE, MESSAGE, provider_key='providerkey')
         self.verify_post(providerkey='providerkey')
+
 
 if __name__ == '__main__':
     main()
