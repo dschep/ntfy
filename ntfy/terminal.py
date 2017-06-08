@@ -1,7 +1,7 @@
-from os import environ, ttyname
-from subprocess import check_output, Popen, PIPE
-from sys import platform, stdout
 import shlex
+from os import environ, ttyname
+from subprocess import PIPE, Popen, check_output
+from sys import platform, stdout
 
 
 def linux_window_is_focused():

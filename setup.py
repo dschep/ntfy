@@ -1,8 +1,8 @@
-from setuptools import setup, find_packages
 from sys import version_info
 
-from ntfy import __version__
+from setuptools import find_packages, setup
 
+from ntfy import __version__
 
 deps = ['requests', 'ruamel.yaml', 'appdirs']
 extra_deps = {
