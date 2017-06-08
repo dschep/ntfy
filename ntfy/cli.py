@@ -31,6 +31,8 @@ except ImportError:
 
     def is_focused():
         return True
+
+
 from .screensaver import is_locked
 
 
