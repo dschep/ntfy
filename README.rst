@@ -352,6 +352,14 @@ Optional parameters:
     * ``important`` - mark notifications as important
     * ``silent`` - mark notifications as silent
 
+`Rocket.Chat <https://rocket.chat>`_ - ``rocketchat``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required parameters:
+    * ``url`` - URL of your Rocket.Chat instance
+    * ``username`` - login username
+    * ``password`` - login password
+    * ``room`` - room/channel name to post in
+
 
 Other options
 ~~~~~~~~~~~~~
