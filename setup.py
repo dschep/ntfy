@@ -15,6 +15,7 @@ extra_deps = {
     'emoji': ['emoji'],
     'pid':['psutil'],
     'slack':['slacker'],
+    'rocketchat':['rocketchat-API'],
 }
 test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
 
