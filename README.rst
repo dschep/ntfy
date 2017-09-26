@@ -83,6 +83,7 @@ Extras
     * Telegram support requires installing as ``ntfy[telegram]``
     * Instapush support requires installing as ``ntfy[instapush]``
     * Slack support requires installing as ``ntfy[slack]``
+    * Rocket.Chat support requires installing as ``ntfy[rocketchat]``
 
 To install multiple extras, separate with commas: e.g., ``ntfy[pid,emjoi]``.
 
@@ -354,6 +355,8 @@ Optional parameters:
 
 `Rocket.Chat <https://rocket.chat>`_ - ``rocketchat``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires extras, install like this: ``pip install ntfy[rocketchat]``.
+
 Required parameters:
     * ``url`` - URL of your Rocket.Chat instance
     * ``username`` - login username
@@ -402,3 +405,4 @@ Contributors
 - `jlesage <https://github.com/jlesage>`_ - Systemlog support
 - `sambrightman <https://github.com/sambrightman>`_ - Prowl support
 - `mlesniew <https://github.com/mlesniew>`_ - Pushalot support
+- `webworxshop <https://github.com/webworxshop>`_ - Rocket.Chat support
