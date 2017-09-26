@@ -93,6 +93,14 @@ ntfy.backends.systemlog module
     :undoc-members:
     :show-inheritance:
 
+ntfy.backends.rocketchat module
+-------------------------
+
+.. automodule:: ntfy.backends.rocketchat
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
