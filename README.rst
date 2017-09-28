@@ -276,7 +276,8 @@ The following dependecies should be installed.
 You will need to install some font that supports emojis (in Debian `fonts-symbola` or Gentoo `media-fonts/symbola`).
 
 Optional parameters:
-    * ``urgency``
+    * ``urgency`` - Specifies the urgency level (low, normal, critical).
+    * ``transient`` - Skip the history (exp: the Gnome message tray) (true, false).
 
 Windows Desktop Notifications - ``win32``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
