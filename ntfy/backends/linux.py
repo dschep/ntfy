@@ -3,7 +3,12 @@ from os import environ, path
 from ..data import icon
 
 
-def notify(title, message, icon=icon.png, urgency=None, retcode=0):
+def notify(title,
+           message,
+           icon=icon.png,
+           urgency=None,
+           transient=None,
+           retcode=0):
     try:
         import dbus
     except ImportError:
@@ -40,6 +45,15 @@ def notify(title, message, icon=icon.png, urgency=None, retcode=0):
     # Fallback to the return code to determine the urgency flag.
     elif retcode:
         hints = {'urgency': dbus.Byte(2)}
+
+    if str(transient).lower() == 'true':
+        hints.update({'transient': dbus.Byte(1)})
+    elif str(transient).lower() == 'false':
+        hints.update({'transient': dbus.Byte(0)})
+    elif transient is not None:
+        logger.warn(
+            'Unexpected value for the "transient" option. Expected values (true, false).'
+        )
 
     message = message.replace('&', '&amp;')
     dbus_iface.Notify('ntfy', 0,

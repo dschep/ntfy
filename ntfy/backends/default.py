@@ -1,5 +1,5 @@
-from sys import platform
 from importlib import import_module
+from sys import platform
 
 
 class DefaultNotifierError(Exception):

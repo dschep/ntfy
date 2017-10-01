@@ -1,6 +1,7 @@
 import logging
-from instapush import App
 import re
+
+from instapush import App
 
 
 class WrongMessageCountException(Exception):

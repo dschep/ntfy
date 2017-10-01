@@ -1,20 +1,20 @@
 import errno
 import logging
-from os.path import expanduser
 from os.path import join as join_path
+from os.path import expanduser
 from sys import exit
 
-from ruamel import yaml
 import requests
 from appdirs import site_config_dir, user_config_dir
+from ruamel import yaml
+
+from . import __version__
 
 if yaml.version_info < (0, 15):
     safe_load = yaml.safe_load
 else:
     yml = yaml.YAML(typ='safe', pure=True)
     safe_load = lambda stream: yml.load(stream)
-
-from . import __version__
 
 DEFAULT_CONFIG = join_path(user_config_dir('ntfy', 'dschep'), 'ntfy.yml')
 SITE_DEFAULT_CONFIG = join_path(site_config_dir('ntfy', 'dschep'), 'ntfy.yml')

@@ -1,15 +1,17 @@
 from time import time
 from unittest import TestCase, main
 
-from mock import patch, MagicMock, Mock
-
-from ntfy.cli import run_cmd, auto_done
+from mock import MagicMock, Mock, patch
 from ntfy.cli import main as ntfy_main
+from ntfy.cli import auto_done, run_cmd
 
 
 def process_mock(returncode=0, stdout=None, stderr=None):
     process_mock = Mock()
-    attrs = {'communicate.return_value': (stdout, stderr), 'returncode': returncode}
+    attrs = {
+        'communicate.return_value': (stdout, stderr),
+        'returncode': returncode
+    }
     process_mock.configure_mock(**attrs)
     return process_mock
 
@@ -25,7 +27,8 @@ class TestRunCmd(TestCase):
         args.unfocused_only = False
         args.hide_command = False
         args.locked_only = False
-        self.assertEqual(('"true" succeeded in 0:00 minutes', 0), run_cmd(args))
+        self.assertEqual(('"true" succeeded in 0:00 minutes', 0),
+                         run_cmd(args))
 
     @patch('ntfy.cli.Popen')
     def test_emoji(self, mock_Popen):
@@ -38,8 +41,9 @@ class TestRunCmd(TestCase):
         args.unfocused_only = False
         args.hide_command = False
         args.locked_only = False
-        self.assertEqual((':white_check_mark: "true" succeeded in 0:00 minutes', 0),
-                         run_cmd(args))
+        self.assertEqual(
+            (':white_check_mark: "true" succeeded in 0:00 minutes', 0),
+            run_cmd(args))
 
     def tests_usage(self):
         args = MagicMock()
@@ -57,7 +61,6 @@ class TestRunCmd(TestCase):
         args.pid = None
         args.unfocused_only = False
         args.hide_command = False
-        args.locked_only = False
         self.assertEqual((None, None), run_cmd(args))
 
     @patch('ntfy.cli.Popen')
@@ -70,7 +73,8 @@ class TestRunCmd(TestCase):
         args.unfocused_only = False
         args.hide_command = False
         args.locked_only = False
-        self.assertEqual(('"false" failed (code 42) in 0:00 minutes', 42), run_cmd(args))
+        self.assertEqual(('"false" failed (code 42) in 0:00 minutes', 42),
+                         run_cmd(args))
 
     @patch('ntfy.cli.Popen')
     def test_stdout(self, mock_Popen):
@@ -85,7 +89,8 @@ class TestRunCmd(TestCase):
         # not actually used
         args.stdout = True
         args.stderr = False
-        self.assertEqual(('"true" succeeded in 0:00 minutes:\noutput', 0), run_cmd(args))
+        self.assertEqual(('"true" succeeded in 0:00 minutes:\noutput', 0),
+                         run_cmd(args))
 
     @patch('ntfy.cli.Popen')
     def test_stderr(self, mock_Popen):
@@ -100,7 +105,8 @@ class TestRunCmd(TestCase):
         # not actually used
         args.stdout = False
         args.stderr = True
-        self.assertEqual(('"true" succeeded in 0:00 minutes:\nerror', 0), run_cmd(args))
+        self.assertEqual(('"true" succeeded in 0:00 minutes:\nerror', 0),
+                         run_cmd(args))
 
     @patch('ntfy.cli.Popen')
     def test_stdout_and_stderr(self, mock_Popen):
@@ -115,11 +121,13 @@ class TestRunCmd(TestCase):
         # not actually used
         args.stdout = True
         args.stderr = True
-        self.assertEqual(('"true" succeeded in 0:00 minutes:\noutputerror', 0), run_cmd(args))
+        self.assertEqual(('"true" succeeded in 0:00 minutes:\noutputerror', 0),
+                         run_cmd(args))
 
     @patch('ntfy.cli.Popen')
     def test_failure_stdout_and_stderr(self, mock_Popen):
-        mock_Popen.return_value = process_mock(1, stdout='output', stderr='error')
+        mock_Popen.return_value = process_mock(
+            1, stdout='output', stderr='error')
         args = MagicMock()
         args.longer_than = -1
         args.command = ['true']
@@ -130,7 +138,9 @@ class TestRunCmd(TestCase):
         # not actually used
         args.stdout = True
         args.stderr = True
-        self.assertEqual(('"true" failed (code 1) in 0:00 minutes:\noutputerror', 1), run_cmd(args))
+        self.assertEqual(
+            ('"true" failed (code 1) in 0:00 minutes:\noutputerror', 1),
+            run_cmd(args))
 
     @patch('ntfy.cli.Popen')
     def test_hide_command(self, mock_Popen):
@@ -141,7 +151,9 @@ class TestRunCmd(TestCase):
         args.pid = None
         args.unfocused_only = False
         args.hide_command = True
-        self.assertEqual(('Your command succeeded in 0:00 minutes', 0), run_cmd(args))
+        args.locked_only = False
+        self.assertEqual(('Your command succeeded in 0:00 minutes', 0),
+                         run_cmd(args))
 
     def test_formatter(self):
         args = MagicMock()
@@ -152,7 +164,8 @@ class TestRunCmd(TestCase):
         args.unfocused_only = False
         args.hide_command = False
         args.locked_only = False
-        self.assertEqual(('"true" succeeded in 1:05 minutes', 0), run_cmd(args))
+        self.assertEqual(('"true" succeeded in 1:05 minutes', 0),
+                         run_cmd(args))
 
     def test_formatter_failure(self):
         args = MagicMock()
@@ -163,21 +176,21 @@ class TestRunCmd(TestCase):
         args.unfocused_only = False
         args.hide_command = False
         args.locked_only = False
-        self.assertEqual(('"false" failed (code 1) in 0:10 minutes', 1), run_cmd(args))
+        self.assertEqual(('"false" failed (code 1) in 0:10 minutes', 1),
+                         run_cmd(args))
 
 
 class TestMain(TestCase):
     @patch('ntfy.backends.default.notify')
     def test_args(self, mock_notify):
         mock_notify.return_value = None
-        self.assertEquals(0, ntfy_main(['-o', 'foo', 'bar',
-                                        '-b', 'default',
-                                        '-t', 'TITLE',
-                                        'send', 'test']))
-        mock_notify.assert_called_once_with(message='test',
-                                            title='TITLE',
-                                            foo='bar',
-                                            retcode=0)
+        self.assertEquals(0,
+                          ntfy_main([
+                              '-o', 'foo', 'bar', '-b', 'default', '-t',
+                              'TITLE', 'send', 'test'
+                          ]))
+        mock_notify.assert_called_once_with(
+            message='test', title='TITLE', foo='bar', retcode=0)
 
 
 class ShellIntegrationTestCase(TestCase):

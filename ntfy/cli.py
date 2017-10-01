@@ -3,8 +3,13 @@ import logging
 import logging.config
 import sys
 from os import environ, path
-from subprocess import Popen, STDOUT, PIPE
+from subprocess import PIPE, STDOUT, Popen
 from time import time
+
+from . import __version__, default_title, notify
+from .config import (DEFAULT_CONFIG, OLD_DEFAULT_CONFIG, SITE_DEFAULT_CONFIG,
+                     load_config)
+from .data import scripts
 
 try:
     from shlex import quote as sh_quote
@@ -21,10 +26,6 @@ try:
 except ImportError:
     psutil = None
 
-from . import __version__, notify, default_title
-from .config import (load_config, DEFAULT_CONFIG, SITE_DEFAULT_CONFIG,
-                     OLD_DEFAULT_CONFIG)
-from .data import scripts
 try:
     from .terminal import is_focused
 except ImportError:
@@ -44,6 +45,7 @@ def run_cmd(args):
             args.command, retcode, duration = args.formatter
             args.command, retcode, duration = ([args.command], int(retcode),
                                                int(duration))
+            args.option.setdefault('transient', 'true')
             stdout, stderr = None, None
         else:
             sys.stderr.write('usage: ntfy done [-h|-L N] command\n'

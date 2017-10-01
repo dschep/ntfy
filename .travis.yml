@@ -1,11 +1,32 @@
-language: python
-python:
-  - '2.7'
-  - '3.3'
-  - '3.4'
-  - '3.5'
-  - '3.6'
-  - pypy
+matrix:
+  include:
+    - language: generic
+      os: osx
+    - language: generic
+      os: osx
+      before_install:
+        - brew update
+        - brew install python3
+        - virtualenv env -p python3
+        - source env/bin/activate
+    - language: python
+      python: 2.7
+      os: linux
+    - language: python
+      python: 3.3
+      os: linux
+    - language: python
+      python: 3.4
+      os: linux
+    - language: python
+      python: 3.5
+      os: linux
+    - language: python
+      python: 3.6
+      os: linux
+    - language: python
+      python: pypy
+      os: linux
 install:
   - pip install -U pip setuptools
   - pip install . .[xmpp]
@@ -13,7 +34,6 @@ install:
 script: |
   set -e
   coverage run --source=ntfy setup.py test
-  bash zipapp.sh
   if ! python --version 2>&1 |egrep 'Python 3.3' ; then
     yapf -r ntfy -d
     [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]

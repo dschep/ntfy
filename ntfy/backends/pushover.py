@@ -1,7 +1,8 @@
 from __future__ import print_function
 
-import requests
 import logging
+
+import requests
 
 from ..config import USER_AGENT
 

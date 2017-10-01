@@ -1,11 +1,10 @@
 from errno import ENOENT
 from os import environ
-from unittest import TestCase, main, skipIf
 from sys import version_info
+from unittest import TestCase, main, skipIf
 
-from mock import patch, mock_open
-
-from ntfy.config import load_config, DEFAULT_CONFIG
+from mock import mock_open, patch
+from ntfy.config import DEFAULT_CONFIG, load_config
 
 py = version_info.major
 py_ = version_info.major, version_info.minor

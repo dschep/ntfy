@@ -83,6 +83,7 @@ Extras
     * Telegram support requires installing as ``ntfy[telegram]``
     * Instapush support requires installing as ``ntfy[instapush]``
     * Slack support requires installing as ``ntfy[slack]``
+    * Rocket.Chat support requires installing as ``ntfy[rocketchat]``
 
 To install multiple extras, separate with commas: e.g., ``ntfy[pid,emjoi]``.
 
@@ -275,7 +276,8 @@ The following dependecies should be installed.
 You will need to install some font that supports emojis (in Debian `fonts-symbola` or Gentoo `media-fonts/symbola`).
 
 Optional parameters:
-    * ``urgency``
+    * ``urgency`` - Specifies the urgency level (low, normal, critical).
+    * ``transient`` - Skip the history (exp: the Gnome message tray) (true, false).
 
 Windows Desktop Notifications - ``win32``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -352,6 +354,16 @@ Optional parameters:
     * ``important`` - mark notifications as important
     * ``silent`` - mark notifications as silent
 
+`Rocket.Chat <https://rocket.chat>`_ - ``rocketchat``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires extras, install like this: ``pip install ntfy[rocketchat]``.
+
+Required parameters:
+    * ``url`` - URL of your Rocket.Chat instance
+    * ``username`` - login username
+    * ``password`` - login password
+    * ``room`` - room/channel name to post in
+
 
 Other options
 ~~~~~~~~~~~~~
@@ -394,3 +406,5 @@ Contributors
 - `jlesage <https://github.com/jlesage>`_ - Systemlog support
 - `sambrightman <https://github.com/sambrightman>`_ - Prowl support
 - `mlesniew <https://github.com/mlesniew>`_ - Pushalot support
+- `webworxshop <https://github.com/webworxshop>`_ - Rocket.Chat support
+- `rhabbachi <https://github.com/rhabbachi>`_ - transient option in  Linux desktop notifications

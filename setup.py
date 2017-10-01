@@ -1,8 +1,8 @@
-from setuptools import setup, find_packages
 from sys import version_info
 
-from ntfy import __version__
+from setuptools import find_packages, setup
 
+from ntfy import __version__
 
 deps = ['requests', 'ruamel.yaml', 'appdirs']
 extra_deps = {
@@ -15,6 +15,7 @@ extra_deps = {
     'emoji': ['emoji'],
     'pid':['psutil'],
     'slack':['slacker'],
+    'rocketchat':['rocketchat-API'],
 }
 test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
 
@@ -51,6 +52,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 
     keywords='push notification',
