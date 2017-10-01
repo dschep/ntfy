@@ -45,7 +45,7 @@ def run_cmd(args):
             args.command, retcode, duration = args.formatter
             args.command, retcode, duration = ([args.command], int(retcode),
                                                int(duration))
-            args.option.setdefault('transient', 'true')
+            args.option.setdefault('linux', {}).setdefault('transient', 'true')
             stdout, stderr = None, None
         else:
             sys.stderr.write('usage: ntfy done [-h|-L N] command\n'
