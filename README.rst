@@ -407,3 +407,4 @@ Contributors
 - `sambrightman <https://github.com/sambrightman>`_ - Prowl support
 - `mlesniew <https://github.com/mlesniew>`_ - Pushalot support
 - `webworxshop <https://github.com/webworxshop>`_ - Rocket.Chat support
+- `rhabbachi <https://github.com/rhabbachi>`_ - transient option in  Linux desktop notifications
