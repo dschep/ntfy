@@ -77,15 +77,15 @@ listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. For example:
 Extras
 ~~~~~~
 ``ntfy`` has a few features that require extra dependencies.
-    * ``ntfy done -p $PID`` requires installing as ``ntfy[pid]``
-    * emjoi support requires installing as ``ntfy[emoji]``
-    * XMPP support requires installing as ``ntfy[xmpp]``
-    * Telegram support requires installing as ``ntfy[telegram]``
-    * Instapush support requires installing as ``ntfy[instapush]``
-    * Slack support requires installing as ``ntfy[slack]``
-    * Rocket.Chat support requires installing as ``ntfy[rocketchat]``
+    * ``ntfy done -p $PID`` requires installing as ``pip install ntfy[pid]``
+    * emjoi support requires installing as ``pip install ntfy[emoji]``
+    * XMPP support requires installing as ``pip install ntfy[xmpp]``
+    * Telegram support requires installing as ``pip install ntfy[telegram]``
+    * Instapush support requires installing as ``pip install ntfy[instapush]``
+    * Slack support requires installing as ``pip install ntfy[slack]``
+    * Rocket.Chat support requires installing as ``pip install ntfy[rocketchat]``
 
-To install multiple extras, separate with commas: e.g., ``ntfy[pid,emjoi]``.
+To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emjoi]``.
 
 Configuring ``ntfy``
 --------------------
