@@ -49,6 +49,7 @@ def notify(title, message, icon=icon.ico, retcode=None):
                  "Balloon tooltip", title, 200, msg),
             )
             win32gui.DestroyWindow(self.hwnd)
+            win32gui.UnregisterClass(wc.lpszClassName, None)
 
         def OnDestroy(self, hwnd, msg, wparam, lparam):
             win32api.PostQuitMessage(0)  # Terminate the app.
