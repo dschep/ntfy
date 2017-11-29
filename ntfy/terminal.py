@@ -30,8 +30,7 @@ def osascript_tell(app, script):
 def darwin_iterm2_shell_is_focused():
     focused_tty = osascript_tell(
         'iTerm',
-        'tty of current session of current terminal',
-    )
+        'tty of current session of current terminal', )
     return focused_tty == ttyname(stdout.fileno())
 
 
@@ -39,8 +38,7 @@ def darwin_terminal_shell_is_focused():
     focused_tty = osascript_tell(
         'Terminal',
         'tty of (first tab of (first window whose frontmost is true) '
-        'whose selected is true)',
-    )
+        'whose selected is true)', )
     return focused_tty == ttyname(stdout.fileno())
 
 
@@ -51,8 +49,7 @@ def darwin_app_shell_is_focused():
     }.get(environ.get('TERM_PROGRAM'))
     focused_appid = osascript_tell(
         'System Events',
-        'name of first application process whose frontmost is true',
-    )
+        'name of first application process whose frontmost is true', )
     if current_appid == focused_appid:
         return {
             'Terminal': darwin_terminal_shell_is_focused,
