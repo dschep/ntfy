@@ -124,8 +124,8 @@ def watch_pid(args):
 
 def auto_done(args):
     if args.longer_than:
-        print(
-            'export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(args.longer_than))
+        print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(
+            args.longer_than))
     if args.unfocused_only:
         print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
     if args.shell == 'bash':

@@ -56,5 +56,5 @@ def notify(title,
         )
 
     message = message.replace('&', '&amp;')
-    dbus_iface.Notify('ntfy', 0,
-                      path.abspath(icon), title, message, [], hints, -1)
+    dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], hints,
+                      -1)

@@ -46,7 +46,8 @@ def notify(title, message, icon=icon.ico, retcode=None):
             win32gui.Shell_NotifyIcon(
                 win32gui.NIM_MODIFY,
                 (self.hwnd, 0, win32gui.NIF_INFO, win32con.WM_USER + 20, hicon,
-                 "Balloon tooltip", title, 200, msg), )
+                 "Balloon tooltip", title, 200, msg),
+            )
             win32gui.DestroyWindow(self.hwnd)
             win32gui.UnregisterClass(wc.lpszClassName, None)
 
