@@ -3,7 +3,7 @@ matrix:
     - language: generic
       os: osx
       before_install:
-        - sudo python <(curl https://bootstrap.pypa.io/get-pip.py)
+        - curl https://bootstrap.pypa.io/get-pip.py | sudo python
     - language: generic
       os: osx
       before_install:
