@@ -4,6 +4,9 @@ matrix:
       os: osx
       before_install:
         - curl https://bootstrap.pypa.io/get-pip.py | sudo python
+        - sudo pip install virtualenv
+        - virtualenv venv
+        - . ./venv/bin/activate
     - language: generic
       os: osx
       before_install:
