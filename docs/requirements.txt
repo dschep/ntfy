@@ -1,0 +1,1 @@
+ntfy[xmpp,telegram,instapush,rocketchat,slack,pid,emoji]
