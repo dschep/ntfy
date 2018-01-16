@@ -11,7 +11,7 @@
 # Author: Ryan Caloras (ryan@bashhub.com)
 # Forked from Original Author: Glyph Lefkowitz
 #
-# V0.3.6
+# V0.3.7
 #
 
 # General Usage:
@@ -106,7 +106,7 @@ __bp_precmd_invoke_cmd() {
         # Test existence of functions with: declare -[Ff]
         if type -t "$precmd_function" 1>/dev/null; then
             __bp_set_ret_value "$__bp_last_ret_value" "$__bp_last_argument_prev_command"
-            $precmd_function
+            "$precmd_function"
         fi
     done
 }
@@ -189,7 +189,7 @@ __bp_preexec_invoke_exec() {
     fi
 
     local this_command
-    this_command=$(HISTTIMEFORMAT= builtin history 1 | { read -r _ this_command; echo "$this_command"; })
+    this_command=$(HISTTIMEFORMAT= builtin history 1 | { IFS=" " read -r _ this_command; echo "$this_command"; })
 
     # Sanity check to make sure we have something to invoke our function with.
     if [[ -z "$this_command" ]]; then
@@ -210,7 +210,7 @@ __bp_preexec_invoke_exec() {
         # Test existence of function with: declare -[fF]
         if type -t "$preexec_function" 1>/dev/null; then
             __bp_set_ret_value $__bp_last_ret_value
-            $preexec_function "$this_command"
+            "$preexec_function" "$this_command"
             preexec_function_ret_value="$?"
             if [[ "$preexec_function_ret_value" != 0 ]]; then
                 preexec_ret_value="$preexec_function_ret_value"
