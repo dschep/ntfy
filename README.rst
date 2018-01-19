@@ -278,6 +278,7 @@ You will need to install some font that supports emojis (in Debian `fonts-symbol
 Optional parameters:
     * ``urgency`` - Specifies the urgency level (low, normal, critical).
     * ``transient`` - Skip the history (exp: the Gnome message tray) (true, false).
+    * ``soundfile`` - Specifies the notification sound file (e.g. /usr/share/sounds/notif.wav).
 
 Windows Desktop Notifications - ``win32``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
