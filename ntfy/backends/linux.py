@@ -8,6 +8,7 @@ def notify(title,
            icon=icon.png,
            urgency=None,
            transient=None,
+           soundfile=None,
            retcode=0):
     try:
         import dbus
@@ -55,6 +56,9 @@ def notify(title,
             'Unexpected value for the "transient" option. Expected values (true, false).'
         )
 
+    if soundfile:
+        hints.update({'sound-file': soundfile})
+
     message = message.replace('&', '&amp;')
-    dbus_iface.Notify('ntfy', 0,
-                      path.abspath(icon), title, message, [], hints, -1)
+    dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], hints,
+                      -1)

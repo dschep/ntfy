@@ -6,7 +6,15 @@ from sys import platform, stdout
 
 def linux_window_is_focused():
     xprop_cmd = shlex.split('xprop -root _NET_ACTIVE_WINDOW')
-    xprop_window_id = int(check_output(xprop_cmd).split()[-1], 16)
+    try:
+        xprop_window_id = int(check_output(xprop_cmd).split()[-1], 16)
+    except ValueError:
+        return False
+    except OSError as e:
+        if 'No such file' in e.strerror:
+            return False
+        else:
+            raise
     env_window_id = int(environ.get('WINDOWID', '0'))
     return env_window_id == xprop_window_id
 
@@ -22,7 +30,8 @@ def osascript_tell(app, script):
 def darwin_iterm2_shell_is_focused():
     focused_tty = osascript_tell(
         'iTerm',
-        'tty of current session of current terminal', )
+        'tty of current session of current terminal',
+    )
     return focused_tty == ttyname(stdout.fileno())
 
 
@@ -30,7 +39,8 @@ def darwin_terminal_shell_is_focused():
     focused_tty = osascript_tell(
         'Terminal',
         'tty of (first tab of (first window whose frontmost is true) '
-        'whose selected is true)', )
+        'whose selected is true)',
+    )
     return focused_tty == ttyname(stdout.fileno())
 
 
@@ -41,7 +51,8 @@ def darwin_app_shell_is_focused():
     }.get(environ.get('TERM_PROGRAM'))
     focused_appid = osascript_tell(
         'System Events',
-        'name of first application process whose frontmost is true', )
+        'name of first application process whose frontmost is true',
+    )
     if current_appid == focused_appid:
         return {
             'Terminal': darwin_terminal_shell_is_focused,

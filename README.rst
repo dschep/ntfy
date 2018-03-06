@@ -1,12 +1,12 @@
 About ``ntfy``
 ==============
-|Version|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_ |Gitter|_
+|Version|_ |Docs|_ |Build|_ |WinBuild|_ |Coverage|_ |SayThanks|_
 
 .. |Version| image:: https://img.shields.io/pypi/v/ntfy.svg?logo=data%3Aimage/svg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNDAiIGhlaWdodD0iMjQwIj48cGF0aCBmaWxsPSIjMzY3MWEyIiBkPSJNNjIuNDc2IDMzLjRjMC0xNi4zNiA0LjM4Ni0yNS4yNiAyOC42MDctMjkuNDk4IDE2LjQ0NC0yLjg4IDM3LjUyOC0zLjI0MiA1Ny4xOTMgMCAxNS41MzMgMi41NjQgMjguNjA3IDE0LjEzNCAyOC42MDcgMjkuNDk3djUzLjk3YzAgMTUuODMtMTIuNjkzIDI4Ljc5NS0yOC42MDcgMjguNzk1SDkxLjA4M2MtMTkuNDEgMC0zNS43NyAxNi41NS0zNS43NyAzNS4yNnYyNS44OTVIMzUuNjVjLTE2LjYzNiAwLTI2LjMyLTExLjk5My0zMC4zODgtMjguNzc2LTUuNDktMjIuNTQ2LTUuMjU2LTM1Ljk4IDAtNTcuNTc0QzkuODE4IDcyLjEzNyAyNC4zNzUgNjIuMTk4IDQxLjAxIDYyLjE5OGg3OC42OHYtNy4yMDRINjIuNDc2VjMzLjR6Ii8%2BPHBhdGggZmlsbD0iI2ZmZDA0NiIgZD0iTTE3Ni44ODMgMjA2LjEyM2MwIDE2LjM2LTE0LjE5OCAyNC42NDQtMjguNjA3IDI4Ljc3Ni0yMS42NzggNi4yMy0zOS4wNzUgNS4yNzMtNTcuMTkzIDAtMTUuMTMtNC40MS0yOC42MDctMTMuNDE3LTI4LjYwNy0yOC43OHYtNTMuOTdjMC0xNS41MzMgMTIuOTQ3LTI4Ljc5OCAyOC42MDctMjguNzk4aDU3LjE5M2MxOS4wNSAwIDM1Ljc3LTE2LjQ2NSAzNS43Ny0zNS45OFY2Mi4xOTZoMjEuNDQ0YzE2LjY1NiAwIDI0LjQ5NiAxMi4zNzYgMjguNjA3IDI4Ljc3NyA1LjcyMiAyMi43OCA1Ljk3NiAzOS44MTcgMCA1Ny41NzQtNS43ODUgMTcuMjUtMTEuOTcyIDI4Ljc3Ny0yOC42MDcgMjguNzc3aC04NS44djcuMjA1aDU3LjE5M3YyMS41OXoiLz48L3N2Zz4%3D
 .. _Version: https://pypi.python.org/pypi/ntfy
 .. |Docs| image:: http://readthedocs.org/projects/ntfy/badge/?version=latest
 .. _Docs: http://ntfy.readthedocs.org/en/stable/?badge=latest
-.. |Build| image:: https://img.shields.io/travis/dschep/ntfy/master.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSItMTQyLjUgLTE0Mi41IDI4NSAyODUiPjxjaXJjbGUgcj0iMTQxLjciIGZpbGw9IiNERDQ4MTQiLz48ZyBpZD0iYSIgZmlsbD0iI0ZGRiI%2BPGNpcmNsZSBjeD0iLTk2LjQiIHI9IjE4LjkiLz48cGF0aCBkPSJNLTQ1LjYgNjguNGMtMTYuNi0xMS0yOS0yOC0zNC00Ny44IDYtNSA5LjgtMTIuMyA5LjgtMjAuNnMtMy44LTE1LjctOS44LTIwLjZjNS0xOS44IDE3LjQtMzYuNyAzNC00Ny44bDEzLjggMjMuMkMtNDYtMzUuMi01NS4zLTE4LjctNTUuMyAwYzAgMTguNyA5LjMgMzUuMiAyMy41IDQ1LjJ6Ii8%2BPC9nPjx1c2UgeGxpbms6aHJlZj0iI2EiIHRyYW5zZm9ybT0icm90YXRlKDEyMCkiLz48dXNlIHhsaW5rOmhyZWY9IiNhIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDApIi8%2BPC9zdmc%2B
+.. |Build| image:: https://img.shields.io/travis/dschep/ntfy/master.svg?logo=data%3Aimage/svg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSItMTQyLjUgLTE0Mi41IDMyIDE2IiB3aWR0aD0iMzIiIGhlaWdodD0iMTYiPjxjaXJjbGUgcj0iOCIgY3g9Ii0xMzQuNSIgY3k9Ii0xMzQuNSIgZmlsbD0iI2RkNDgxNCIvPjxnIGlkPSJhIiB0cmFuc2Zvcm09Im1hdHJpeCguMDU2NDYgMCAwIC4wNTY0NiAtMTM0LjUgLTEzNC41KSIgZmlsbD0iI2ZmZiI%252BPGNpcmNsZSBjeD0iLTk2LjQiIHI9IjE4LjkiLz48cGF0aCBkPSJNLTQ1LjYgNjguNGMtMTYuNi0xMS0yOS0yOC0zNC00Ny44IDYtNSA5LjgtMTIuMyA5LjgtMjAuNnMtMy44LTE1LjctOS44LTIwLjZjNS0xOS44IDE3LjQtMzYuNyAzNC00Ny44bDEzLjggMjMuMkMtNDYtMzUuMi01NS4zLTE4LjctNTUuMyAwYzAgMTguNyA5LjMgMzUuMiAyMy41IDQ1LjJ6Ii8%252BPC9nPjx1c2UgeGxpbms6aHJlZj0iI2EiIHRyYW5zZm9ybT0icm90YXRlKDEyMCAtMTM0LjUgLTEzNC41KSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjx1c2UgeGxpbms6aHJlZj0iI2EiIHRyYW5zZm9ybT0icm90YXRlKC0xMjAgLTEzNC41IC0xMzQuNSkiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiLz48Y2lyY2xlIGN5PSItMTM0LjUiIGN4PSItMTM0LjUiIHI9IjgiIGZpbGw9IiNkZDQ4MTQiLz48ZyB0cmFuc2Zvcm09Im1hdHJpeCguMDU2NDYgMCAwIC4wNTY0NiAtMTM0LjUgLTEzNC41KSIgZmlsbD0iI2ZmZiI%252BPGNpcmNsZSByPSIxOC45IiBjeD0iLTk2LjQiLz48cGF0aCBkPSJNLTQ1LjYgNjguNGMtMTYuNi0xMS0yOS0yOC0zNC00Ny44IDYtNSA5LjgtMTIuMyA5LjgtMjAuNnMtMy44LTE1LjctOS44LTIwLjZjNS0xOS44IDE3LjQtMzYuNyAzNC00Ny44bDEzLjggMjMuMkMtNDYtMzUuMi01NS4zLTE4LjctNTUuMyAwYzAgMTguNyA5LjMgMzUuMiAyMy41IDQ1LjJ6Ii8%252BPC9nPjx1c2UgaGVpZ2h0PSIxMDAlIiB3aWR0aD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIC0xMzQuNSAtMTM0LjUpIiB4bGluazpocmVmPSIjYSIvPjx1c2UgaGVpZ2h0PSIxMDAlIiB3aWR0aD0iMTAwJSIgdHJhbnNmb3JtPSJyb3RhdGUoLTEyMCAtMTM0LjUgLTEzNC41KSIgeGxpbms6aHJlZj0iI2EiLz48cGF0aCBkPSJNLTExMS41NTUtMTMwLjAzMWE4LjY5OCA4LjY5OCAwIDAgMS0uODYgMS41NDZjLS40NTMuNjQ1LS44MjMgMS4wOTItMS4xMDkgMS4zNC0uNDQyLjQwNy0uOTE2LjYxNS0xLjQyNC42MjctLjM2NCAwLS44MDQtLjEwNC0xLjMxNS0uMzE0LS41MTQtLjIxLS45ODUtLjMxMy0xLjQxNy0uMzEzLS40NTIgMC0uOTM3LjEwMy0xLjQ1Ni4zMTMtLjUyLjIxLS45MzguMzItMS4yNTguMzMtLjQ4Ny4wMjEtLjk3Mi0uMTkzLTEuNDU3LS42NDMtLjMwOS0uMjctLjY5Ni0uNzMyLTEuMTU5LTEuMzg3LS40OTctLjctLjkwNS0xLjUxLTEuMjI1LTIuNDM0LS4zNDMtLjk5OS0uNTE1LTEuOTY2LS41MTUtMi45MDIgMC0xLjA3Mi4yMzItMS45OTcuNjk2LTIuNzcyYTQuMDgyIDQuMDgyIDAgMCAxIDEuNDU3LTEuNDc0IDMuOTIgMy45MiAwIDAgMSAxLjk3LS41NTZjLjM4NyAwIC44OTQuMTIgMS41MjQuMzU1LjYyOC4yMzYgMS4wMzIuMzU1IDEuMjA5LjM1NS4xMzIgMCAuNTgtLjE0IDEuMzQtLjQxOC43MTgtLjI1OSAxLjMyNS0uMzY2IDEuODIxLS4zMjQgMS4zNDcuMTA5IDIuMzU4LjY0IDMuMDMgMS41OTUtMS4yMDMuNzMtMS43OTkgMS43NTItMS43ODcgMy4wNjIuMDEgMS4wMjEuMzgxIDEuODcgMS4xMDkgMi41NDUuMzMuMzEzLjY5OC41NTUgMS4xMDguNzI3LS4wODkuMjU4LS4xODMuNTA1LS4yODIuNzQyem0tMy4wODgtMTIuMTQ5YzAgLjgtLjI5MiAxLjU0Ny0uODc1IDIuMjM5LS43MDMuODIyLTEuNTUzIDEuMjk3LTIuNDc2IDEuMjIyYTIuNTAyIDIuNTAyIDAgMCAxLS4wMTgtLjMwM2MwLS43NjguMzM0LTEuNTkuOTI4LTIuMjYzLjI5Ni0uMzQuNjczLS42MjMgMS4xMy0uODQ5LjQ1Ny0uMjIyLjg4OS0uMzQ1IDEuMjk1LS4zNjYuMDExLjEwNy4wMTYuMjE0LjAxNi4zMnoiIGZpbGw9IiNmZmYiLz48L3N2Zz4%3D
 .. _Build: https://travis-ci.org/dschep/ntfy
 .. |WinBuild| image:: https://img.shields.io/appveyor/ci/dschep/ntfy/master.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZyBmaWxsPSIjMUJBMUUyIiB0cmFuc2Zvcm09InNjYWxlKDgpIj48cGF0aCBkPSJNMCAyLjI2NWw2LjUzOS0uODg4LjAwMyA2LjI4OC02LjUzNi4wMzd6Ii8%2BPHBhdGggZD0iTTYuNTM2IDguMzlsLjAwNSA2LjI5My02LjUzNi0uODk2di01LjQ0eiIvPjxwYXRoIGQ9Ik03LjMyOCAxLjI2MWw4LjY3LTEuMjYxdjcuNTg1bC04LjY3LjA2OXoiLz48cGF0aCBkPSJNMTYgOC40NDlsLS4wMDIgNy41NTEtOC42Ny0xLjIyLS4wMTItNi4zNDV6Ii8%2BPC9nPjwvc3ZnPg==
 .. _WinBuild: https://ci.appveyor.com/project/dschep/ntfy
@@ -14,8 +14,8 @@ About ``ntfy``
 .. _Coverage: https://coveralls.io/github/dschep/ntfy?brach=master
 .. |Requires| image:: https://requires.io/github/dschep/ntfy/requirements.svg?branch=master
 .. _Requires: https://requires.io/github/dschep/ntfy/requirements/?branch=master
-.. |Gitter| image:: https://badges.gitter.im/.svg
-.. _Gitter: https://gitter.im/ntfy/Lobby
+.. |SayThanks| image:: https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg
+.. _SayThanks: https://saythanks.io/to/dschep
 
 
 ``ntfy`` brings notification to your shell. It can automatically provide
@@ -77,22 +77,22 @@ listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. For example:
 Extras
 ~~~~~~
 ``ntfy`` has a few features that require extra dependencies.
-    * ``ntfy done -p $PID`` requires installing as ``ntfy[pid]``
-    * emjoi support requires installing as ``ntfy[emoji]``
-    * XMPP support requires installing as ``ntfy[xmpp]``
-    * Telegram support requires installing as ``ntfy[telegram]``
-    * Instapush support requires installing as ``ntfy[instapush]``
-    * Slack support requires installing as ``ntfy[slack]``
-    * Rocket.Chat support requires installing as ``ntfy[rocketchat]``
+    * ``ntfy done -p $PID`` requires installing as ``pip install ntfy[pid]``
+    * emjoi support requires installing as ``pip install ntfy[emoji]``
+    * XMPP support requires installing as ``pip install ntfy[xmpp]``
+    * Telegram support requires installing as ``pip install ntfy[telegram]``
+    * Instapush support requires installing as ``pip install ntfy[instapush]``
+    * Slack support requires installing as ``pip install ntfy[slack]``
+    * Rocket.Chat support requires installing as ``pip install ntfy[rocketchat]``
 
-To install multiple extras, separate with commas: e.g., ``ntfy[pid,emjoi]``.
+To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emjoi]``.
 
 Configuring ``ntfy``
 --------------------
 
 ``ntfy`` is configured with a YAML file stored at ``~/.ntfy.yml`` or in standard platform specific locations:
 
-* Linux - ``~/config/ntfy/ntfy.yml``
+* Linux - ``~/.config/ntfy/ntfy.yml``
 * macOS - ``~/Library/Application Support/ntfy/ntfy.yml``
 * Windows - ``C:\Users\<User>\AppData\Local\dschep\ntfy.yml``
 
@@ -278,6 +278,7 @@ You will need to install some font that supports emojis (in Debian `fonts-symbol
 Optional parameters:
     * ``urgency`` - Specifies the urgency level (low, normal, critical).
     * ``transient`` - Skip the history (exp: the Gnome message tray) (true, false).
+    * ``soundfile`` - Specifies the notification sound file (e.g. /usr/share/sounds/notif.wav).
 
 Windows Desktop Notifications - ``win32``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

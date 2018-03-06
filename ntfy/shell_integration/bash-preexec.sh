@@ -11,7 +11,7 @@
 # Author: Ryan Caloras (ryan@bashhub.com)
 # Forked from Original Author: Glyph Lefkowitz
 #
-# V0.3.4
+# V0.3.7
 #
 
 # General Usage:
@@ -44,6 +44,9 @@ __bp_imported="defined"
 # functions, should they want it.
 __bp_last_ret_value="$?"
 __bp_last_argument_prev_command="$_"
+
+__bp_inside_precmd=0
+__bp_inside_preexec=0
 
 # Remove ignorespace and or replace ignoreboth from HISTCONTROL
 # so we can accurately invoke preexec with a command from our
@@ -83,9 +86,17 @@ __bp_interactive_mode() {
 # This function is installed as part of the PROMPT_COMMAND.
 # It will invoke any functions defined in the precmd_functions array.
 __bp_precmd_invoke_cmd() {
-
-    # Save the returned value from our last command
+    # Save the returned value from our last command. Note: this MUST be the
+    # first thing done in this function.
     __bp_last_ret_value="$?"
+
+    # Don't invoke precmds if we are inside an execution of an "original
+    # prompt command" by another precmd execution loop. This avoids infinite
+    # recursion.
+    if (( __bp_inside_precmd > 0 )); then
+      return
+    fi
+    local __bp_inside_precmd=1
 
     # Invoke every function defined in our function array.
     local precmd_function
@@ -95,7 +106,7 @@ __bp_precmd_invoke_cmd() {
         # Test existence of functions with: declare -[Ff]
         if type -t "$precmd_function" 1>/dev/null; then
             __bp_set_ret_value "$__bp_last_ret_value" "$__bp_last_argument_prev_command"
-            $precmd_function
+            "$precmd_function"
         fi
     done
 }
@@ -137,6 +148,12 @@ __bp_preexec_invoke_exec() {
     # https://stackoverflow.com/questions/40944532/bash-preserve-in-a-debug-trap#40944702
     __bp_last_argument_prev_command="$1"
 
+    # Don't invoke preexecs if we are inside of another preexec.
+    if (( __bp_inside_preexec > 0 )); then
+      return
+    fi
+    local __bp_inside_preexec=1
+
     # Checks if the file descriptor is not standard out (i.e. '1')
     # __bp_delay_install checks if we're in test. Needed for bats to run.
     # Prevents preexec from being invoked for functions in PS1
@@ -172,7 +189,7 @@ __bp_preexec_invoke_exec() {
     fi
 
     local this_command
-    this_command=$(HISTTIMEFORMAT= builtin history 1 | { read -r _ this_command; echo "$this_command"; })
+    this_command=$(HISTTIMEFORMAT= builtin history 1 | { IFS=" " read -r _ this_command; echo "$this_command"; })
 
     # Sanity check to make sure we have something to invoke our function with.
     if [[ -z "$this_command" ]]; then
@@ -193,7 +210,7 @@ __bp_preexec_invoke_exec() {
         # Test existence of function with: declare -[fF]
         if type -t "$preexec_function" 1>/dev/null; then
             __bp_set_ret_value $__bp_last_ret_value
-            $preexec_function "$this_command"
+            "$preexec_function" "$this_command"
             preexec_function_ret_value="$?"
             if [[ "$preexec_function_ret_value" != 0 ]]; then
                 preexec_ret_value="$preexec_function_ret_value"
@@ -281,7 +298,8 @@ __bp_install_after_session_init() {
     # trap. __bp_install sets PROMPT_COMMAND to its final value, so these are only
     # invoked once.
     # It's necessary to clear any existing DEBUG trap in order to set it from the install function.
-    PROMPT_COMMAND='__bp_trap_string=$(trap -p DEBUG); trap DEBUG; __bp_install'
+    # Using \n as it's the most universal delimiter of bash commands
+    PROMPT_COMMAND=$'\n__bp_trap_string="$(trap -p DEBUG)"\ntrap DEBUG\n__bp_install\n'
 }
 
 # Run our install so long as we're not delaying it.

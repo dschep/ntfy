@@ -43,6 +43,8 @@ def notify(title,
         data['providerkey'] = provider_key
 
     resp = requests.post(
-        API_URL, data=data, headers={'User-Agent': USER_AGENT})
+        API_URL, data=data, headers={
+            'User-Agent': USER_AGENT,
+        })
 
     resp.raise_for_status()

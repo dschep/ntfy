@@ -129,8 +129,8 @@ def watch_pid(args):
 
 def auto_done(args):
     if args.longer_than:
-        print(
-            'export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(args.longer_than))
+        print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(
+            args.longer_than))
     if args.unfocused_only:
         print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
     if args.shell == 'bash':
@@ -368,7 +368,7 @@ def main(cli_args=None):
         args.longer_than = config['longer_than']
 
     if getattr(args, 'func', None) == run_cmd and 'hide_command' in config:
-        args.hide_command = config['hide_commnad']
+        args.hide_command = config['hide_command']
 
     if hasattr(args, 'func'):
         message, retcode = args.func(args)

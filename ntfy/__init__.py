@@ -6,13 +6,12 @@ from importlib import import_module
 from inspect import getargspec
 from .backends.default import DefaultNotifierError
 
-__version__ = '2.5.0'
+__version__ = '2.5.1'
 
 _user_home = path.expanduser('~')
 _cwd = getcwd()
 if name != 'nt' and _cwd.startswith(_user_home):
-    default_title = '{}@{}:{}'.format(getuser(),
-                                      gethostname(),
+    default_title = '{}@{}:{}'.format(getuser(), gethostname(),
                                       path.join('~',
                                                 _cwd[len(_user_home) + 1:]))
 else:
