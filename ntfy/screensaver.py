@@ -1,5 +1,6 @@
 from shlex import split
 from subprocess import check_output, check_call, CalledProcessError, PIPE
+import sys
 
 # some adapted from
 # https://github.com/mtorromeo/xdg-utils/blob/master/scripts/xdg-screensaver.in#L540
@@ -91,6 +92,19 @@ def matescreensaver_is_locked():
     return bool(dbus_iface.GetActive())
 
 
+def macos_detect():
+    return sys.platform == 'darwin'
+
+
+def macos_is_locked():
+    # Strictly-speaking, this detects whether or not the screensaver is running. The screensaver 
+    # may or may not be locked.
+    cmd = '''tell application "System Events"
+                 get running of screen saver preferences
+             end tell'''
+    return check_output([ 'osascript', '-e', cmd ]) == b'true\n'
+
+
 def is_locked():
     if xscreensaver_detect():
         return xscreensaver_is_locked()
@@ -100,4 +114,6 @@ def is_locked():
         return gnomescreensaver_is_locked()
     if matescreensaver_detect():
         return matescreensaver_is_locked()
+    if macos_detect():
+        return macos_is_locked()
     return True
