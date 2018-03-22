@@ -97,12 +97,24 @@ def macos_detect():
 
 
 def macos_is_locked():
-    # Strictly-speaking, this detects whether or not the screensaver is running. The screensaver 
+    # Strictly-speaking, this detects whether or not the screensaver is running. The screensaver
     # may or may not be locked.
     cmd = '''tell application "System Events"
                  get running of screen saver preferences
              end tell'''
-    return check_output([ 'osascript', '-e', cmd ]) == b'true\n'
+    screensaver_is_running = check_output(
+        ['osascript', '-e', cmd]) == b'true\n'
+    if screensaver_is_running:
+        return True
+
+    # The screen may be locked even if the scrensaver is not running. This
+    # *should* cover that scenario.
+    # https: // stackoverflow.com/questions/11505255/osx-check-if-the-screen-is-locked
+    import Quartz
+    d = Quartz.CGSessionCopyCurrentDictionary()
+    screen_is_locked = d.get("CGSSessionScreenIsLocked", 0) == 1
+
+    return screen_is_locked
 
 
 def is_locked():
