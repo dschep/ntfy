@@ -6,7 +6,7 @@ from ntfy import __version__
 
 deps = ['requests', 'ruamel.yaml', 'appdirs']
 extra_deps = {
-    ':sys_platform == "win32"': ['pypiwin32==219'],
+    ':sys_platform == "win32"': ['pywin32'],
     ':sys_platform == "darwin"': ['pyobjc-core', 'pyobjc'],
     'xmpp': [
         'sleekxmpp', 'dnspython' if version_info[0] < 3 else 'dnspython3'],
