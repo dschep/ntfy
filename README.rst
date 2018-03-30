@@ -134,7 +134,8 @@ name and then specify the backend with a backend key. For example:
         backend: pushover
         user_key: hunter2
 
-See the backends below for available backends and options.
+See the backends below for available backends and options. As of v2.6.0 ``ntfy`` also supports
+`3rd party backends <#3rd-party-backends>`_
 
 `Pushover <https://pushover.net>`_ - ``pushover``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -364,6 +365,20 @@ Required parameters:
     * ``username`` - login username
     * ``password`` - login password
     * ``room`` - room/channel name to post in
+
+3rd party backends
+~~~~~~~~~~~~~~~~~~
+To use or implement your own backends, specify the full path of the module as your backend. The
+module needs to contain a module with a function called ``notify`` with the following signature:
+
+.. code:: python
+
+    def notify(title, message, **kwargs):
+        """
+        kwargs contains retcode if using ntfy done or ntfy shell-integration
+        and all options in your backend's section of the config
+        """
+        pass
 
 
 Other options
