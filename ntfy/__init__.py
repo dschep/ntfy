@@ -42,10 +42,13 @@ def notify(message, title, config=None, **kwargs):
         try:
             notifier = import_module('ntfy.backends.{}'.format(backend))
         except ImportError:
-            logging.getLogger(__name__).error(
-                'Invalid backend {}'.format(backend))
-            ret = 1
-            continue
+            try:
+                notifier = import_module(backend)
+            except ImportError:
+                logging.getLogger(__name__).error(
+                    'Invalid backend {}'.format(backend))
+                ret = 1
+                continue
 
         try:
             notify_ret = notifier.notify(
