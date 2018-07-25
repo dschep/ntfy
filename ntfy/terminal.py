@@ -2,7 +2,7 @@ import shlex
 from os import environ, ttyname
 from subprocess import PIPE, Popen, check_output
 from sys import platform, stdout
-from screensaver import is_locked
+from .screensaver import is_locked
 
 
 def linux_window_is_focused():
