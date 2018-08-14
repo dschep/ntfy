@@ -101,6 +101,14 @@ ntfy.backends.rocketchat module
     :undoc-members:
     :show-inheritance:
 
+ntfy.backends.matrix module
+-------------------------
+
+.. automodule:: ntfy.backends.matrix
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
