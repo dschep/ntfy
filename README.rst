@@ -366,6 +366,20 @@ Required parameters:
     * ``password`` - login password
     * ``room`` - room/channel name to post in
 
+`Matrix.org <https://matrix.org>`_ - ``matrix``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires extras, install like this: ``pip install ntfy[matrix]``.
+
+Required parameters:
+    * ``url`` - URL of your homeserver instance
+    * ``roomId`` - room to post in
+    * ``userId`` - login userid
+    * ``password`` - login password
+    * ``token`` - access token
+
+You must either specify ``token``, or ``userId`` and ``password``.
+
+
 3rd party backends
 ~~~~~~~~~~~~~~~~~~
 To use or implement your own backends, specify the full path of the module as your backend. The
@@ -424,3 +438,4 @@ Contributors
 - `mlesniew <https://github.com/mlesniew>`_ - Pushalot support
 - `webworxshop <https://github.com/webworxshop>`_ - Rocket.Chat support
 - `rhabbachi <https://github.com/rhabbachi>`_ - transient option in  Linux desktop notifications
+- `Half-Shot <https://github.com/Half-Shot>`_ - Matrix support
