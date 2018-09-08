@@ -67,7 +67,7 @@ def notify(message, title, config=None, **kwargs):
 
             args, _, _, defaults = getargspec(notifier.notify)
             possible_args = set(args)
-            required_args = set(args[:-len(defaults)])
+            required_args =  set(args) if defaults is None else set(args[:-len(defaults)])
             required_args -= set(['title', 'message', 'retcode'])
             unknown_args = set(backend_config) - possible_args
             missing_args = required_args - set(backend_config)
