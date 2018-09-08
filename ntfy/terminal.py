@@ -8,8 +8,10 @@ from .screensaver import is_locked
 def linux_window_is_focused():
     xprop_cmd = shlex.split('xprop -root _NET_ACTIVE_WINDOW')
     try:
-        xprop_window_id = int(check_output(xprop_cmd).split()[-1], 16)
-    except (ValueError, CalledProcessError):
+        xprop_window_id = int(check_output(xprop_cmd, stdout=PIPE, stderr=PIPE).split()[-1], 16)
+    except CalledProcessError:
+        return False
+    except ValueError:
         return False
     except OSError as e:
         if 'No such file' in e.strerror:
