@@ -1,6 +1,6 @@
 import shlex
 from os import environ, ttyname
-from subprocess import PIPE, Popen, check_output
+from subprocess import PIPE, Popen, check_output, CalledProcessError
 from sys import platform, stdout
 
 
@@ -8,7 +8,7 @@ def linux_window_is_focused():
     xprop_cmd = shlex.split('xprop -root _NET_ACTIVE_WINDOW')
     try:
         xprop_window_id = int(check_output(xprop_cmd).split()[-1], 16)
-    except ValueError:
+    except (ValueError, CalledProcessError):
         return False
     except OSError as e:
         if 'No such file' in e.strerror:
