@@ -181,7 +181,7 @@ Optional parameters
     * ``hostname`` (if not from jid)
     * ``port``
     * ``path_to_certs``
-    * ``mtype`` ('chat' required for Google Hangouts)
+    * ``mtype``
 
 Requires extras, install like this: ``pip install ntfy[xmpp]``.
 
@@ -191,11 +191,10 @@ path_to_certs = "path/to/ca/cert"
 Without dnspython library installed, you will need
 to specify the server hostname if it doesn't match the jid.
 
-For example, to use Google Talk you would need to use:
-hostname = 'talk.google.com'
-
 Specify port if other than 5222.
 NOTE: Ignored without specified hostname
+
+NOTE: Google Hangouts doesn't support XMPP since 2017
 
 `Telegram <https://telegram.org>`_ - ``telegram``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -378,6 +377,17 @@ Required parameters:
     * ``token`` - access token
 
 You must either specify ``token``, or ``userId`` and ``password``.
+
+
+`Webpush <https://github.com/dschep/ntfy-webpush>`_ - ``ntfy_webpush``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Webpush support is provded by an external ntfy module, install like this: ``pip install ntfy ntfy-webpush``.
+
+Required parameters:
+  * ``subscription_info`` - A `PushSubscription <https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription>`_ Object
+  * ``private_key`` - the path to private key file or anything else that works with `pywebpush <https://github.com/web-push-libs/pywebpush>`_.
+
+For more info, see _`ntfy-webpush` <https://github.com/dschep/ntfy-webpush>`_
 
 
 3rd party backends
