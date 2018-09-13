@@ -51,6 +51,9 @@ It can be installed in a virtualenv, but with some caveats: Linux notifications
 require ``--system-site-packages`` for the virtualenv and OS X notifications
 don't work at all.
 
+**:penguin: NOTE:** `Linux Desktop Notifications <#linux-desktop-notifications---linux>`_
+require Python DBUS bindings. See `here <#linux-desktop-notifications---linux>`_ for more info.
+
 Shell integration
 ~~~~~~~~~~~~~~~~~
 ``ntfy`` has support for **automatically** sending notifications when long
@@ -270,8 +273,7 @@ The following dependecies should be installed.
 
 .. code:: shell
 
-    $ sudo apt-get install libdbus-glib-1-dev libdbus-1-dev
-    $ pip install --user dbus-python
+    $ sudo apt install python-dbus # on ubuntu/debian
 
 You will need to install some font that supports emojis (in Debian `fonts-symbola` or Gentoo `media-fonts/symbola`).
 
