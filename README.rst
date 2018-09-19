@@ -81,12 +81,12 @@ Extras
 ~~~~~~
 ``ntfy`` has a few features that require extra dependencies.
     * ``ntfy done -p $PID`` requires installing as ``pip install ntfy[pid]``
-    * emjoi support requires installing as ``pip install ntfy[emoji]``
-    * XMPP support requires installing as ``pip install ntfy[xmpp]``
-    * Telegram support requires installing as ``pip install ntfy[telegram]``
-    * Instapush support requires installing as ``pip install ntfy[instapush]``
-    * Slack support requires installing as ``pip install ntfy[slack]``
-    * Rocket.Chat support requires installing as ``pip install ntfy[rocketchat]``
+    * [emoji](https://en.wikipedia.org/wiki/Emoji) support requires installing as ``pip install ntfy[emoji]``
+    * [XMPP](https://xmpp.org/) support requires installing as ``pip install ntfy[xmpp]``
+    * [Telegram](https://telegram.org/) support requires installing as ``pip install ntfy[telegram]``
+    * [Instapush](https://instapush.im/) support requires installing as ``pip install ntfy[instapush]``
+    * [Slack](https://slack.com/) support requires installing as ``pip install ntfy[slack]``
+    * [Rocket.Chat](https://Rocket.Chat) support requires installing as ``pip install ntfy[rocketchat]``
 
 To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emjoi]``.
 
@@ -449,5 +449,5 @@ Contributors
 - `sambrightman <https://github.com/sambrightman>`_ - Prowl support
 - `mlesniew <https://github.com/mlesniew>`_ - Pushalot support
 - `webworxshop <https://github.com/webworxshop>`_ - Rocket.Chat support
-- `rhabbachi <https://github.com/rhabbachi>`_ - transient option in  Linux desktop notifications
+- `rhabbachi <https://github.com/rhabbachi>`_ - transient option in Linux desktop notifications
 - `Half-Shot <https://github.com/Half-Shot>`_ - Matrix support
