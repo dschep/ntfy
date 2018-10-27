@@ -278,9 +278,11 @@ The following dependecies should be installed.
 You will need to install some font that supports emojis (in Debian `fonts-symbola` or Gentoo `media-fonts/symbola`).
 
 Optional parameters:
+    * ``icon`` - Specifies path to the notification icon, empty string for no icon.
     * ``urgency`` - Specifies the urgency level (low, normal, critical).
     * ``transient`` - Skip the history (exp: the Gnome message tray) (true, false).
     * ``soundfile`` - Specifies the notification sound file (e.g. /usr/share/sounds/notif.wav).
+    * ``timeout`` - Specifies notification expiration time level (-1 - system default, 0 - never expire).
 
 Windows Desktop Notifications - ``win32``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
