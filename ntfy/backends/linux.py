@@ -9,6 +9,7 @@ def notify(title,
            urgency=None,
            transient=None,
            soundfile=None,
+           timeout=-1,
            retcode=0):
     try:
         import dbus
@@ -60,5 +61,5 @@ def notify(title,
         hints.update({'sound-file': soundfile})
 
     message = message.replace('&', '&amp;')
-    dbus_iface.Notify('ntfy', 0, path.abspath(icon), title, message, [], hints,
-                      -1)
+    dbus_iface.Notify('ntfy', 0, "" if not icon else path.abspath(icon), title, 
+                      message, [], hints, int(timeout))
