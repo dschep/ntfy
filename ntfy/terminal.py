@@ -33,7 +33,7 @@ def osascript_tell(app, script):
 def darwin_iterm2_shell_is_focused():
     focused_tty = osascript_tell(
         'iTerm',
-        'tty of current session of current terminal',
+        'tty of current session of current window',
     )
     return focused_tty == ttyname(stdout.fileno())
 
@@ -54,7 +54,7 @@ def darwin_terminal_shell_is_focused():
 
 def darwin_app_shell_is_focused():
     current_appid = {
-        'iTerm.app': 'iTerm',
+        'iTerm.app': 'iTerm2',
         'Apple_Terminal': 'Terminal',
     }.get(environ.get('TERM_PROGRAM'))
     focused_appid = osascript_tell(
@@ -64,7 +64,7 @@ def darwin_app_shell_is_focused():
     if current_appid == focused_appid:
         return {
             'Terminal': darwin_terminal_shell_is_focused,
-            'iTerm': darwin_iterm2_shell_is_focused,
+            'iTerm2': darwin_iterm2_shell_is_focused,
         }[current_appid]()
 
 

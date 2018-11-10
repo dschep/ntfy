@@ -51,6 +51,9 @@ It can be installed in a virtualenv, but with some caveats: Linux notifications
 require ``--system-site-packages`` for the virtualenv and OS X notifications
 don't work at all.
 
+**:penguin: NOTE:** `Linux Desktop Notifications <#linux-desktop-notifications---linux>`_
+require Python DBUS bindings. See `here <#linux-desktop-notifications---linux>`_ for more info.
+
 Shell integration
 ~~~~~~~~~~~~~~~~~
 ``ntfy`` has support for **automatically** sending notifications when long
@@ -78,12 +81,12 @@ Extras
 ~~~~~~
 ``ntfy`` has a few features that require extra dependencies.
     * ``ntfy done -p $PID`` requires installing as ``pip install ntfy[pid]``
-    * emjoi support requires installing as ``pip install ntfy[emoji]``
-    * XMPP support requires installing as ``pip install ntfy[xmpp]``
-    * Telegram support requires installing as ``pip install ntfy[telegram]``
-    * Instapush support requires installing as ``pip install ntfy[instapush]``
-    * Slack support requires installing as ``pip install ntfy[slack]``
-    * Rocket.Chat support requires installing as ``pip install ntfy[rocketchat]``
+    * [emoji](https://en.wikipedia.org/wiki/Emoji) support requires installing as ``pip install ntfy[emoji]``
+    * [XMPP](https://xmpp.org/) support requires installing as ``pip install ntfy[xmpp]``
+    * [Telegram](https://telegram.org/) support requires installing as ``pip install ntfy[telegram]``
+    * [Instapush](https://instapush.im/) support requires installing as ``pip install ntfy[instapush]``
+    * [Slack](https://slack.com/) support requires installing as ``pip install ntfy[slack]``
+    * [Rocket.Chat](https://Rocket.Chat) support requires installing as ``pip install ntfy[rocketchat]``
 
 To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emjoi]``.
 
@@ -181,7 +184,7 @@ Optional parameters
     * ``hostname`` (if not from jid)
     * ``port``
     * ``path_to_certs``
-    * ``mtype`` ('chat' required for Google Hangouts)
+    * ``mtype``
 
 Requires extras, install like this: ``pip install ntfy[xmpp]``.
 
@@ -191,11 +194,10 @@ path_to_certs = "path/to/ca/cert"
 Without dnspython library installed, you will need
 to specify the server hostname if it doesn't match the jid.
 
-For example, to use Google Talk you would need to use:
-hostname = 'talk.google.com'
-
 Specify port if other than 5222.
 NOTE: Ignored without specified hostname
+
+NOTE: Google Hangouts doesn't support XMPP since 2017
 
 `Telegram <https://telegram.org>`_ - ``telegram``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -271,15 +273,16 @@ The following dependecies should be installed.
 
 .. code:: shell
 
-    $ sudo apt-get install libdbus-glib-1-dev libdbus-1-dev
-    $ pip install --user dbus-python
+    $ sudo apt install python-dbus # on ubuntu/debian
 
 You will need to install some font that supports emojis (in Debian `fonts-symbola` or Gentoo `media-fonts/symbola`).
 
 Optional parameters:
+    * ``icon`` - Specifies path to the notification icon, empty string for no icon.
     * ``urgency`` - Specifies the urgency level (low, normal, critical).
     * ``transient`` - Skip the history (exp: the Gnome message tray) (true, false).
     * ``soundfile`` - Specifies the notification sound file (e.g. /usr/share/sounds/notif.wav).
+    * ``timeout`` - Specifies notification expiration time level (-1 - system default, 0 - never expire).
 
 Windows Desktop Notifications - ``win32``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -380,6 +383,17 @@ Required parameters:
 You must either specify ``token``, or ``userId`` and ``password``.
 
 
+`Webpush <https://github.com/dschep/ntfy-webpush>`_ - ``ntfy_webpush``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Webpush support is provded by an external ntfy module, install like this: ``pip install ntfy ntfy-webpush``.
+
+Required parameters:
+  * ``subscription_info`` - A `PushSubscription <https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription>`_ Object
+  * ``private_key`` - the path to private key file or anything else that works with `pywebpush <https://github.com/web-push-libs/pywebpush>`_.
+
+For more info, see _`ntfy-webpush` <https://github.com/dschep/ntfy-webpush>`_
+
+
 3rd party backends
 ~~~~~~~~~~~~~~~~~~
 To use or implement your own backends, specify the full path of the module as your backend. The
@@ -437,5 +451,5 @@ Contributors
 - `sambrightman <https://github.com/sambrightman>`_ - Prowl support
 - `mlesniew <https://github.com/mlesniew>`_ - Pushalot support
 - `webworxshop <https://github.com/webworxshop>`_ - Rocket.Chat support
-- `rhabbachi <https://github.com/rhabbachi>`_ - transient option in  Linux desktop notifications
+- `rhabbachi <https://github.com/rhabbachi>`_ - transient option in Linux desktop notifications
 - `Half-Shot <https://github.com/Half-Shot>`_ - Matrix support
