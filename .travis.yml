@@ -40,6 +40,7 @@ script: |
 after_success: coveralls
 deploy:
   - provider: pypi
+    twine_version: 1.12.1
     distributions: sdist bdist_wheel
     on:
       tags: true
