@@ -81,12 +81,12 @@ Extras
 ~~~~~~
 ``ntfy`` has a few features that require extra dependencies.
     * ``ntfy done -p $PID`` requires installing as ``pip install ntfy[pid]``
-    * [emoji](https://en.wikipedia.org/wiki/Emoji) support requires installing as ``pip install ntfy[emoji]``
-    * [XMPP](https://xmpp.org/) support requires installing as ``pip install ntfy[xmpp]``
-    * [Telegram](https://telegram.org/) support requires installing as ``pip install ntfy[telegram]``
-    * [Instapush](https://instapush.im/) support requires installing as ``pip install ntfy[instapush]``
-    * [Slack](https://slack.com/) support requires installing as ``pip install ntfy[slack]``
-    * [Rocket.Chat](https://Rocket.Chat) support requires installing as ``pip install ntfy[rocketchat]``
+    * `emoji <https://en.wikipedia.org/wiki/Emojim>`_ support requires installing as ``pip install ntfy[emoji]``
+    * `XMPP <https://xmpp.org/>`_ support requires installing as ``pip install ntfy[xmpp]``
+    * `Telegram <https://telegram.org/>`_ support requires installing as ``pip install ntfy[telegram]``
+    * `Instapush <https://instapush.im/>`_ support requires installing as ``pip install ntfy[instapush]``
+    * `Slack <https://slack.com/>`_ support requires installing as ``pip install ntfy[slack]``
+    * `Rocket.Chat <https://Rocket.Chat>`_ support requires installing as ``pip install ntfy[rocketchat]``
 
 To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emjoi]``.
 
