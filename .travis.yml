@@ -40,6 +40,7 @@ script: |
 after_success: coveralls
 deploy:
   - provider: pypi
+    twine_version: 1.12.1
     distributions: sdist bdist_wheel
     on:
       tags: true
@@ -47,4 +48,4 @@ deploy:
       repo: dschep/ntfy
     user: dschep
     password:
-      secure: efA3tZAR8qOiQkG+uilQE+XdNn1Et+NBZpR36xXIa5i31zUqQQma6TUEeS989nZYINzXZSjYCuIEf4lgaVI587nszsRnmlkhIEmbqPJdUmpLQGeOvlzAOglTNuu9TxalZZfNV1smFJSj+t9ulZrpTT7WBuR9EsCr6fZ21llPUy8lqeFgSqhabXfM8FsplOrKTywIa241WL5qTU3HEeBBGEgke+oG6UTs0z68Kd/nZM2ETPPcXlrzLv8IetsH388LoiV3USMivIaQoeKt0Ulp0aJaNzUBSdKepAjFejtkYv58QX7sG5Wb7/0CPdWjaEFdqzRQsTnA9SBWz9qqg8FObYbeI5KcGKxIOEfHNXZT0mLRphwWeKKKzmLwI8WR1foHxBnb3G+AJCPTt8chyO1WqU2Fc349pCy1lP9iqZ5UKJYQfhK53oE+PhW1GyyN/nVcjOrdOfuMo55Ok3nui8kTtEFEqWfXo+SeYBSSnNfXW8+SUZYPSKFFaZvykGM50n8Gnr52/lGzHViue68do5HqhXKyKAXhYbIA61YdVViVH5XFnVf1JzlH2KXv1nRLjT/c7A7nUtPQ8WLhq9IIbP4oQlW3PzlMvbgrh2pwXCWcRAKsxbXyizFoNnK89PeYVOZhrJcRtnErCf3gSSJ2SVKwhqEFvVC5Bsy2DJS31/FoEJQ=
+      secure: Y1M1b2HnHi3uRgqXQWJSYFm2oAo+EbEEt4+9M8cqay1BhISUv0I727N/JUNiRoGAyt+6GTY9isEopO39LCXgTANYVzQHhQIEM9aY5DObFhwdkU3gv2YdE0MPAvh+VL3b5BDO8znc8lXxXzAvVDn4WFujnGeCPn+4ubP9OA2hnTyFiSlq+OqvNE6BoeZsUxeAOi29S65kSirevps1qDA/UeIT/94Qp5XtMolqlZtTTA6EEPNAA++mJcZYM7aBGf1oy89w7OupVw5t93Zhj90mb4z8p4VSfFXBcn40oo1DayegXF79tgqWLulz1fIzIJV3mY8Ge1Skp6HgJwNgmqOtiMcIwMbu/Kba9ifaFc+bUUQ1K0yZqNzznkDFscd8nQ9GJYXn+s92th0llQjBVzG5o89LPlEysMlb1ETu+BdP3kJruNX7ACKtQpBKMVHaYoDCkTb1rt7r5wbn/rc3wijRgTJo1fDG0XUuesAaaFpLo1bS3TRZQXu3zx+1OLQaXBWRA712HF6gLHbdK0aP8CCNWtayLz1ivjYg/F4W7rKePlTOeheRo2c8/k+CU6+AbblPZ7ane20/15tofzLnATFFpoRtXA7k4hfHIzC7s0R9nWYTU0OREe0ma+yJTUDQA+YKyVcPoFImdunGhkbxWDHggn+4RlXAWRPCRkhqI0g90Vw=
