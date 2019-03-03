@@ -1,5 +1,5 @@
-from matrix_client.client import MatrixClient
 from __future__ import unicode_literals
+from matrix_client.client import MatrixClient
 
 def notify(title, message, url, roomId, userId=None, token=None, password=None, retcode=None):
 
