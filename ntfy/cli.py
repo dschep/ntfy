@@ -1,3 +1,4 @@
+# PYTHON_ARGCOMPLETE_OK
 import argparse
 import logging
 import logging.config
@@ -25,6 +26,11 @@ try:
     import psutil
 except ImportError:
     psutil = None
+
+try:
+    import argcomplete
+except ImportError:
+    argcomplete = None
 
 try:
     from .terminal import is_focused
@@ -294,6 +300,8 @@ shell_integration_parser.set_defaults(func=auto_done)
 
 
 def main(cli_args=None):
+    if argcomplete is not None:
+        argcomplete.autocomplete(parser)
     if cli_args is not None:
         args = parser.parse_args(cli_args)
     else:

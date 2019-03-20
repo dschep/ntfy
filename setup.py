@@ -14,6 +14,7 @@ extra_deps = {
     'instapush': ['instapush'],
     'emoji': ['emoji'],
     'pid':['psutil'],
+    'autocomplete':['argcomplete'],
     'slack':['slack_sdk'],
     'rocketchat':['rocketchat-API'],
     'matrix':['matrix_client'],
