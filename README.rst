@@ -88,7 +88,7 @@ Extras
     * `Slack <https://slack.com/>`_ support requires installing as ``pip install ntfy[slack]``
     * `Rocket.Chat <https://Rocket.Chat>`_ support requires installing as ``pip install ntfy[rocketchat]``
 
-To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emjoi]``.
+To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emoji]``.
 
 Configuring ``ntfy``
 --------------------
