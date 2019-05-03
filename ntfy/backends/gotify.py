@@ -33,8 +33,12 @@ def notify(title,
     if priority is not None:
         data['priority'] = priority
 
-    if extras is not None:
-        data['extras'] = json.load(extras)
+    if extras is not None and type(extras) == dict:
+        data['extras'] = extras
+    elif extras is not None and type(extras) == str:
+        data['extras'] = json.loads(extras.replace("'", '"'))
+    else:
+        raise Exception('"extras" argument must be a string or a dictionary')
 
     headers = {'User-Agent': USER_AGENT}
 
