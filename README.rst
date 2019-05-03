@@ -393,6 +393,17 @@ Required parameters:
 
 For more info, see _`ntfy-webpush` <https://github.com/dschep/ntfy-webpush>`_
 
+`Gotify <https://gotify.net>`_ - ``gotify``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required parameter:
+   * ``url`` - The url of the gotify server
+   * ``access_token`` - Your Gotify App access token
+
+Optional parameters:
+   * ``extras`` - Additional data in json format sent along the message
+   * ``priority`` - integer
+
+For more info, see _`gotify` <https://gotify.net/docs>`_
 
 3rd party backends
 ~~~~~~~~~~~~~~~~~~
@@ -453,3 +464,4 @@ Contributors
 - `webworxshop <https://github.com/webworxshop>`_ - Rocket.Chat support
 - `rhabbachi <https://github.com/rhabbachi>`_ - transient option in Linux desktop notifications
 - `Half-Shot <https://github.com/Half-Shot>`_ - Matrix support
+- `Mike325 <https://github.com/Mike325>`_ - Gotify support
