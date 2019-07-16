@@ -5,7 +5,7 @@ from ..data import icon
 
 def notify(title,
            message,
-           icon=icon.png,
+           icon=path.abspath(icon.png),
            urgency=None,
            transient=None,
            soundfile=None,
@@ -61,5 +61,5 @@ def notify(title,
         hints.update({'sound-file': soundfile})
 
     message = message.replace('&', '&amp;')
-    dbus_iface.Notify('ntfy', 0, "" if not icon else path.abspath(icon), title, 
+    dbus_iface.Notify('ntfy', 0, "" or icon, title, 
                       message, [], hints, int(timeout))
