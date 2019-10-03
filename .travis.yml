@@ -3,12 +3,14 @@ matrix:
     - language: generic
       os: osx
       before_install:
+        - pip install virtualenv
         - virtualenv venv
         - . ./venv/bin/activate
     - language: generic
       os: osx
       before_install:
         - pyenv install 3.6.3
+        - pip install virtualenv
         - virtualenv env -p $(pyenv root)/versions/3.6.3/bin/python
         - source env/bin/activate
     - language: python
