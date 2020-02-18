@@ -1,6 +1,6 @@
-from requests import Request
+import requests
 
 
-def notify(title, message, url):
+def notify(title, message, url, retcode=None):
 
-    req = Request('POST', url, data={"text": message}, headers={"Content-type": "application/json"})
+    req = requests.post(url, json={"text": message})
