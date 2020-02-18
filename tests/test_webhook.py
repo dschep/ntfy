@@ -12,6 +12,5 @@ class TestWebhook(TestCase):
         notify('title', 'message', url)
         mock_post.assert_called_once_with(
             url,
-            json={'title': 'title',
-                  'message': 'message'},
+            json={'text': '*{}*\n{}'.format('title', 'message')},
             headers={'User-Agent': USER_AGENT})
