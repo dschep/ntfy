@@ -109,6 +109,13 @@ ntfy.backends.matrix module
     :undoc-members:
     :show-inheritance:
 
+ntfy.backends.astronote module
+-------------------------
+
+.. automodule:: ntfy.backends.astronote
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 Module contents
 ---------------

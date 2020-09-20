@@ -393,6 +393,18 @@ Required parameters:
 
 For more info, see _`ntfy-webpush` <https://github.com/dschep/ntfy-webpush>`_
 
+`AstroNote <https://astronote.app>`_ - ``astronote``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required parameters:
+    * ``token``
+
+Optional parameters:
+    * ``category``
+    * ``display_category``
+    * ``persistent``
+    * ``sound``
+
+For more info see the _AstroNote API Documentation <https://astronote.app/api>_
 
 3rd party backends
 ~~~~~~~~~~~~~~~~~~
