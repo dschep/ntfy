@@ -13,7 +13,8 @@ def notify(title,
            category=None,
            display_category=None,
            persistent=None,
-           sound=None):
+           sound=None,
+           retcode=None):
     """
     Required parameters:
         * ``token``
