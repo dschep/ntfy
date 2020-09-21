@@ -229,7 +229,7 @@ Required parameter:
 Requires extras, install like this: ``pip install ntfy[slack]``.
 
 Required parameter:
-    * ``token`` - The Slack service secret token, created in https://api.slack.com/web#authentication
+    * ``token`` - The Slack service secret token, either a legacy user token created at https://api.slack.com/custom-integrations/legacy-tokens or a token obtained by creating an app at https://api.slack.com/apps?new_app=1 with ``chat:write:bot`` scope and linking it to a workspace.
     * ``recipient`` - The Slack channel or user to send notifications to. If you use the ``#`` symbol the message is send to a Slack channel and if you use the ``@`` symbol the message is send to a Slack user.
 
 `Instapush <https://instapush.im/>`_ - ``insta``
