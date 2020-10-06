@@ -97,7 +97,7 @@ Configuring ``ntfy``
 
 * Linux - ``~/.config/ntfy/ntfy.yml``
 * macOS - ``~/Library/Application Support/ntfy/ntfy.yml``
-* Windows - ``C:\Users\<User>\AppData\Local\dschep\ntfy.yml``
+* Windows - ``C:\Users\<User>\AppData\Local\dschep\ntfy\ntfy.yml``
 
 Backends
 ~~~~~~~~
