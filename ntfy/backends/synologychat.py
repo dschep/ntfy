@@ -12,7 +12,7 @@ def notify(title, message,
         'text': message
     })
 
-    if bool(verify):
+    if verify:
         response = requests.post(webhook_url, body)
     else:
         with warnings.catch_warnings():
