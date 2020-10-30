@@ -86,6 +86,7 @@ Extras
     * `Telegram <https://telegram.org/>`_ support requires installing as ``pip install ntfy[telegram]``
     * `Instapush <https://instapush.im/>`_ support requires installing as ``pip install ntfy[instapush]``
     * `Slack <https://slack.com/>`_ support requires installing as ``pip install ntfy[slack]``
+    * `Slack Incoming Webhooks<https://slack.com/>`_ - simpler slack implementation that doesn't have additional dependencies
     * `Rocket.Chat <https://Rocket.Chat>`_ support requires installing as ``pip install ntfy[rocketchat]``
 
 To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emoji]``.
@@ -224,13 +225,19 @@ Required parameter:
     * ``webhook`` - The webhook link, created at https://n.tkte.ch/
                     (choose ``Plain Text`` service when creating the webhook)
 
-`Slack <https://slack.com>`_ - ``Slack``
+`Slack <https://slack.com>`_ - ``slack``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Requires extras, install like this: ``pip install ntfy[slack]``.
 
 Required parameter:
     * ``token`` - The Slack service secret token, either a legacy user token created at https://api.slack.com/custom-integrations/legacy-tokens or a token obtained by creating an app at https://api.slack.com/apps?new_app=1 with ``chat:write:bot`` scope and linking it to a workspace.
     * ``recipient`` - The Slack channel or user to send notifications to. If you use the ``#`` symbol the message is send to a Slack channel and if you use the ``@`` symbol the message is send to a Slack user.
+
+`Slack Incoming Webhook <https://slack.com>`_ - ``slack_webhook``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Required parameter:
+    * ``url`` - the URL of the incoming webhook
+    * ``user`` - The Slack channel or user to send notifications to
 
 `Instapush <https://instapush.im/>`_ - ``insta``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

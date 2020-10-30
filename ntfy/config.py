@@ -9,6 +9,7 @@ from appdirs import site_config_dir, user_config_dir
 from ruamel import yaml
 
 from . import __version__
+from .default_config import config as default_configuration
 
 if yaml.version_info < (0, 15):
     safe_load = yaml.safe_load
@@ -33,7 +34,7 @@ def load_config(config_path=DEFAULT_CONFIG):
     except IOError as e:
         if e.errno == errno.ENOENT and config_path == DEFAULT_CONFIG:
             logger.info('{} not found'.format(config_path))
-            config = {}
+            config = default_configuration
         else:
             logger.error(
                 'Failed to open {}'.format(config_path), exc_info=True)
