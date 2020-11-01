@@ -4,14 +4,14 @@ from subprocess import PIPE, Popen, check_output, CalledProcessError
 from sys import platform, stdout
 
 def tmux_is_focused():
-    cmd = shlex.split('tmux list-panes -F "#D:#{window_active}:#{session_attached}"')
+    cmd = shlex.split('tmux list-panes -F "#{pane_id}:#{pane_active}:#{window_active}:#{session_attached}"')
     pane = environ.get('TMUX_PANE')
     p = Popen(cmd, stdout=PIPE, stderr=PIPE)
     p.wait()
     if p.poll() != 0:
         return False
     panes = p.stdout.read().decode()
-    return True if panes.find(pane + ':1:1') != -1 else False
+    return True if panes.find(pane + ':1:1:1') != -1 else False
 
 
 def linux_window_is_focused():
@@ -80,14 +80,14 @@ def darwin_app_shell_is_focused():
 
 
 def is_focused():
+    retval = None
+
     if platform.startswith('linux') and environ.get('DISPLAY'):
         retval = linux_window_is_focused()
     elif platform == 'darwin':
         retval = darwin_app_shell_is_focused()
 
-    retval = False if not retval else retval
-
     if environ.get('TMUX'):
-        return retval & tmux_is_focused()
+        return tmux_is_focused() & (retval if retval is not None else True)
     else:
         return retval
