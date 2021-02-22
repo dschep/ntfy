@@ -19,7 +19,7 @@ function _ntfy_precmd () {
     ntfy_start_time=''
 
     local appname=$(basename "${ntfy_command%% *}")
-    [[ " $AUTO_NTFY_DONE_IGNORE " == *" $appname "* ]] && return
+    [[ " $AUTO_NTFY_DONE_IGNORE " == *" $appname "* || " $AUTO_NTFY_DONE_IGNORE " == *"'$ntfy_command'"* ]] && return
 
     (ntfy $AUTO_NTFY_DONE_OPTS done \
         $AUTO_NTFY_DONE_UNFOCUSED_ONLY $AUTO_NTFY_DONE_LONGER_THAN \
