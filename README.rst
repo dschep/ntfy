@@ -86,7 +86,7 @@ Extras
     * `Telegram <https://telegram.org/>`_ support requires installing as ``pip install ntfy[telegram]``
     * `Instapush <https://instapush.im/>`_ support requires installing as ``pip install ntfy[instapush]``
     * `Slack <https://slack.com/>`_ support requires installing as ``pip install ntfy[slack]``
-    * `Slack Incoming Webhooks<https://slack.com/>`_ - simpler slack implementation that doesn't have additional dependencies
+    * `Slack Incoming webhook <https://slack.com/>`_ - simpler slack implementation that doesn't have additional dependencies
     * `Rocket.Chat <https://Rocket.Chat>`_ support requires installing as ``pip install ntfy[rocketchat]``
 
 To install multiple extras, separate with commas: e.g., ``pip install ntfy[pid,emoji]``.
