@@ -7,7 +7,7 @@ def notify(title, message, url, user, **kwargs):
         url,
         json={
             "text": "{0}\n{1}".format(title, message),
-            "user": user,
+            "channel": user,
             "blocks": [
                 {
                     "type": "section",
