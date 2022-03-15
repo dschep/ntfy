@@ -141,7 +141,7 @@ def auto_done(args):
                 args.longer_than))
         if args.unfocused_only:
             print('set -x AUTO_NTFY_DONE_UNFOCUSED_ONLY -b')
-        print('source {}'.format(sh_quote(scripts['auto-ntfy-done.sh'])))
+        print('source {}'.format(sh_quote(scripts['auto-ntfy-done.fish'])))
         print("# To use ntfy's shell integration, run "
               "this and add it to your shell's config file:")
         print('# eval "(ntfy shell-integration)"')
