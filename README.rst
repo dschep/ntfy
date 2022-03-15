@@ -57,16 +57,18 @@ require Python DBUS bindings. See `here <#linux-desktop-notifications---linux>`_
 Shell integration
 ~~~~~~~~~~~~~~~~~
 ``ntfy`` has support for **automatically** sending notifications when long
-running commands finish in bash and zsh. In bash it emulates zsh's preexec and
+running commands finish in bash, zsh, and fish. In bash it emulates zsh's preexec and
 precmd functionality with `rcaloras/bash-preexec <https://github.com/rcaloras/bash-preexec>`_.
-To enable it add the following to your ``.bashrc`` or ``.zshrc``:
+In fish it hooks into the `fish_preexec` and `fish_postexec` function events.
+To enable it add the following to your ``.bashrc``, ``.zshrc``, or ``config.fish``:
 
 .. code:: shell
 
-    eval "$(ntfy shell-integration)"
+    eval "$(ntfy shell-integration)" # omit $ in case of fish
 
 By default it will only send notifications for commands lasting longer than 10
-seconds and if the terminal is focused. Terminal focus works on X11(Linux) and
+seconds and if the terminal is focused. This can be changed using the ``-L``
+option when invoking ``shell integration``. Terminal focus works on X11(Linux) and
 with Terminal.app and iTerm2 on MacOS. Both options can be configured via the
 ``--longer-than`` and ``--foreground-too`` options.
 
@@ -460,3 +462,4 @@ Contributors
 - `webworxshop <https://github.com/webworxshop>`_ - Rocket.Chat support
 - `rhabbachi <https://github.com/rhabbachi>`_ - transient option in Linux desktop notifications
 - `Half-Shot <https://github.com/Half-Shot>`_ - Matrix support
+- `Trafficone <https://github.com/trafficone>` - Fish shell support
