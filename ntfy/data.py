@@ -23,7 +23,7 @@ for fmt in ['png', 'ico']:
             icon_file.write(get_data('ntfy', 'icon.' + fmt))
 
 scripts = {}
-for script in ['auto-ntfy-done.sh', 'bash-preexec.sh']:
+for script in ['auto-ntfy-done.sh', 'bash-preexec.sh', 'auto-ntfy-done.fish']:
     script_path = path.abspath(path.join(ntfy_data_dir, script))
     scripts[script] = script_path
     if not path.isfile(script_path) or progmtime > path.getmtime(script_path):

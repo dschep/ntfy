@@ -22,7 +22,7 @@ function _ntfy_precmd --on-event fish_postexec
 
     ntfy $AUTO_NTFY_DONE_OPTS done \
         $AUTO_NTFY_DONE_UNFOCUSED_ONLY $AUTO_NTFY_DONE_LONGER_THAN \
-        --formatter $ntfy_command $ret_value $duration 
+        --formatter $ntfy_command $ret_value $duration &
 end
 
 function _ntfy_preexec --on-event fish_preexec 
