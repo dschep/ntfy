@@ -12,7 +12,7 @@ extra_deps = {
         'sleekxmpp', 'dnspython' if version_info[0] < 3 else 'dnspython3'],
     'telegram': ['telegram-send'],
     'instapush': ['instapush'],
-    'emoji': ['emoji'],
+    'emoji': ['emoji >= 1.6.2'],
     'pid':['psutil'],
     'slack':['slack_sdk'],
     'rocketchat':['rocketchat-API'],

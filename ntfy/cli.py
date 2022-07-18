@@ -358,7 +358,7 @@ def main(cli_args=None):
         if message is None:
             return 0
         if emojize is not None and not args.no_emoji:
-            message = emojize(message, use_aliases=True)
+            message = emojize(message, language='alias')
         return notify(
             message,
             args.title,
