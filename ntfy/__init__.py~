@@ -43,7 +43,7 @@ def notify(message, title, config=None, **kwargs):
             notifier = import_module(backend_notifier_path)
         except ImportError as e:
             logging.getLogger(__name__).error(
-                    "Could not import notifier from '{}'. Reason: {}"
+                    'Could not import notifier from {}. Reason: {}'
                     .format(backend_notifier_path, e))
             try:
                 notifier = import_module(backend)
