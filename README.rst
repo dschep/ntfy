@@ -400,6 +400,15 @@ Required parameters:
 
 For more info, see _`ntfy-webpush` <https://github.com/dschep/ntfy-webpush>`_
 
+`Gotify <https://pypi.org/project/gotify/>`_ - ``gotify``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires extras, install like this: ``pip install ntfy[gotify]``.
+
+Required parameters:
+  * ``base_url`` - A `gotify <https://gotify.net/>`_ server
+  * ``app_token`` - the created application token on the gotify server.
+
+For more info, see _`python-gotify` <https://pypi.org/project/gotify/>`_
 
 3rd party backends
 ~~~~~~~~~~~~~~~~~~
