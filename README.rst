@@ -392,7 +392,7 @@ You must either specify ``token``, or ``userId`` and ``password``.
 
 `Webpush <https://github.com/dschep/ntfy-webpush>`_ - ``ntfy_webpush``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Webpush support is provded by an external ntfy module, install like this: ``pip install ntfy ntfy-webpush``.
+Webpush support is provided by an external ntfy module, install like this: ``pip install ntfy ntfy-webpush``.
 
 Required parameters:
   * ``subscription_info`` - A `PushSubscription <https://developer.mozilla.org/en-US/docs/Web/API/PushSubscription>`_ Object
@@ -400,6 +400,15 @@ Required parameters:
 
 For more info, see _`ntfy-webpush` <https://github.com/dschep/ntfy-webpush>`_
 
+`Gotify <https://pypi.org/project/gotify/>`_ - ``gotify``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Requires extras, install like this: ``pip install ntfy[gotify]``.
+
+Required parameters:
+  * ``base_url`` - A `gotify <https://gotify.net/>`_ server
+  * ``app_token`` - the created application token on the gotify server.
+
+For more info, see _`python-gotify` <https://pypi.org/project/gotify/>`_
 
 3rd party backends
 ~~~~~~~~~~~~~~~~~~

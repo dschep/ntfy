@@ -1,1 +1,1 @@
-ntfy[xmpp,telegram,instapush,rocketchat,slack,pid,emoji]
+ntfy[xmpp,telegram,instapush,rocketchat,slack,pid,emoji,gotify]
