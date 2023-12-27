@@ -3,7 +3,7 @@ from getpass import getuser
 from os import getcwd, path, name
 from socket import gethostname
 from importlib import import_module
-from inspect import getargspec
+from inspect import getfullargspec
 from .backends.default import DefaultNotifierError
 
 __version__ = '2.7.1'
@@ -65,7 +65,7 @@ def notify(message, title, config=None, **kwargs):
                 notifier = e.module
                 e = e.exception
 
-            args, _, _, defaults = getargspec(notifier.notify)
+            args, _, _, defaults = getfullargspec(notifier.notify)
             possible_args = set(args)
             required_args =  set(args) if defaults is None else set(args[:-len(defaults)])
             required_args -= set(['title', 'message', 'retcode'])
