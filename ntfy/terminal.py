@@ -3,6 +3,16 @@ from os import environ, ttyname
 from subprocess import PIPE, Popen, check_output, CalledProcessError
 from sys import platform, stdout
 
+def tmux_is_focused():
+    cmd = shlex.split('tmux list-panes -F "#{pane_id}:#{pane_active}:#{window_active}:#{session_attached}"')
+    pane = environ.get('TMUX_PANE')
+    p = Popen(cmd, stdout=PIPE, stderr=PIPE)
+    p.wait()
+    if p.poll() != 0:
+        return False
+    panes = p.stdout.read().decode()
+    return True if panes.find(pane + ':1:1:1') != -1 else False
+
 
 def linux_window_is_focused():
     xprop_cmd = shlex.split('xprop -root _NET_ACTIVE_WINDOW')
@@ -20,6 +30,13 @@ def linux_window_is_focused():
     env_window_id = int(environ.get('WINDOWID', '0'))
     return env_window_id == xprop_window_id
 
+def get_tty():
+    if environ.get('TMUX'):
+        # tmux list-clients -F '#{client_tty}'
+        tprop_cmd = shlex.split("tmux list-clients -F '#{client_tty}'")
+        return check_output(tprop_cmd).decode().strip()
+    else:
+        return ttyname(stdout.fileno())
 
 def osascript_tell(app, script):
     p = Popen(['osascript'], stdin=PIPE, stdout=PIPE)
@@ -34,7 +51,7 @@ def darwin_iterm2_shell_is_focused():
         'iTerm',
         'tty of current session of current window',
     )
-    return focused_tty == ttyname(stdout.fileno())
+    return focused_tty == get_tty()
 
 
 def darwin_terminal_shell_is_focused():
@@ -43,7 +60,7 @@ def darwin_terminal_shell_is_focused():
         'tty of (first tab of (first window whose frontmost is true) '
         'whose selected is true)',
     )
-    return focused_tty == ttyname(stdout.fileno())
+    return focused_tty == get_tty()
 
 
 def darwin_app_shell_is_focused():
@@ -63,9 +80,14 @@ def darwin_app_shell_is_focused():
 
 
 def is_focused():
+    retval = None
+
     if platform.startswith('linux') and environ.get('DISPLAY'):
-        return linux_window_is_focused()
+        retval = linux_window_is_focused()
     elif platform == 'darwin':
-        return darwin_app_shell_is_focused()
+        retval = darwin_app_shell_is_focused()
+
+    if environ.get('TMUX'):
+        return tmux_is_focused() & (retval if retval is not None else True)
     else:
-        return False
+        return retval
