@@ -59,7 +59,7 @@ setup(
     keywords='push notification',
 
     packages=find_packages(exclude=['tests', 'tests.*']),
-    package_data={'ntfy': ['icon.png', 'icon.ico', 'shell_integration/*.sh']},
+    package_data={'ntfy': ['icon.png', 'icon.ico', 'shell_integration/*.sh', 'shell_integration/*.fish']},
 
     install_requires=deps,
 

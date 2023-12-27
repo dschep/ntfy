@@ -123,17 +123,28 @@ def watch_pid(args):
 
 
 def auto_done(args):
-    if args.longer_than:
-        print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(
-            args.longer_than))
-    if args.unfocused_only:
-        print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
-    if args.shell == 'bash':
-        print('source {}'.format(sh_quote(scripts['bash-preexec.sh'])))
-    print('source {}'.format(sh_quote(scripts['auto-ntfy-done.sh'])))
-    print("# To use ntfy's shell integration, run "
-          "this and add it to your shell's rc file:")
-    print('# eval "$(ntfy shell-integration)"')
+    if args.shell in ['bash','zsh']:
+        if args.longer_than:
+            print('export AUTO_NTFY_DONE_LONGER_THAN=-L{}'.format(
+                args.longer_than))
+        if args.unfocused_only:
+            print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
+        if args.shell == 'bash':
+            print('source {}'.format(sh_quote(scripts['bash-preexec.sh'])))
+        print('source {}'.format(sh_quote(scripts['auto-ntfy-done.sh'])))
+        print("# To use ntfy's shell integration, run "
+              "this and add it to your shell's rc file:")
+        print('# eval "$(ntfy shell-integration)"')
+    else:
+        if args.longer_than:
+            print('set -x AUTO_NTFY_DONE_LONGER_THAN -L{};'.format(
+                args.longer_than))
+        if args.unfocused_only:
+            print('set -x AUTO_NTFY_DONE_UNFOCUSED_ONLY -b;')
+            print('source {};'.format(sh_quote(scripts['auto-ntfy-done.fish'])))
+        print("# To use ntfy's shell integration, run "
+              "this and add it to your shell's config file:")
+        print('# eval "(ntfy shell-integration)"')
     return None, None
 
 
@@ -274,7 +285,7 @@ shell_integration_parser.add_argument(
     '-s',
     '--shell',
     default=path.split(environ.get('SHELL', ''))[1],
-    choices=['bash', 'zsh'],
+    choices=['bash', 'zsh','fish'],
     help='The shell to integrate ntfy with (default: $SHELL)')
 shell_integration_parser.add_argument(
     '-L',
