@@ -8,8 +8,7 @@ deps = ['requests', 'ruamel.yaml', 'appdirs']
 extra_deps = {
     ':sys_platform == "win32"': ['pywin32'],
     ':sys_platform == "darwin"': ['pyobjc-core', 'pyobjc'],
-    'xmpp': [
-        'sleekxmpp', 'dnspython' if version_info[0] < 3 else 'dnspython3'],
+    'xmpp': ['sleekxmpp', 'dnspython3'],
     'telegram': ['telegram-send'],
     'instapush': ['instapush'],
     'emoji': ['emoji >= 1.6.2'],
@@ -47,8 +46,6 @@ setup(
 
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
 
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
