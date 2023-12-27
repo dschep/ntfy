@@ -75,7 +75,7 @@ listed in ``AUTO_NTFY_DONE_IGNORE`` don't generate notifications. For example:
 
 .. code:: shell
 
-    export AUTO_NTFY_DONE_IGNORE="vim screen meld"
+    export AUTO_NTFY_DONE_IGNORE="vim screen meld 'npm run dev' 'npm run watch'"
 
 Extras
 ~~~~~~
