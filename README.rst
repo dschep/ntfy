@@ -82,6 +82,7 @@ Extras
 ``ntfy`` has a few features that require extra dependencies.
     * ``ntfy done -p $PID`` requires installing as ``pip install ntfy[pid]``
     * `emoji <https://en.wikipedia.org/wiki/Emoji>`_ support requires installing as ``pip install ntfy[emoji]``
+    * `autocomplete <https://argcomplete.readthedocs.io>`_ support requires installing as ``pip install ntfy[autocomplete]``
     * `XMPP <https://xmpp.org/>`_ support requires installing as ``pip install ntfy[xmpp]``
     * `Telegram <https://telegram.org/>`_ support requires installing as ``pip install ntfy[telegram]``
     * `Instapush <https://instapush.im/>`_ support requires installing as ``pip install ntfy[instapush]``
