@@ -162,6 +162,18 @@ class TestIntegration(TestCase):
         }
         ntfy_main(['send', 'ms'])
 
+    @patch(builtin_module + '.open', mock_open())
+    @patch('ntfy.config.safe_load')
+    @patch('ntfy.backends.astronote.requests.post')
+    def test_astronote(self, mock_post, mock_yamlload):
+        mock_yamlload.return_value = {
+            'backends': ['astronote'],
+            'astronote': {
+                'token': 'token',
+            },
+        }
+        self.assertEqual(0, ntfy_main(['send', 'foobar']))
+
 
 if __name__ == '__main__':
     main()
