@@ -8,3 +8,4 @@ htmlcov
 *.orig
 .coverage
 cover
+.venv/

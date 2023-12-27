@@ -376,6 +376,16 @@ Required parameters:
     * ``password`` - login password
     * ``room`` - room/channel name to post in
 
+`Rocket.Chat <https://rocket.chat>`_ using tokens - ``rocketchat_token``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Does not require any extras but you must generate an "personal access token": https://developer.rocket.chat/api/rest-api/personal-access-tokens
+
+Required parameters:
+    * ``url`` - URL of your Rocket.Chat instance
+    * ``user_id`` - login username
+    * ``auth_token`` - login password
+    * ``channel`` - room/channel name to post in
+
 `Matrix.org <https://matrix.org>`_ - ``matrix``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Requires extras, install like this: ``pip install ntfy[matrix]``.
