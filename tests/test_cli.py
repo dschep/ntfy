@@ -174,7 +174,7 @@ class TestMain(TestCase):
     @patch('ntfy.backends.default.notify')
     def test_args(self, mock_notify):
         mock_notify.return_value = None
-        self.assertEquals(0,
+        self.assertEqual(0,
                           ntfy_main([
                               '-o', 'foo', 'bar', '-b', 'default', '-t',
                               'TITLE', 'send', 'test'
