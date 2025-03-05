@@ -19,7 +19,7 @@ extra_deps = {
 }
 test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
 
-long_description = open('README.md').read()
+long_description = "See the repo readme for mor information"
 
 setup(
     name='ntfy',
