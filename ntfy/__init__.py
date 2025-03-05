@@ -65,7 +65,7 @@ def notify(message, title, config=None, **kwargs):
                 notifier = e.module
                 e = e.exception
 
-            args, _, _, defaults = getfullargspec(notifier.notify)
+            args, _, _, defaults, *_ = getfullargspec(notifier.notify)
             possible_args = set(args)
             required_args =  set(args) if defaults is None else set(args[:-len(defaults)])
             required_args -= set(['title', 'message', 'retcode'])
