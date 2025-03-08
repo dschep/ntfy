@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-13, ubuntu-18.04]
+        python-version: ['2.7', '3.4', '3.5', '3.6', 'pypy']
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools
+          pip install .[xmpp]
+          pip install coveralls yapf twine
+        shell: bash
+
+      - name: Run tests
+        run: |
+          set -e
+          coverage run --source=ntfy setup.py test
+          if ! python --version 2>&1; then
+            yapf -r ntfy -d
+            [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
+          fi
+        shell: bash
+
+      - name: Upload coverage to Coveralls
+        run: coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
