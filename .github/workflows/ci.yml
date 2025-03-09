@@ -32,7 +32,7 @@ jobs:
           python -m pip install --upgrade pip setuptools
           pip install .
           pip install -r test-requirements.txt
-          pip install coveralls yapf twine pytest-cov
+          pip install yapf twine pytest-cov
         shell: bash
 
       - name: Run tests
@@ -46,6 +46,17 @@ jobs:
         shell: bash
 
       - name: Upload coverage to Coveralls
-        run: coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        uses: coverallsapp/github-action@v2
+        with:
+          flag-name: run-${{ join(matrix.*, '-') }}
+          parallel: true
+
+  finish:
+    needs: test
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Signal test completion to coverage
+      uses: coverallsapp/github-action@v2
+      with:
+        parallel-finished: true
