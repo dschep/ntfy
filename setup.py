@@ -17,7 +17,6 @@ extra_deps = {
     'rocketchat':['rocketchat-API'],
     'matrix':['matrix_client'],
 }
-test_deps = ['mock', 'sleekxmpp', 'emoji', 'psutil']
 
 long_description = "See the repo readme for mor information"
 
@@ -57,9 +56,6 @@ setup(
     install_requires=deps,
 
     extras_require=extra_deps,
-
-    tests_require=test_deps,
-    test_suite='tests',
 
     entry_points={
         'console_scripts': [

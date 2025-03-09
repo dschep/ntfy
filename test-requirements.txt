@@ -1,0 +1,5 @@
+mock
+sleekxmpp
+emoji
+psutil
+pytest

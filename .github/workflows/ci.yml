@@ -28,15 +28,17 @@ jobs:
 
       - name: Install dependencies
         run: |
+          set -e
           python -m pip install --upgrade pip setuptools
           pip install .[xmpp]
-          pip install coveralls yapf twine
+          pip install -r test-requirements.txt
+          pip install coveralls yapf twine pytest-cov
         shell: bash
 
       - name: Run tests
         run: |
           set -e
-          coverage run --source=ntfy setup.py test
+          pytest --cov=ntfy tests
           if ! python --version 2>&1; then
             yapf -r ntfy -d
             [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
