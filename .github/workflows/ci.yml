@@ -30,7 +30,7 @@ jobs:
         run: |
           set -e
           python -m pip install --upgrade pip setuptools
-          pip install .[xmpp]
+          pip install .
           pip install -r test-requirements.txt
           pip install coveralls yapf twine pytest-cov
         shell: bash
@@ -38,7 +38,7 @@ jobs:
       - name: Run tests
         run: |
           set -e
-          pytest --cov=ntfy tests
+          pytest --cov=ntfy --ignore 'tests/test_xmpp.py' -k 'not test_xmpp' tests 
           if ! python --version 2>&1; then
             yapf -r ntfy -d
             [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]

@@ -1,5 +1,5 @@
 mock
-sleekxmpp
+#sleekxmpp  Not supported on any non-EOL Python version
 emoji
 psutil
 pytest
