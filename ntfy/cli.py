@@ -86,18 +86,16 @@ def _result_message(command, return_code, stdout, stderr, duration, emoji):
     else:
         command = '"{command}"'.format(command=' '.join(command))
     if stdout is not None or stderr is not None:
-        all_output = ':\n{}{}'.format(stdout
-                                      if stdout is not None else '', stderr
-                                      if stderr is not None else '')
+        all_output = ':\n{}{}'.format(stdout if stdout is not None else '',
+                                      stderr if stderr is not None else '')
     else:
         all_output = ''
     template = '{prefix}{command} {result} in {:d}:{:02d} minutes{output}'
-    return template.format(
-        prefix=prefix,
-        command=command,
-        result=result,
-        output=all_output,
-        *map(int, divmod(duration, 60)))
+    return template.format(prefix=prefix,
+                           command=command,
+                           result=result,
+                           output=all_output,
+                           *map(int, divmod(duration, 60)))
 
 
 def watch_pid(args):
@@ -163,45 +161,42 @@ parser.add_argument(
     '-c',
     '--config',
     help='config file to use (default: {})'.format(DEFAULT_CONFIG))
-parser.add_argument(
-    '-b',
-    '--backend',
-    action=BackendOptionAction,
-    help='override backend specified in config')
-parser.add_argument(
-    '-o',
-    '--option',
-    nargs=2,
-    default=None,
-    action=BackendOptionAction,
-    metavar=('key', 'value'),
-    help='backend specific options')
-parser.add_argument(
-    '-l',
-    '--log-level',
-    action='store',
-    default='WARNING',
-    choices=['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
-    help=('Specify the how verbose CLI output is '
-          '(default: WARNING)'))
-parser.add_argument(
-    '-v',
-    '--verbose',
-    dest='log_level',
-    action='store_const',
-    const='DEBUG',
-    help='a shortcut for --log-level=DEBUG')
-parser.add_argument(
-    '-q',
-    '--quiet',
-    dest='log_level',
-    action='store_const',
-    const='CRITICAL',
-    help='a shortcut for --log-level=CRITICAL')
+parser.add_argument('-b',
+                    '--backend',
+                    action=BackendOptionAction,
+                    help='override backend specified in config')
+parser.add_argument('-o',
+                    '--option',
+                    nargs=2,
+                    default=None,
+                    action=BackendOptionAction,
+                    metavar=('key', 'value'),
+                    help='backend specific options')
+parser.add_argument('-l',
+                    '--log-level',
+                    action='store',
+                    default='WARNING',
+                    choices=['CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],
+                    help=('Specify the how verbose CLI output is '
+                          '(default: WARNING)'))
+parser.add_argument('-v',
+                    '--verbose',
+                    dest='log_level',
+                    action='store_const',
+                    const='DEBUG',
+                    help='a shortcut for --log-level=DEBUG')
+parser.add_argument('-q',
+                    '--quiet',
+                    dest='log_level',
+                    action='store_const',
+                    const='CRITICAL',
+                    help='a shortcut for --log-level=CRITICAL')
 parser.add_argument('--version', action='version', version=__version__)
 if emojize is not None:
-    parser.add_argument(
-        '-E', '--no-emoji', action='store_true', help='Disable emoji support')
+    parser.add_argument('-E',
+                        '--no-emoji',
+                        action='store_true',
+                        help='Disable emoji support')
 
 parser.add_argument(
     '-t',
@@ -222,21 +217,21 @@ send_parser.set_defaults(func=default_sender)
 
 done_parser = subparsers.add_parser(
     'done', help='run a command and send a notification when done')
-done_parser.add_argument(
-    'command', nargs=argparse.REMAINDER, help='command to run')
+done_parser.add_argument('command',
+                         nargs=argparse.REMAINDER,
+                         help='command to run')
 done_parser.add_argument(
     '-L',
     '--longer-than',
     type=int,
     metavar='N',
     help="Only notify if the command runs longer than N seconds")
-done_parser.add_argument(
-    '-b',
-    '--background-only',
-    action='store_true',
-    default=False,
-    dest='unfocused_only',
-    help="Only notify if shell isn't in the foreground")
+done_parser.add_argument('-b',
+                         '--background-only',
+                         action='store_true',
+                         default=False,
+                         dest='unfocused_only',
+                         help="Only notify if shell isn't in the foreground")
 done_parser.add_argument(
     '--formatter',
     metavar=('command', 'retcode', 'duration'),
@@ -249,16 +244,14 @@ if psutil is not None:
         '--pid',
         type=int,
         help="Watch a PID instead of running a new command")
-done_parser.add_argument(
-    '-o',
-    '--stdout',
-    action='store_true',
-    help="Capture and send standard output")
-done_parser.add_argument(
-    '-e',
-    '--stderr',
-    action='store_true',
-    help="Capture and send standard error")
+done_parser.add_argument('-o',
+                         '--stdout',
+                         action='store_true',
+                         help="Capture and send standard output")
+done_parser.add_argument('-e',
+                         '--stderr',
+                         action='store_true',
+                         help="Capture and send standard error")
 done_parser.add_argument(
     '-H',
     '--hide-command',
@@ -359,12 +352,11 @@ def main(cli_args=None):
             return 0
         if emojize is not None and not args.no_emoji:
             message = emojize(message, language='alias')
-        return notify(
-            message,
-            args.title,
-            config,
-            retcode=retcode,
-            **dict(args.option.get(None, [])))
+        return notify(message,
+                      args.title,
+                      config,
+                      retcode=retcode,
+                      **dict(args.option.get(None, [])))
     else:
         parser.print_help()
 

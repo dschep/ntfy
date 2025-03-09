@@ -7,7 +7,8 @@ from sys import platform, stdout
 def linux_window_is_focused():
     xprop_cmd = shlex.split('xprop -root _NET_ACTIVE_WINDOW')
     try:
-        xprop_window_id = int(check_output(xprop_cmd, stdout=PIPE, stderr=PIPE).split()[-1], 16)
+        xprop_window_id = int(
+            check_output(xprop_cmd, stdout=PIPE, stderr=PIPE).split()[-1], 16)
     except CalledProcessError:
         return False
     except ValueError:
@@ -24,8 +25,8 @@ def linux_window_is_focused():
 def osascript_tell(app, script):
     p = Popen(['osascript'], stdin=PIPE, stdout=PIPE)
     stdout, stderr = p.communicate(
-        ('tell application "{}"\n{}\nend tell'.format(app, script)
-         .encode('utf-8')))
+        ('tell application "{}"\n{}\nend tell'.format(app,
+                                                      script).encode('utf-8')))
     return stdout.decode('utf-8').rstrip('\n')
 
 

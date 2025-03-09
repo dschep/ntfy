@@ -33,8 +33,9 @@ def notify(title,
     if MIN_PRIORITY <= priority <= MAX_PRIORITY:
         data['priority'] = priority
     else:
-        raise ValueError('priority must be an integer from {:d} to {:d}'
-                         .format(MIN_PRIORITY, MAX_PRIORITY))
+        raise ValueError(
+            'priority must be an integer from {:d} to {:d}'.format(
+                MIN_PRIORITY, MAX_PRIORITY))
 
     if url is not None:
         data['url'] = url
@@ -42,9 +43,10 @@ def notify(title,
     if provider_key is not None:
         data['providerkey'] = provider_key
 
-    resp = requests.post(
-        API_URL, data=data, headers={
-            'User-Agent': USER_AGENT,
-        })
+    resp = requests.post(API_URL,
+                         data=data,
+                         headers={
+                             'User-Agent': USER_AGENT,
+                         })
 
     resp.raise_for_status()

@@ -36,8 +36,8 @@ def load_config(config_path=DEFAULT_CONFIG):
             logger.info('{} not found'.format(config_path))
             config = default_configuration.copy()
         else:
-            logger.error(
-                'Failed to open {}'.format(config_path), exc_info=True)
+            logger.error('Failed to open {}'.format(config_path),
+                         exc_info=True)
             exit(1)
     except ValueError as e:
         logger.error('Failed to load {}'.format(config_path), exc_info=True)
