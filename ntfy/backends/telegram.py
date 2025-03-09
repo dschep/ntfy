@@ -6,6 +6,7 @@ import asyncio
 config_dir = user_config_dir('ntfy', 'dschep')
 config_file = path.join(config_dir, 'telegram.ini')
 
+
 def notify(title, message, retcode=None):
     """Sends message over Telegram using telegram-send, title is ignored."""
     if not path.exists(config_file):

@@ -106,12 +106,11 @@ def notify(title,
     else:
         raise ValueError('priority must be an integer from -2 to 2')
 
-    resp = requests.post(
-        'https://api.pushover.net/1/messages.json',
-        data=data,
-        headers={
-            'User-Agent': USER_AGENT,
-        })
+    resp = requests.post('https://api.pushover.net/1/messages.json',
+                         data=data,
+                         headers={
+                             'User-Agent': USER_AGENT,
+                         })
 
     if resp.status_code == 429:
         print("ntfy's default api_token has reached pushover's rate limit")

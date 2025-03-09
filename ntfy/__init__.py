@@ -50,11 +50,10 @@ def notify(message, title, config=None, **kwargs):
                 continue
 
         try:
-            notify_ret = notifier.notify(
-                message=message,
-                title=title,
-                retcode=retcode,
-                **backend_config)
+            notify_ret = notifier.notify(message=message,
+                                         title=title,
+                                         retcode=retcode,
+                                         **backend_config)
             if notify_ret:
                 ret = notify_ret
         except (SystemExit, KeyboardInterrupt):
@@ -67,7 +66,8 @@ def notify(message, title, config=None, **kwargs):
 
             args, _, _, defaults, *_ = getfullargspec(notifier.notify)
             possible_args = set(args)
-            required_args =  set(args) if defaults is None else set(args[:-len(defaults)])
+            required_args = set(args) if defaults is None else set(
+                args[:-len(defaults)])
             required_args -= set(['title', 'message', 'retcode'])
             unknown_args = set(backend_config) - possible_args
             missing_args = required_args - set(backend_config)

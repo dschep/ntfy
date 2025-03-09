@@ -1,7 +1,13 @@
 import requests
 
 
-def notify(title, message, topic, host='https://ntfy.sh', user=None, password=None, **kwargs):
+def notify(title,
+           message,
+           topic,
+           host='https://ntfy.sh',
+           user=None,
+           password=None,
+           **kwargs):
     auth_kwarg = {'auth': (user, password)} if user and password else {}
 
     requests.post(

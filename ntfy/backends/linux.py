@@ -32,8 +32,8 @@ def notify(title,
     bus = dbus.SessionBus()
     dbus_obj = bus.get_object('org.freedesktop.Notifications',
                               '/org/freedesktop/Notifications')
-    dbus_iface = dbus.Interface(
-        dbus_obj, dbus_interface='org.freedesktop.Notifications')
+    dbus_iface = dbus.Interface(dbus_obj,
+                                dbus_interface='org.freedesktop.Notifications')
 
     hints = {}
 
@@ -61,5 +61,5 @@ def notify(title,
         hints.update({'sound-file': soundfile})
 
     message = message.replace('&', '&amp;')
-    dbus_iface.Notify('ntfy', 0, "" or icon, title, 
-                      message, [], hints, int(timeout))
+    dbus_iface.Notify('ntfy', 0, "" or icon, title, message, [], hints,
+                      int(timeout))

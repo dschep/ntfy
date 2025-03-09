@@ -3,6 +3,7 @@ from sys import platform
 
 
 class DefaultNotifierError(Exception):
+
     def __init__(self, exception, module):
         self.exception = exception
         self.module = module

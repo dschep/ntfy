@@ -490,8 +490,16 @@ title: Customized Title
 
 ## Testing
 
+Additional requirements required for the test suite are defined in `test-requirements.txt`.
+
+```shell
+pip install -r test-requirements.txt
+```
+
+To run the test suite, run the following command:
+
 ``` shell
-python setup.py test
+pytest test
 ```
 
 ## Contributors
