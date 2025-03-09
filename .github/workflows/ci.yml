@@ -9,6 +9,30 @@ on:
       - master
 
 jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install yapf
+        shell: bash
+
+      - name: Format code with yapf
+        run: |
+          set -e
+          if ! python --version 2>&1; then
+            yapf -r ntfy -d
+            [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
+          fi
+        shell: bash
   test:
     strategy:
       matrix:
@@ -32,17 +56,13 @@ jobs:
           python -m pip install --upgrade pip setuptools
           pip install .
           pip install -r test-requirements.txt
-          pip install yapf twine pytest-cov
+          pip install twine pytest-cov
         shell: bash
 
       - name: Run tests
         run: |
           set -e
           pytest --cov=ntfy --ignore 'tests/test_xmpp.py' -k 'not test_xmpp' tests 
-          if ! python --version 2>&1; then
-            yapf -r ntfy -d
-            [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
-          fi
         shell: bash
 
       - name: Upload coverage to Coveralls
