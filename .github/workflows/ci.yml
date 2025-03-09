@@ -36,7 +36,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "pypy-3.10"]
         exclude:
           - os: macos-latest
@@ -58,18 +58,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          set -e
           python -m pip install --upgrade pip setuptools
           pip install .
           pip install -r test-requirements.txt
           pip install twine pytest-cov
-        shell: bash
 
       - name: Run tests
         run: |
-          set -e
           pytest --cov=ntfy --ignore 'tests/test_xmpp.py' -k 'not test_xmpp' tests 
-        shell: bash
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2
