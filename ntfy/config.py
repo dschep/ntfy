@@ -34,7 +34,7 @@ def load_config(config_path=DEFAULT_CONFIG):
     except IOError as e:
         if e.errno == errno.ENOENT and config_path == DEFAULT_CONFIG:
             logger.info('{} not found'.format(config_path))
-            config = default_configuration
+            config = default_configuration.copy()
         else:
             logger.error(
                 'Failed to open {}'.format(config_path), exc_info=True)
