@@ -28,10 +28,8 @@ jobs:
       - name: Format code with yapf
         run: |
           set -e
-          if ! python --version 2>&1; then
-            yapf -r ntfy -d
-            [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
-          fi
+          yapf -r ntfy -d
+          [ "$(yapf -r ntfy -d | wc -l)" -eq 0 ]
         shell: bash
   test:
     strategy:
