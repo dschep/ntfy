@@ -2,6 +2,7 @@ import shlex
 from os import environ, ttyname
 from subprocess import PIPE, Popen, check_output, CalledProcessError
 from sys import platform, stdout
+from screensaver import is_locked
 
 
 def linux_window_is_focused():
@@ -38,6 +39,11 @@ def darwin_iterm2_shell_is_focused():
 
 
 def darwin_terminal_shell_is_focused():
+    # The osascript for detecting window focus throws an error if the screen is
+    # locked, so we'll check that first.
+    if is_locked() == True:
+        return False
+
     focused_tty = osascript_tell(
         'Terminal',
         'tty of (first tab of (first window whose frontmost is true) '

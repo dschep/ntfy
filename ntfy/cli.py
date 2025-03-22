@@ -34,6 +34,9 @@ except ImportError:
         return True
 
 
+from .screensaver import is_locked
+
+
 def run_cmd(args):
     if getattr(args, 'pid', False):
         return watch_pid(args)
@@ -63,6 +66,8 @@ def run_cmd(args):
         duration = time() - start_time
         retcode = process.returncode
     if args.longer_than is not None and duration <= args.longer_than:
+        return None, None
+    if args.locked_only and not is_locked():
         return None, None
     if args.unfocused_only and is_focused():
         return None, None
@@ -231,6 +236,12 @@ done_parser.add_argument(
     metavar='N',
     help="Only notify if the command runs longer than N seconds")
 done_parser.add_argument(
+    '--locked-only',
+    action='store_true',
+    default=False,
+    dest='locked_only',
+    help='Only notify if the screen is locked')
+done_parser.add_argument(
     '-b',
     '--background-only',
     action='store_true',
@@ -283,6 +294,12 @@ shell_integration_parser.add_argument(
     type=int,
     metavar='N',
     help="Only notify if the command runs longer than N seconds")
+shell_integration_parser.add_argument(
+    '--locked-only',
+    action='store_true',
+    default=False,
+    dest='locked_only',
+    help='Only notify if the screen is locked')
 shell_integration_parser.add_argument(
     '-f',
     '--foreground-too',
