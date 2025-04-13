@@ -64,6 +64,8 @@ def notify(title,
         data['html'] = 1
 
     priority = int(priority)
+    expire = None if not expire else int(expire)
+    retry = None if not retry else int(retry)
     if priority <= 2 and priority >= -2:
         if priority != 0:
             data['priority'] = priority
