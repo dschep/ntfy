@@ -86,6 +86,8 @@ export AUTO_NTFY_DONE_IGNORE="vim screen meld"
         implementation that doesn\'t have additional dependencies
     -   [Rocket.Chat](https://Rocket.Chat) support requires installing
         as `pip install ntfy[rocketchat]`
+    -   [MQTT](https://mqtt.org) support requires installing as
+        `pip install ntfy[mqtt]`
 
 To install multiple extras, separate with commas: e.g.,
 `pip install ntfy[pid,emoji]`.
@@ -441,6 +443,7 @@ Required parameters:
 
 You must either specify `token`, or `userId` and `password`.
 
+
 [Webpush](https://github.com/dschep/ntfy-webpush) - `ntfy_webpush`
 \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
 Webpush support is provded by an external ntfy module, install like
@@ -457,6 +460,24 @@ Required parameters:
 
 For more info, see [ntfy-webpush]{#ntfy-webpush}
 \<https://github.com/dschep/ntfy-webpush\>\`\_
+
+### [MQTT](https://mqtt.org) - `mqtt`
+-------------------------------------------------------------
+Requires extras, install like this: `pip install ntfy[mqtt]`.
+
+Required parameters:
+
+:   -   `hostname` - The MQTT broker hostname
+    -   `topic` - The MQTT topic to publish to
+
+Optional parameters:
+
+:   -   `port` - The MQTT broker port (defaults to 1883)
+    -   `qos` - The Quality of Service level (defaults to 1)
+    -   `username` - The MQTT username
+    -   `password` - The MQTT password
+
+
 
 ### 3rd party backends
 
