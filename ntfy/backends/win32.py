@@ -37,7 +37,7 @@ def notify(title, message, icon=icon.ico, retcode=None):
             try:
                 hicon = win32gui.LoadImage(
                     hinst, iconPathName, win32con.IMAGE_ICON, 0, 0, icon_flags)
-            except:
+            except Exception:
                 hicon = win32gui.LoadIcon(0, win32con.IDI_APPLICATION)
             flags = win32gui.NIF_ICON | win32gui.NIF_MESSAGE | win32gui.NIF_TIP
             nid = (self.hwnd, 0, flags, win32con.WM_USER + 20, hicon,
