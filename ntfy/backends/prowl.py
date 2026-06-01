@@ -45,6 +45,6 @@ def notify(title,
     resp = requests.post(
         API_URL, data=data, headers={
             'User-Agent': USER_AGENT,
-        })
+        }, timeout=10)
 
     resp.raise_for_status()

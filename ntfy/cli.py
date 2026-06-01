@@ -128,6 +128,9 @@ def auto_done(args):
             args.longer_than))
     if args.unfocused_only:
         print('export AUTO_NTFY_DONE_UNFOCUSED_ONLY=-b')
+    ignore = getattr(args, 'config_data', {}).get('auto_ntfy_done_ignore')
+    if ignore:
+        print('export AUTO_NTFY_DONE_IGNORE="{}"'.format(ignore))
     if args.shell == 'bash':
         print('source {}'.format(sh_quote(scripts['bash-preexec.sh'])))
     print('source {}'.format(sh_quote(scripts['auto-ntfy-done.sh'])))
@@ -207,6 +210,11 @@ parser.add_argument(
     '-t',
     '--title',
     help='a title for the notification (default: {})'.format(default_title))
+parser.add_argument(
+    '--timeout',
+    type=int,
+    default=None,
+    help='How long the notification stays visible (seconds)')
 
 subparsers = parser.add_subparsers()
 
@@ -243,12 +251,11 @@ done_parser.add_argument(
     nargs=3,
     help="Format and send cmd, retcode & duration instead of running command. "
     "Used internally by shell-integration")
-if psutil is not None:
-    done_parser.add_argument(
-        '-p',
-        '--pid',
-        type=int,
-        help="Watch a PID instead of running a new command")
+done_parser.add_argument(
+    '-p',
+    '--pid',
+    type=int,
+    help="Watch a PID instead of running a new command")
 done_parser.add_argument(
     '-o',
     '--stdout',
@@ -353,7 +360,11 @@ def main(cli_args=None):
     if getattr(args, 'func', None) == run_cmd and 'hide_command' in config:
         args.hide_command = config['hide_command']
 
+    if getattr(args, 'timeout', None) is not None:
+        args.option.setdefault(None, {})['timeout'] = args.timeout
+
     if hasattr(args, 'func'):
+        args.config_data = config
         message, retcode = args.func(args)
         if message is None:
             return 0

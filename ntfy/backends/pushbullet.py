@@ -34,6 +34,6 @@ def notify(title,
     headers = {'Access-Token': access_token, 'User-Agent': USER_AGENT}
 
     resp = requests.post(
-        'https://api.pushbullet.com/v2/pushes', data=data, headers=headers)
+        'https://api.pushbullet.com/v2/pushes', data=data, headers=headers, timeout=10)
 
     resp.raise_for_status()

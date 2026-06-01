@@ -20,5 +20,5 @@ def notify(title, message, retcode=None, webhook=None):
         params={
             'payload': '{title}\n{message}'.format(
                 title=title, message=message)
-        })
+        }, timeout=10)
     response.raise_for_status()

@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from mock import patch
+from unittest.mock import patch
 from ntfy.backends.pushover import notify
 from ntfy.config import USER_AGENT
 
@@ -17,7 +17,8 @@ class TestPushover(TestCase):
                 'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
                 'title': 'title'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_url_title(self, mock_post):
@@ -37,7 +38,8 @@ class TestPushover(TestCase):
                 'url_title': 'foo',
                 'url': 'bar'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
         mock_post.reset_mock()
         notify('title', 'message', user_key='user_key', url_title='foo')
@@ -49,7 +51,8 @@ class TestPushover(TestCase):
                 'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
                 'title': 'title'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_html(self, mock_post):
@@ -63,7 +66,8 @@ class TestPushover(TestCase):
                 'title': 'title',
                 'html': 1
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_priority(self, mock_post):
@@ -77,7 +81,8 @@ class TestPushover(TestCase):
                 'title': 'title',
                 'priority': 1
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_invalid_priority(self, mock_post):
@@ -103,7 +108,8 @@ class TestPushover(TestCase):
                 'retry': 30,
                 'expire': 86400
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_hi_priority_retry(self, mock_post):
@@ -119,7 +125,8 @@ class TestPushover(TestCase):
                 'retry': 60,
                 'expire': 86400
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_hi_priority_expire(self, mock_post):
@@ -135,7 +142,8 @@ class TestPushover(TestCase):
                 'retry': 30,
                 'expire': 60
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_hi_priority_callback(self, mock_post):
@@ -157,7 +165,8 @@ class TestPushover(TestCase):
                 'expire': 86400,
                 'callback': 'http://example.com'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_device(self, mock_post):
@@ -171,7 +180,8 @@ class TestPushover(TestCase):
                 'title': 'title',
                 'device': 'foobar'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_sound(self, mock_post):
@@ -185,7 +195,23 @@ class TestPushover(TestCase):
                 'title': 'title',
                 'sound': 'foobar'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
+
+    @patch('requests.post')
+    def test_ttl(self, mock_post):
+        notify('title', 'message', user_key='user_key', ttl=3600)
+        mock_post.assert_called_once_with(
+            'https://api.pushover.net/1/messages.json',
+            data={
+                'user': 'user_key',
+                'message': 'message',
+                'token': 'aUnsraBiEZVsmrG89AZp47K3S2dX2a',
+                'title': 'title',
+                'ttl': 3600
+            },
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_url(self, mock_post):
@@ -199,7 +225,8 @@ class TestPushover(TestCase):
                 'title': 'title',
                 'url': 'foobar'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
 
 if __name__ == '__main__':

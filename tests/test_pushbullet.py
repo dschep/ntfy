@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from mock import patch
+from unittest.mock import patch
 from ntfy.backends.pushbullet import notify
 from ntfy.config import USER_AGENT
 
@@ -15,7 +15,8 @@ class TestPushbullet(TestCase):
                   'title': 'title',
                   'type': 'note'},
             headers={'Access-Token': 'access_token',
-                     'User-Agent': USER_AGENT})
+                     'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_device(self, mock_post):
@@ -33,7 +34,8 @@ class TestPushbullet(TestCase):
                 'type': 'note'
             },
             headers={'Access-Token': 'access_token',
-                     'User-Agent': USER_AGENT})
+                     'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_email(self, mock_post):
@@ -51,7 +53,8 @@ class TestPushbullet(TestCase):
                 'type': 'note'
             },
             headers={'Access-Token': 'access_token',
-                     'User-Agent': USER_AGENT})
+                     'User-Agent': USER_AGENT},
+            timeout=10)
 
 
 if __name__ == '__main__':

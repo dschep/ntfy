@@ -9,4 +9,5 @@ def notify(title, message, topic, host='https://ntfy.sh', user=None, password=No
         headers=dict(title=title),
         data=message,
         **auth_kwarg,
+        timeout=10,
     )

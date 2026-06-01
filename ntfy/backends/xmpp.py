@@ -1,20 +1,20 @@
+import asyncio
 import logging
 import os
 
-import sleekxmpp
+import slixmpp
 
 
-class NtfySendMsgBot(sleekxmpp.ClientXMPP):
+class NtfySendMsgBot(slixmpp.ClientXMPP):
     """
-    Modified the commented sleekxmpp example:
-    http://sleekxmpp.com/getting_started/sendlogout.html
+    Updated from sleekxmpp to slixmpp (async-based XMPP library).
 
     NOTE: supplying mtype='chat' was required for
           Google Hangouts to work
     """
 
     def __init__(self, jid, password, recipient, title, message, mtype=None):
-        super(NtfySendMsgBot, self).__init__(jid, password)
+        super().__init__(jid, password)
 
         self.recipient = recipient
         self.title = title
@@ -23,10 +23,9 @@ class NtfySendMsgBot(sleekxmpp.ClientXMPP):
 
         self.add_event_handler("session_start", self.start)
 
-    def start(self, event):
-
+    async def start(self, event):
         self.send_presence()
-        self.get_roster()
+        await self.get_roster()
         msg_args = {
             'mto': self.recipient,
             'msubject': self.title,
@@ -37,7 +36,7 @@ class NtfySendMsgBot(sleekxmpp.ClientXMPP):
 
         self.send_message(**msg_args)
 
-        self.disconnect(wait=True)
+        self.disconnect()
 
 
 def notify(title,
@@ -72,16 +71,12 @@ def notify(title,
 
     xmpp_bot = NtfySendMsgBot(jid, password, recipient, title, message, mtype)
 
-    # NOTE: Below plugins weren't needed for Google Hangouts
-    # but may be useful (from original sleekxmpp example)
-    # xmpp_bot.register_plugin('xep_0030') # Service Discovery
-    # xmpp_bot.register_plugin('xep_0199') # XMPP Ping
-
     if path_to_certs and os.path.isdir(path_to_certs):
         xmpp_bot.ca_certs = path_to_certs
 
-    # Connect to the XMPP server and start processing XMPP stanzas.
-    if xmpp_bot.connect(*([(hostname, int(port)) if hostname else []])):
-        xmpp_bot.process(block=True)
+    if hostname:
+        xmpp_bot.connect((hostname, int(port)))
     else:
-        logging.getLogger(__name__).error('Unable to connect', exc_info=True)
+        xmpp_bot.connect()
+
+    xmpp_bot.process()

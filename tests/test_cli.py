@@ -1,7 +1,7 @@
 from time import time
 from unittest import TestCase, main
 
-from mock import MagicMock, Mock, patch
+from unittest.mock import MagicMock, Mock, patch
 from ntfy.cli import main as ntfy_main
 from ntfy.cli import auto_done, run_cmd
 

@@ -1,7 +1,7 @@
 from sys import modules, version_info
 from unittest import TestCase, main
 
-from mock import MagicMock, mock_open, patch
+from unittest.mock import MagicMock, mock_open, patch
 from ntfy.cli import main as ntfy_main
 
 py = version_info.major

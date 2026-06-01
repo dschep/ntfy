@@ -1,6 +1,6 @@
 from unittest import TestCase, skipIf
 
-from mock import call, patch
+from unittest.mock import call, patch
 
 try:
     import syslog

@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from mock import patch
+from unittest.mock import patch
 from ntfy.backends.prowl import API_URL, NTFY_API_KEY, notify
 from ntfy.config import USER_AGENT
 
@@ -30,7 +30,7 @@ class TestProwl(TestCase):
         }
         data.update(kwargs)
         self.mock_post.assert_called_once_with(
-            API_URL, data=data, headers={'User-Agent': USER_AGENT})
+            API_URL, data=data, headers={'User-Agent': USER_AGENT}, timeout=10)
         self.mock_response.raise_for_status.assert_called_once()
 
     def test_basic(self):

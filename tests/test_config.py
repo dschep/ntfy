@@ -3,7 +3,7 @@ from os import environ
 from sys import version_info
 from unittest import TestCase, main, skipIf
 
-from mock import mock_open, patch
+from unittest.mock import mock_open, patch
 from ntfy.config import DEFAULT_CONFIG, load_config
 
 py = version_info.major
@@ -21,7 +21,7 @@ class TestLoadConfig(TestCase):
     @patch(builtin_module + '.open', mock_open_dne_error)
     def test_default_config(self):
         config = load_config(DEFAULT_CONFIG)
-        self.assertEqual(config, {})
+        self.assertEqual(config, {'backends': ['default']})
 
     @patch(builtin_module + '.open', mock_open())
     @patch('ntfy.config.safe_load')

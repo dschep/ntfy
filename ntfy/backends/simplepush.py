@@ -26,6 +26,6 @@ def notify(title, message, key, event=None, retcode=None):
 
     endpoint = "https://api.simplepush.io"
 
-    resp = requests.post(endpoint + '/send', data=data, headers=headers)
+    resp = requests.post(endpoint + '/send', data=data, headers=headers, timeout=10)
 
     resp.raise_for_status()

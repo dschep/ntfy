@@ -20,4 +20,5 @@ def notify(title, message, url, user, **kwargs):
                 }
             ],
         },
+        timeout=10,
     )

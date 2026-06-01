@@ -37,6 +37,6 @@ def notify(title,
     if endpoint is None:
         endpoint = 'https://api.pushjet.io'
 
-    resp = requests.post(endpoint + '/message', data=data, headers=headers)
+    resp = requests.post(endpoint + '/message', data=data, headers=headers, timeout=10)
 
     resp.raise_for_status()

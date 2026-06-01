@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 import ntfy
-from mock import patch
+from unittest.mock import patch
 from ntfy import notify
 
 

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from mock import patch
+from unittest.mock import patch
 from ntfy.backends.simplepush import notify
 from ntfy.config import USER_AGENT
 
@@ -14,7 +14,8 @@ class TestSimplepush(TestCase):
             data={'title': 'title',
                   'msg': 'message',
                   'key': 'secret'},
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_event(self, mock_post):
@@ -27,4 +28,5 @@ class TestSimplepush(TestCase):
                 'key': 'secret',
                 'event': 'foo'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)

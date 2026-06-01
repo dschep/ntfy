@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 
-from mock import patch
+from unittest.mock import patch
 from ntfy.backends.pushalot import notify
 from ntfy.config import USER_AGENT
 
@@ -18,7 +18,8 @@ class TestPushalot(TestCase):
                 'Title': 'title',
                 'AuthorizationToken': 'access_token'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_silent(self, mock_post):
@@ -31,7 +32,8 @@ class TestPushalot(TestCase):
                 'IsSilent': 'True',
                 'AuthorizationToken': 'access_token'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_important(self, mock_post):
@@ -44,7 +46,8 @@ class TestPushalot(TestCase):
                 'IsImportant': 'True',
                 'AuthorizationToken': 'access_token'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_source(self, mock_post):
@@ -57,7 +60,8 @@ class TestPushalot(TestCase):
                 'Source': 'source',
                 'AuthorizationToken': 'access_token'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_url(self, mock_post):
@@ -71,7 +75,8 @@ class TestPushalot(TestCase):
                 'Link': 'example.com',
                 'AuthorizationToken': 'access_token'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_url_title(self, mock_post):
@@ -90,7 +95,8 @@ class TestPushalot(TestCase):
                 'LinkTitle': 'url title',
                 'AuthorizationToken': 'access_token'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_image(self, mock_post):
@@ -104,7 +110,8 @@ class TestPushalot(TestCase):
                 'Image': 'image.jpg',
                 'AuthorizationToken': 'access_token'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
     @patch('requests.post')
     def test_ttl(self, mock_post):
@@ -117,7 +124,8 @@ class TestPushalot(TestCase):
                 'TimeToLive': 100,
                 'AuthorizationToken': 'access_token'
             },
-            headers={'User-Agent': USER_AGENT})
+            headers={'User-Agent': USER_AGENT},
+            timeout=10)
 
 
 if __name__ == '__main__':
