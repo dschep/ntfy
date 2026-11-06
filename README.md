@@ -58,6 +58,11 @@ than 10 seconds and if the terminal is focused. Terminal focus works on
 X11(Linux) and with Terminal.app and iTerm2 on MacOS. Both options can
 be configured via the `--longer-than` and `--foreground-too` options.
 
+In Bash, commands prefixed with a space continue to respect `HISTCONTROL`
+settings such as `ignorespace` and `ignoreboth`: they are available to the
+notification hook but are removed from Bash history after the command is
+captured. The integration also preserves other `HISTCONTROL` options.
+
 To avoid unnecessary notifications when running interactive programs,
 programs listed in `AUTO_NTFY_DONE_IGNORE` don\'t generate
 notifications. For example:

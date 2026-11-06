@@ -44,20 +44,30 @@ __bp_imported="defined"
 # functions, should they want it.
 __bp_last_ret_value="$?"
 __bp_last_argument_prev_command="$_"
+__bp_ignorespace=
 
 __bp_inside_precmd=0
 __bp_inside_preexec=0
 
-# Remove ignorespace and or replace ignoreboth from HISTCONTROL
-# so we can accurately invoke preexec with a command from our
-# history even if it starts with a space.
+# Preserve HISTCONTROL's ignorespace behavior while keeping the command
+# available to preexec. Commands beginning with whitespace are removed from
+# history manually after the preexec hook has captured their text.
 __bp_adjust_histcontrol() {
     local histcontrol
-    histcontrol="${HISTCONTROL//ignorespace}"
-    # Replace ignoreboth with ignoredups
+    __bp_ignorespace=
+    if [[ "$HISTCONTROL" == *"ignorespace"* || "$HISTCONTROL" == *"ignoreboth"* ]]; then
+        __bp_ignorespace=yes
+    fi
+    histcontrol="${HISTCONTROL//ignorespace:}"
+    histcontrol="${histcontrol//:ignorespace}"
+    histcontrol="${histcontrol//ignorespace}"
+    # Replace ignoreboth with ignoredups, without leaving empty separators.
     if [[ "$histcontrol" == *"ignoreboth"* ]]; then
-        histcontrol="ignoredups:${histcontrol//ignoreboth}"
-    fi;
+        histcontrol="${histcontrol//ignoreboth:}"
+        histcontrol="${histcontrol//:ignoreboth}"
+        histcontrol="${histcontrol//ignoreboth}"
+        histcontrol="ignoredups${histcontrol:+:}${histcontrol}"
+    fi
     export HISTCONTROL="$histcontrol"
 }
 
@@ -189,11 +199,28 @@ __bp_preexec_invoke_exec() {
     fi
 
     local this_command
-    this_command=$(HISTTIMEFORMAT= builtin history 1 | { IFS=" " read -r _ this_command; echo "$this_command"; })
+    if [[ "$HISTCONTROL" == *"ignorespace"* || "$HISTCONTROL" == *"ignoreboth"* ]]; then
+        # The user re-enabled ignorespace after installation. In this case the
+        # command may not be in history, so use Bash's current command instead.
+        this_command="${BASH_COMMAND:-}"
+        local __bp_ignorespace=
+    else
+        this_command="$(HISTTIMEFORMAT= builtin history 1 | { IFS=" " read -r _ this_command; echo "$this_command"; })"
+    fi
 
     # Sanity check to make sure we have something to invoke our function with.
     if [[ -z "$this_command" ]]; then
         return
+    fi
+
+    # If ignorespace was present when bash-preexec was installed, remove a
+    # whitespace-prefixed command after capturing it. Negative history indices
+    # are unavailable before Bash 5.0, so resolve the current entry explicitly.
+    if [[ -n "$__bp_ignorespace" && "$this_command" == " "* ]]; then
+        builtin history -d "$(
+            export LC_ALL=C
+            HISTTIMEFORMAT= history 1 | sed '1 s/^ *\([0-9][0-9]*\).*/\1/'
+        )"
     fi
 
     # If none of the previous checks have returned out of this function, then
